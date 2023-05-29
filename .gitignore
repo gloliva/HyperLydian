@@ -1,0 +1,7 @@
+.DS_Store
+
+# ignore python virtual envs
+*venv
+
+# ignore .pyc files
+*.pyc
