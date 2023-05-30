@@ -48,6 +48,8 @@ class StraferGruntGroup(pg.sprite.Group):
 
 
 class Enemy(pg.sprite.Sprite):
+    DRAW_LAYER = 2
+
     def __init__(
             self,
             image_file: str,
@@ -70,6 +72,8 @@ class Enemy(pg.sprite.Sprite):
         self.rect = self.surf.get_rect(
             center=spawn_position,
         )
+
+        self._layer = self.DRAW_LAYER
 
         # Enemy attributes
         self.health = health

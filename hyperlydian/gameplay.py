@@ -13,17 +13,17 @@ from events import Event, initialize_event_timers
 from sprites.manager import GroupManager, SpriteManager
 
 
-GAME_SCREEN = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
-
-
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     print('Gameplay State')
+
+    # create game screen
+    game_screen = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 
     # start initial events
     initialize_event_timers()
 
     # create the player
-    player = SpriteManager.PLAYER['player'](GAME_SCREEN.get_rect(), PRIMARY_ATTACK)
+    player = SpriteManager.PLAYER['player'](game_screen.get_rect(), PRIMARY_ATTACK)
     GroupManager.all_sprites.add(player)
 
     gameplay_loop = True
@@ -37,7 +37,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             # handle creating stars
             elif event.type == Event.ADD_STAR.type:
                 for _ in range(SpriteManager.BACKGROUND['star'].NUM_STARS_PER_EVENT):
-                    star = SpriteManager.BACKGROUND['star'](GAME_SCREEN.get_rect())
+                    star = SpriteManager.BACKGROUND['star'](game_screen.get_rect())
                     GroupManager.stars.add(star)
                     GroupManager.all_sprites.add(star)
 
@@ -76,34 +76,34 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             player.light_attack()
 
         # move the player
-        player.update(pressed_keys, GAME_SCREEN.get_rect())
+        player.update(pressed_keys, game_screen.get_rect())
 
         # move enemies
-        GroupManager.all_enemies.update(GAME_SCREEN.get_rect())
+        GroupManager.all_enemies.update(game_screen.get_rect())
 
         # enemy attacks
         for grunt in GroupManager.grunt_enemies:
             grunt.attack()
 
         # move projectiles
-        GroupManager.player_projectiles.update(GAME_SCREEN.get_rect())
-        GroupManager.enemy_projectiles.update(GAME_SCREEN.get_rect())
+        GroupManager.player_projectiles.update(game_screen.get_rect())
+        GroupManager.enemy_projectiles.update(game_screen.get_rect())
 
         # move stars
-        GroupManager.stars.update(GAME_SCREEN.get_rect())
+        GroupManager.stars.update(game_screen.get_rect())
 
         # collision checks
         handle_collisions()
 
         # screen background
-        GAME_SCREEN.fill((0, 0, 0,))
+        game_screen.fill((0, 0, 0,))
 
         # draw all sprites
         for sprite in GroupManager.all_sprites:
-            GAME_SCREEN.blit(sprite.surf, sprite.rect)
+            game_screen.blit(sprite.surf, sprite.rect)
 
         # draw game screen to display
-        main_screen.blit(GAME_SCREEN, GAME_SCREEN.get_rect())
+        main_screen.blit(game_screen, game_screen.get_rect())
 
         # render screen
         pg.display.flip()

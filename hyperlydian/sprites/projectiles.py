@@ -7,6 +7,8 @@ import pygame
 
 
 class Projectile(pygame.sprite.Sprite):
+    DRAW_LAYER = 1
+
     def __init__(
             self,
             image_file: str,
@@ -21,6 +23,7 @@ class Projectile(pygame.sprite.Sprite):
         image = pygame.image.load(image_file).convert()
         self.surf = pygame.transform.scale_by(image, image_scale)
         self.rect = self.surf.get_rect(center=center_position)
+        self._layer = self.DRAW_LAYER
 
         # Weapon attributes
         self.damage = damage

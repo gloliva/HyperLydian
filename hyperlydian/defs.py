@@ -5,8 +5,8 @@ from enum import Enum
 FPS = 60
 
 # Screen constants
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1027
+SCREEN_WIDTH = 1440
+SCREEN_HEIGHT = 900
 
 # Define game states
 class GameState(Enum):

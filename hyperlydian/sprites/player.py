@@ -15,6 +15,7 @@ from pygame.locals import (
 class Player(pg.sprite.Sprite):
     DEFAULT_HEALTH = 3
     DEFAULT_SPEED = 5
+    DRAW_LAYER = 2
 
     def __init__(self, game_screen_rect: pg.Rect, primary_attack) -> None:
         super().__init__()
@@ -30,6 +31,8 @@ class Player(pg.sprite.Sprite):
                 game_screen_rect.width / 2, game_screen_rect.height - 100
             )
         )
+
+        self._layer = self.DRAW_LAYER
 
         # Player attributes
         self.max_health = self.DEFAULT_HEALTH
