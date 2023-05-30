@@ -2,7 +2,7 @@
 from typing import Optional, Tuple, Union
 
 # 3rd-party imports
-import pygame
+import pygame as pg
 
 # project imports
 from sprites.projectiles import Projectile
@@ -26,11 +26,16 @@ class Weapon:
         self.rate_of_fire = rate_of_fire if rate_of_fire is not None else self.DEFAULT_RATE_OF_FIRE
         self.last_time_shot = 0
 
-    def fire_projectile(self, projectile_center_position: Tuple[int, int]) -> None:
-        current_time = pygame.time.get_ticks()
+    def fire_projectile(
+            self,
+            projectile_center_position: Tuple[int, int],
+            projectile_group: pg.sprite.Group,
+            movement_angle: int = None,
+        ) -> None:
+        current_time = pg.time.get_ticks()
         if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
-            projectile = self.projectile_type(center_position=projectile_center_position)
-            GroupManager.projectiles.add(projectile)
+            projectile = self.projectile_type(center_position=projectile_center_position, movement_angle=movement_angle)
+            projectile_group.add(projectile)
             GroupManager.all_sprites.add(projectile)
             self.curr_projectiles -= 1
             self.last_time_shot = current_time
@@ -47,20 +52,21 @@ class Weapon:
 
 class StandardAttack:
     """Standard method of Attack for both Player and Enemies"""
-    def __init__(self, default_weapon: Weapon) -> None:
+    def __init__(self, default_weapon: Weapon, projectile_group: pg.sprite.Group) -> None:
         self.default_weapon = default_weapon
         self.equipped_weapon = default_weapon
+        self.projectile_group = projectile_group
 
     def switch_weapon(self, weapon: Weapon) -> None:
         self.equipped_weapon = weapon
 
     def attack(self, object_center_position: Tuple[int, int]):
-        self.equipped_weapon.fire_projectile(object_center_position)
+        self.equipped_weapon.fire_projectile(object_center_position, self.projectile_group)
 
 
 # Create Weapons
 # Default weapon used by Player
-STANDARD_TURRET = Weapon(
+TURRET = Weapon(
     SpriteManager.PROJECTILES['turret'],
     Weapon.INFINITE_AMMO,
     Weapon.DEFAULT_RATE_OF_FIRE,
@@ -74,5 +80,5 @@ MISSILE_LAUNCHER = Weapon(
 )
 
 # Create player attack types
-PRIMARY_ATTACK = StandardAttack(STANDARD_TURRET)
-SECONDARY_ATTACK = StandardAttack(MISSILE_LAUNCHER)
+PRIMARY_ATTACK = StandardAttack(TURRET, GroupManager.player_projectiles)
+SECONDARY_ATTACK = StandardAttack(MISSILE_LAUNCHER, GroupManager.player_projectiles)

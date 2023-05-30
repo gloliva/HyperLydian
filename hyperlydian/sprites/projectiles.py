@@ -52,9 +52,11 @@ class TurretRound(Projectile):
     def __init__(
             self,
             center_position: Tuple[int, int],
+            movement_angle: int = None,
         ) -> None:
         image_file = "assets/kenny-space/PNG/Default/meteor_detailedSmall.png"
-        movement_angle = self.DEFAULT_ANGLE
+        if movement_angle is None:
+            movement_angle = self.DEFAULT_ANGLE
         super().__init__(
             image_file,
             center_position,
@@ -72,7 +74,7 @@ class EnergyOrb(Projectile):
     def __init__(
             self,
             center_position: Tuple[int, int],
-            movement_angle: int,
+            movement_angle: int = None,
         ) -> None:
         image_file = "assets/kenny-space/PNG/Default/meteor_small.png"
         super().__init__(

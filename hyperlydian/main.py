@@ -32,7 +32,6 @@ def initialize_game():
     CLOCK = pg.time.Clock()
 
 
-
 def main():
     """Main Program Loop"""
     main_loop = True

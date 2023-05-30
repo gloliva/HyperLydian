@@ -38,6 +38,7 @@ class SpriteManager:
 class GroupManager():
     all_enemies = Group()
     grunt_enemies = StraferGruntGroup()
-    projectiles = Group()
+    enemy_projectiles = Group()
+    player_projectiles = Group()
     stars = Group()
     all_sprites = Group()

@@ -1,6 +1,6 @@
 # stdlib imports
 from random import randint
-from typing import Any, Tuple
+from typing import Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -101,7 +101,7 @@ class StraferGrunt(Enemy):
     SPAWN_SPEED = 5
     STRAFE_SPEED = 2
 
-    def __init__(self, row: int) -> None:
+    def __init__(self, primary_attack, row: int) -> None:
         image_file = 'assets/kenny-space/PNG/Default/enemy_A.png'
         spawn_position = (
             randint(0, 1000),
@@ -112,10 +112,11 @@ class StraferGrunt(Enemy):
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_position,
-            None,
+            primary_attack,
             image_scale=1.5,
             image_rotation=180,
         )
+
 
         self.moving_to_position = True
         self.stopping_point_y = None
@@ -153,6 +154,15 @@ class StraferGrunt(Enemy):
             self.move_to_position()
         else:
             self.strafe(game_screen_rect)
+
+    def attack(self):
+        if self.moving_to_position:
+            return
+
+        attack_center = (self.rect.centerx, self.rect.bottom)
+        self.primary_attack.attack(
+            object_center_position=attack_center,
+        )
 
 
 class TrackerGrunt(Enemy):

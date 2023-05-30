@@ -57,6 +57,14 @@ class Player(pg.sprite.Sprite):
         if self.rect.bottom > game_screen_rect.height:
             self.rect.bottom = game_screen_rect.height
 
+    def take_damage(self, damage: int) -> None:
+        self.curr_health -= damage
+        if self.is_dead():
+            self.kill()
+
+    def is_dead(self):
+        return self.curr_health <= 0
+
     def light_attack(self):
         attack_center = (self.rect.centerx, self.rect.top)
         self.primary_attack.attack(
