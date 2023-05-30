@@ -1,10 +1,6 @@
-# stdlib imports
-from typing import Optional, Union
-
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
-    RLEACCEL,
     K_UP,
     K_DOWN,
     K_LEFT,
@@ -19,19 +15,23 @@ class Player(pg.sprite.Sprite):
 
     def __init__(self, game_screen_rect: pg.Rect, primary_attack) -> None:
         super().__init__()
-        self.surf = pg.image.load("assets/kenny-space/PNG/Default/ship_L.png").convert()
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
+
+        # Create sprite surface
+        image_file = "assets/kenny-space/PNG/Default/ship_L.png"
+        self.surf = pg.image.load(image_file).convert_alpha()
 
         color_image = pg.Surface(self.surf.get_size()).convert_alpha()
         color_image.fill((255, 255, 0))
         self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
 
-        self.rect = self.surf.get_rect(
-            center=(
-                game_screen_rect.width / 2, game_screen_rect.height - 100
-            )
-        )
+        # Get sprite rect
+        spawn_location = (game_screen_rect.width / 2, game_screen_rect.height - 100)
+        self.rect = self.surf.get_rect(center=spawn_location)
 
+        # Create sprite mask
+        self.mask = pg.mask.from_surface(self.surf)
+
+        # Set layer sprite is drawn to
         self._layer = self.DRAW_LAYER
 
         # Player attributes

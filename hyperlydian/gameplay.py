@@ -121,7 +121,10 @@ def handle_collisions():
     handled_enemies = set()
     for grunt in GroupManager.grunt_enemies:
         collided_enemies = pg.sprite.spritecollide(
-            grunt, GroupManager.all_enemies, dokill=False,
+            grunt,
+            GroupManager.all_enemies,
+            dokill=False,
+            collided=pg.sprite.collide_mask,
         )
         for collided_enemy in collided_enemies:
             # skip for enemy colliding with itself and if the enemy has already been handled
@@ -138,6 +141,7 @@ def handle_collisions():
         GroupManager.all_enemies,
         dokilla=True,
         dokillb=False,
+        collided=pg.sprite.collide_mask,
     )
     for projectile, enemies in collided.items():
         for enemy in enemies:

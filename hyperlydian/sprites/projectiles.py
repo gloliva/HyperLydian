@@ -1,12 +1,12 @@
 # stdlib
 import math
-from typing import Callable, Optional, Tuple
+from typing import Tuple
 
 # 3rd-party imports
-import pygame
+import pygame as pg
 
 
-class Projectile(pygame.sprite.Sprite):
+class Projectile(pg.sprite.Sprite):
     DRAW_LAYER = 1
 
     def __init__(
@@ -20,9 +20,11 @@ class Projectile(pygame.sprite.Sprite):
         ) -> None:
         super().__init__()
         # Sprite attributes
-        image = pygame.image.load(image_file).convert()
-        self.surf = pygame.transform.scale_by(image, image_scale)
+        image = pg.image.load(image_file).convert_alpha()
+        self.surf = pg.transform.scale_by(image, image_scale)
         self.rect = self.surf.get_rect(center=center_position)
+        # Create sprite mask
+        self.mask = pg.mask.from_surface(self.surf)
         self._layer = self.DRAW_LAYER
 
         # Weapon attributes
@@ -30,7 +32,7 @@ class Projectile(pygame.sprite.Sprite):
         self.movement_speed = movement_speed
         self.movement_angle = movement_angle
 
-    def update(self, game_screen_rect: pygame.Rect):
+    def update(self, game_screen_rect: pg.Rect):
         # Calculate new position based on the angle of fire
         x = self.movement_speed * math.sin(2 * math.pi * (self.movement_angle / 360))
         y = self.movement_speed * math.cos(2 * math.pi * (self.movement_angle / 360))
@@ -66,7 +68,7 @@ class TurretRound(Projectile):
             self.DEFAULT_DAMAGE,
             self.DEFAULT_SPEED,
             movement_angle,
-            image_scale=0.2,
+            image_scale=0.3,
         )
 
 
@@ -88,12 +90,12 @@ class EnergyOrb(Projectile):
 class Missile(Projectile):
     def __init__(self, player_center) -> None:
         super().__init__()
-        image = pygame.image.load("assets/kenny-space/PNG/Default/ship_B.png").convert()
-        self.surf = pygame.transform.scale_by(pygame.transform.rotate(image, -90), 0.2)
+        image = pg.image.load("assets/kenny-space/PNG/Default/ship_B.png").convert()
+        self.surf = pg.transform.scale_by(pg.transform.rotate(image, -90), 0.2)
 
-        color_image = pygame.Surface(self.surf.get_size()).convert_alpha()
+        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
         color_image.fill((255, 255, 0))
-        self.surf.blit(color_image, (0,0), special_flags=pygame.BLEND_RGB_MULT)
+        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
 
         self.rect = self.surf.get_rect(
             center=player_center

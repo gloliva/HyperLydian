@@ -8,6 +8,7 @@ FPS = 60
 SCREEN_WIDTH = 1440
 SCREEN_HEIGHT = 900
 
+
 # Define game states
 class GameState(Enum):
     MAIN_MENU = 0

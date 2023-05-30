@@ -4,7 +4,6 @@ from typing import Tuple
 
 # 3rd-party imports
 import pygame as pg
-from pygame.locals import RLEACCEL
 
 
 class StraferGruntGroup(pg.sprite.Group):
@@ -55,24 +54,28 @@ class Enemy(pg.sprite.Sprite):
             image_file: str,
             health: int,
             movement_speed: int,
-            spawn_position: Tuple[int, int],
+            spawn_location: Tuple[int, int],
             primary_attack,
             image_scale: float = 1.0,
             image_rotation: int = 0,
         ) -> None:
         super().__init__()
-        image = pg.image.load(image_file).convert()
+
+        # Create sprite surface
+        image = pg.image.load(image_file).convert_alpha()
         self.surf = pg.transform.rotate(pg.transform.scale_by(image, image_scale), image_rotation)
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
 
         color_image = pg.Surface(self.surf.get_size()).convert_alpha()
         color_image.fill((255, 0, 0))
         self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
 
-        self.rect = self.surf.get_rect(
-            center=spawn_position,
-        )
+        # Get sprite rect
+        self.rect = self.surf.get_rect(center=spawn_location)
 
+        # Create sprite mask
+        self.mask = pg.mask.from_surface(self.surf)
+
+        # Set layer sprite is drawn to
         self._layer = self.DRAW_LAYER
 
         # Enemy attributes
@@ -107,7 +110,7 @@ class StraferGrunt(Enemy):
 
     def __init__(self, primary_attack, row: int) -> None:
         image_file = 'assets/kenny-space/PNG/Default/enemy_A.png'
-        spawn_position = (
+        spawn_location = (
             randint(0, 1000),
             -100,
         )
@@ -115,7 +118,7 @@ class StraferGrunt(Enemy):
             image_file,
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
-            spawn_position,
+            spawn_location,
             primary_attack,
             image_scale=1.5,
             image_rotation=180,
