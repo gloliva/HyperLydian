@@ -1,5 +1,5 @@
 # 3rd-party imports
-import pygame
+import pygame as pg
 from pygame.locals import QUIT, RESIZABLE
 
 # project imports
@@ -7,21 +7,30 @@ from defs import SCREEN_WIDTH, SCREEN_HEIGHT
 from states import GameState, transition_state
 
 # initial pygame setup
-pygame.init()
+pg.init()
 
 # set up display
-MAIN_SCREEN = pygame.display.set_mode(
+MAIN_SCREEN = pg.display.set_mode(
     (SCREEN_WIDTH, SCREEN_HEIGHT),
     flags=RESIZABLE,
 )
-pygame.display.set_caption('HYPER LYDIAN')
+pg.display.set_caption('HYPER LYDIAN')
 
 # set up clock
-CLOCK = pygame.time.Clock()
+CLOCK = pg.time.Clock()
 
 
 def initialize_game():
-    pass
+    global MAIN_SCREEN, CLOCK
+    pg.init()
+
+    MAIN_SCREEN = pg.display.set_mode(
+        (SCREEN_WIDTH, SCREEN_HEIGHT),
+        flags=RESIZABLE,
+    )
+
+    CLOCK = pg.time.Clock()
+
 
 
 def main():
@@ -31,7 +40,7 @@ def main():
 
     while main_loop:
         # event handler
-        for event in pygame.event.get():
+        for event in pg.event.get():
             # Quit the game
             if event.type == QUIT:
                 main_loop = False
@@ -47,6 +56,6 @@ def main():
 
 if __name__ == "__main__":
     # maybe initialize stuff, like fonts
-    initialize_game()
+    # initialize_game()
     main()
-    pygame.quit()
+    pg.quit()

@@ -1,20 +1,15 @@
-# stdlib imports
-from enum import Enum
-
 # 3rd-party imports
-import pygame as pg
-
-
-CUSTOM_EVENT_ID_START = pg.USEREVENT + 1
+from pygame.event import custom_type, Event as PGEvent
+from pygame.time import set_timer as event_timer
 
 
 # Custom Events
-class Event(Enum):
-    ADD_ENEMY = pg.event.Event(CUSTOM_EVENT_ID_START)
-    ADD_STAR = pg.event.Event(CUSTOM_EVENT_ID_START + 1)
+class Event:
+    ADD_ENEMY = PGEvent(custom_type())
+    ADD_STAR = PGEvent(custom_type())
 
 
 # Event timers
 def initialize_event_timers():
-    pg.time.set_timer(Event.ADD_ENEMY.value, 200)
-    pg.time.set_timer(Event.ADD_STAR.value, 50)
+    event_timer(Event.ADD_ENEMY, 2000)
+    event_timer(Event.ADD_STAR, 50)
