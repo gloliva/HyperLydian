@@ -1,9 +1,13 @@
 # 3rd-party imports
-import pygame as pg
+from pygame.sprite import Group
 
 # project imports
 from sprites.background import Star
-from sprites.enemies import ShooterGrunt, TrackerGrunt
+from sprites.enemies import (
+    StraferGruntGroup,
+    StraferGrunt,
+    TrackerGrunt
+)
 from sprites.player import Player
 from sprites.projectiles import Missile, EnergyOrb, TurretRound
 
@@ -15,7 +19,7 @@ class SpriteManager:
     }
 
     ENEMIES = {
-        'shooter_grunt': ShooterGrunt,
+        'strafer_grunt': StraferGrunt,
         'tracker_grunt': TrackerGrunt,
     }
 
@@ -32,7 +36,8 @@ class SpriteManager:
 
 # Single access point for all groups of sprites
 class GroupManager():
-    enemies = pg.sprite.Group()
-    projectiles = pg.sprite.Group()
-    stars = pg.sprite.Group()
-    all_sprites = pg.sprite.Group()
+    all_enemies = Group()
+    grunt_enemies = StraferGruntGroup()
+    projectiles = Group()
+    stars = Group()
+    all_sprites = Group()

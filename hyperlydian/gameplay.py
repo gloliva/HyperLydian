@@ -25,6 +25,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # create the player
     player = SpriteManager.PLAYER['player'](GAME_SCREEN.get_rect(), PRIMARY_ATTACK)
     GroupManager.all_sprites.add(player)
+    waiting_grunts = set()
 
     gameplay_loop = True
     while gameplay_loop:
@@ -41,11 +42,26 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                     GroupManager.stars.add(star)
                     GroupManager.all_sprites.add(star)
 
-            # handle creating enemies
-            elif event.type == Event.ADD_ENEMY.type and len(GroupManager.enemies) < 3:
-                enemy = SpriteManager.ENEMIES['shooter_grunt']()
-                GroupManager.enemies.add(enemy)
-                GroupManager.all_sprites.add(enemy)
+            # handle creating grunts
+            elif event.type == Event.ADD_STRAFER_GRUNT.type and not GroupManager.grunt_enemies.is_full():
+                # create Grunt object
+                grunt_row = GroupManager.grunt_enemies.curr_row_to_fill
+                grunt = SpriteManager.ENEMIES['strafer_grunt'](grunt_row)
+
+                # determine where grunt stops on screen
+                grunt_y_position = (
+                    GroupManager.grunt_enemies.ROW_START +
+                    (GroupManager.grunt_enemies.curr_row_to_fill * grunt.rect.height * GroupManager.grunt_enemies.ROW_SPACING)
+                )
+                grunt.set_stopping_point_y(grunt_y_position)
+
+                # Add Grunt to groups
+                GroupManager.grunt_enemies.add(grunt)
+                GroupManager.all_sprites.add(grunt)
+                GroupManager.all_enemies.add(grunt)
+
+                # Calculate new grunt row
+                GroupManager.grunt_enemies.update_curr_row()
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()
@@ -58,7 +74,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         player.update(pressed_keys, GAME_SCREEN.get_rect())
 
         # move enemies
-        GroupManager.enemies.update(GAME_SCREEN.get_rect())
+        GroupManager.all_enemies.update(GAME_SCREEN.get_rect())
 
         # move projectiles
         GroupManager.projectiles.update(GAME_SCREEN.get_rect())
@@ -67,21 +83,31 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         GroupManager.stars.update(GAME_SCREEN.get_rect())
 
         # collision checks
-        # enemy + enemy collison; change strafe direction
-
+        # grunt + enemies collison; change strafe direction
         handled_enemies = set()
-        for enemy in GroupManager.enemies:
+        for grunt in GroupManager.grunt_enemies:
             collided_enemies = pg.sprite.spritecollide(
-                enemy, GroupManager.enemies, dokill=False,
+                grunt, GroupManager.all_enemies, dokill=False,
             )
-
             for collided_enemy in collided_enemies:
                 # skip for enemy colliding with itself and if the enemy has already been handled
-                if enemy == collided_enemy or enemy in handled_enemies:
+                if grunt == collided_enemy or grunt in handled_enemies:
                     continue
-                enemy.switch_strafe_direction()
-                handled_enemies.add(enemy)
+                if not grunt.moving_to_position:
+                    grunt.switch_strafe_direction()
+                handled_enemies.add(grunt)
 
+        # projectiles + enemies collision;
+        # destroy projectile + damage enemy
+        collided = pg.sprite.groupcollide(
+            GroupManager.projectiles,
+            GroupManager.all_enemies,
+            dokilla=True,
+            dokillb=False,
+        )
+        for projectile, enemies in collided.items():
+            for enemy in enemies:
+                enemy.take_damage(projectile.damage)
 
         # screen background
         GAME_SCREEN.fill((0, 0, 0,))

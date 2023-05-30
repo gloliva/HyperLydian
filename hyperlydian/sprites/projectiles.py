@@ -15,7 +15,6 @@ class Projectile(pygame.sprite.Sprite):
             movement_speed: int,
             movement_angle: int,
             image_scale: float = 1.,
-            on_kill_callback: Optional[Callable] = None,
         ) -> None:
         super().__init__()
         # Sprite attributes
@@ -27,7 +26,6 @@ class Projectile(pygame.sprite.Sprite):
         self.damage = damage
         self.movement_speed = movement_speed
         self.movement_angle = movement_angle
-        self.on_kill_callback = on_kill_callback
 
     def update(self, game_screen_rect: pygame.Rect):
         # Calculate new position based on the angle of fire
@@ -44,8 +42,6 @@ class Projectile(pygame.sprite.Sprite):
 
         if out_of_bounds:
             self.kill()
-            if self.on_kill_callback is not None:
-                self.on_kill_callback()
 
 
 class TurretRound(Projectile):
@@ -56,7 +52,6 @@ class TurretRound(Projectile):
     def __init__(
             self,
             center_position: Tuple[int, int],
-            on_kill_callback: Optional[Callable] = None,
         ) -> None:
         image_file = "assets/kenny-space/PNG/Default/meteor_detailedSmall.png"
         movement_angle = self.DEFAULT_ANGLE
@@ -67,7 +62,6 @@ class TurretRound(Projectile):
             self.DEFAULT_SPEED,
             movement_angle,
             image_scale=0.2,
-            on_kill_callback=on_kill_callback,
         )
 
 
@@ -79,11 +73,10 @@ class EnergyOrb(Projectile):
             self,
             center_position: Tuple[int, int],
             movement_angle: int,
-            on_kill_callback: Optional[Callable] = None,
         ) -> None:
         image_file = "assets/kenny-space/PNG/Default/meteor_small.png"
         super().__init__(
-            image_file, center_position, self.DEFAULT_DAMAGE, self.DEFAULT_SPEED, movement_angle, on_kill_callback
+            image_file, center_position, self.DEFAULT_DAMAGE, self.DEFAULT_SPEED, movement_angle
         )
 
 
@@ -104,3 +97,6 @@ class Missile(Projectile):
 
     def update(self):
         pass
+
+    def kill(self):
+        super().kill()
