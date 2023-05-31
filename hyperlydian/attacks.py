@@ -33,6 +33,7 @@ class Weapon:
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
+            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
         current_time = pg.time.get_ticks()
@@ -42,6 +43,7 @@ class Weapon:
                 damage=damage,
                 speed=speed,
                 movement_angle=movement_angle,
+                rotation_angle=rotation_angle,
                 image_scale=image_scale,
             )
             projectile_group.add(projectile)
@@ -75,6 +77,7 @@ class StandardAttack:
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
+            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ):
         self.equipped_weapon.fire_projectile(
@@ -83,5 +86,6 @@ class StandardAttack:
             damage=damage,
             speed=speed,
             movement_angle=movement_angle,
+            rotation_angle=rotation_angle,
             image_scale=image_scale,
         )

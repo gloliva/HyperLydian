@@ -18,12 +18,13 @@ class Projectile(pg.sprite.Sprite):
             damage: int,
             movement_speed: int,
             movement_angle: int,
+            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
         super().__init__()
         # Sprite attributes
         image = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.scale_by(image, image_scale)
+        self.surf = pg.transform.rotozoom(image, rotation_angle, image_scale)
         self.rect = self.surf.get_rect(center=center_position)
         # Create sprite mask
         self.mask = pg.mask.from_surface(self.surf)
@@ -64,6 +65,7 @@ class EnergyBeam(Projectile):
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
+            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
 
@@ -90,6 +92,7 @@ class EnergyBeam(Projectile):
             damage,
             speed,
             movement_angle,
+            rotation_angle,
             image_scale,
         )
 
