@@ -5,6 +5,8 @@ from typing import Tuple
 # 3rd-party imports
 import pygame as pg
 
+# project imports
+from exceptions import AssetLoadError
 
 class Projectile(pg.sprite.Sprite):
     DRAW_LAYER = 1
@@ -16,7 +18,7 @@ class Projectile(pg.sprite.Sprite):
             damage: int,
             movement_speed: int,
             movement_angle: int,
-            image_scale: float = 1.,
+            image_scale: float = 1.0,
         ) -> None:
         super().__init__()
         # Sprite attributes
@@ -49,27 +51,54 @@ class Projectile(pg.sprite.Sprite):
             self.kill()
 
 
-class TurretRound(Projectile):
+class EnergyBeam(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
+    COLOR = None
+    COLORS = ('blue', 'red')
 
     def __init__(
             self,
             center_position: Tuple[int, int],
+            damage: int = None,
+            speed: int = None,
             movement_angle: int = None,
+            image_scale: float = 1.0,
         ) -> None:
-        image_file = "assets/kenny-space/PNG/Default/meteor_detailedSmall.png"
+
+        # Handle which asset to select
+        color = self.COLOR
+        if color not in self.COLORS:
+            raise AssetLoadError(
+                f'Passed in color "{color}" not in available EnergyBeam colors: {self.COLORS}'
+            )
+        image_file = f"assets/projectiles/{color}_energy_beam.png"
+
+        # Set any defaults
+        if damage is None:
+            damage = self.DEFAULT_DAMAGE
+        if speed is None:
+            speed = self.DEFAULT_SPEED
         if movement_angle is None:
             movement_angle = self.DEFAULT_ANGLE
+
+        # Instantiate projectile
         super().__init__(
             image_file,
             center_position,
-            self.DEFAULT_DAMAGE,
-            self.DEFAULT_SPEED,
+            damage,
+            speed,
             movement_angle,
-            image_scale=0.3,
+            image_scale,
         )
+
+class BlueEnergyBeam(EnergyBeam):
+    COLOR = 'blue'
+
+
+class RedEnergyBeam(EnergyBeam):
+    COLOR = 'red'
 
 
 class EnergyOrb(Projectile):

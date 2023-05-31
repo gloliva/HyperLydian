@@ -1,0 +1,2 @@
+class AssetLoadError(Exception):
+    pass

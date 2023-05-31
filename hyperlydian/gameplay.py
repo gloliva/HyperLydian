@@ -7,7 +7,7 @@ from pygame.locals import (
 )
 
 # project imports
-from attacks import PRIMARY_ATTACK, StandardAttack, Weapon
+from attacks import StandardAttack, Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 from events import Event, initialize_event_timers
 from sprites.manager import GroupManager, SpriteManager
@@ -23,8 +23,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     initialize_event_timers()
 
     # create the player
-    player = SpriteManager.PLAYER['player'](game_screen.get_rect(), PRIMARY_ATTACK)
-    GroupManager.all_sprites.add(player)
+    player = create_player(game_screen.get_rect())
 
     gameplay_loop = True
     while gameplay_loop:
@@ -34,6 +33,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             if event.type == QUIT:
                 gameplay_loop = False
                 next_state = GameState.QUIT
+
             # handle creating stars
             elif event.type == Event.ADD_STAR.type:
                 for _ in range(SpriteManager.BACKGROUND['star'].NUM_STARS_PER_EVENT):
@@ -41,12 +41,17 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                     GroupManager.stars.add(star)
                     GroupManager.all_sprites.add(star)
 
+            # handle player death
+            elif event.type == Event.PLAYER_DEATH.type:
+                gameplay_loop = False
+                next_state = GameState.MAIN_MENU
+
             # handle creating grunts
             elif event.type == Event.ADD_STRAFER_GRUNT.type and not GroupManager.grunt_enemies.is_full():
                 # create Grunt object
                 grunt_row = GroupManager.grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
-                    SpriteManager.PROJECTILES['turret'],
+                    SpriteManager.PROJECTILES['red_energy_beam'],
                     Weapon.INFINITE_AMMO,
                     1000,
                 )
@@ -93,7 +98,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         GroupManager.stars.update(game_screen.get_rect())
 
         # collision checks
-        handle_collisions()
+        handle_collisions(player)
 
         # screen background
         game_screen.fill((0, 0, 0,))
@@ -115,7 +120,27 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     return next_state
 
 
-def handle_collisions():
+def create_player(game_screen_rect: pg.Rect):
+    # create default weapon
+    energy_beam = Weapon(
+        SpriteManager.PROJECTILES['blue_energy_beam'],
+        Weapon.INFINITE_AMMO,
+        Weapon.DEFAULT_RATE_OF_FIRE,
+    )
+    player_attack = StandardAttack(
+        energy_beam,
+        GroupManager.player_projectiles,
+    )
+
+    # create player object
+    player = SpriteManager.PLAYER['player'](game_screen_rect, player_attack)
+
+    # add to sprite group
+    GroupManager.all_sprites.add(player)
+    return player
+
+
+def handle_collisions(player):
     # grunt + enemies collison
     # change Grunt strafe direction
     handled_enemies = set()
@@ -146,3 +171,15 @@ def handle_collisions():
     for projectile, enemies in collided.items():
         for enemy in enemies:
             enemy.take_damage(projectile.damage)
+
+    # projectiles + player collision
+    # destroy projectile + damage player
+    collided = pg.sprite.spritecollide(
+        player,
+        GroupManager.enemy_projectiles,
+        dokill=False,
+        collided=pg.sprite.collide_mask
+    )
+    for projectile in collided:
+        player.take_damage(projectile.damage)
+        projectile.kill()

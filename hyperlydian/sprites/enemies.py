@@ -168,7 +168,9 @@ class StraferGrunt(Enemy):
 
         attack_center = (self.rect.centerx, self.rect.bottom)
         self.primary_attack.attack(
-            object_center_position=attack_center,
+            projectile_center_position=attack_center,
+            speed=4,
+            movement_angle=0,
         )
 
 

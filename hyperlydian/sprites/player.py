@@ -7,6 +7,9 @@ from pygame.locals import (
     K_RIGHT,
 )
 
+# project imports
+from events import Event
+
 
 class Player(pg.sprite.Sprite):
     DEFAULT_HEALTH = 3
@@ -41,6 +44,7 @@ class Player(pg.sprite.Sprite):
         self.primary_attack = primary_attack
 
     def update(self, pressed_keys, game_screen_rect: pg.Rect):
+        # move player based on key input
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -self.movement_speed)
         if pressed_keys[K_DOWN]:
@@ -64,6 +68,7 @@ class Player(pg.sprite.Sprite):
         self.curr_health -= damage
         if self.is_dead():
             self.kill()
+            pg.event.post(Event.PLAYER_DEATH)
 
     def is_dead(self):
         return self.curr_health <= 0
@@ -71,7 +76,8 @@ class Player(pg.sprite.Sprite):
     def light_attack(self):
         attack_center = (self.rect.centerx, self.rect.top)
         self.primary_attack.attack(
-            object_center_position=attack_center,
+            projectile_center_position=attack_center,
+            movement_angle=180,
         )
 
     def heavy_attack(self):

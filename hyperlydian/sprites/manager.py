@@ -9,7 +9,12 @@ from sprites.enemies import (
     TrackerGrunt
 )
 from sprites.player import Player
-from sprites.projectiles import Missile, EnergyOrb, TurretRound
+from sprites.projectiles import (
+    Missile,
+    BlueEnergyBeam,
+    RedEnergyBeam,
+    EnergyOrb,
+)
 
 
 # Single access point for all Sprite objects
@@ -28,8 +33,9 @@ class SpriteManager:
     }
 
     PROJECTILES = {
-        'turret': TurretRound,
-        'orb': EnergyOrb,
+        'blue_energy_beam': BlueEnergyBeam,
+        'red_energy_beam': RedEnergyBeam,
+        'energy_orb': EnergyOrb,
         'missile': Missile,
     }
 

@@ -6,7 +6,7 @@ import pygame as pg
 
 # project imports
 from sprites.projectiles import Projectile
-from sprites.manager import SpriteManager, GroupManager
+from sprites.manager import GroupManager
 
 
 class Weapon:
@@ -30,11 +30,20 @@ class Weapon:
             self,
             projectile_center_position: Tuple[int, int],
             projectile_group: pg.sprite.Group,
+            damage: int = None,
+            speed: int = None,
             movement_angle: int = None,
+            image_scale: float = 1.0,
         ) -> None:
         current_time = pg.time.get_ticks()
         if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
-            projectile = self.projectile_type(center_position=projectile_center_position, movement_angle=movement_angle)
+            projectile = self.projectile_type(
+                center_position=projectile_center_position,
+                damage=damage,
+                speed=speed,
+                movement_angle=movement_angle,
+                image_scale=image_scale,
+            )
             projectile_group.add(projectile)
             GroupManager.all_sprites.add(projectile)
             self.curr_projectiles -= 1
@@ -60,25 +69,19 @@ class StandardAttack:
     def switch_weapon(self, weapon: Weapon) -> None:
         self.equipped_weapon = weapon
 
-    def attack(self, object_center_position: Tuple[int, int]):
-        self.equipped_weapon.fire_projectile(object_center_position, self.projectile_group)
-
-
-# Create Weapons
-# Default weapon used by Player
-TURRET = Weapon(
-    SpriteManager.PROJECTILES['turret'],
-    Weapon.INFINITE_AMMO,
-    Weapon.DEFAULT_RATE_OF_FIRE,
-)
-
-# Secondary weapon used by Player
-MISSILE_LAUNCHER = Weapon(
-    SpriteManager.PROJECTILES['missile'],
-    num_projectiles=3,
-    rate_of_fire=2000,
-)
-
-# Create player attack types
-PRIMARY_ATTACK = StandardAttack(TURRET, GroupManager.player_projectiles)
-SECONDARY_ATTACK = StandardAttack(MISSILE_LAUNCHER, GroupManager.player_projectiles)
+    def attack(
+            self,
+            projectile_center_position: Tuple[int, int],
+            damage: int = None,
+            speed: int = None,
+            movement_angle: int = None,
+            image_scale: float = 1.0,
+        ):
+        self.equipped_weapon.fire_projectile(
+            projectile_center_position=projectile_center_position,
+            projectile_group=self.projectile_group,
+            damage=damage,
+            speed=speed,
+            movement_angle=movement_angle,
+            image_scale=image_scale,
+        )
