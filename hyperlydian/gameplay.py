@@ -183,3 +183,7 @@ def handle_collisions(player):
     for projectile in collided:
         player.take_damage(projectile.damage)
         projectile.kill()
+
+
+def end_game():
+    pass

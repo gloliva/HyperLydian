@@ -20,12 +20,8 @@ class Player(pg.sprite.Sprite):
         super().__init__()
 
         # Create sprite surface
-        image_file = "assets/kenny-space/PNG/Default/ship_L.png"
-        self.surf = pg.image.load(image_file).convert_alpha()
-
-        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((255, 255, 0))
-        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
+        image_file = "assets/spaceships/player_ship.png"
+        self.surf = pg.transform.scale_by(pg.image.load(image_file), 1.5).convert_alpha()
 
         # Get sprite rect
         spawn_location = (game_screen_rect.width / 2, game_screen_rect.height - 100)

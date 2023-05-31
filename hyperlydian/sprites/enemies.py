@@ -65,10 +65,6 @@ class Enemy(pg.sprite.Sprite):
         image = pg.image.load(image_file).convert_alpha()
         self.surf = pg.transform.rotate(pg.transform.scale_by(image, image_scale), image_rotation)
 
-        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((255, 0, 0))
-        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
-
         # Get sprite rect
         self.rect = self.surf.get_rect(center=spawn_location)
 
@@ -109,7 +105,7 @@ class StraferGrunt(Enemy):
     STRAFE_SPEED = 2
 
     def __init__(self, primary_attack, row: int) -> None:
-        image_file = 'assets/kenny-space/PNG/Default/enemy_A.png'
+        image_file = 'assets/spaceships/enemy_ship.png'
         spawn_location = (
             randint(0, 1000),
             -100,
@@ -169,8 +165,9 @@ class StraferGrunt(Enemy):
         attack_center = (self.rect.centerx, self.rect.bottom)
         self.primary_attack.attack(
             projectile_center_position=attack_center,
-            speed=4,
+            speed=6,
             movement_angle=0,
+            image_scale=1.5,
         )
 
 
