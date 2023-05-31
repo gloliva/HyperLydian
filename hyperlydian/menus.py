@@ -15,7 +15,8 @@ from pygame.locals import (
 
 # project imports
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
-from sprites.manager import GroupManager, SpriteManager
+import sprites.groups as groups
+import sprites.background as background
 
 
 pygame.font.init()
@@ -114,9 +115,9 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
 
     # draw initial background
     for _ in range(400):
-        star = SpriteManager.BACKGROUND['star'](MENU_SCREEN.get_rect(), on_load=True)
-        GroupManager.stars.add(star)
-        GroupManager.all_sprites.add(star)
+        star = background.Star(MENU_SCREEN.get_rect(), on_load=True)
+        groups.stars.add(star)
+        groups.all_sprites.add(star)
 
     # start main menu loop
     main_menu_loop = True
@@ -141,7 +142,7 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
 
         # draw background
         MENU_SCREEN.fill("black")
-        for sprite in GroupManager.stars:
+        for sprite in groups.stars:
             MENU_SCREEN.blit(sprite.surf, sprite.rect)
 
         # draw text

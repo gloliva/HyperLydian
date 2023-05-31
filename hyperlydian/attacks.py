@@ -6,7 +6,7 @@ import pygame as pg
 
 # project imports
 from sprites.projectiles import Projectile
-from sprites.manager import GroupManager
+import sprites.groups as groups
 
 
 class Weapon:
@@ -45,7 +45,7 @@ class Weapon:
                 image_scale=image_scale,
             )
             projectile_group.add(projectile)
-            GroupManager.all_sprites.add(projectile)
+            groups.all_sprites.add(projectile)
             self.curr_projectiles -= 1
             self.last_time_shot = current_time
 
