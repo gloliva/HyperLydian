@@ -20,18 +20,6 @@ pg.display.set_caption('HYPER LYDIAN')
 CLOCK = pg.time.Clock()
 
 
-def initialize_game():
-    global MAIN_SCREEN, CLOCK
-    pg.init()
-
-    MAIN_SCREEN = pg.display.set_mode(
-        (SCREEN_WIDTH, SCREEN_HEIGHT),
-        flags=RESIZABLE,
-    )
-
-    CLOCK = pg.time.Clock()
-
-
 def main():
     """Main Program Loop"""
     main_loop = True
@@ -55,6 +43,5 @@ def main():
 
 if __name__ == "__main__":
     # maybe initialize stuff, like fonts
-    # initialize_game()
     main()
     pg.quit()

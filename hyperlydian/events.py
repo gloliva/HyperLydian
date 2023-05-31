@@ -17,6 +17,6 @@ class Event:
 
 
 # Event timers
-def initialize_event_timers():
+def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
     event_timer(Event.ADD_STAR, 50)
