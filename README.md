@@ -12,3 +12,16 @@ python3 -m pip install -r requirements.txt
 ```
 python3 hyperlydian/main.py
 ```
+
+## Controls
+Subject to change (definitely will change)
+
+`Arrow Keys` - Move
+
+`W` - Shoot
+
+`Q` - Rotate CCW
+
+`E` - Rotate CW
+
+GOOD LUCK
