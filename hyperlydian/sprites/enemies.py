@@ -5,83 +5,16 @@ from typing import List, Tuple
 # 3rd-party imports
 import pygame as pg
 
-
-class Enemy(pg.sprite.Sprite):
-    DRAW_LAYER = 2
-
-    def __init__(
-            self,
-            image_files: str,
-            health: int,
-            movement_speed: int,
-            spawn_location: Tuple[int, int],
-            primary_attack,
-            image_scale: float = 1.0,
-            image_rotation: int = 0,
-        ) -> None:
-        super().__init__()
-
-        # Create sprite surface
-        self.images = [
-            pg.image.load(image_file).convert_alpha() for image_file in image_files
-        ]
-        self.selected_image_id = 0
-
-        # self.original_image = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.rotate(
-            pg.transform.scale_by(
-                self.images[self.selected_image_id],
-                image_scale
-            ),
-            image_rotation
-        )
-
-        # Get sprite rect
-        self.rect = self.surf.get_rect(center=spawn_location)
-
-        # Create sprite mask
-        self.mask = pg.mask.from_surface(self.surf)
-
-        # Set layer sprite is drawn to
-        self._layer = self.DRAW_LAYER
-
-        # hit indicator image
-        self.last_time_hit = 0
-
-        # Enemy attributes
-        self.health = health
-        self.movement_speed = movement_speed
-        self.primary_attack = primary_attack
-        self.show_hit_indicator = False
+# project imports
+from sprites.base import Sprite
 
 
-    def update(self):
-        raise NotImplementedError(
-            'Each Enemy subclass must override their update method.'
-        )
-
-    def attack(self):
-        raise NotImplementedError(
-            'Each Enemy subclass must override their attack method.'
-        )
-
-    def take_damage(self, damage: int) -> None:
-        self.health -= damage
-        self.last_time_hit = pg.time.get_ticks()
-        self.show_hit_indicator = True
-        if self.is_dead():
-            self.kill()
-
-    def is_dead(self):
-        return self.health <= 0
-
-
-class StraferGrunt(Enemy):
+class StraferGrunt(Sprite):
     DEFAULT_HEALTH = 5
     SPAWN_SPEED = 8
     STRAFE_SPEED = 4
 
-    def __init__(self, primary_attack, row: int) -> None:
+    def __init__(self, attack, row: int) -> None:
         image_files = [
             'assets/spaceships/enemy_ship.png',
             'assets/spaceships/enemy_ship_hit.png',
@@ -95,12 +28,12 @@ class StraferGrunt(Enemy):
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_location,
-            primary_attack,
+            attack,
             image_scale=1.5,
             image_rotation=180,
         )
 
-        # Grunt movement attributes
+        # Additional Grunt attributes
         self.moving_to_position = True
         self.stopping_point_y = None
         self.strafe_direction = 1
@@ -133,13 +66,7 @@ class StraferGrunt(Enemy):
     def switch_strafe_direction(self):
         self.strafe_direction *= -1
 
-    def update(self, game_screen_rect: pg.Rect):
-        current_time = pg.time.get_ticks()
-        if self.show_hit_indicator:
-            if current_time - self.last_time_hit >= 2000:
-                pass
-            else:
-                self.show_hit_indicator = False
+    def move(self, game_screen_rect: pg.Rect):
         if self.moving_to_position:
             self.move_to_position()
         else:
@@ -158,6 +85,6 @@ class StraferGrunt(Enemy):
         )
 
 
-class TrackerGrunt(Enemy):
+class TrackerGrunt(Sprite):
     DEFAULT_HEALTH = 2
 

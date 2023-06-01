@@ -11,42 +11,39 @@ from pygame.locals import (
 
 # project imports
 from events import Event
+from sprites.base import Sprite
 
 
-class Player(pg.sprite.Sprite):
-    DEFAULT_HEALTH = 3
+class Player(Sprite):
+    DEFAULT_HEALTH = 5
     DEFAULT_SPEED = 5
     ROTATION_AMOUNT = 2
     DRAW_LAYER = 2
 
     def __init__(self, game_screen_rect: pg.Rect, primary_attack) -> None:
-        super().__init__()
+        image_files = [
+            "assets/spaceships/player_ship.png",
+            "assets/spaceships/player_ship_hit.png",
+        ]
+        spawn_location = (
+            game_screen_rect.width / 2,
+            game_screen_rect.height - 100,
+        )
 
-        # Create sprite surface
-        image_file = "assets/spaceships/player_ship.png"
-        self.original_image = pg.transform.scale_by(pg.image.load(image_file), 1.5).convert_alpha()
-        self.surf = self.original_image
+        super().__init__(
+            image_files,
+            self.DEFAULT_HEALTH,
+            self.DEFAULT_SPEED,
+            spawn_location,
+            primary_attack,
+            image_scale=1.5,
+        )
 
-        # Get sprite rect
-        spawn_location = (game_screen_rect.width / 2, game_screen_rect.height - 100)
-        self.rect = self.surf.get_rect(center=spawn_location)
-
-        # Create sprite mask
-        self.mask = pg.mask.from_surface(self.surf)
-
-        # Set layer sprite is drawn to
-        self._layer = self.DRAW_LAYER
-
-        # rotation
+        # Additional Player attributes
+        self.max_health = self.DEFAULT_HEALTH
         self.current_rotation = 0
 
-        # Player attributes
-        self.max_health = self.DEFAULT_HEALTH
-        self.curr_health = self.max_health
-        self.movement_speed = self.DEFAULT_SPEED
-        self.primary_attack = primary_attack
-
-    def update(self, pressed_keys, game_screen_rect: pg.Rect):
+    def move(self, pressed_keys, game_screen_rect: pg.Rect):
         # move player based on key input
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -self.movement_speed)
@@ -75,7 +72,8 @@ class Player(pg.sprite.Sprite):
 
     def rotate(self, rotation_angle: int):
         self.current_rotation = rotation_angle
-        self.surf = pg.transform.rotate(self.original_image, rotation_angle)
+        image = self.images[self.curr_image_id]
+        self.surf = pg.transform.rotate(image, rotation_angle)
 
         # make sure image retains its previous center
         current_image_center = self.rect.center
@@ -86,13 +84,9 @@ class Player(pg.sprite.Sprite):
         self.mask = pg.mask.from_surface(self.surf)
 
     def take_damage(self, damage: int) -> None:
-        self.curr_health -= damage
+        super().take_damage(damage)
         if self.is_dead():
-            self.kill()
             pg.event.post(Event.PLAYER_DEATH)
-
-    def is_dead(self):
-        return self.curr_health <= 0
 
     def light_attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
