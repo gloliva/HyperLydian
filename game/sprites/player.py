@@ -41,7 +41,6 @@ class Player(Sprite):
 
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
-        self.current_rotation = 0
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
         # move player based on key input
@@ -69,19 +68,6 @@ class Player(Sprite):
             self.rotate(self.current_rotation + self.ROTATION_AMOUNT)
         if pressed_keys[K_e]:
             self.rotate(self.current_rotation - self.ROTATION_AMOUNT)
-
-    def rotate(self, rotation_angle: int):
-        self.current_rotation = rotation_angle
-        image = self.images[int(self.curr_image_id)]
-        self.surf = pg.transform.rotate(image, rotation_angle)
-
-        # make sure image retains its previous center
-        current_image_center = self.rect.center
-        self.rect = self.surf.get_rect()
-        self.rect.center = current_image_center
-
-        # generate new mask
-        self.mask = pg.mask.from_surface(self.surf)
 
     def take_damage(self, damage: int) -> None:
         super().take_damage(damage)

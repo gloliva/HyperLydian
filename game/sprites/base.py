@@ -52,6 +52,7 @@ class Sprite(pg.sprite.Sprite):
         self.health = health
         self.movement_speed = movement_speed
         self.primary_attack = primary_attack
+        self.current_rotation = 0
 
     def update(self, *args, **kwargs):
         if self.hit_animation_on:
@@ -69,6 +70,19 @@ class Sprite(pg.sprite.Sprite):
             'Each Sprite subclass must override their attack method.'
         )
 
+    def rotate(self, rotation_angle: int):
+        self.current_rotation = rotation_angle
+        image = self.images[int(self.curr_image_id)]
+        self.surf = pg.transform.rotate(image, rotation_angle)
+
+        # make sure image retains its previous center
+        current_image_center = self.rect.center
+        self.rect = self.surf.get_rect()
+        self.rect.center = current_image_center
+
+        # generate new mask
+        self.mask = pg.mask.from_surface(self.surf)
+
     def take_damage(self, damage: int) -> None:
         self.health -= damage
         self.hit_animation_on = True
@@ -82,7 +96,10 @@ class Sprite(pg.sprite.Sprite):
     def show_hit_animation(self):
         self.curr_image_id = (self.curr_image_id + self.HIT_TIMER_INCREMENT) % self.num_images
         image_id = int(self.curr_image_id)
-        self.surf = self.images[image_id]
+        self.surf = pg.transform.rotate(
+            self.images[image_id],
+            self.current_rotation,
+        )
         if image_id == 0:
             self.curr_image_id = 0
             self.hit_animation_on = False
