@@ -10,7 +10,7 @@ python3 -m pip install -r requirements.txt
 
 ## Run Game
 ```
-python3 hyperlydian/main.py
+python3 game/main.py
 ```
 
 ## Controls

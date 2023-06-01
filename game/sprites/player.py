@@ -72,7 +72,7 @@ class Player(Sprite):
 
     def rotate(self, rotation_angle: int):
         self.current_rotation = rotation_angle
-        image = self.images[self.curr_image_id]
+        image = self.images[int(self.curr_image_id)]
         self.surf = pg.transform.rotate(image, rotation_angle)
 
         # make sure image retains its previous center
