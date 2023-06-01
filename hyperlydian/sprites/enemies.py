@@ -1,6 +1,6 @@
 # stdlib imports
 from random import randint
-from typing import Tuple
+from typing import List, Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -11,7 +11,7 @@ class Enemy(pg.sprite.Sprite):
 
     def __init__(
             self,
-            image_file: str,
+            image_files: str,
             health: int,
             movement_speed: int,
             spawn_location: Tuple[int, int],
@@ -22,8 +22,19 @@ class Enemy(pg.sprite.Sprite):
         super().__init__()
 
         # Create sprite surface
-        image = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.rotate(pg.transform.scale_by(image, image_scale), image_rotation)
+        self.images = [
+            pg.image.load(image_file).convert_alpha() for image_file in image_files
+        ]
+        self.selected_image_id = 0
+
+        # self.original_image = pg.image.load(image_file).convert_alpha()
+        self.surf = pg.transform.rotate(
+            pg.transform.scale_by(
+                self.images[self.selected_image_id],
+                image_scale
+            ),
+            image_rotation
+        )
 
         # Get sprite rect
         self.rect = self.surf.get_rect(center=spawn_location)
@@ -34,10 +45,14 @@ class Enemy(pg.sprite.Sprite):
         # Set layer sprite is drawn to
         self._layer = self.DRAW_LAYER
 
+        # hit indicator image
+        self.last_time_hit = 0
+
         # Enemy attributes
         self.health = health
         self.movement_speed = movement_speed
         self.primary_attack = primary_attack
+        self.show_hit_indicator = False
 
 
     def update(self):
@@ -52,6 +67,8 @@ class Enemy(pg.sprite.Sprite):
 
     def take_damage(self, damage: int) -> None:
         self.health -= damage
+        self.last_time_hit = pg.time.get_ticks()
+        self.show_hit_indicator = True
         if self.is_dead():
             self.kill()
 
@@ -61,17 +78,20 @@ class Enemy(pg.sprite.Sprite):
 
 class StraferGrunt(Enemy):
     DEFAULT_HEALTH = 5
-    SPAWN_SPEED = 5
-    STRAFE_SPEED = 2
+    SPAWN_SPEED = 8
+    STRAFE_SPEED = 4
 
     def __init__(self, primary_attack, row: int) -> None:
-        image_file = 'assets/spaceships/enemy_ship.png'
+        image_files = [
+            'assets/spaceships/enemy_ship.png',
+            'assets/spaceships/enemy_ship_hit.png',
+        ]
         spawn_location = (
             randint(0, 1000),
             -100,
         )
         super().__init__(
-            image_file,
+            image_files,
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_location,
@@ -80,7 +100,7 @@ class StraferGrunt(Enemy):
             image_rotation=180,
         )
 
-
+        # Grunt movement attributes
         self.moving_to_position = True
         self.stopping_point_y = None
         self.strafe_direction = 1
@@ -96,6 +116,7 @@ class StraferGrunt(Enemy):
         if self.rect.bottom < self.stopping_point_y:
             self.rect.move_ip(0, self.movement_speed)
         else:
+            self.movement_speed = self.STRAFE_SPEED
             self.moving_to_position = False
 
     def strafe(self, game_screen_rect: pg.Rect):
@@ -113,6 +134,12 @@ class StraferGrunt(Enemy):
         self.strafe_direction *= -1
 
     def update(self, game_screen_rect: pg.Rect):
+        current_time = pg.time.get_ticks()
+        if self.show_hit_indicator:
+            if current_time - self.last_time_hit >= 2000:
+                pass
+            else:
+                self.show_hit_indicator = False
         if self.moving_to_position:
             self.move_to_position()
         else:

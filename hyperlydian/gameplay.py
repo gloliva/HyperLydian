@@ -1,7 +1,10 @@
+# stdlib imports
+from random import randint
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
-    K_SPACE,
+    K_w,
     QUIT,
     SRCALPHA,
 )
@@ -57,7 +60,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 grunt_weapon = Weapon(
                     projectiles.RedEnergyBeam,
                     Weapon.INFINITE_AMMO,
-                    1000,
+                    randint(500, 2000),
                 )
                 grunt_attack = StandardAttack(grunt_weapon, groups.enemy_projectiles)
                 grunt = enemies.StraferGrunt(grunt_attack, grunt_row)
@@ -81,7 +84,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         pressed_keys = pg.key.get_pressed()
 
         # player attack
-        if pressed_keys[K_SPACE]:
+        if pressed_keys[K_w]:
             player.light_attack()
 
         # move the player
@@ -160,7 +163,8 @@ def handle_collisions(player):
             if grunt == collided_enemy or grunt in handled_enemies:
                 continue
             if not grunt.moving_to_position:
-                grunt.switch_strafe_direction()
+                pass
+                # grunt.switch_strafe_direction()
             handled_enemies.add(grunt)
 
     # projectiles + enemies collision
