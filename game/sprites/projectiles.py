@@ -9,7 +9,16 @@ import pygame as pg
 from exceptions import AssetLoadError
 
 class Projectile(pg.sprite.Sprite):
+    # Default attrs
+    DEFAULT_DAMAGE = 1
+    DEFAULT_SPEED = 1
+    DEFAULT_ANGLE = 0
+
     DRAW_LAYER = 1
+
+    # Colors
+    AVAILABLE_COLORS = None
+    COLOR = None
 
     def __init__(
             self,
@@ -20,20 +29,35 @@ class Projectile(pg.sprite.Sprite):
             movement_angle: int,
             rotation_angle: int = 0,
             image_scale: float = 1.0,
+            # colored_projectile: bool = False,
         ) -> None:
         super().__init__()
+
+        # Handle sprite color, if needed
+        if self.COLOR is not None:
+            if self.COLOR not in self.AVAILABLE_COLORS:
+                raise AssetLoadError(
+                    f'Passed in color "{self.COLOR}" not in available Projectile colors: {self.AVAILABLE_COLORS}'
+                )
+            image_file = image_file.format(color=self.COLOR)
+
         # Sprite attributes
         image = pg.image.load(image_file).convert_alpha()
         self.surf = pg.transform.rotozoom(image, rotation_angle, image_scale)
+
+        # Set projectile rect
         self.rect = self.surf.get_rect(center=center_position)
+
         # Create sprite mask
         self.mask = pg.mask.from_surface(self.surf)
+
+        # Update the drawing layer
         self._layer = self.DRAW_LAYER
 
         # Weapon attributes
-        self.damage = damage
-        self.movement_speed = movement_speed
-        self.movement_angle = movement_angle
+        self.damage = damage if damage is not None else self.DEFAULT_DAMAGE
+        self.movement_speed = movement_speed if movement_speed is not None else self.DEFAULT_SPEED
+        self.movement_angle = movement_angle if movement_angle is not None else self.DEFAULT_ANGLE
 
     def update(self, game_screen_rect: pg.Rect):
         # Calculate new position based on the angle of fire
@@ -56,8 +80,7 @@ class EnergyBeam(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
-    COLOR = None
-    COLORS = ('blue', 'red')
+    AVAILABLE_COLORS = ('blue', 'red')
 
     def __init__(
             self,
@@ -68,22 +91,7 @@ class EnergyBeam(Projectile):
             rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
-
-        # Handle which asset to select
-        color = self.COLOR
-        if color not in self.COLORS:
-            raise AssetLoadError(
-                f'Passed in color "{color}" not in available EnergyBeam colors: {self.COLORS}'
-            )
-        image_file = f"assets/projectiles/{color}_energy_beam.png"
-
-        # Set any defaults
-        if damage is None:
-            damage = self.DEFAULT_DAMAGE
-        if speed is None:
-            speed = self.DEFAULT_SPEED
-        if movement_angle is None:
-            movement_angle = self.DEFAULT_ANGLE
+        image_file = "assets/projectiles/{color}_energy_beam.png"
 
         # Instantiate projectile
         super().__init__(
@@ -106,17 +114,36 @@ class RedEnergyBeam(EnergyBeam):
 
 class EnergyOrb(Projectile):
     DEFAULT_DAMAGE = 1
-    DEFAULT_SPEED = 8
+    DEFAULT_SPEED = 3
+    DEFAULT_ANGLE = 180
+    COLOR = None
+    AVAILABLE_COLORS = ('green')
 
     def __init__(
             self,
             center_position: Tuple[int, int],
+            damage: int = None,
+            speed: int = None,
             movement_angle: int = None,
+            rotation_angle: int = 0,
+            image_scale: float = 1.0,
         ) -> None:
-        image_file = "assets/kenny-space/PNG/Default/meteor_small.png"
+        image_file = image_file = "assets/projectiles/{color}_energy_orb.png"
+
+        # Instantiate projectile
         super().__init__(
-            image_file, center_position, self.DEFAULT_DAMAGE, self.DEFAULT_SPEED, movement_angle
+            image_file,
+            center_position,
+            damage,
+            speed,
+            movement_angle,
+            rotation_angle,
+            image_scale,
         )
+
+
+class GreenEnergyOrb(EnergyOrb):
+    COLOR = 'green'
 
 
 class Missile(Projectile):

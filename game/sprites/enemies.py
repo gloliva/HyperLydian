@@ -1,6 +1,5 @@
 # stdlib imports
 from random import randint
-from typing import List, Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -10,17 +9,17 @@ from sprites.base import Sprite
 
 
 class StraferGrunt(Sprite):
-    DEFAULT_HEALTH = 5
+    DEFAULT_HEALTH = 6
     SPAWN_SPEED = 8
     STRAFE_SPEED = 4
 
-    def __init__(self, attack, row: int) -> None:
+    def __init__(self, weapons, row: int) -> None:
         image_files = [
             'assets/spaceships/enemy_ship.png',
             'assets/spaceships/enemy_ship_hit.png',
         ]
         spawn_location = (
-            randint(0, 1000),
+            randint(40, 1400),
             -100,
         )
         super().__init__(
@@ -28,7 +27,7 @@ class StraferGrunt(Sprite):
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_location,
-            attack,
+            weapons,
             image_scale=1.5,
             image_rotation=180,
         )
@@ -38,6 +37,7 @@ class StraferGrunt(Sprite):
         self.stopping_point_y = None
         self.strafe_direction = 1
         self.grunt_row = row
+        self.attack_speed = randint(4, 8)
 
     def set_stopping_point_y(self, y_pos: float):
         self.stopping_point_y = y_pos
@@ -77,11 +77,10 @@ class StraferGrunt(Sprite):
             return
 
         attack_center = (self.rect.centerx, self.rect.bottom)
-        self.primary_attack.attack(
-            projectile_center_position=attack_center,
-            speed=6,
+        self.equipped_weapon.attack(
+            projectile_center=attack_center,
+            speed=self.attack_speed,
             movement_angle=0,
-            image_scale=1.5,
         )
 
 

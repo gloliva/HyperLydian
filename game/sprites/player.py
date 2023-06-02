@@ -12,6 +12,9 @@ from pygame.locals import (
 # project imports
 from events import Event
 from sprites.base import Sprite
+import sprites.groups as groups
+import sprites.projectiles as projectiles
+from attacks import Weapon
 
 
 class Player(Sprite):
@@ -20,7 +23,7 @@ class Player(Sprite):
     ROTATION_AMOUNT = 2
     DRAW_LAYER = 2
 
-    def __init__(self, game_screen_rect: pg.Rect, primary_attack) -> None:
+    def __init__(self, game_screen_rect: pg.Rect, weapons) -> None:
         image_files = [
             "assets/spaceships/player_ship.png",
             "assets/spaceships/player_ship_hit.png",
@@ -35,7 +38,7 @@ class Player(Sprite):
             self.DEFAULT_HEALTH,
             self.DEFAULT_SPEED,
             spawn_location,
-            primary_attack,
+            weapons,
             image_scale=1.5,
         )
 
@@ -74,19 +77,40 @@ class Player(Sprite):
         if self.is_dead():
             pg.event.post(Event.PLAYER_DEATH)
 
-    def light_attack(self):
+    def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
-        movement_angle = 180 + self.current_rotation
+        movement_angle = (180 + self.current_rotation) % 360
         rotation_angle = self.current_rotation
+        delta_multiplier = self.rect.height / self.original_rect.height
 
-        self.primary_attack.attack(
-            projectile_center_position=attack_center,
+        self.equipped_weapon.attack(
+            projectile_center=attack_center,
             movement_angle=movement_angle,
-            rotation_angle=rotation_angle
+            rotation_angle=rotation_angle,
+            delta_multiplier=delta_multiplier,
         )
 
-    def heavy_attack(self):
-        pass
 
-    def special_ability(self):
-        pass
+def create_player(game_screen_rect: pg.Rect):
+    # create default weapon
+    energy_beam = Weapon(
+        projectiles.BlueEnergyBeam,
+        groups.player_projectiles,
+        Weapon.INFINITE_AMMO,
+        rate_of_fire=400,
+    )
+    energy_turret = Weapon(
+        projectiles.GreenEnergyOrb,
+        groups.player_projectiles,
+        Weapon.INFINITE_AMMO,
+        Weapon.DEFAULT_RATE_OF_FIRE,
+        center_deltas=[(12, 0), (-12, 0)],
+        projectile_scale=0.3,
+    )
+
+    # create player object
+    player = Player(game_screen_rect, weapons=[energy_beam, energy_turret])
+
+    # add to sprite group
+    groups.all_sprites.add(player)
+    return player

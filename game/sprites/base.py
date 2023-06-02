@@ -16,7 +16,7 @@ class Sprite(pg.sprite.Sprite):
             health: int,
             movement_speed: int,
             spawn_location: Tuple[int, int],
-            primary_attack,
+            weapons,
             image_scale: float = 1.0,
             image_rotation: int = 0,
         ) -> None:
@@ -38,6 +38,7 @@ class Sprite(pg.sprite.Sprite):
 
         # Get sprite rect
         self.rect = self.surf.get_rect(center=spawn_location)
+        self.original_rect = self.rect
 
         # Create sprite mask
         self.mask = pg.mask.from_surface(self.surf)
@@ -51,7 +52,9 @@ class Sprite(pg.sprite.Sprite):
         # Sprite attributes
         self.health = health
         self.movement_speed = movement_speed
-        self.primary_attack = primary_attack
+        self.weapons = weapons
+        self.current_weapon_id = 0
+        self.equipped_weapon = self.weapons[self.current_weapon_id]
         self.current_rotation = 0
 
     def update(self, *args, **kwargs):
@@ -70,8 +73,12 @@ class Sprite(pg.sprite.Sprite):
             'Each Sprite subclass must override their attack method.'
         )
 
+    def switch_weapon(self):
+        self.current_weapon_id = (self.current_weapon_id + 1) % len(self.weapons)
+        self.equipped_weapon = self.weapons[self.current_weapon_id]
+
     def rotate(self, rotation_angle: int):
-        self.current_rotation = rotation_angle
+        self.current_rotation = rotation_angle % 360
         image = self.images[int(self.curr_image_id)]
         self.surf = pg.transform.rotate(image, rotation_angle)
 

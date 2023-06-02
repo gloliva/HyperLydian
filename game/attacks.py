@@ -1,5 +1,6 @@
 # stdlib imports
-from typing import Optional, Tuple, Union
+import math
+from typing import List, Optional, Tuple, Union
 
 # 3rd-party imports
 import pygame as pg
@@ -17,39 +18,73 @@ class Weapon:
     def __init__(
         self,
         projectile_type: Projectile,
+        projectile_group: pg.sprite.Group,
         num_projectiles: Union[int, float],
         rate_of_fire: Optional[int] = None,
+        center_deltas: Optional[List[Tuple[int, int]]] = None,
+        projectile_scale: float = 1.0,
     ) -> None:
         self.projectile_type = projectile_type
+        self.projectile_group = projectile_group
         self.num_projectiles = num_projectiles
         self.curr_projectiles = num_projectiles
+        self.projectile_scale = projectile_scale
         self.rate_of_fire = rate_of_fire if rate_of_fire is not None else self.DEFAULT_RATE_OF_FIRE
+        self.center_deltas = center_deltas if center_deltas is not None else [(0, 0)]
         self.last_time_shot = 0
+
+    def attack(
+            self,
+            projectile_center: Tuple[int, int],
+            damage: int = None,
+            speed: int = None,
+            movement_angle: int = None,
+            rotation_angle: int = 0,
+            delta_multiplier: int = 1.
+        ):
+
+        # Handle rate of fire for weapon
+        current_time = pg.time.get_ticks()
+        if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
+            for center_delta in self.center_deltas:
+                x_delta = center_delta[0]
+                y_delta = center_delta[1]
+
+                projectile_center_position = (
+                    projectile_center[0] + x_delta * delta_multiplier,
+                    projectile_center[1] + y_delta * delta_multiplier,
+                )
+
+                self.fire_projectile(
+                    projectile_center_position=projectile_center_position,
+                    damage=damage,
+                    speed=speed,
+                    movement_angle=movement_angle,
+                    rotation_angle=rotation_angle,
+                    image_scale=self.projectile_scale,
+                )
+                self.last_time_shot = current_time
 
     def fire_projectile(
             self,
             projectile_center_position: Tuple[int, int],
-            projectile_group: pg.sprite.Group,
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
             rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
-        current_time = pg.time.get_ticks()
-        if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
-            projectile = self.projectile_type(
-                center_position=projectile_center_position,
-                damage=damage,
-                speed=speed,
-                movement_angle=movement_angle,
-                rotation_angle=rotation_angle,
-                image_scale=image_scale,
-            )
-            projectile_group.add(projectile)
-            groups.all_sprites.add(projectile)
-            self.curr_projectiles -= 1
-            self.last_time_shot = current_time
+        projectile = self.projectile_type(
+            center_position=projectile_center_position,
+            damage=damage,
+            speed=speed,
+            movement_angle=movement_angle,
+            rotation_angle=rotation_angle,
+            image_scale=image_scale,
+        )
+        self.projectile_group.add(projectile)
+        groups.all_sprites.add(projectile)
+        self.curr_projectiles -= 1
 
     def reload_projectile(self) -> None:
         self.curr_projectiles += 1
@@ -59,33 +94,3 @@ class Weapon:
 
     def weapon_empty(self) -> bool:
         return self.curr_projectiles == 0
-
-
-class StandardAttack:
-    """Standard method of Attack for both Player and Enemies"""
-    def __init__(self, default_weapon: Weapon, projectile_group: pg.sprite.Group) -> None:
-        self.default_weapon = default_weapon
-        self.equipped_weapon = default_weapon
-        self.projectile_group = projectile_group
-
-    def switch_weapon(self, weapon: Weapon) -> None:
-        self.equipped_weapon = weapon
-
-    def attack(
-            self,
-            projectile_center_position: Tuple[int, int],
-            damage: int = None,
-            speed: int = None,
-            movement_angle: int = None,
-            rotation_angle: int = 0,
-            image_scale: float = 1.0,
-        ):
-        self.equipped_weapon.fire_projectile(
-            projectile_center_position=projectile_center_position,
-            projectile_group=self.projectile_group,
-            damage=damage,
-            speed=speed,
-            movement_angle=movement_angle,
-            rotation_angle=rotation_angle,
-            image_scale=image_scale,
-        )

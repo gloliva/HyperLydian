@@ -4,16 +4,18 @@ from random import randint
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
+    K_r,
     K_w,
+    KEYDOWN,
     QUIT,
     SRCALPHA,
 )
 
 # project imports
-from attacks import StandardAttack, Weapon
+from attacks import Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 from events import Event, initialize_event_timers
-from sprites.player import Player
+from sprites.player import create_player
 import sprites.background as background
 import sprites.enemies as enemies
 import sprites.projectiles as projectiles
@@ -59,11 +61,12 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 grunt_row = groups.grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
                     projectiles.RedEnergyBeam,
+                    groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
                     randint(500, 2000),
+                    projectile_scale=1.5,
                 )
-                grunt_attack = StandardAttack(grunt_weapon, groups.enemy_projectiles)
-                grunt = enemies.StraferGrunt(grunt_attack, grunt_row)
+                grunt = enemies.StraferGrunt([grunt_weapon], grunt_row)
 
                 # determine where grunt stops on screen
                 grunt_y_position = (
@@ -80,12 +83,15 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 # Calculate new grunt row
                 groups.grunt_enemies.update_curr_row()
 
+            elif event.type == KEYDOWN:
+                if event.key == K_r:
+                    # Cycle through players weapons
+                    player.switch_weapon()
+
         # get pressed key events
         pressed_keys = pg.key.get_pressed()
-
-        # player attack
         if pressed_keys[K_w]:
-            player.light_attack()
+            player.attack()
 
         # move the player
         player.update(pressed_keys, game_screen.get_rect())
@@ -114,6 +120,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         for sprite in groups.all_sprites:
             game_screen.blit(sprite.surf, sprite.rect)
 
+        pg.draw.rect(game_screen, (255, 255, 0, 255), player.rect , 4)
         # draw game screen to display
         main_screen.blit(game_screen, game_screen.get_rect())
 
@@ -125,26 +132,6 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
     # return the next state
     return next_state
-
-
-def create_player(game_screen_rect: pg.Rect):
-    # create default weapon
-    energy_beam = Weapon(
-        projectiles.BlueEnergyBeam,
-        Weapon.INFINITE_AMMO,
-        Weapon.DEFAULT_RATE_OF_FIRE,
-    )
-    player_attack = StandardAttack(
-        energy_beam,
-        groups.player_projectiles,
-    )
-
-    # create player object
-    player = Player(game_screen_rect, player_attack)
-
-    # add to sprite group
-    groups.all_sprites.add(player)
-    return player
 
 
 def handle_collisions(player):
