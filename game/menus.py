@@ -5,7 +5,6 @@ from typing import List, Tuple
 import pygame
 from pygame.locals import (
     K_DOWN,
-    K_UP,
     K_ESCAPE,
     K_RETURN,
     KEYDOWN,
@@ -91,19 +90,11 @@ main_menu.add_text(
         'HyperLydian', 'chalkduster', 128, 'darkmagenta', (0, 0, 0, 100), (SCREEN_WIDTH/2, 250)
     ),
     SelectableText(
-        'Start', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 600),
+        'Press Enter to Start', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 600),
         transition_state=GameState.GAMEPLAY
     ),
     SelectableText(
-        'Controls', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 700),
-        transition_state=GameState.QUIT,
-    ),
-    SelectableText(
-        'Settings', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 800),
-        transition_state=GameState.QUIT,
-    ),
-    SelectableText(
-        'Quit', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 900),
+        'Press Esc to Quit', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 700),
         transition_state=GameState.QUIT,
     ),
 )
