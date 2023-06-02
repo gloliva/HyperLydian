@@ -1,3 +1,6 @@
+# stdlib imports
+from typing import List
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
@@ -20,10 +23,12 @@ from attacks import Weapon
 class Player(Sprite):
     DEFAULT_HEALTH = 5
     DEFAULT_SPEED = 5
+    INITIAL_ROTATION = 0
     ROTATION_AMOUNT = 2
+    IMAGE_SCALE = 1.5
     DRAW_LAYER = 2
 
-    def __init__(self, game_screen_rect: pg.Rect, weapons) -> None:
+    def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
             "assets/spaceships/player_ship.png",
             "assets/spaceships/player_ship_hit.png",
@@ -39,7 +44,8 @@ class Player(Sprite):
             self.DEFAULT_SPEED,
             spawn_location,
             weapons,
-            image_scale=1.5,
+            image_scale=self.IMAGE_SCALE,
+            image_rotation=self.INITIAL_ROTATION,
         )
 
         # Additional Player attributes
@@ -79,10 +85,13 @@ class Player(Sprite):
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
-        movement_angle = (180 + self.current_rotation) % 360
-        rotation_angle = self.current_rotation
-        delta_multiplier = self.rect.height / self.original_rect.height
+        # movement_angle = (180 + self.current_rotation) % 360
+        movement_angle = self.current_rotation % 360
+        rotation_angle = self.current_rotation + self.INITIAL_ROTATION
+        delta_multiplier = self.rect.width / self.original_rect.width
 
+        print('** IN PLAYER **')
+        print(f'center: {attack_center}, move angle: {movement_angle}, rotation angle: {rotation_angle}')
         self.equipped_weapon.attack(
             projectile_center=attack_center,
             movement_angle=movement_angle,
@@ -105,9 +114,9 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         projectiles.GreenEnergyOrb,
         groups.player_projectiles,
         Weapon.INFINITE_AMMO,
-        Weapon.DEFAULT_RATE_OF_FIRE,
-        center_deltas=[(12, 0), (-12, 0)],
-        projectile_scale=0.3,
+        rate_of_fire=100,
+        center_deltas=[(0, 24), (0, -24)],
+        projectile_scale=0.2,
     )
 
     # Create player object

@@ -50,9 +50,16 @@ class Weapon:
                 x_delta = center_delta[0]
                 y_delta = center_delta[1]
 
+                angle = math.radians(movement_angle)
+                rotated_x = x_delta * math.cos(angle) - y_delta * math.sin(angle)
+                rotated_y = x_delta * math.sin(angle) + y_delta * math.cos(angle)
+
+                print('**** In Weapon ****')
+                print(f'center delta: {center_delta}, movement_angle: {movement_angle},  x delta: {rotated_x}, y delta: {rotated_y}')
+
                 projectile_center_position = (
-                    projectile_center[0] + x_delta * delta_multiplier,
-                    projectile_center[1] + y_delta * delta_multiplier,
+                    projectile_center[0] + (-1 * rotated_x),
+                    projectile_center[1] + rotated_y,
                 )
 
                 self.fire_projectile(

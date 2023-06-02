@@ -14,6 +14,7 @@ class Projectile(pg.sprite.Sprite):
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 0
 
+    # Layers
     DRAW_LAYER = 1
 
     # Colors
@@ -61,8 +62,9 @@ class Projectile(pg.sprite.Sprite):
 
     def update(self, game_screen_rect: pg.Rect):
         # Calculate new position based on the angle of fire
-        x = self.movement_speed * math.sin(2 * math.pi * (self.movement_angle / 360))
-        y = self.movement_speed * math.cos(2 * math.pi * (self.movement_angle / 360))
+        # We negate Y since the top of the screen is negative, and the bottom is positive
+        x = self.movement_speed * math.cos(math.radians(self.movement_angle))
+        y = -1 * self.movement_speed * math.sin(math.radians(self.movement_angle))
 
         self.rect.move_ip(x, y)
         out_of_bounds = (
@@ -114,7 +116,7 @@ class RedEnergyBeam(EnergyBeam):
 
 class EnergyOrb(Projectile):
     DEFAULT_DAMAGE = 1
-    DEFAULT_SPEED = 3
+    DEFAULT_SPEED = 12
     DEFAULT_ANGLE = 180
     COLOR = None
     AVAILABLE_COLORS = ('green')

@@ -14,6 +14,7 @@ from pygame.locals import (
 # project imports
 from attacks import Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
+import debug
 from events import Event, initialize_event_timers
 from sprites.player import create_player
 import sprites.background as background
@@ -56,7 +57,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 next_state = GameState.MAIN_MENU
 
             # handle creating grunts
-            elif event.type == Event.ADD_STRAFER_GRUNT.type and not groups.grunt_enemies.is_full():
+            elif event.type == Event.ADD_STRAFER_GRUNT.type and not groups.grunt_enemies.is_full() and not debug.NO_ENEMIES:
                 # create Grunt object
                 grunt_row = groups.grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
