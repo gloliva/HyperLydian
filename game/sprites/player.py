@@ -91,8 +91,10 @@ class Player(Sprite):
         )
 
 
-def create_player(game_screen_rect: pg.Rect):
-    # create default weapon
+def create_player(game_screen_rect: pg.Rect) -> Player:
+    """Creates a new Player object"""
+
+    # Create player weapons
     energy_beam = Weapon(
         projectiles.BlueEnergyBeam,
         groups.player_projectiles,
@@ -108,7 +110,7 @@ def create_player(game_screen_rect: pg.Rect):
         projectile_scale=0.3,
     )
 
-    # create player object
+    # Create player object
     player = Player(game_screen_rect, weapons=[energy_beam, energy_turret])
 
     # add to sprite group
