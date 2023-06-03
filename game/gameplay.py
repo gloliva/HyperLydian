@@ -121,7 +121,6 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         for sprite in groups.all_sprites:
             game_screen.blit(sprite.surf, sprite.rect)
 
-        pg.draw.rect(game_screen, (255, 255, 0, 255), player.rect , 4)
         # draw game screen to display
         main_screen.blit(game_screen, game_screen.get_rect())
 
