@@ -28,7 +28,6 @@ class Projectile(pg.sprite.Sprite):
             damage: int,
             movement_speed: int,
             movement_angle: int,
-            rotation_angle: int = 0,
             image_scale: float = 1.0,
             # colored_projectile: bool = False,
         ) -> None:
@@ -44,7 +43,7 @@ class Projectile(pg.sprite.Sprite):
 
         # Sprite attributes
         image = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.rotozoom(image, rotation_angle, image_scale)
+        self.surf = pg.transform.rotozoom(image, movement_angle, image_scale)
 
         # Set projectile rect
         self.rect = self.surf.get_rect(center=center_position)
@@ -90,7 +89,6 @@ class EnergyBeam(Projectile):
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
-            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
         image_file = "assets/projectiles/{color}_energy_beam.png"
@@ -102,7 +100,6 @@ class EnergyBeam(Projectile):
             damage,
             speed,
             movement_angle,
-            rotation_angle,
             image_scale,
         )
 
@@ -127,7 +124,6 @@ class EnergyOrb(Projectile):
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
-            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
         image_file = image_file = "assets/projectiles/{color}_energy_orb.png"
@@ -139,7 +135,6 @@ class EnergyOrb(Projectile):
             damage,
             speed,
             movement_angle,
-            rotation_angle,
             image_scale,
         )
 

@@ -39,23 +39,20 @@ class Weapon:
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
-            rotation_angle: int = 0,
-            delta_multiplier: int = 1.
         ):
 
         # Handle rate of fire for weapon
         current_time = pg.time.get_ticks()
         if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
+            # Create all of the projectiles with each weapon fire, oriented from the center point
             for center_delta in self.center_deltas:
                 x_delta = center_delta[0]
                 y_delta = center_delta[1]
 
+                # Handle if the player, and thus the projectile, has rotated
                 angle = math.radians(movement_angle)
                 rotated_x = x_delta * math.cos(angle) - y_delta * math.sin(angle)
                 rotated_y = x_delta * math.sin(angle) + y_delta * math.cos(angle)
-
-                print('**** In Weapon ****')
-                print(f'center delta: {center_delta}, movement_angle: {movement_angle},  x delta: {rotated_x}, y delta: {rotated_y}')
 
                 projectile_center_position = (
                     projectile_center[0] + (-1 * rotated_x),
@@ -67,7 +64,6 @@ class Weapon:
                     damage=damage,
                     speed=speed,
                     movement_angle=movement_angle,
-                    rotation_angle=rotation_angle,
                     image_scale=self.projectile_scale,
                 )
                 self.last_time_shot = current_time
@@ -78,7 +74,6 @@ class Weapon:
             damage: int = None,
             speed: int = None,
             movement_angle: int = None,
-            rotation_angle: int = 0,
             image_scale: float = 1.0,
         ) -> None:
         projectile = self.projectile_type(
@@ -86,7 +81,6 @@ class Weapon:
             damage=damage,
             speed=speed,
             movement_angle=movement_angle,
-            rotation_angle=rotation_angle,
             image_scale=image_scale,
         )
         self.projectile_group.add(projectile)

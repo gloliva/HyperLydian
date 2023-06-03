@@ -9,6 +9,7 @@ class Sprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
     HIT_TIMER_INCREMENT = 0.2
     DRAW_LAYER = 2
+    INITIAL_ROTATION = 0
 
     def __init__(
             self,
@@ -56,6 +57,9 @@ class Sprite(pg.sprite.Sprite):
         self.current_weapon_id = 0
         self.equipped_weapon = self.weapons[self.current_weapon_id]
         self.current_rotation = 0
+
+        if self.INITIAL_ROTATION:
+            self.rotate(self.INITIAL_ROTATION)
 
     def update(self, *args, **kwargs):
         if self.hit_animation_on:

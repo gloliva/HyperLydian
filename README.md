@@ -13,15 +13,21 @@ python3 -m pip install -r requirements.txt
 python3 game/main.py
 ```
 
+## Where things are at
+No GUI yet, but it will happen.
+
+Extremely in-progress; everything subject to change.
+
 ## Controls
-Subject to change (definitely will change)
 
 `Arrow Keys` - Move
 
 `W` - Shoot
 
+`R` - Cycle Weapons
+
 `Q` - Rotate CCW
 
 `E` - Rotate CW
 
-GOOD LUCK
+### *GOOD LUCK*

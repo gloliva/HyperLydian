@@ -12,6 +12,7 @@ class StraferGrunt(Sprite):
     DEFAULT_HEALTH = 6
     SPAWN_SPEED = 8
     STRAFE_SPEED = 4
+    INITIAL_ROTATION = 270
 
     def __init__(self, weapons, row: int) -> None:
         image_files = [
@@ -29,7 +30,6 @@ class StraferGrunt(Sprite):
             spawn_location,
             weapons,
             image_scale=1.5,
-            image_rotation=180,
         )
 
         # Additional Grunt attributes
@@ -76,11 +76,12 @@ class StraferGrunt(Sprite):
         if self.moving_to_position:
             return
 
+        angle = self.current_rotation % 360
         attack_center = (self.rect.centerx, self.rect.bottom)
         self.equipped_weapon.attack(
             projectile_center=attack_center,
             speed=self.attack_speed,
-            movement_angle=0,
+            movement_angle=angle,
         )
 
 

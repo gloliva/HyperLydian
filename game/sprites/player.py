@@ -23,7 +23,7 @@ from attacks import Weapon
 class Player(Sprite):
     DEFAULT_HEALTH = 5
     DEFAULT_SPEED = 5
-    INITIAL_ROTATION = 0
+    INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
     DRAW_LAYER = 2
@@ -45,7 +45,6 @@ class Player(Sprite):
             spawn_location,
             weapons,
             image_scale=self.IMAGE_SCALE,
-            image_rotation=self.INITIAL_ROTATION,
         )
 
         # Additional Player attributes
@@ -85,18 +84,10 @@ class Player(Sprite):
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
-        # movement_angle = (180 + self.current_rotation) % 360
-        movement_angle = self.current_rotation % 360
-        rotation_angle = self.current_rotation + self.INITIAL_ROTATION
-        delta_multiplier = self.rect.width / self.original_rect.width
-
-        print('** IN PLAYER **')
-        print(f'center: {attack_center}, move angle: {movement_angle}, rotation angle: {rotation_angle}')
+        angle = self.current_rotation % 360
         self.equipped_weapon.attack(
             projectile_center=attack_center,
-            movement_angle=movement_angle,
-            rotation_angle=rotation_angle,
-            delta_multiplier=delta_multiplier,
+            movement_angle=angle,
         )
 
 
