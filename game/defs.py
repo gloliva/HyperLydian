@@ -5,6 +5,8 @@ from enum import Enum
 FPS = 60
 
 # Screen constants
+SCREEN_TOP = 0
+SCREEN_LEFT = 0
 SCREEN_WIDTH = 1440
 SCREEN_HEIGHT = 900
 

@@ -78,7 +78,7 @@ class Projectile(pg.sprite.Sprite):
 
 
 class EnergyBeam(Projectile):
-    DEFAULT_DAMAGE = 1
+    DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
     AVAILABLE_COLORS = ('blue', 'red')
@@ -116,7 +116,7 @@ class EnergyOrb(Projectile):
     DEFAULT_SPEED = 12
     DEFAULT_ANGLE = 180
     COLOR = None
-    AVAILABLE_COLORS = ('green')
+    AVAILABLE_COLORS = ('green', 'orange')
 
     def __init__(
             self,
@@ -141,6 +141,10 @@ class EnergyOrb(Projectile):
 
 class GreenEnergyOrb(EnergyOrb):
     COLOR = 'green'
+
+
+class OrangeEnergyOrb(EnergyOrb):
+    COLOR = 'orange'
 
 
 class Missile(Projectile):

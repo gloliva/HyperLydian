@@ -13,6 +13,7 @@ from pygame.locals import (
 )
 
 # project imports
+import debug
 from events import Event
 from sprites.base import Sprite
 import sprites.groups as groups
@@ -26,7 +27,6 @@ class Player(Sprite):
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
-    DRAW_LAYER = 2
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
@@ -78,16 +78,18 @@ class Player(Sprite):
             self.rotate(self.current_rotation - self.ROTATION_AMOUNT)
 
     def take_damage(self, damage: int) -> None:
+        if debug.PLAYER_INVINCIBLE:
+            return
+
         super().take_damage(damage)
         if self.is_dead():
             pg.event.post(Event.PLAYER_DEATH)
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
-        angle = self.current_rotation % 360
         self.equipped_weapon.attack(
             projectile_center=attack_center,
-            movement_angle=angle,
+            movement_angle=self.current_rotation,
         )
 
 

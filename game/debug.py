@@ -1,1 +1,2 @@
 NO_ENEMIES = False
+PLAYER_INVINCIBLE = True

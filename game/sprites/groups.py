@@ -2,12 +2,12 @@
 from pygame.sprite import Group, LayeredUpdates as LayeredGroup
 
 # project imports
-from sprites.enemies import StraferGrunt
+from sprites.enemies import StraferGrunt, SpinnerGrunt
 
 
 class StraferGruntGroup(Group):
     MAX_GRUNTS_PER_ROW = 3
-    MAX_ROWS = 3
+    MAX_ROWS = 2
     ROW_START = 150
     ROW_SPACING = 1.25
 
@@ -41,14 +41,49 @@ class StraferGruntGroup(Group):
                 self.curr_row_to_fill = row
                 break
 
+    def set_row_limits(self, new_max_rows: int, new_max_grunts_per_row: int) -> None:
+        self.max_rows = new_max_rows
+        self.max_grunts_per_row = new_max_grunts_per_row
+
     def is_full(self):
         return sum(self.grunts_per_row) >= self.max_grunts_per_row * self.max_rows
+
+
+class SpinnerGruntGroup(Group):
+    INITIAL_MAX_GRUNTS = 2
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.grunts_on_screen = 0
+        self.max_grunts = self.INITIAL_MAX_GRUNTS
+
+    def add(self, *grunts: SpinnerGrunt) -> None:
+        for grunt in grunts:
+            super().add(grunt)
+            self.grunts_on_screen += 1
+
+    def remove_internal(self, grunt: SpinnerGrunt) -> None:
+        super().remove_internal(grunt)
+        self.grunts_on_screen -= 1
+
+    def change_max_grunts(self, max_delta: int):
+        self.max_grunts += max_delta
+        if self.max_grunts < 0:
+            self.max_grunts = 0
+
+    def set_max_grunts(self, max_grunts: int):
+        self.max_grunts = max_grunts
+
+    def is_full(self):
+        return self.grunts_on_screen >= self.max_grunts
 
 
 # Sprite Groups
 # Enemies
 all_enemies = Group()
-grunt_enemies = StraferGruntGroup()
+strafer_grunt_enemies = StraferGruntGroup()
+spinner_grunt_enemies = SpinnerGruntGroup()
 enemy_projectiles = Group()
 
 # Player

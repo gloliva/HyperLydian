@@ -6,6 +6,7 @@ import pygame as pg
 from pygame.locals import (
     K_r,
     K_w,
+    K_SPACE,
     KEYDOWN,
     QUIT,
     SRCALPHA,
@@ -57,9 +58,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 next_state = GameState.MAIN_MENU
 
             # handle creating grunts
-            elif event.type == Event.ADD_STRAFER_GRUNT.type and not groups.grunt_enemies.is_full() and not debug.NO_ENEMIES:
+            elif event.type == Event.ADD_STRAFER_GRUNT.type and not groups.strafer_grunt_enemies.is_full() and not debug.NO_ENEMIES:
                 # create Grunt object
-                grunt_row = groups.grunt_enemies.curr_row_to_fill
+                grunt_row = groups.strafer_grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
                     projectiles.RedEnergyBeam,
                     groups.enemy_projectiles,
@@ -71,18 +72,35 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
                 # determine where grunt stops on screen
                 grunt_y_position = (
-                    groups.grunt_enemies.ROW_START +
-                    (groups.grunt_enemies.curr_row_to_fill * grunt.rect.height * groups.grunt_enemies.ROW_SPACING)
+                    groups.strafer_grunt_enemies.ROW_START +
+                    (groups.strafer_grunt_enemies.curr_row_to_fill * grunt.rect.height * groups.strafer_grunt_enemies.ROW_SPACING)
                 )
                 grunt.set_stopping_point_y(grunt_y_position)
 
-                # Add Grunt to groups
-                groups.grunt_enemies.add(grunt)
+                # Add grunt to groups
+                groups.strafer_grunt_enemies.add(grunt)
                 groups.all_sprites.add(grunt)
                 groups.all_enemies.add(grunt)
 
                 # Calculate new grunt row
-                groups.grunt_enemies.update_curr_row()
+                groups.strafer_grunt_enemies.update_curr_row()
+
+            # Handle creating Spinner Grunts
+            elif event.type == Event.ADD_SPINNER_GRUNT.type and not groups.spinner_grunt_enemies.is_full() and not debug.NO_ENEMIES:
+                # create Grunt object
+                grunt_weapon = Weapon(
+                    projectiles.OrangeEnergyOrb,
+                    groups.enemy_projectiles,
+                    Weapon.INFINITE_AMMO,
+                    rate_of_fire=300,
+                    projectile_scale=0.5,
+                )
+                grunt = enemies.SpinnerGrunt([grunt_weapon])
+
+                # Add grunt to groups
+                groups.spinner_grunt_enemies.add(grunt)
+                groups.all_enemies.add(grunt)
+                groups.all_sprites.add(grunt)
 
             elif event.type == KEYDOWN:
                 if event.key == K_r:
@@ -91,7 +109,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()
-        if pressed_keys[K_w]:
+        if pressed_keys[K_w] or pressed_keys[K_SPACE]:
             player.attack()
 
         # move the player
@@ -101,8 +119,8 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         groups.all_enemies.update(game_screen.get_rect())
 
         # enemy attacks
-        for grunt in groups.grunt_enemies:
-            grunt.attack()
+        for enemy in groups.all_enemies:
+            enemy.attack()
 
         # move projectiles
         groups.player_projectiles.update(game_screen.get_rect())
@@ -138,7 +156,7 @@ def handle_collisions(player):
     # grunt + enemies collison
     # change Grunt strafe direction
     handled_enemies = set()
-    for grunt in groups.grunt_enemies:
+    for grunt in groups.strafer_grunt_enemies:
         collided_enemies = pg.sprite.spritecollide(
             grunt,
             groups.all_enemies,

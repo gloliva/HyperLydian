@@ -6,8 +6,11 @@ from pygame.time import set_timer as event_timer
 # Custom Events
 class Event:
     """Event wrapper class for single-entrypoint access to custom player events"""
-    # Add a new grunt enemy
+    # Add a new strafer enemy
     ADD_STRAFER_GRUNT = PGEvent(custom_type())
+
+    # Add a new spinner enemy
+    ADD_SPINNER_GRUNT = PGEvent(custom_type())
 
     # Add star to the background
     ADD_STAR = PGEvent(custom_type())
@@ -19,4 +22,5 @@ class Event:
 # Event timers
 def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
+    event_timer(Event.ADD_SPINNER_GRUNT, 10000)
     event_timer(Event.ADD_STAR, 50)
