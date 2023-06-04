@@ -16,6 +16,11 @@ $ python3 -m pip install -r requirements.txt
 $ python3 game/main.py
 ```
 
+## How to Play
+Shoot everything you see. View the controls down below.
+
+You can view some basic stats (like number of enemies killed) in the terminal post-game; these will be added to a post-game menu eventually.
+
 ## Where things are at
 Screen size is 1440x900 (MacBook 13" default scaled resolution). Will maybe handle additional resolutions later; resize at your own risk.
 
