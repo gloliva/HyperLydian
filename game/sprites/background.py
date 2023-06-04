@@ -12,7 +12,7 @@ class Star(pygame.sprite.Sprite):
     def __init__(self, screen_rect: pygame.Rect, on_load: bool = False) -> None:
         super().__init__()
         star_type = self.STAR_TYPES[random.randint(0, 1)]
-        image = pygame.image.load(f"assets/kenny-space/PNG/Default/star_{star_type}.png").convert()
+        image = pygame.image.load(f"assets/backgrounds/star_{star_type}.png").convert()
         self.surf = pygame.transform.scale_by(pygame.transform.rotate(image, random.randint(0, 359)), random.random())
         self.surf.set_alpha(random.randint(10, 255))
 
