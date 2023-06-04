@@ -29,6 +29,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # create game screen
     game_screen = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 
+    # track stats for this playthrough
+    stat_tracker.init_new_playthrough(pg.time.get_ticks())
+
     # start initial events
     initialize_event_timers()
 
