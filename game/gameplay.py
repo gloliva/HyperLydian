@@ -16,7 +16,7 @@ from pygame.locals import (
 from attacks import Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import debug
-from events import Event, initialize_event_timers
+from events import Event, initialize_event_timers, disable_event_timers
 from sprites.player import create_player
 import sprites.background as background
 import sprites.enemies as enemies
@@ -58,14 +58,18 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 next_state = GameState.MAIN_MENU
 
             # handle creating grunts
-            elif event.type == Event.ADD_STRAFER_GRUNT.type and not groups.strafer_grunt_enemies.is_full() and not debug.NO_ENEMIES:
+            elif event.type == Event.ADD_STRAFER_GRUNT.type and \
+                not groups.strafer_grunt_enemies.is_full() and \
+                not debug.NO_ENEMIES:
                 # create Grunt object
                 grunt_row = groups.strafer_grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
                     projectiles.RedEnergyBeam,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
-                    randint(500, 2000),
+                    damage=1,
+                    attack_speed=randint(4, 8),
+                    rate_of_fire=randint(500, 2000),
                     projectile_scale=1.5,
                 )
                 grunt = enemies.StraferGrunt([grunt_weapon], grunt_row)
@@ -86,12 +90,16 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 groups.strafer_grunt_enemies.update_curr_row()
 
             # Handle creating Spinner Grunts
-            elif event.type == Event.ADD_SPINNER_GRUNT.type and not groups.spinner_grunt_enemies.is_full() and not debug.NO_ENEMIES:
+            elif event.type == Event.ADD_SPINNER_GRUNT.type and \
+                not groups.spinner_grunt_enemies.is_full() and \
+                not debug.NO_ENEMIES:
                 # create Grunt object
                 grunt_weapon = Weapon(
                     projectiles.OrangeEnergyOrb,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
+                    damage=1,
+                    attack_speed=4,
                     rate_of_fire=300,
                     projectile_scale=0.5,
                 )
@@ -149,6 +157,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         game_clock.tick(FPS)
 
     # return the next state
+    end_game()
     return next_state
 
 
@@ -161,15 +170,14 @@ def handle_collisions(player):
             grunt,
             groups.all_enemies,
             dokill=False,
-            collided=pg.sprite.collide_mask,
+            collided=pg.sprite.collide_rect,
         )
         for collided_enemy in collided_enemies:
             # skip for enemy colliding with itself and if the enemy has already been handled
             if grunt == collided_enemy or grunt in handled_enemies:
                 continue
             if not grunt.moving_to_position:
-                pass
-                # grunt.switch_strafe_direction()
+                grunt.switch_strafe_direction_on_collision(collided_enemy)
             handled_enemies.add(grunt)
 
     # projectiles + enemies collision
@@ -199,4 +207,9 @@ def handle_collisions(player):
 
 
 def end_game():
-    pass
+    disable_event_timers()
+
+    for sprite in groups.all_sprites:
+        if sprite not in groups.stars:
+            sprite.kill()
+

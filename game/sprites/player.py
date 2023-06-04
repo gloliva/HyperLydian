@@ -97,23 +97,25 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
     """Creates a new Player object"""
 
     # Create player weapons
-    energy_beam = Weapon(
-        projectiles.BlueEnergyBeam,
-        groups.player_projectiles,
-        Weapon.INFINITE_AMMO,
-        rate_of_fire=400,
-    )
     energy_turret = Weapon(
         projectiles.GreenEnergyOrb,
         groups.player_projectiles,
         Weapon.INFINITE_AMMO,
+        damage=1,
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
         projectile_scale=0.2,
     )
+    energy_beam = Weapon(
+        projectiles.BlueEnergyBeam,
+        groups.player_projectiles,
+        Weapon.INFINITE_AMMO,
+        damage=10,
+        rate_of_fire=300,
+    )
 
     # Create player object
-    player = Player(game_screen_rect, weapons=[energy_beam, energy_turret])
+    player = Player(game_screen_rect, weapons=[energy_turret, energy_beam])
 
     # add to sprite group
     groups.all_sprites.add(player)

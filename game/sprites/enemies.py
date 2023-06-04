@@ -40,7 +40,7 @@ class StraferGrunt(Sprite):
         self.stopping_point_y = None
         self.strafe_direction = 1
         self.grunt_row = row
-        self.attack_speed = randint(4, 8)
+        self.overlapping_enemies = set()
 
     def set_stopping_point_y(self, y_pos: float):
         self.stopping_point_y = y_pos
@@ -65,6 +65,11 @@ class StraferGrunt(Sprite):
             self.rect.right = game_screen_rect.width
             self.switch_strafe_direction()
 
+    def switch_strafe_direction_on_collision(self, enemy: Sprite):
+        if enemy not in self.overlapping_enemies:
+            self.switch_strafe_direction()
+            self.overlapping_enemies.add(enemy)
+
     def switch_strafe_direction(self):
         self.strafe_direction *= -1
 
@@ -82,7 +87,7 @@ class StraferGrunt(Sprite):
 
 
 class SpinnerGrunt(Sprite):
-    DEFAULT_HEALTH = 40
+    DEFAULT_HEALTH = 30
     INITIAL_ROTATION = 0
     SPAWN_SPEED = 6
     ROTATION_AMOUNT = 1
@@ -109,39 +114,25 @@ class SpinnerGrunt(Sprite):
 
         # Additional SpinngerGrunt attributes
         self.moving_to_position = True
-        self.attack_speed = 4
 
     def set_spawn_information(self):
         self.spawn_quadrant = randelem(self.SPAWN_QUADRANT)
 
-        if self.spawn_quadrant == 'top':
-            spawn_location = (
-                randint(50, SCREEN_WIDTH - 50),
-                -100,
-            )
-
-        elif self.spawn_quadrant == 'bottom':
-            spawn_location = (
-                randint(50, SCREEN_WIDTH - 50),
-                SCREEN_HEIGHT + 100,
-            )
-        elif self.spawn_quadrant == 'left':
+        if self.spawn_quadrant == 'left':
             spawn_location = (
                 -100,
-                randint(50, SCREEN_HEIGHT - 50),
+                randint(75, SCREEN_HEIGHT - 75),
             )
 
             self.stopping_point_x = spawn_location[0] + randint(300, 600)
-            self.movement_direction = 1
 
         elif self.spawn_quadrant == 'right':
             spawn_location = (
                 SCREEN_WIDTH + 100,
-                randint(50, SCREEN_HEIGHT - 50),
+                randint(75, SCREEN_HEIGHT - 75),
             )
 
             self.stopping_point_x = spawn_location[0] - randint(300, 600)
-            self.movement_direction = -1
             self.INITIAL_ROTATION = 180
 
         return spawn_location

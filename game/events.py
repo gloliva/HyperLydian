@@ -24,3 +24,8 @@ def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
     event_timer(Event.ADD_SPINNER_GRUNT, 10000)
     event_timer(Event.ADD_STAR, 50)
+
+
+def disable_event_timers() -> None:
+    event_timer(Event.ADD_STRAFER_GRUNT, 0)
+    event_timer(Event.ADD_SPINNER_GRUNT, 0)

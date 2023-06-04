@@ -81,7 +81,6 @@ class Sprite(pg.sprite.Sprite):
         attack_center = (self.rect.centerx + x_delta, self.rect.centery + y_delta)
         self.equipped_weapon.attack(
             projectile_center=attack_center,
-            speed=self.attack_speed,
             movement_angle=self.current_rotation,
         )
 
@@ -104,6 +103,8 @@ class Sprite(pg.sprite.Sprite):
 
     def take_damage(self, damage: int) -> None:
         self.health -= damage
+        if self.health < 0:
+            self.health = 0
         self.hit_animation_on = True
         # TODO: setting this to 1 uses the hit sprite png
         # will need to change this later if working with multiple sprites for animation

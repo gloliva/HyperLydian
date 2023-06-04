@@ -20,6 +20,8 @@ class Weapon:
         projectile_type: Projectile,
         projectile_group: pg.sprite.Group,
         num_projectiles: Union[int, float],
+        damage: Optional[int] = None,
+        attack_speed: Optional[int] = None,
         rate_of_fire: Optional[int] = None,
         center_deltas: Optional[List[Tuple[int, int]]] = None,
         projectile_scale: float = 1.0,
@@ -29,6 +31,8 @@ class Weapon:
         self.num_projectiles = num_projectiles
         self.curr_projectiles = num_projectiles
         self.projectile_scale = projectile_scale
+        self.damage = damage
+        self.attack_speed = attack_speed
         self.rate_of_fire = rate_of_fire if rate_of_fire is not None else self.DEFAULT_RATE_OF_FIRE
         self.center_deltas = center_deltas if center_deltas is not None else [(0, 0)]
         self.last_time_shot = 0
@@ -36,8 +40,6 @@ class Weapon:
     def attack(
             self,
             projectile_center: Tuple[int, int],
-            damage: int = None,
-            speed: int = None,
             movement_angle: int = None,
         ):
 
@@ -61,27 +63,21 @@ class Weapon:
 
                 self.fire_projectile(
                     projectile_center_position=projectile_center_position,
-                    damage=damage,
-                    speed=speed,
                     movement_angle=movement_angle,
-                    image_scale=self.projectile_scale,
                 )
                 self.last_time_shot = current_time
 
     def fire_projectile(
             self,
             projectile_center_position: Tuple[int, int],
-            damage: int = None,
-            speed: int = None,
             movement_angle: int = None,
-            image_scale: float = 1.0,
         ) -> None:
         projectile = self.projectile_type(
             center_position=projectile_center_position,
-            damage=damage,
-            speed=speed,
+            damage=self.damage,
+            speed=self.attack_speed,
             movement_angle=movement_angle,
-            image_scale=image_scale,
+            image_scale=self.projectile_scale,
         )
         self.projectile_group.add(projectile)
         groups.all_sprites.add(projectile)
