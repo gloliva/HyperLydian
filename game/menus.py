@@ -102,8 +102,6 @@ main_menu.add_text(
 
 def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
     """Render main menu"""
-    print('Main Menu State')
-
     # draw initial background
     for _ in range(400):
         star = background.Star(MENU_SCREEN.get_rect(), on_load=True)

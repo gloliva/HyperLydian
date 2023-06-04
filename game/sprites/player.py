@@ -19,6 +19,7 @@ from sprites.base import Sprite
 import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
+from stats import stat_tracker
 
 
 class Player(Sprite):
@@ -27,6 +28,7 @@ class Player(Sprite):
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
+    COUNT_DEATH_STAT = False
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
@@ -81,6 +83,7 @@ class Player(Sprite):
         if debug.PLAYER_INVINCIBLE:
             return
 
+        stat_tracker.player_health_lost += damage
         super().take_damage(damage)
         if self.is_dead():
             pg.event.post(Event.PLAYER_DEATH)
@@ -91,6 +94,7 @@ class Player(Sprite):
             projectile_center=attack_center,
             movement_angle=self.current_rotation,
         )
+        stat_tracker.player_shots_fired += 1
 
 
 def create_player(game_screen_rect: pg.Rect) -> Player:

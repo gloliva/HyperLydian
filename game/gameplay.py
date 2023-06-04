@@ -22,11 +22,10 @@ import sprites.background as background
 import sprites.enemies as enemies
 import sprites.projectiles as projectiles
 import sprites.groups as groups
+from stats import stat_tracker
 
 
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
-    print('Gameplay State')
-
     # create game screen
     game_screen = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 
@@ -153,6 +152,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         # render screen
         pg.display.flip()
 
+        # update stats tracker
+        stat_tracker.update_stats()
+
         # lock FPS
         game_clock.tick(FPS)
 
@@ -191,6 +193,7 @@ def handle_collisions(player):
     )
     for projectile, enemies in collided.items():
         for enemy in enemies:
+            stat_tracker.player_enemies_hit += 1
             enemy.take_damage(projectile.damage)
 
     # projectiles + player collision
@@ -207,9 +210,12 @@ def handle_collisions(player):
 
 
 def end_game():
+    """Reset the game so it can be played again from the beginning"""
     disable_event_timers()
 
     for sprite in groups.all_sprites:
         if sprite not in groups.stars:
             sprite.kill()
 
+    stat_tracker.total_time_survived = pg.time.get_ticks()
+    stat_tracker.print_stats()

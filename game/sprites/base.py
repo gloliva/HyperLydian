@@ -5,6 +5,9 @@ from typing import Tuple
 # 3rd-party impoarts
 import pygame as pg
 
+# project imports
+from stats import stat_tracker
+
 
 class Sprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
@@ -12,6 +15,7 @@ class Sprite(pg.sprite.Sprite):
     PROJECTILE_SPAWN_DELTA = 0
     DRAW_LAYER = 2
     INITIAL_ROTATION = 0
+    COUNT_DEATH_STAT = True
 
     def __init__(
             self,
@@ -105,12 +109,15 @@ class Sprite(pg.sprite.Sprite):
         self.health -= damage
         if self.health < 0:
             self.health = 0
+
         self.hit_animation_on = True
         # TODO: setting this to 1 uses the hit sprite png
         # will need to change this later if working with multiple sprites for animation
         self.curr_image_id = 1
         self.show_hit_animation()
         if self.is_dead():
+            if self.COUNT_DEATH_STAT:
+                stat_tracker.player_enemies_killed += 1
             self.kill()
 
     def show_hit_animation(self):

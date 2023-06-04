@@ -73,6 +73,13 @@ class StraferGrunt(Sprite):
     def switch_strafe_direction(self):
         self.strafe_direction *= -1
 
+    def update(self, *args, **kwargs):
+        for enemy in self.overlapping_enemies.copy():
+            if not pg.sprite.collide_rect(self, enemy):
+                self.overlapping_enemies.remove(enemy)
+
+        super().update(*args, **kwargs)
+
     def move(self, game_screen_rect: pg.Rect):
         if self.moving_to_position:
             self.move_to_position()
