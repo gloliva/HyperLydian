@@ -13,6 +13,7 @@ class StraferGrunt(Sprite):
     DEFAULT_HEALTH = 20
     SPAWN_SPEED = 8
     STRAFE_SPEED = 3
+    PROJECTILE_SPAWN_DELTA = 40
     INITIAL_ROTATION = 270
     IMAGE_SCALE = 1.5
 
@@ -77,12 +78,7 @@ class StraferGrunt(Sprite):
         if self.moving_to_position:
             return
 
-        attack_center = (self.rect.centerx, self.rect.bottom)
-        self.equipped_weapon.attack(
-            projectile_center=attack_center,
-            speed=self.attack_speed,
-            movement_angle=self.current_rotation,
-        )
+        super().attack()
 
 
 class SpinnerGrunt(Sprite):
@@ -90,12 +86,14 @@ class SpinnerGrunt(Sprite):
     INITIAL_ROTATION = 0
     SPAWN_SPEED = 6
     ROTATION_AMOUNT = 1
+    PROJECTILE_SPAWN_DELTA = 50
     IMAGE_SCALE = 1.5
     SPAWN_QUADRANT = ['left', 'right']
 
     def __init__(self, weapons) -> None:
         image_files = [
-            'assets/spaceships/enemy_spinner_ship.png',
+            'assets/spaceships/spinner_grunt.png',
+            'assets/spaceships/spinner_grunt_hit.png',
         ]
 
         spawn_location = self.set_spawn_information()
@@ -109,9 +107,9 @@ class SpinnerGrunt(Sprite):
             image_scale=self.IMAGE_SCALE,
         )
 
-        # Additional HyperMoth attributes
+        # Additional SpinngerGrunt attributes
         self.moving_to_position = True
-        self.attack_speed = 3
+        self.attack_speed = 4
 
     def set_spawn_information(self):
         self.spawn_quadrant = randelem(self.SPAWN_QUADRANT)
@@ -173,12 +171,7 @@ class SpinnerGrunt(Sprite):
         if self.moving_to_position:
             return
 
-        attack_center = (self.rect.centerx, self.rect.bottom)
-        self.equipped_weapon.attack(
-            projectile_center=attack_center,
-            speed=self.attack_speed,
-            movement_angle=self.current_rotation,
-        )
+        super().attack()
 
 
 

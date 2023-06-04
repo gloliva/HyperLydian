@@ -29,7 +29,6 @@ class Projectile(pg.sprite.Sprite):
             movement_speed: int,
             movement_angle: int,
             image_scale: float = 1.0,
-            # colored_projectile: bool = False,
         ) -> None:
         super().__init__()
 
@@ -145,25 +144,3 @@ class GreenEnergyOrb(EnergyOrb):
 
 class OrangeEnergyOrb(EnergyOrb):
     COLOR = 'orange'
-
-
-class Missile(Projectile):
-    def __init__(self, player_center) -> None:
-        super().__init__()
-        image = pg.image.load("assets/kenny-space/PNG/Default/ship_B.png").convert()
-        self.surf = pg.transform.scale_by(pg.transform.rotate(image, -90), 0.2)
-
-        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((255, 255, 0))
-        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGB_MULT)
-
-        self.rect = self.surf.get_rect(
-            center=player_center
-        )
-        self.speed = 8
-
-    def update(self):
-        pass
-
-    def kill(self):
-        super().kill()

@@ -1,4 +1,5 @@
 # stdlib imports
+import math
 from typing import Tuple
 
 # 3rd-party impoarts
@@ -7,7 +8,8 @@ import pygame as pg
 
 class Sprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
-    HIT_TIMER_INCREMENT = 0.2
+    HIT_TIMER_INCREMENT = 0.25
+    PROJECTILE_SPAWN_DELTA = 0
     DRAW_LAYER = 2
     INITIAL_ROTATION = 0
 
@@ -73,8 +75,14 @@ class Sprite(pg.sprite.Sprite):
         )
 
     def attack(self):
-        raise NotImplementedError(
-            'Each Sprite subclass must override their attack method.'
+        x_delta = self.PROJECTILE_SPAWN_DELTA * math.cos(math.radians(self.current_rotation))
+        y_delta = -1 * self.PROJECTILE_SPAWN_DELTA * math.sin(math.radians(self.current_rotation))
+
+        attack_center = (self.rect.centerx + x_delta, self.rect.centery + y_delta)
+        self.equipped_weapon.attack(
+            projectile_center=attack_center,
+            speed=self.attack_speed,
+            movement_angle=self.current_rotation,
         )
 
     def switch_weapon(self):

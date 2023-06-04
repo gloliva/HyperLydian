@@ -6,15 +6,14 @@ import pygame
 
 
 class Star(pygame.sprite.Sprite):
-    STAR_TYPES = ['tiny', 'small',] # 'medium', 'large']
-    NUM_STARS_PER_EVENT = 5
+    STAR_TYPES = ['tiny', 'small']
+    NUM_STARS_PER_EVENT = 4
 
     def __init__(self, screen_rect: pygame.Rect, on_load: bool = False) -> None:
         super().__init__()
         star_type = self.STAR_TYPES[random.randint(0, 1)]
         image = pygame.image.load(f"assets/kenny-space/PNG/Default/star_{star_type}.png").convert()
         self.surf = pygame.transform.scale_by(pygame.transform.rotate(image, random.randint(0, 359)), random.random())
-        # self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.surf.set_alpha(random.randint(10, 255))
 
         color_image = pygame.Surface(self.surf.get_size()).convert_alpha()
@@ -37,6 +36,6 @@ class Star(pygame.sprite.Sprite):
             )
 
     def update(self, screen_rect: pygame.Rect):
-        self.rect.move_ip(0, 3)
+        self.rect.move_ip(0, 2)
         if self.rect.top > screen_rect.height:
             self.kill()
