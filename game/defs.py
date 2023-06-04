@@ -17,3 +17,8 @@ class GameState(Enum):
     GAMEPLAY = 1
     DEATH_MENU = 3
     QUIT = 4
+
+
+# OSC constants
+ADDRESS = '127.0.0.1'  # localhost
+PORT = 8001

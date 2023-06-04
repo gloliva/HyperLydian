@@ -181,8 +181,8 @@ def handle_collisions(player):
             # skip for enemy colliding with itself and if the enemy has already been handled
             if grunt == collided_enemy or grunt in handled_enemies:
                 continue
-            if not grunt.moving_to_position:
-                grunt.switch_strafe_direction_on_collision(collided_enemy)
+
+            grunt.switch_strafe_direction_on_collision(collided_enemy)
             handled_enemies.add(grunt)
 
     # projectiles + enemies collision
