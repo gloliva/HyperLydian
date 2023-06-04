@@ -217,5 +217,5 @@ def end_game():
         if sprite not in groups.stars:
             sprite.kill()
 
-    stat_tracker.total_time_survived = pg.time.get_ticks()
+    stat_tracker.set_game_time(pg.time.get_ticks())
     stat_tracker.print_stats()
