@@ -20,8 +20,8 @@ class StraferGrunt(Sprite):
 
     def __init__(self, weapons, row: int) -> None:
         image_files = [
-            'assets/spaceships/enemy_ship.png',
-            'assets/spaceships/enemy_ship_hit.png',
+            'assets/spaceships/strafer_grunt.png',
+            'assets/spaceships/strafer_grunt_hit.png',
         ]
         spawn_location = (
             randint(50, SCREEN_WIDTH - 50),

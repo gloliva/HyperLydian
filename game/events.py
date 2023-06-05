@@ -18,6 +18,10 @@ class Event:
     # The player has been killed
     PLAYER_DEATH = PGEvent(custom_type())
 
+    # Difficulty events
+    INCREASE_DIFFICULTY = PGEvent(custom_type())
+    DECREASE_DIFFICULTY = PGEvent(custom_type())
+
 
 # Event timers
 def initialize_event_timers() -> None:
