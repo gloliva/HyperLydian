@@ -1,10 +1,25 @@
 # HyperLydian
 
-## Requirements
+## Install Instructions
+
+### Download the Executable
+
+If you have a MacBook, you can download the executable from itch.io:
+[Download Game Here](https://gloliva.itch.io/hyperlydian)
+
+The password to view the page is: `earlyaccess`
+
+To run the game, find the downloaded executable in your files and double click on it, or find it in your terminal and run `./hyperlydian`.
+
+### Install from Source
+
+If you don't have a Mac (or just want to be more up-to-date with changes), you'll need to install and run this game with Python
+
+#### Requirements
 
 You will need at least Python 3.7, although preferably Python 3.9+. Has been tested with Python 3.8 and Python 3.11. If you need help installing a new version of Python, check out [pyenv](https://github.com/pyenv/pyenv).
 
-## Install
+#### Install
 
 Will make this into a proper package at the end, but for now:
 
@@ -16,7 +31,9 @@ source .venv/bin/activate  # or activate.fish if using fish shell
 python3 -m pip install -r requirements.txt
 ```
 
-## Run Game
+#### Run Game
+
+From the project directory:
 
 ```bash
 python3 game/main.py
