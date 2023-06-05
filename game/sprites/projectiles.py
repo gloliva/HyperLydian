@@ -7,6 +7,7 @@ import pygame as pg
 
 # project imports
 from exceptions import AssetLoadError
+from sprites.base import construct_asset_full_path
 
 class Projectile(pg.sprite.Sprite):
     # Default attrs
@@ -41,7 +42,7 @@ class Projectile(pg.sprite.Sprite):
             image_file = image_file.format(color=self.COLOR)
 
         # Sprite attributes
-        image = pg.image.load(image_file).convert_alpha()
+        image = pg.image.load(construct_asset_full_path(image_file)).convert_alpha()
         self.surf = pg.transform.rotozoom(image, movement_angle, image_scale)
 
         # Set projectile rect

@@ -1,6 +1,8 @@
 # stdlib imports
 import math
+import os
 from typing import Tuple
+import sys
 
 # 3rd-party impoarts
 import pygame as pg
@@ -33,7 +35,7 @@ class Sprite(pg.sprite.Sprite):
         # Load Sprite images
         self.images = [
             pg.transform.rotozoom(
-                pg.image.load(image_file).convert_alpha(),
+                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
                 image_rotation,
                 image_scale
             ) for image_file in image_files
@@ -138,3 +140,14 @@ class Sprite(pg.sprite.Sprite):
             stat_tracker.player_enemies_killed += 1
             stat_tracker.score += self.SCORE
         self.kill()
+
+
+def construct_asset_full_path(asset_relative_path: str) -> str:
+    """Constructs the full path to a project asset. Handles building from source and using Pyinstaller"""
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, asset_relative_path)
