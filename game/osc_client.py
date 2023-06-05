@@ -30,11 +30,23 @@ class OSCHandler:
             for address in addresses_to_send
         ]
 
+        address_map = {}
+        for address in addresses_to_send:
+            if address not in self.bundle:
+                raise ValueError(f'Address "{address}" not in OSC bundle')
+
+            address_map[address] = self.bundle[address]
+
+        self._send_bundle(address_map)
+
     def send_full_bundle(self) -> None:
+        self._send_bundle(self.bundle)
+
+    def _send_bundle(self, address_map):
         bundle_to_send = OscBundleBuilder(BUNDLE_BUILD_IMMEDIATELY)
 
-        for address, value in self.bundle.items():
-            msg = OscMessageBuilder(address)
+        for address, value in address_map.items():
+            msg = OscMessageBuilder(self._convert_variable_to_address(address))
 
             # Handle is the message is an iterable
             if isinstance(value, list) or isinstance(value, tuple):

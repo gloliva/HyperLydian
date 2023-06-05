@@ -17,6 +17,7 @@ from attacks import Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import debug
 from events import Event, initialize_event_timers, disable_event_timers
+from osc_client import osc
 from sprites.player import create_player
 import sprites.background as background
 import sprites.enemies as enemies
@@ -146,6 +147,12 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # update stats tracker
         stat_tracker.update_stats()
+
+        # Update OSC bundle and send via client
+        osc_stats = stat_tracker.convert_osc_stats_to_dict()
+        osc.union_bundle(osc_stats)
+        if not debug.DISABLE_OSC_SEND:
+            osc.send_full_bundle()
 
         # lock FPS
         timedelta = game_clock.tick(FPS) / 1000

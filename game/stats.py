@@ -1,16 +1,96 @@
+# stdlib imports
+from typing import Any, Dict
+
+
+class OSCStat:
+    """A stat to be sent via OSC"""
+    def __init__(self, value, send: bool = True) -> None:
+        self.value = value
+        self.send = send
+
+    def __add__(self, other) -> "OSCStat":
+        stat = OSCStat(self.value + other.value, self.send) \
+            if isinstance(other, OSCStat) \
+            else OSCStat(self.value + other, self.send)
+
+        return stat
+
+    def __sub__(self, other) -> "OSCStat":
+        stat = OSCStat(self.value - other.value, self.send) \
+            if isinstance(other, OSCStat) \
+            else OSCStat(self.value - other, self.send)
+
+        return stat
+
+    def __mul__(self, other) -> "OSCStat":
+        stat = OSCStat(self.value * other.value, self.send) \
+            if isinstance(other, OSCStat) \
+            else OSCStat(self.value * other, self.send)
+
+        return stat
+
+    def __div__(self, other) -> "OSCStat":
+        stat = OSCStat(self.value / other.value, self.send) \
+            if isinstance(other, OSCStat) \
+            else OSCStat(self.value / other, self.send)
+
+        return stat
+
+    def __truediv__(self, other) -> "OSCStat":
+        return self.__div__(other)
+
+    def __lt__(self, other) -> bool:
+        return self.value < other.value \
+            if isinstance(other, OSCStat) \
+            else self.value < other
+
+    def __le__(self, other) -> bool:
+        return self.value <= other.value \
+            if isinstance(other, OSCStat) \
+            else self.value <= other
+
+    def __eq__(self, other) -> bool:
+        return self.value == other.value \
+            if isinstance(other, OSCStat) \
+            else self.value == other
+
+    def __ne__(self, other) -> bool:
+        return self.value != other.value \
+            if isinstance(other, OSCStat) \
+            else self.value != other
+
+    def __gt__(self, other) -> bool:
+        return self.value > other.value \
+            if isinstance(other, OSCStat) \
+            else self.value > other
+
+    def __ge__(self, other) -> bool:
+        return self.value >= other.value \
+            if isinstance(other, OSCStat) \
+            else self.value >= other
+
+    def __str__(self) -> str:
+        return str(self.value)
+
+    def __repr__(self) -> str:
+        return str(f'OSCStat(Value={self.value}, OSC={self.send})')
+
+
 class StatTracker:
+    """Tracks game information
+    """
     def __init__(self) -> None:
-        # Stats that track throughout each playthrough
-        self.games_played = 0
+        # OSCStats that track throughout each playthrough
+        self.games_played = OSCStat(0)
         self.total_time_played = (0, 0, 0)
 
     def init_new_playthrough(self, start_time_ms: int = 0):
-        self.score = 0
-        self.player_shots_fired = 0
-        self.player_enemies_hit = 0
-        self.player_enemies_killed = 0
-        self.player_health_lost = 0
-        self.player_accuracy = 0.0
+        self.score = OSCStat(0)
+        self.player_shots_fired = OSCStat(0)
+        self.player_enemies_hit = OSCStat(0)
+        self.player_enemies_killed = OSCStat(0)
+        self.player_health_lost = OSCStat(0)
+        self.player_accuracy = OSCStat(0.0)
         self.start_time = start_time_ms
         self.current_playthrough_time = (0, 0, 0)
 
@@ -19,6 +99,15 @@ class StatTracker:
     def update_stats(self):
         if self.player_shots_fired > 0:
             self.player_accuracy = self.player_enemies_hit / self.player_shots_fired
+
+    def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
+        stat_dict = {}
+
+        for stat_name, stat in self.__dict__.items():
+            if isinstance(stat, OSCStat) and stat.send:
+                stat_dict[stat_name] = stat.value
+
+        return stat_dict
 
     def set_game_time(self, total_time_elapsed_ms: int):
         # calculate playthrough time
