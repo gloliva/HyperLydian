@@ -38,10 +38,11 @@ class StatTracker:
 
     def print_stats(self):
         print(f'---- Game {self.games_played} ----')
+        print(f'Score: {self.score}')
+        print(f'Enemies Killed: {self.player_enemies_killed}')
         print(f'Total Shots Fired: {self.player_shots_fired}')
         print(f'Enemies Hit: {self.player_enemies_hit}')
         print(f'Player Shot Accuracy: {self.player_accuracy}')
-        print(f'Enemies Killed: {self.player_enemies_killed}')
         print(
             f'Time Survived: {self.current_playthrough_time[0]} Hours, '
             f'{self.current_playthrough_time[1]} Minutes, '

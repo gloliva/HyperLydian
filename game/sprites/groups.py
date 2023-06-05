@@ -1,3 +1,5 @@
+from typing import Any, List
+
 # 3rd-party imports
 from pygame.sprite import Group, LayeredUpdates as LayeredGroup
 
@@ -19,6 +21,22 @@ class StraferGruntGroup(Group):
         # Manage grunt arrangement
         self.grunts_per_row = [0 for _ in range(self.max_rows)]
         self.curr_row_to_fill = 0
+
+    def create_new_grunt(self, weapons: List[Any]) -> StraferGrunt:
+        # Create grunt and set stopping position
+        grunt = StraferGrunt(weapons, self.curr_row_to_fill)
+        grunt_y_position = (
+            self.ROW_START +
+            (self.curr_row_to_fill * grunt.rect.height * self.ROW_SPACING)
+        )
+        grunt.set_stopping_point_y(grunt_y_position)
+
+        # Add Grunt and update row information
+        self.add(grunt)
+        self.update_curr_row()
+
+        return grunt
+
 
     def add(self, *grunts: StraferGrunt) -> None:
         """Overrides AbstractGroup `add` method to handle row assignment

@@ -16,6 +16,7 @@ class StraferGrunt(Sprite):
     PROJECTILE_SPAWN_DELTA = 40
     INITIAL_ROTATION = 270
     IMAGE_SCALE = 1.5
+    SCORE = 10
 
     def __init__(self, weapons, row: int) -> None:
         image_files = [
@@ -66,7 +67,10 @@ class StraferGrunt(Sprite):
             self.switch_strafe_direction()
 
     def switch_strafe_direction_on_collision(self, enemy: Sprite):
-        if enemy not in self.overlapping_enemies:
+        if self.moving_to_position:
+            if isinstance(enemy, StraferGrunt):
+                self.strafe_direction = -1 * enemy.strafe_direction
+        elif enemy not in self.overlapping_enemies and not enemy.moving_to_position:
             self.switch_strafe_direction()
             self.overlapping_enemies.add(enemy)
 
@@ -101,6 +105,7 @@ class SpinnerGrunt(Sprite):
     PROJECTILE_SPAWN_DELTA = 50
     IMAGE_SCALE = 1.5
     SPAWN_QUADRANT = ['left', 'right']
+    SCORE = 25
 
     def __init__(self, weapons) -> None:
         image_files = [
@@ -170,7 +175,6 @@ class SpinnerGrunt(Sprite):
             return
 
         super().attack()
-
 
 
 class TrackerGrunt(Sprite):

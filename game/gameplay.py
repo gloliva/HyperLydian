@@ -35,6 +35,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # start initial events
     initialize_event_timers()
 
+    # handle frame-independent phsyics
+    timedelta = 0
+
     # create the player
     player = create_player(game_screen.get_rect())
 
@@ -64,32 +67,18 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 not groups.strafer_grunt_enemies.is_full() and \
                 not debug.NO_ENEMIES:
                 # create Grunt object
-                grunt_row = groups.strafer_grunt_enemies.curr_row_to_fill
                 grunt_weapon = Weapon(
                     projectiles.RedEnergyBeam,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
                     damage=1,
-                    attack_speed=randint(4, 8),
+                    attack_speed=randint(4, 7),
                     rate_of_fire=randint(500, 2000),
-                    projectile_scale=1.5,
+                    projectile_scale=0.5,
                 )
-                grunt = enemies.StraferGrunt([grunt_weapon], grunt_row)
-
-                # determine where grunt stops on screen
-                grunt_y_position = (
-                    groups.strafer_grunt_enemies.ROW_START +
-                    (groups.strafer_grunt_enemies.curr_row_to_fill * grunt.rect.height * groups.strafer_grunt_enemies.ROW_SPACING)
-                )
-                grunt.set_stopping_point_y(grunt_y_position)
-
-                # Add grunt to groups
-                groups.strafer_grunt_enemies.add(grunt)
+                grunt = groups.strafer_grunt_enemies.create_new_grunt([grunt_weapon])
                 groups.all_sprites.add(grunt)
                 groups.all_enemies.add(grunt)
-
-                # Calculate new grunt row
-                groups.strafer_grunt_enemies.update_curr_row()
 
             # Handle creating Spinner Grunts
             elif event.type == Event.ADD_SPINNER_GRUNT.type and \
@@ -159,7 +148,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         stat_tracker.update_stats()
 
         # lock FPS
-        game_clock.tick(FPS)
+        timedelta = game_clock.tick(FPS) / 1000
 
     # return the next state
     end_game()

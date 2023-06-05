@@ -16,6 +16,7 @@ class Sprite(pg.sprite.Sprite):
     DRAW_LAYER = 2
     INITIAL_ROTATION = 0
     COUNT_DEATH_STAT = True
+    SCORE = 0
 
     def __init__(
             self,
@@ -116,9 +117,7 @@ class Sprite(pg.sprite.Sprite):
         self.curr_image_id = 1
         self.show_hit_animation()
         if self.is_dead():
-            if self.COUNT_DEATH_STAT:
-                stat_tracker.player_enemies_killed += 1
-            self.kill()
+            self.on_death()
 
     def show_hit_animation(self):
         self.curr_image_id = (self.curr_image_id + self.HIT_TIMER_INCREMENT) % self.num_images
@@ -133,3 +132,9 @@ class Sprite(pg.sprite.Sprite):
 
     def is_dead(self):
         return self.health <= 0
+
+    def on_death(self):
+        if self.COUNT_DEATH_STAT:
+            stat_tracker.player_enemies_killed += 1
+            stat_tracker.score += self.SCORE
+        self.kill()
