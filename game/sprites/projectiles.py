@@ -192,3 +192,4 @@ class BlueMusicNote(MusicNote):
 
 class RedMusicNote(MusicNote):
     COLOR = 'red'
+    NUM_VARIANTS = 8
