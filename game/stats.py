@@ -81,24 +81,24 @@ class StatTracker:
     """
     def __init__(self) -> None:
         # OSCStats that track throughout each playthrough
-        self.games_played = OSCStat(0)
+        self.game__play_count = OSCStat(0)
         self.total_time_played = (0, 0, 0)
 
     def init_new_playthrough(self, start_time_ms: int = 0):
-        self.score = OSCStat(0)
-        self.player_shots_fired = OSCStat(0)
-        self.player_enemies_hit = OSCStat(0)
-        self.player_enemies_killed = OSCStat(0)
-        self.player_health_lost = OSCStat(0)
-        self.player_accuracy = OSCStat(0.0)
+        self.game__score = OSCStat(0)
+        self.player__shots_fired = OSCStat(0)
+        self.player__enemies_hit = OSCStat(0)
+        self.player__enemies_killed = OSCStat(0)
+        self.player__health_lost = OSCStat(0)
+        self.player__accuracy = OSCStat(0.0)
         self.start_time = start_time_ms
         self.current_playthrough_time = (0, 0, 0)
 
-        self.games_played += 1
+        self.game__play_count += 1
 
     def update_stats(self):
-        if self.player_shots_fired > 0:
-            self.player_accuracy = self.player_enemies_hit / self.player_shots_fired
+        if self.player__shots_fired > 0:
+            self.player__accuracy = self.player__enemies_hit / self.player__shots_fired
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}
@@ -126,12 +126,12 @@ class StatTracker:
         self.total_time_played = (hours, minutes, seconds)
 
     def print_stats(self):
-        print(f'---- Game {self.games_played} ----')
-        print(f'Score: {self.score}')
-        print(f'Enemies Killed: {self.player_enemies_killed}')
-        print(f'Total Shots Fired: {self.player_shots_fired}')
-        print(f'Enemies Hit: {self.player_enemies_hit}')
-        print(f'Player Shot Accuracy: {self.player_accuracy}')
+        print(f'---- Game {self.game__play_count} ----')
+        print(f'Score: {self.game__score}')
+        print(f'Enemies Killed: {self.player__enemies_killed}')
+        print(f'Total Shots Fired: {self.player__shots_fired}')
+        print(f'Enemies Hit: {self.player__enemies_hit}')
+        print(f'Player Shot Accuracy: {self.player__accuracy}')
         print(
             f'Time Survived: {self.current_playthrough_time[0]} Hours, '
             f'{self.current_playthrough_time[1]} Minutes, '

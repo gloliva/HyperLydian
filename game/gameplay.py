@@ -87,7 +87,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 not debug.NO_ENEMIES:
                 # create Grunt object
                 grunt_weapon = Weapon(
-                    projectiles.OrangeEnergyOrb,
+                    projectiles.RedMusicNote,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
                     damage=1,
@@ -192,7 +192,7 @@ def handle_collisions(player):
     )
     for projectile, enemies in collided.items():
         for enemy in enemies:
-            stat_tracker.player_enemies_hit += 1
+            stat_tracker.player__enemies_hit += 1
             enemy.take_damage(projectile.damage)
 
     # projectiles + player collision

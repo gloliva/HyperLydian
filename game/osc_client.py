@@ -61,7 +61,7 @@ class OSCHandler:
 
     @staticmethod
     def _convert_variable_to_address(variable: str) -> str:
-        variable = variable.replace('_', '/')
+        variable = variable.replace('__', '/')
         if variable[0] != '/':
             variable = '/' + variable
 

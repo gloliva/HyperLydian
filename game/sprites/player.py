@@ -83,7 +83,7 @@ class Player(Sprite):
         if debug.PLAYER_INVINCIBLE:
             return
 
-        stat_tracker.player_health_lost += damage
+        stat_tracker.player__health_lost += damage
         super().take_damage(damage)
         if self.is_dead():
             pg.event.post(Event.PLAYER_DEATH)
@@ -94,7 +94,7 @@ class Player(Sprite):
             projectile_center=attack_center,
             movement_angle=self.current_rotation,
         )
-        stat_tracker.player_shots_fired += 1
+        stat_tracker.player__shots_fired += 1
 
 
 def create_player(game_screen_rect: pg.Rect) -> Player:
@@ -102,13 +102,14 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
 
     # Create player weapons
     energy_turret = Weapon(
-        projectiles.GreenEnergyOrb,
+        projectiles.BlueMusicNote,
         groups.player_projectiles,
         Weapon.INFINITE_AMMO,
         damage=1,
+        attack_speed=12,
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
-        projectile_scale=0.2,
+        projectile_scale=0.3,
     )
     energy_beam = Weapon(
         projectiles.BlueEnergyBeam,

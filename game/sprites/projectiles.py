@@ -22,6 +22,9 @@ class Projectile(pg.sprite.Sprite):
     AVAILABLE_COLORS = None
     COLOR = None
 
+    # Variants
+    NUM_VARIANTS = 1
+
     def __init__(
             self,
             image_file: str,
@@ -30,6 +33,7 @@ class Projectile(pg.sprite.Sprite):
             movement_speed: int,
             movement_angle: int,
             image_scale: float = 1.0,
+            variant_number: int = 0,
         ) -> None:
         super().__init__()
 
@@ -39,7 +43,8 @@ class Projectile(pg.sprite.Sprite):
                 raise AssetLoadError(
                     f'Passed in color "{self.COLOR}" not in available Projectile colors: {self.AVAILABLE_COLORS}'
                 )
-            image_file = image_file.format(color=self.COLOR)
+
+        image_file = image_file.format(color=self.COLOR, variant_number=variant_number)
 
         # Sprite attributes
         image = pg.image.load(construct_asset_full_path(image_file)).convert_alpha()
@@ -90,6 +95,7 @@ class EnergyBeam(Projectile):
             speed: int = None,
             movement_angle: int = None,
             image_scale: float = 1.0,
+            variant_number: int = 0,
         ) -> None:
         image_file = "assets/projectiles/{color}_energy_beam.png"
 
@@ -101,6 +107,7 @@ class EnergyBeam(Projectile):
             speed,
             movement_angle,
             image_scale,
+            variant_number,
         )
 
 class BlueEnergyBeam(EnergyBeam):
@@ -125,6 +132,7 @@ class EnergyOrb(Projectile):
             speed: int = None,
             movement_angle: int = None,
             image_scale: float = 1.0,
+            variant_number: int = 0,
         ) -> None:
         image_file = image_file = "assets/projectiles/{color}_energy_orb.png"
 
@@ -136,6 +144,7 @@ class EnergyOrb(Projectile):
             speed,
             movement_angle,
             image_scale,
+            variant_number,
         )
 
 
@@ -145,3 +154,41 @@ class GreenEnergyOrb(EnergyOrb):
 
 class OrangeEnergyOrb(EnergyOrb):
     COLOR = 'orange'
+
+
+class MusicNote(Projectile):
+    DEFAULT_DAMAGE = 1
+    DEFAULT_SPEED = 1
+    DEFAULT_ANGLE = 180
+    AVAILABLE_COLORS = ('blue', 'red')
+    NUM_VARIANTS = 4
+
+    def __init__(
+        self,
+        center_position: Tuple[int, int],
+        damage: int = None,
+        speed: int = None,
+        movement_angle: int = None,
+        image_scale: float = 1.0,
+        variant_number: int = 0,
+        ) -> None:
+
+        image_file = "assets/projectiles/notes/{color}_note_{variant_number}.png"
+
+        # Instantiate projectile
+        super().__init__(
+            image_file,
+            center_position,
+            damage,
+            speed,
+            movement_angle,
+            image_scale,
+            variant_number,
+        )
+
+class BlueMusicNote(MusicNote):
+    COLOR = 'blue'
+
+
+class RedMusicNote(MusicNote):
+    COLOR = 'red'

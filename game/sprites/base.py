@@ -137,8 +137,8 @@ class Sprite(pg.sprite.Sprite):
 
     def on_death(self):
         if self.COUNT_DEATH_STAT:
-            stat_tracker.player_enemies_killed += 1
-            stat_tracker.score += self.SCORE
+            stat_tracker.player__enemies_killed += 1
+            stat_tracker.game__score += self.SCORE
         self.kill()
 
 

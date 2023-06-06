@@ -1,5 +1,6 @@
 # stdlib imports
 import math
+from random import randint
 from typing import List, Optional, Tuple, Union
 
 # 3rd-party imports
@@ -78,6 +79,7 @@ class Weapon:
             speed=self.attack_speed,
             movement_angle=movement_angle,
             image_scale=self.projectile_scale,
+            variant_number=randint(0, self.projectile_type.NUM_VARIANTS - 1),
         )
         self.projectile_group.add(projectile)
         groups.all_sprites.add(projectile)
