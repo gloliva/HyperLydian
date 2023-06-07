@@ -86,6 +86,10 @@ class TimeStat:
         minutes, self.seconds = divmod(seconds, 60)
         self.hours, self.minutes = divmod(minutes, 60)
 
+    @property
+    def time(self):
+        return (self.hours, self.minutes, self.seconds, self.ms)
+
     def __sub__(self, other) -> "TimeStat":
         if isinstance(other, TimeStat):
             return TimeStat(self.total_ms - other.total_ms)
@@ -101,6 +105,27 @@ class TimeStat:
         return str(f'TimeStat(Hours={self.hours}, Minutes={self.minutes}, Seconds={self.seconds}, Milliseconds={self.ms})')
 
 
+class AvgStat:
+    def __init__(self, initial_value: float, send: bool = True) -> None:
+        self.sum = initial_value
+        self.count = 1
+        self.send = send
+
+    @property
+    def avg(self) -> float:
+        return self.sum / self.count
+
+    def add(self, val: float):
+        self.sum += val
+        self.count += 1
+
+    def __str__(self) -> str:
+        return str(self.avg)
+
+    def __repr__(self) -> str:
+        return str(f'AvgStat(Average={self.avg}, Count={self.count})')
+
+
 class StatTracker:
     """Tracks game information"""
     def __init__(self) -> None:
@@ -110,14 +135,18 @@ class StatTracker:
 
     def init_new_playthrough(self, start_time_ms: int = 0):
         self.start_time = start_time_ms
+        self.time_last_enemy_killed = start_time_ms
 
         self.game__score = Stat(0)
+        self.game__time__current_playthrough = TimeStat(0)
+
         self.player__shots_fired = Stat(0)
         self.player__enemies_hit = Stat(0)
-        self.player__enemies_killed = Stat(0)
-        self.player__health_lost = Stat(0)
         self.player__accuracy = Stat(0.0)
-        self.game__time__current_playthrough = TimeStat(0)
+        self.player__enemies_killed = Stat(0)
+        self.player__avg_time_between_kills = AvgStat(0)
+        self.player__health_lost = Stat(0)
+        self.player__near_misses = Stat(0)
 
         self.game__play_count += 1
 
@@ -129,10 +158,15 @@ class StatTracker:
         stat_dict = {}
 
         for stat_name, stat in self.__dict__.items():
-            if isinstance(stat, Stat) and stat.send:
+            if not hasattr(stat, 'send') or not stat.send:
+                continue
+
+            if isinstance(stat, Stat):
                 stat_dict[stat_name] = stat.value
-            if isinstance(stat, TimeStat) and stat.send:
-                stat_dict[stat_name] = (stat.hours, stat.minutes, stat.seconds, stat.ms)
+            elif isinstance(stat, TimeStat):
+                stat_dict[stat_name] = stat.time
+            elif isinstance(stat, AvgStat):
+                stat_dict[stat_name] = stat.avg
 
         return stat_dict
 
@@ -148,6 +182,8 @@ class StatTracker:
         print(f'---- Game {self.game__play_count} ----')
         print(f'Score: {self.game__score}')
         print(f'Enemies Killed: {self.player__enemies_killed}')
+        print(f'Enemy shots dodged: {self.player__near_misses}')
+        print(f'Avg time to kill an Enemy: {self.player__avg_time_between_kills.avg / 1000}')
         print(f'Total Shots Fired: {self.player__shots_fired}')
         print(f'Enemies Hit: {self.player__enemies_hit}')
         print(f'Player Shot Accuracy: {self.player__accuracy}%')

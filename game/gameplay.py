@@ -18,7 +18,7 @@ from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import debug
 from events import Event, initialize_event_timers, disable_event_timers
 from osc_client import osc
-from sprites.player import create_player
+from sprites.player import create_player, Player
 import sprites.background as background
 import sprites.enemies as enemies
 import sprites.projectiles as projectiles
@@ -147,15 +147,13 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # update stats tracker
         stat_tracker.update_stats()
+        stat_tracker.set_game_time(pg.time.get_ticks())
 
         # Update OSC bundle and send via client
         osc_stats = stat_tracker.convert_osc_stats_to_dict()
         osc.union_bundle(osc_stats)
         if not debug.DISABLE_OSC_SEND:
             osc.send_full_bundle()
-
-        # Update Time stats
-        stat_tracker.set_game_time(pg.time.get_ticks())
 
         # lock FPS
         timedelta = game_clock.tick(FPS) / 1000
@@ -165,7 +163,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     return next_state
 
 
-def handle_collisions(player):
+def handle_collisions(player: Player):
     # grunt + enemies collison
     # change Grunt strafe direction
     handled_enemies = set()
@@ -198,15 +196,25 @@ def handle_collisions(player):
             stat_tracker.player__enemies_hit += 1
             enemy.take_damage(projectile.damage)
 
+    # projectile + player near misses
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.enemy_projectiles,
+        dokill=False,
+        collided=pg.sprite.collide_rect,
+    )
+    player.add_projectiles_in_range(collided)
+
     # projectiles + player collision
     # destroy projectile + damage player
     collided = pg.sprite.spritecollide(
         player,
         groups.enemy_projectiles,
         dokill=False,
-        collided=pg.sprite.collide_mask
+        collided=pg.sprite.collide_mask,
     )
     for projectile in collided:
+        player.update_near_misses(projectile)
         player.take_damage(projectile.damage)
         projectile.kill()
 

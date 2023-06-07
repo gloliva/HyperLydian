@@ -51,6 +51,7 @@ class Player(Sprite):
 
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
+        self.projectiles_in_range = set()
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
         # move player based on key input
@@ -95,6 +96,17 @@ class Player(Sprite):
             movement_angle=self.current_rotation,
         )
         stat_tracker.player__shots_fired += 1
+
+    def add_projectiles_in_range(self, projectiles: List[projectiles.Projectile]):
+        for projectile in projectiles:
+            if projectile not in self.projectiles_in_range:
+                self.projectiles_in_range.add(projectile)
+                stat_tracker.player__near_misses += 1
+
+    def update_near_misses(self, projectile: projectiles.Projectile):
+        if projectile in self.projectiles_in_range:
+            self.projectiles_in_range.remove(projectile)
+            stat_tracker.player__near_misses -= 1
 
 
 def create_player(game_screen_rect: pg.Rect) -> Player:
