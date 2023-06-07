@@ -154,6 +154,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         if not debug.DISABLE_OSC_SEND:
             osc.send_full_bundle()
 
+        # Update Time stats
+        stat_tracker.set_game_time(pg.time.get_ticks())
+
         # lock FPS
         timedelta = game_clock.tick(FPS) / 1000
 
@@ -216,5 +219,4 @@ def end_game():
         if sprite not in groups.stars:
             sprite.kill()
 
-    stat_tracker.set_game_time(pg.time.get_ticks())
     stat_tracker.print_stats()
