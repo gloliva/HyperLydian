@@ -2,81 +2,81 @@
 from typing import Any, Dict
 
 
-class OSCStat:
+class Stat:
     """A stat to be sent via OSC"""
     def __init__(self, value, send: bool = True) -> None:
         self.value = value
         self.send = send
 
-    def __add__(self, other) -> "OSCStat":
-        stat = OSCStat(self.value + other.value, self.send) \
-            if isinstance(other, OSCStat) \
-            else OSCStat(self.value + other, self.send)
+    def __add__(self, other) -> "Stat":
+        stat = Stat(self.value + other.value, self.send) \
+            if isinstance(other, Stat) \
+            else Stat(self.value + other, self.send)
 
         return stat
 
-    def __sub__(self, other) -> "OSCStat":
-        stat = OSCStat(self.value - other.value, self.send) \
-            if isinstance(other, OSCStat) \
-            else OSCStat(self.value - other, self.send)
+    def __sub__(self, other) -> "Stat":
+        stat = Stat(self.value - other.value, self.send) \
+            if isinstance(other, Stat) \
+            else Stat(self.value - other, self.send)
 
         return stat
 
-    def __mul__(self, other) -> "OSCStat":
-        stat = OSCStat(self.value * other.value, self.send) \
-            if isinstance(other, OSCStat) \
-            else OSCStat(self.value * other, self.send)
+    def __mul__(self, other) -> "Stat":
+        stat = Stat(self.value * other.value, self.send) \
+            if isinstance(other, Stat) \
+            else Stat(self.value * other, self.send)
 
         return stat
 
-    def __div__(self, other) -> "OSCStat":
-        stat = OSCStat(self.value / other.value, self.send) \
-            if isinstance(other, OSCStat) \
-            else OSCStat(self.value / other, self.send)
+    def __div__(self, other) -> "Stat":
+        stat = Stat(self.value / other.value, self.send) \
+            if isinstance(other, Stat) \
+            else Stat(self.value / other, self.send)
 
         return stat
 
-    def __truediv__(self, other) -> "OSCStat":
+    def __truediv__(self, other) -> "Stat":
         return self.__div__(other)
 
     def __lt__(self, other) -> bool:
         return self.value < other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value < other
 
     def __le__(self, other) -> bool:
         return self.value <= other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value <= other
 
     def __eq__(self, other) -> bool:
         return self.value == other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value == other
 
     def __ne__(self, other) -> bool:
         return self.value != other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value != other
 
     def __gt__(self, other) -> bool:
         return self.value > other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value > other
 
     def __ge__(self, other) -> bool:
         return self.value >= other.value \
-            if isinstance(other, OSCStat) \
+            if isinstance(other, Stat) \
             else self.value >= other
 
     def __str__(self) -> str:
         return str(self.value)
 
     def __repr__(self) -> str:
-        return str(f'OSCStat(Value={self.value}, OSC={self.send})')
+        return str(f'Stat(Value={self.value}, OSC={self.send})')
 
 
-class OSCTimeStat:
+class TimeStat:
     """A stat that tracks time in ms, seconds, minutes, and hours"""
     def __init__(self, total_ms, send: bool = True) -> None:
         self.total_ms = total_ms
@@ -86,11 +86,11 @@ class OSCTimeStat:
         minutes, self.seconds = divmod(seconds, 60)
         self.hours, self.minutes = divmod(minutes, 60)
 
-    def __sub__(self, other) -> "OSCTimeStat":
-        if isinstance(other, OSCTimeStat):
-            return OSCTimeStat(self.total_ms - other.total_ms)
+    def __sub__(self, other) -> "TimeStat":
+        if isinstance(other, TimeStat):
+            return TimeStat(self.total_ms - other.total_ms)
         elif isinstance(other, (int, float)):
-            return OSCTimeStat(self.total_ms - other)
+            return TimeStat(self.total_ms - other)
         else:
             raise TypeError(f'{self.__class__} unable to perform subtraction with type: {type(other)}')
 
@@ -98,26 +98,26 @@ class OSCTimeStat:
         return str(self.total_ms)
 
     def __repr__(self) -> str:
-        return str(f'OSCTimeStat(Hours={self.hours}, Minutes={self.minutes}, Seconds={self.seconds}, Milliseconds={self.ms})')
+        return str(f'TimeStat(Hours={self.hours}, Minutes={self.minutes}, Seconds={self.seconds}, Milliseconds={self.ms})')
 
 
 class StatTracker:
     """Tracks game information"""
     def __init__(self) -> None:
-        # OSCStats that track throughout each playthrough
-        self.game__play_count = OSCStat(0)
-        self.game__time__total_played = OSCTimeStat(0)
+        # Stats that track throughout each playthrough
+        self.game__play_count = Stat(0)
+        self.game__time__total_played = TimeStat(0)
 
     def init_new_playthrough(self, start_time_ms: int = 0):
         self.start_time = start_time_ms
 
-        self.game__score = OSCStat(0)
-        self.player__shots_fired = OSCStat(0)
-        self.player__enemies_hit = OSCStat(0)
-        self.player__enemies_killed = OSCStat(0)
-        self.player__health_lost = OSCStat(0)
-        self.player__accuracy = OSCStat(0.0)
-        self.game__time__current_playthrough = OSCTimeStat(0)
+        self.game__score = Stat(0)
+        self.player__shots_fired = Stat(0)
+        self.player__enemies_hit = Stat(0)
+        self.player__enemies_killed = Stat(0)
+        self.player__health_lost = Stat(0)
+        self.player__accuracy = Stat(0.0)
+        self.game__time__current_playthrough = TimeStat(0)
 
         self.game__play_count += 1
 
@@ -129,9 +129,9 @@ class StatTracker:
         stat_dict = {}
 
         for stat_name, stat in self.__dict__.items():
-            if isinstance(stat, OSCStat) and stat.send:
+            if isinstance(stat, Stat) and stat.send:
                 stat_dict[stat_name] = stat.value
-            if isinstance(stat, OSCTimeStat) and stat.send:
+            if isinstance(stat, TimeStat) and stat.send:
                 stat_dict[stat_name] = (stat.hours, stat.minutes, stat.seconds, stat.ms)
 
         return stat_dict
@@ -139,10 +139,10 @@ class StatTracker:
     def set_game_time(self, total_time_elapsed_ms: int):
         # calculate playthrough time
         playthrough_time_elapsed = total_time_elapsed_ms - self.start_time
-        self.game__time__current_playthrough = OSCTimeStat(playthrough_time_elapsed)
+        self.game__time__current_playthrough = TimeStat(playthrough_time_elapsed)
 
         # calculate total time
-        self.game__time__total_played = OSCTimeStat(total_time_elapsed_ms)
+        self.game__time__total_played = TimeStat(total_time_elapsed_ms)
 
     def print_stats(self):
         print(f'---- Game {self.game__play_count} ----')
