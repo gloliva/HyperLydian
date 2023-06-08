@@ -6,6 +6,8 @@ import pygame as pg
 from pygame.locals import (
     K_r,
     K_w,
+    K_1,
+    K_2,
     K_SPACE,
     KEYDOWN,
     QUIT,
@@ -103,8 +105,12 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 groups.all_sprites.add(grunt)
 
             elif event.type == KEYDOWN:
-                if event.key == K_r:
-                    # Cycle through players weapons
+                # Cycle through players weapons
+                if event.key == K_1:
+                    player.switch_weapon(0)
+                elif event.key == K_2:
+                    player.switch_weapon(1)
+                elif event.key == K_r:
                     player.switch_weapon()
 
         # get pressed key events

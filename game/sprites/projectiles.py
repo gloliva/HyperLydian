@@ -230,3 +230,34 @@ class MusicLetter(Projectile):
 class BlueMusicLetter(MusicLetter):
     COLOR = 'blue'
     NUM_VARIANTS = 10
+
+
+class Accidental(Projectile):
+    DEFAULT_DAMAGE = 5
+    DEFAULT_SPEED = 8
+    AVAILABLE_VARIANTS = ('natural', 'sharp', 'flat')
+    NUM_VARIANTS = 3
+
+    def __init__(
+        self,
+        center_position: Tuple[int, int],
+        damage: int = None,
+        speed: int = None,
+        movement_angle: int = None,
+        image_scale: float = 1.0,
+        variant_number: int = 0,
+        ) -> None:
+
+        variant = self.AVAILABLE_VARIANTS[variant_number]
+        image_file = f"assets/projectiles/accidentals/{variant}.png"
+
+        # Instantiate projectile
+        super().__init__(
+            image_file,
+            center_position,
+            damage,
+            speed,
+            movement_angle,
+            image_scale,
+            variant_number,
+        )

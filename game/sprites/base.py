@@ -91,8 +91,8 @@ class Sprite(pg.sprite.Sprite):
             movement_angle=self.current_rotation,
         )
 
-    def switch_weapon(self):
-        self.current_weapon_id = (self.current_weapon_id + 1) % len(self.weapons)
+    def switch_weapon(self, weapon_id: int = 0):
+        self.current_weapon_id = weapon_id
         self.equipped_weapon = self.weapons[self.current_weapon_id]
 
     def rotate(self, rotation_angle: int):

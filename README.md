@@ -65,7 +65,7 @@ Extremely in-progress; everything subject to change.
 
 `Space` or `W` - Shoot
 
-`R` - Cycle Weapons
+`1`, `2` - Switch between first and second weapon
 
 `Q` - Rotate CCW
 

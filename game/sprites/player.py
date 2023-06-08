@@ -124,13 +124,13 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         projectile_scale=0.3,
     )
     energy_beam = Weapon(
-        projectiles.BlueMusicLetter,
+        projectiles.Accidental,
         groups.player_projectiles,
         Weapon.INFINITE_AMMO,
         attack_speed=10,
         damage=5,
         rate_of_fire=300,
-        projectile_scale=0.3,
+        projectile_scale=0.5,
     )
 
     # Create player object
