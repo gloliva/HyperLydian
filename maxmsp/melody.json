@@ -1,0 +1,18 @@
+{
+	"pattrstorage" : 	{
+		"name" : "melody",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"leadvoices::voice1" : [ 0, 6, 5, 4, 6, 5, 4, 5 ],
+					"leadvoices::voice2" : [ -1, 1, -1, -1, -1, 8, -1, -1 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
