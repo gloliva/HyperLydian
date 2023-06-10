@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 137.0, 130.0, 801.0, 631.0 ],
+		"rect" : [ 34.0, 87.0, 892.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -139,7 +139,9 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"annotation" : "Envelope Output Value",
+					"comment" : "Envelope Output Value",
+					"hint" : "Envelope Output Value",
 					"id" : "obj-2",
 					"index" : 0,
 					"maxclass" : "outlet",
@@ -251,7 +253,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 121.0, 439.470562219619751, 191.0, 122.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 7.470562219619751, 240.0, 155.0 ],
+					"presentation_rect" : [ 7.0, 7.470562219619751, 529.0, 155.0 ],
 					"varname" : "ad-envelope"
 				}
 
@@ -269,7 +271,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 507.0, 436.470562219619751, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.470562219619751, 254.0, 171.0 ],
+					"presentation_rect" : [ 0.0, 0.470562219619751, 545.0, 171.0 ],
 					"proportion" : 0.5,
 					"rounded" : 12
 				}
