@@ -141,18 +141,20 @@ class StatTracker:
         self.game__time__current_playthrough = TimeStat(0)
 
         self.player__shots_fired = Stat(0)
-        self.player__enemies_hit = Stat(0)
         self.player__accuracy = Stat(0.0)
-        self.player__enemies_killed = Stat(0)
         self.player__avg_time_between_kills = AvgStat(0)
         self.player__health_lost = Stat(0)
         self.player__near_misses = Stat(0)
+
+        self.enemies__num_on_screen = Stat(0)
+        self.enemies__hit = Stat(0)
+        self.enemies__killed = Stat(0)
 
         self.game__play_count += 1
 
     def update_stats(self):
         if self.player__shots_fired > 0:
-            self.player__accuracy = (self.player__enemies_hit / self.player__shots_fired) * 100
+            self.player__accuracy = (self.enemies__hit / self.player__shots_fired) * 100
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}
@@ -181,11 +183,11 @@ class StatTracker:
     def print_stats(self):
         print(f'---- Game {self.game__play_count} ----')
         print(f'Score: {self.game__score}')
-        print(f'Enemies Killed: {self.player__enemies_killed}')
+        print(f'Enemies Killed: {self.enemies__killed}')
         print(f'Enemy shots dodged: {self.player__near_misses}')
         print(f'Avg time to kill an Enemy: {self.player__avg_time_between_kills.avg / 1000}')
         print(f'Total Shots Fired: {self.player__shots_fired}')
-        print(f'Enemies Hit: {self.player__enemies_hit}')
+        print(f'Enemies Hit: {self.enemies__hit}')
         print(f'Player Shot Accuracy: {self.player__accuracy}%')
         print(
             f'Time Survived: {self.game__time__current_playthrough.hours} Hours, '

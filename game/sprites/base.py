@@ -141,7 +141,7 @@ class Sprite(pg.sprite.Sprite):
             current_time = pg.time.get_ticks()
             stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
             stat_tracker.time_last_enemy_killed = current_time
-            stat_tracker.player__enemies_killed += 1
+            stat_tracker.enemies__killed += 1
             stat_tracker.game__score += self.SCORE
         self.kill()
 

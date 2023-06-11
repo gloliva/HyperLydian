@@ -25,7 +25,7 @@ import sprites.background as background
 import sprites.enemies as enemies
 import sprites.projectiles as projectiles
 import sprites.groups as groups
-from stats import stat_tracker
+from stats import stat_tracker, Stat
 
 
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
@@ -152,6 +152,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         pg.display.flip()
 
         # update stats tracker
+        stat_tracker.enemies__num_on_screen = Stat(len(groups.all_enemies))
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
 
@@ -199,7 +200,7 @@ def handle_collisions(player: Player):
     )
     for projectile, enemies in collided.items():
         for enemy in enemies:
-            stat_tracker.player__enemies_hit += 1
+            stat_tracker.enemies__hit += 1
             enemy.take_damage(projectile.damage)
 
     # projectile + player near misses
