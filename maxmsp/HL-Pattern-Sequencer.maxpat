@@ -56,10 +56,10 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 609.0, 79.0, 24.0 ],
+					"patching_rect" : [ 9.5, 586.0, 104.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 90.5, 264.0, 200.0, 24.0 ],
-					"text" : "0",
+					"presentation_rect" : [ 90.5, 264.0, 321.0, 24.0 ],
+					"text" : "0 0 0 0 0 0 0 0",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 
@@ -71,7 +71,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "FullPacket" ],
-					"patching_rect" : [ 20.0, 573.0, 145.0, 22.0 ],
+					"patching_rect" : [ 20.0, 534.0, 145.0, 22.0 ],
 					"text" : "o.route /sequence/display"
 				}
 
@@ -85,8 +85,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "FullPacket" ],
-					"patching_rect" : [ 20.0, 419.0, 486.0, 57.0 ],
-					"presentation_linecount" : 3,
+					"patching_rect" : [ 20.0, 384.0, 486.0, 57.0 ],
 					"text" : "/sequence/values = /sequence/values[[ aseq(0, /sequence/length - 1 ) ]],\n/sequence/display = /sequence/values + 1"
 				}
 
@@ -186,8 +185,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 20.0, 492.0, 373.0, 59.0 ],
-					"text" : "/sequence/values : -1,\n/sequence/length : 1,\n/sequence/display : 0"
+					"patching_rect" : [ 20.0, 457.0, 486.0, 59.0 ],
+					"text" : "/sequence/values : [-1, -1, -1, -1, -1, -1, -1, -1],\n/sequence/length : 8,\n/sequence/display : [0, 0, 0, 0, 0, 0, 0, 0]"
 				}
 
 			}
@@ -201,7 +200,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 146.0, 614.0, 30.0, 30.0 ]
+					"patching_rect" : [ 146.0, 632.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -212,10 +211,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 510.0, 384.0, 59.0, 22.0 ],
+					"patching_rect" : [ 547.0, 384.0, 59.0, 22.0 ],
 					"restore" : 					{
 						"sequence" : [ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-						"sequence-length" : [ 1 ]
+						"sequence-length" : [ 8 ]
 					}
 ,
 					"text" : "autopattr",
@@ -245,7 +244,7 @@
 					"peakcolor" : [ 1.0, 0.015686274509804, 0.015686274509804, 1.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.0, 10.0, 531.0, 249.0 ],
-					"setminmax" : [ -1.0, 14.0 ],
+					"setminmax" : [ -1.0, 15.0 ],
 					"settype" : 0,
 					"signed" : 1,
 					"size" : 32,
