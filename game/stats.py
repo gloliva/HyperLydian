@@ -133,7 +133,7 @@ class StatTracker:
         self.game__play_count = Stat(0)
         self.game__time__total_played = TimeStat(0)
 
-    def init_new_playthrough(self, start_time_ms: int = 0):
+    def init_new_playthrough(self, start_time_ms: int = 0, player_max_health: int = 0):
         self.start_time = start_time_ms
         self.time_last_enemy_killed = start_time_ms
 
@@ -144,6 +144,7 @@ class StatTracker:
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat(0)
         self.player__health_lost = Stat(0)
+        self.player__curr_health = Stat(player_max_health)
         self.player__near_misses = Stat(0)
 
         self.enemies__num_on_screen = Stat(0)
