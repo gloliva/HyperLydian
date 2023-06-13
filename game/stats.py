@@ -106,14 +106,17 @@ class TimeStat:
 
 
 class AvgStat:
-    def __init__(self, initial_value: float, send: bool = True) -> None:
-        self.sum = initial_value
-        self.count = 1
+    def __init__(self, send: bool = True) -> None:
+        self.sum = 0
+        self.count = 0
         self.send = send
 
     @property
     def avg(self) -> float:
-        return self.sum / self.count
+        if self.count > 0:
+            return self.sum / self.count
+        else:
+            return 0
 
     def add(self, val: float):
         self.sum += val
@@ -142,7 +145,7 @@ class StatTracker:
 
         self.player__shots_fired = Stat(0)
         self.player__accuracy = Stat(0.0)
-        self.player__avg_time_between_kills = AvgStat(0)
+        self.player__avg_time_between_kills = AvgStat()
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
