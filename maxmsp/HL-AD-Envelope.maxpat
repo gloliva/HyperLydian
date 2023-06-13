@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 2608.0, -38.0, 1113.0, 779.0 ],
+		"rect" : [ 754.0, 87.0, 652.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -265,7 +265,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 121.0, 518.470562219619751, 191.0, 122.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 7.470562219619751, 529.0, 155.0 ],
+					"presentation_rect" : [ 7.0, 7.470562219619751, 592.0, 155.0 ],
 					"varname" : "ad-envelope"
 				}
 
@@ -283,7 +283,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 507.0, 515.470562219619751, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.470562219619751, 545.0, 171.0 ],
+					"presentation_rect" : [ 0.0, 0.470562219619751, 607.0, 171.0 ],
 					"proportion" : 0.5,
 					"rounded" : 12
 				}

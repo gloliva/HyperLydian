@@ -40,18 +40,6 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-19",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 893.0, 734.0, 39.0, 22.0 ],
-					"text" : "metro"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -565,13 +553,13 @@
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "HL-Pattern-Sequencer.maxpat",
-					"numinlets" : 0,
+					"numinlets" : 1,
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 447.0, 68.0, 546.0, 317.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 0.0, 546.0, 317.0 ],
+					"presentation_rect" : [ -0.47058892250061, -1.0, 608.0, 317.0 ],
 					"varname" : "HL-Pattern-Sequencer",
 					"viewvisibility" : 1
 				}
@@ -595,7 +583,7 @@
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 290.0, 846.0, 546.0, 176.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 312.0, 546.0, 172.0 ],
+					"presentation_rect" : [ -0.47058892250061, 312.0, 608.0, 172.0 ],
 					"varname" : "HL-AD-Envelope",
 					"viewvisibility" : 1
 				}
