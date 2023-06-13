@@ -1194,7 +1194,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 471.5, 1460.0, 257.0, 85.0 ],
-					"text" : "/global/bars : 1,\n/global/beats : 1,\n/global/units : 0.,\n/global/tempo : 112.,\n/global/time_sig : [4, 4]"
+					"text" : "/global/bars : 101,\n/global/beats : 2,\n/global/units : 0.,\n/global/tempo : 112.,\n/global/time_sig : [4, 4]"
 				}
 
 			}
