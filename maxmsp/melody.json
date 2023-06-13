@@ -10,7 +10,10 @@
 					"HL-Voice-Sequencer::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
 					"HL-Voice-Sequencer[1]::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 13.118300454835962, 1.0, 0, -0.35, 1000.0, 0.0, 0, -0.645, "curve" ],
 					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence" : [ -1, 11, -1, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, 8, -1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 16 ]
+					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
+					"HL-Voice-Sequencer[2]::HL-AD-Envelope::ad-envelope" : [  ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence" : [  ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence-length" : [  ]
 				}
 
 			}
@@ -23,7 +26,10 @@
 					"HL-Voice-Sequencer::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
 					"HL-Voice-Sequencer[1]::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 17.408123791102515, 1.0, 0, -0.35, 822.050290135396494, 0.795927401689383, 0, -0.395, 1000.0, 0.0, 0, 0.555, "curve" ],
 					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence" : [ 11, -1, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, 8, -1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 16 ]
+					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
+					"HL-Voice-Sequencer[2]::HL-AD-Envelope::ad-envelope" : [  ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence" : [  ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence-length" : [  ]
 				}
 
 			}
@@ -31,12 +37,15 @@
 			"3" : 			{
 				"id" : 3,
 				"data" : 				{
-					"HL-Voice-Sequencer::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 13.118300454835962, 1.0, 0, -0.35, 1000.0, 0.0, 0, -0.645, "curve" ],
-					"HL-Voice-Sequencer::HL-Pattern-Sequencer::sequence" : [ 7, 11, 7, 11, 15, 0, 14, 0, 15, 0, 14, 0, 15, 0, 14, 0, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+					"HL-Voice-Sequencer::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 13.118300454835962, 1.0, 0, -0.35, 1000.0, 0.0, 0, 0.555, "curve" ],
+					"HL-Voice-Sequencer::HL-Pattern-Sequencer::sequence" : [ 7, 11, 7, 11, 15, -1, 14, -1, 15, -1, 14, -1, 15, -1, 14, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
 					"HL-Voice-Sequencer::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
-					"HL-Voice-Sequencer[1]::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 17.408123791102515, 1.0, 0, -0.35, 255.319148936170222, 0.657465863227844, 0, -0.395, 1000.0, 0.0, 0, 0.555, "curve" ],
-					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence" : [ 5, -1, -1, 0, -1, -1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 8 ]
+					"HL-Voice-Sequencer[1]::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 19.342359767891683, 1.0, 0, -0.35, 261.121856866537712, 1.0, 0, -0.395, 1000.0, 0.0, 0, 0.645, "curve" ],
+					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence" : [ -1, -1, -1, -1, 7, -1, 6, -1, 7, -1, 6, -1, 7, -1, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+					"HL-Voice-Sequencer[1]::HL-Pattern-Sequencer::sequence-length" : [ 16 ],
+					"HL-Voice-Sequencer[2]::HL-AD-Envelope::ad-envelope" : [ 1000.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 13.118300454835962, 1.0, 0, -0.35, 998.065764023210818, 0.0, 0, 0.995, "curve" ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence" : [ 0, 4, 5, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+					"HL-Voice-Sequencer[2]::HL-Pattern-Sequencer::sequence-length" : [ 4 ]
 				}
 
 			}

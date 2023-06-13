@@ -143,8 +143,9 @@ class StatTracker:
         self.player__shots_fired = Stat(0)
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat(0)
-        self.player__health_lost = Stat(0)
+        self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
+        self.player__health_lost = Stat(0)
         self.player__near_misses = Stat(0)
 
         self.enemies__num_on_screen = Stat(0)
