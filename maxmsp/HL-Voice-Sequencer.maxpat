@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2154.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 128.666666666666686, 366.0, 58.0, 22.0 ],
+					"text" : "loadbang"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-33",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -47,21 +60,6 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 52.0, 821.5, 404.25, 22.0 ],
 					"text" : "t l l"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 0,
-					"id" : "obj-31",
-					"linecount" : 7,
-					"maxclass" : "o.display",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 831.0, 750.5, 1057.0, 110.0 ],
-					"presentation_linecount" : 7,
-					"text" : "/sequence/curr_idx : 0,\n/sequence/values : [0, 0, 0, 0, -1, -1, -1, -1],\n/note/base : 36,\n/sequence/sustain : [1., 0., 0., 0., 0., 0., 0., 0.],\n/scale/current : [0, 2, 4, 5, 7, 9, 11],\n/scale/length : 7,\n/sustain/type : 1."
 				}
 
 			}
@@ -96,7 +94,7 @@
 					"comment" : "Key (int)",
 					"hint" : "Key (int)\n0 - C\n...\n11 - B",
 					"id" : "obj-8",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -171,7 +169,7 @@
 					"comment" : "Beat Divisions (int)",
 					"hint" : "Beat Divisions (int)",
 					"id" : "obj-7",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -210,11 +208,11 @@
 					"comment" : "Start Metronome (Toggle)",
 					"hint" : "Start Metronome (Toggle)",
 					"id" : "obj-21",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 52.0, 217.0, 30.0, 30.0 ]
 				}
 
@@ -225,7 +223,7 @@
 					"comment" : "Clock Divider (float)",
 					"hint" : "Clock Divider (float)",
 					"id" : "obj-20",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -252,7 +250,7 @@
 					"comment" : "Scale Variables (OSC)",
 					"hint" : "Scale Variables (OSC)\nCurrent scale values and length",
 					"id" : "obj-18",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -279,7 +277,7 @@
 					"comment" : "Tempo (BPM)",
 					"hint" : "Tempo (BPM)",
 					"id" : "obj-16",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -306,7 +304,7 @@
 					"comment" : "Note Frequency (Hz)",
 					"hint" : "Note Frequency (Hz)",
 					"id" : "obj-15",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -320,7 +318,7 @@
 					"comment" : "Envelope Output",
 					"hint" : "Envelope Output",
 					"id" : "obj-14",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -673,7 +671,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 121.0, 633.0, 281.0, 633.0, 281.0, 344.0, 197.0, 344.0, 197.0, 408.0, 197.5, 408.0 ],
+					"midpoints" : [ 121.0, 633.0, 281.0, 633.0, 281.0, 351.0, 197.0, 351.0, 197.0, 408.0, 197.5, 408.0 ],
 					"source" : [ "obj-12", 0 ]
 				}
 
@@ -770,16 +768,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-31", 0 ],
-					"order" : 0,
-					"source" : [ "obj-23", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-33", 0 ],
-					"order" : 1,
 					"source" : [ "obj-23", 0 ]
 				}
 
@@ -837,6 +826,16 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 3 ],
+					"order" : 1,
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 4 ],
+					"midpoints" : [ 197.5, 492.0, 888.5, 492.0 ],
+					"order" : 0,
 					"source" : [ "obj-4", 0 ]
 				}
 
@@ -845,6 +844,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-13", 0 ],
 					"source" : [ "obj-44", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-5", 0 ]
 				}
 
 			}
@@ -883,7 +890,63 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "HL-AD-Envelope.maxpat",
+				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "HL-Pattern-Sequencer.maxpat",
+				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "o.collect.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.cond.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.display.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.expr.codebox.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.if.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.pack.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.select.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.union.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.var.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0
 	}
 
 }

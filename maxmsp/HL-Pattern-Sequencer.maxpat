@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2154.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -42,12 +42,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-84",
+					"linecount" : 3,
 					"maxclass" : "o.expr.codebox",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "FullPacket" ],
-					"patching_rect" : [ 449.0, 933.0, 503.5, 34.0 ],
-					"text" : "/sequence/sustain = /sequence/sustain[[ aseq(0, /sequence/length - 1) ]]"
+					"patching_rect" : [ 449.0, 938.0, 503.5, 57.0 ],
+					"text" : "/sequence/sustain ??= nfill(/sequence/length, 0),\n\n/sequence/sustain = /sequence/sustain[[ aseq(0, /sequence/length - 1) ]]"
 				}
 
 			}
@@ -8262,7 +8263,8 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 8.0, 261.0, 531.0, 18.0 ],
 					"range" : 4,
-					"rows" : 1
+					"rows" : 1,
+					"varname" : "sustain"
 				}
 
 			}
@@ -8719,7 +8721,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 449.0, 983.0, 30.0, 30.0 ]
+					"patching_rect" : [ 449.0, 1023.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -8734,7 +8736,8 @@
 					"restore" : 					{
 						"octave-select" : [ 2 ],
 						"sequence" : [ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-						"sequence-length" : [ 32 ]
+						"sequence-length" : [ 32 ],
+						"sustain" : [ 0, 0, 0.0, 1, 0, 0.0, 2, 0, 0.0, 3, 0, 0.0, 4, 0, 0.0, 5, 0, 0.0, 6, 0, 0.0, 7, 0, 0.0, 8, 0, 0.0, 9, 0, 0.0, 10, 0, 0.0, 11, 0, 0.0, 12, 0, 0.0, 13, 0, 0.0, 14, 0, 0.0, 15, 0, 0.0, 16, 0, 0.0, 17, 0, 0.0, 18, 0, 0.0, 19, 0, 0.0, 20, 0, 0.0, 21, 0, 0.0, 22, 0, 0.0, 23, 0, 0.0, 24, 0, 0.0, 25, 0, 0.0, 26, 0, 0.0, 27, 0, 0.0, 28, 0, 0.0, 29, 0, 0.0, 30, 0, 0.0, 31, 0, 0.0 ]
 					}
 ,
 					"text" : "autopattr",
