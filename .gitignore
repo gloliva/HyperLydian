@@ -10,3 +10,6 @@
 *build
 *dist
 *.spec
+
+# ignore any scratch / temp dirs
+*scratch
