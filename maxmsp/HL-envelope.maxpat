@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 4034.0, -11.0, 1852.0, 959.0 ],
+		"rect" : [ 4034.0, -11.0, 1514.0, 959.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -68,7 +68,7 @@
 					"comment" : "Beat Divisions (int)",
 					"hint" : "Beat Divisions (int)",
 					"id" : "obj-16",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -191,7 +191,7 @@
 					"comment" : "Sustain Type (0-3)",
 					"hint" : "Sustain Type (0-3)\n\n0 - AR\n1 - A\n2 - S\n3 - R",
 					"id" : "obj-82",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -562,13 +562,11 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-23",
-					"linecount" : 5,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 85.0 ],
-					"text" : "/curve/seq : [0., 494.413, -0.55],\n/ms_per_beat : 500.,\n/curve/len : 3,\n/curve/idxs : 1,\n/curve/x_vals : 494.413"
+					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 33.0 ]
 				}
 
 			}
@@ -615,7 +613,7 @@
 					"cool" : 1,
 					"hint" : "Divisor or Multiple of Clock Pulse",
 					"id" : "obj-7",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -642,7 +640,7 @@
 					"comment" : "Tempo in BPM",
 					"cool" : 1,
 					"id" : "obj-4",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -660,7 +658,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 796.083333333333599, 617.441124439239502, 79.5, 22.0 ],
 					"restore" : 					{
-						"ad-envelope" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 0.011173184357542, 1.0, 2, -0.6, 1.0, 0.0, 0, -0.55, "curve" ]
+						"envelope" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 0.011173184357542, 1.0, 2, -0.6, 1.0, 0.0, 0, -0.55, "curve" ]
 					}
 ,
 					"text" : "autopattr",
@@ -674,7 +672,7 @@
 					"comment" : "Envelope Output Value (Signal)",
 					"hint" : "Envelope Output Value (Signal)",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -688,11 +686,11 @@
 					"comment" : "Bang to output AD Env",
 					"hint" : "Bang to output AD Env",
 					"id" : "obj-1",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 11.0, 141.0, 30.0, 30.0 ]
 				}
 
@@ -764,7 +762,7 @@
 					"patching_rect" : [ 126.5, 476.970562219619751, 191.000000000000114, 120.5 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 7.470562219619751, 594.0, 155.0 ],
-					"varname" : "ad-envelope"
+					"varname" : "envelope"
 				}
 
 			}
@@ -1106,6 +1104,48 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "o.collect.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.cond.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.display.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.expr.codebox.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.if.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.pack.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.select.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.union.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.var.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbomonokai",
 				"default" : 				{

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2154.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2161.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -602,7 +602,7 @@
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
-					"name" : "HL-Pattern-Sequencer.maxpat",
+					"name" : "HL-sequence.maxpat",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
@@ -610,7 +610,7 @@
 					"patching_rect" : [ 447.0, 40.0, 610.0, 329.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ -0.47058892250061, 0.0, 612.0, 330.0 ],
-					"varname" : "HL-Pattern-Sequencer",
+					"varname" : "HL-sequence",
 					"viewvisibility" : 1
 				}
 
@@ -626,7 +626,7 @@
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
-					"name" : "HL-AD-Envelope.maxpat",
+					"name" : "HL-envelope.maxpat",
 					"numinlets" : 5,
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
@@ -634,7 +634,7 @@
 					"patching_rect" : [ 290.0, 942.0, 608.0, 172.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ -0.47058892250061, 326.0, 612.0, 172.0 ],
-					"varname" : "HL-AD-Envelope",
+					"varname" : "HL-envelope",
 					"viewvisibility" : 1
 				}
 
@@ -701,7 +701,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 2 ],
-					"midpoints" : [ 106.833333333333343, 522.0, 594.0, 522.0 ],
+					"midpoints" : [ 106.833333333333343, 521.5, 594.0, 521.5 ],
 					"order" : 0,
 					"source" : [ "obj-16", 0 ]
 				}
@@ -739,7 +739,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 3 ],
-					"midpoints" : [ 152.166666666666686, 508.0, 741.25, 508.0 ],
+					"midpoints" : [ 152.166666666666686, 509.5, 741.25, 509.5 ],
 					"order" : 0,
 					"source" : [ "obj-20", 0 ]
 				}
@@ -834,7 +834,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 4 ],
-					"midpoints" : [ 197.5, 492.0, 888.5, 492.0 ],
+					"midpoints" : [ 197.5, 488.5, 888.5, 488.5 ],
 					"order" : 0,
 					"source" : [ "obj-4", 0 ]
 				}
@@ -892,14 +892,14 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "HL-AD-Envelope.maxpat",
+				"name" : "HL-envelope.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "HL-Pattern-Sequencer.maxpat",
+				"name" : "HL-sequence.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

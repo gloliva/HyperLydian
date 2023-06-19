@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, 87.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2193.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -230,7 +230,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 1603.25, 1054.0, 219.0, 63.0 ],
+					"patching_rect" : [ 1892.25, 953.5, 219.0, 63.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -391,7 +391,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 967.999999999999773, 1026.0, 175.750000000000227, 22.0 ],
+					"patching_rect" : [ 967.999999999999773, 1034.0, 175.750000000000227, 22.0 ],
 					"text" : "reson~ 0.5 500 0.5"
 				}
 
@@ -664,13 +664,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-104",
-									"linecount" : 2,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 328.5, 317.0, 478.0, 46.0 ],
-									"text" : "/bit_resolution : 1,\n/sample_ratio : 0.1"
+									"patching_rect" : [ 328.5, 317.0, 478.0, 46.0 ]
 								}
 
 							}
@@ -1561,13 +1559,13 @@
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
-					"name" : "HL-Voice-Sequencer.maxpat",
+					"name" : "HL-voice.maxpat",
 					"numinlets" : 6,
 					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "float", "signal" ],
 					"patching_rect" : [ 346.5, 418.382351517677307, 610.0, 497.647086262702942 ],
-					"varname" : "HL-Voice-Sequencer[2]",
+					"varname" : "HL-voice[2]",
 					"viewvisibility" : 1
 				}
 
@@ -1774,13 +1772,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-104",
-									"linecount" : 2,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 328.5, 317.0, 478.0, 46.0 ],
-									"text" : "/bit_resolution : 1,\n/sample_ratio : 0.1"
+									"patching_rect" : [ 328.5, 317.0, 478.0, 46.0 ]
 								}
 
 							}
@@ -2120,13 +2116,13 @@
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
-					"name" : "HL-Voice-Sequencer.maxpat",
+					"name" : "HL-voice.maxpat",
 					"numinlets" : 6,
 					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "float", "signal" ],
 					"patching_rect" : [ 967.999999999999773, 418.382351517677307, 609.000000000000227, 498.0 ],
-					"varname" : "HL-Voice-Sequencer[1]",
+					"varname" : "HL-voice[1]",
 					"viewvisibility" : 1
 				}
 
@@ -2202,13 +2198,13 @@
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
-					"name" : "HL-Voice-Sequencer.maxpat",
+					"name" : "HL-voice.maxpat",
 					"numinlets" : 6,
 					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "float", "signal" ],
 					"patching_rect" : [ 1602.999999999999545, 418.382351517677307, 608.000000000000455, 497.0 ],
-					"varname" : "HL-Voice-Sequencer",
+					"varname" : "HL-voice",
 					"viewvisibility" : 1
 				}
 
@@ -2608,13 +2604,11 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-43",
-					"linecount" : 3,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 108.333333333333314, 176.0, 291.0, 59.0 ],
-					"text" : "/num_on_screen : 7,\n/hit : 248,\n/killed : 11"
+					"patching_rect" : [ 108.333333333333314, 176.0, 291.0, 33.0 ]
 				}
 
 			}
@@ -2667,13 +2661,11 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-16",
-					"linecount" : 4,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 5.0, 418.382351517677307, 304.0, 72.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 46, 42],\n/score : 170,\n/time/current_playthrough : [0, 0, 41, 21]"
+					"patching_rect" : [ 5.0, 418.382351517677307, 304.0, 33.0 ]
 				}
 
 			}
@@ -2681,13 +2673,11 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-15",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 56.666666666666657, 275.0, 272.0, 110.0 ],
-					"text" : "/shots_fired : 2141,\n/accuracy : 11.5834,\n/avg_time_between_kills : 3354.27,\n/max_health : 5,\n/curr_health : 0,\n/health_lost : 5,\n/near_misses : 11"
+					"patching_rect" : [ 56.666666666666657, 275.0, 272.0, 33.0 ]
 				}
 
 			}
@@ -3130,8 +3120,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-117", 0 ],
-					"order" : 0,
+					"destination" : [ "obj-251", 0 ],
 					"source" : [ "obj-250", 0 ]
 				}
 
@@ -3140,14 +3129,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-252", 1 ],
 					"source" : [ "obj-250", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-90", 0 ],
-					"order" : 1,
-					"source" : [ "obj-250", 0 ]
 				}
 
 			}
@@ -3561,13 +3542,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-251", 0 ],
-					"source" : [ "obj-90", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-127", 0 ],
 					"source" : [ "obj-91", 0 ]
 				}
@@ -3596,21 +3570,21 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "HL-AD-Envelope.maxpat",
+				"name" : "HL-envelope.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "HL-Pattern-Sequencer.maxpat",
+				"name" : "HL-sequence.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "HL-Voice-Sequencer.maxpat",
+				"name" : "HL-voice.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
