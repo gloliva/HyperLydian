@@ -111,10 +111,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 # Cycle through players weapons
                 if event.key == K_1:
                     player.switch_weapon(0)
+                    stat_tracker.player__weapon_selected = Stat(0)
                 elif event.key == K_2:
                     player.switch_weapon(1)
-                elif event.key == K_r:
-                    player.switch_weapon()
+                    stat_tracker.player__weapon_selected = Stat(1)
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()

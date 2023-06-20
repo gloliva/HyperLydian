@@ -150,6 +150,7 @@ class StatTracker:
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
         self.player__near_misses = Stat(0)
+        self.player__weapon_selected = Stat(0)
 
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
