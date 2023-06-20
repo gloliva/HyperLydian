@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2154.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,102 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-132",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 290.588236570358276, 942.0, 280.0, 35.0 ],
+					"text" : "1. 2. 2. 2. 2. 2. 2. 2. 1. 2. 2. 2. 2. 2. 2. 2. 1. 2. 2. 2. 2. 2. 2. 2. 1. 2. 2. 2. 2. 2. 2. 2."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-130",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "FullPacket" ],
+					"patching_rect" : [ 603.0, 1002.0, 187.0, 22.0 ],
+					"text" : "o.route /pattern/sequence/sustain"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-127",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 776.0, 1090.0, 29.5, 22.0 ],
+					"text" : "0.2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-124",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 756.0, 1191.0, 217.0, 35.0 ],
+					"text" : "0 1 2 2 2 0 1 0 1 2 2 0 0 1 2 2 1 2 2 2 0 1 2 2 0 1 2 2 2 0 1 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-116",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 505.5, 1049.0, 50.0, 22.0 ],
+					"text" : "compile"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-108",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 625.0, 1158.0, 113.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"filename" : "sustainmodifier.js",
+						"parameter_enable" : 0
+					}
+,
+					"text" : "js sustainmodifier.js"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-105",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 265.0, 1104.0, 83.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"filename" : "jsplus.js",
+						"parameter_enable" : 0
+					}
+,
+					"text" : "js jsplus.js 7 1"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-89",
@@ -92,7 +188,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 594.0, 911.0, 362.0, 59.0 ],
+					"patching_rect" : [ 594.0, 932.0, 362.0, 59.0 ],
 					"text" : "/pattern/sequence/sustain : [1., 2., 2., 2., 2., 2., 2., 2., 1., 2., 2., 2., 2., 2., 2., 2., 1., 2., 2., 2., 2., 2., 2., 2., 1., 2., 2., 2., 2., 2., 2., 2.]"
 				}
 
@@ -1869,7 +1965,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 108.333333333333314, 176.0, 291.0, 59.0 ],
-					"text" : "/num_on_screen : 7,\n/hit : 52,\n/killed : 1"
+					"text" : "/num_on_screen : 7,\n/hit : 361,\n/killed : 15"
 				}
 
 			}
@@ -1928,7 +2024,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 5.0, 448.382351517677307, 304.0, 72.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 22, 225],\n/score : 10,\n/time/current_playthrough : [0, 0, 18, 119]"
+					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 45, 666],\n/score : 210,\n/time/current_playthrough : [0, 0, 44, 160]"
 				}
 
 			}
@@ -1942,7 +2038,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 56.666666666666657, 275.0, 272.0, 123.0 ],
-					"text" : "/shots_fired : 527,\n/accuracy : 9.86717,\n/avg_time_between_kills : 6145.,\n/max_health : 5,\n/curr_health : 1,\n/health_lost : 4,\n/near_misses : 2,\n/weapon_selected : 0"
+					"text" : "/shots_fired : 2655,\n/accuracy : 13.597,\n/avg_time_between_kills : 2844.87,\n/max_health : 5,\n/curr_health : 0,\n/health_lost : 5,\n/near_misses : 13,\n/weapon_selected : 0"
 				}
 
 			}
@@ -2037,6 +2133,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-124", 1 ],
+					"source" : [ "obj-108", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-76", 2 ],
 					"source" : [ "obj-109", 0 ]
 				}
@@ -2053,6 +2156,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-101", 0 ],
 					"source" : [ "obj-115", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-108", 0 ],
+					"source" : [ "obj-116", 0 ]
 				}
 
 			}
@@ -2079,6 +2189,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-108", 1 ],
+					"source" : [ "obj-127", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-13", 2 ]
 				}
@@ -2096,6 +2213,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-81", 0 ],
 					"source" : [ "obj-13", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-108", 0 ],
+					"source" : [ "obj-132", 0 ]
 				}
 
 			}
@@ -2577,6 +2701,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-130", 0 ],
+					"source" : [ "obj-82", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-122", 2 ],
 					"source" : [ "obj-87", 0 ]
 				}
@@ -2668,6 +2799,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "jsplus.js",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/javascript/math",
+				"patcherrelativepath" : "../../../../Library/Application Support/Cycling '74/Max 8/Examples/javascript/math",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "music.json",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
@@ -2727,6 +2865,13 @@
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sustainmodifier.js",
+				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
+				"patcherrelativepath" : ".",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],
