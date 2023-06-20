@@ -40,6 +40,23 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-17",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 609.200000000000045, 254.0, 56.0, 22.0 ],
+					"restore" : 					{
+						"oscillator" : [ 0 ]
+					}
+,
+					"text" : "autopattr",
+					"varname" : "u583002815"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "newobj",
@@ -222,7 +239,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 62.700000000000045, 286.0, 85.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 8.0, 35.0, 82.0, 22.0 ]
+					"presentation_rect" : [ 8.0, 35.0, 82.0, 22.0 ],
+					"varname" : "oscillator"
 				}
 
 			}
