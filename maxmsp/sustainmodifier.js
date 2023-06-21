@@ -21,8 +21,8 @@ function msg_float(f)
 function list()
 {
     if (inlet == 0) {
-        var test = arrayfromargs(arguments)
-        decreaseSustain();
+        var argList = arrayfromargs(arguments);
+        decreaseSustain(argList);
         bang();
     } else if (inlet == 1) {
         for (var i = 0; i < arguments.length; i++) {
@@ -36,22 +36,22 @@ function bang()
     outlet(0, outputList);
 }
 
-function decreaseSustain() {
+function decreaseSustain(argList) {
     outputList = new Array();
     var valueUpdated = false;
-    for (var i = 0; i < arguments.length; i++) {
+    for (var i = 0; i < argList.length; i++) {
         var idxProb = Math.random();
         var idxValue;
-        if (arguments[i] > 0 && idxProb < probability) {
+        if (argList[i] > 0 && idxProb < probability) {
             valueUpdated = true;
             idxValue = 0.0;
         } else {
-            if (valueUpdated) {
+            if (valueUpdated && inputValues[i] >= 0) {
                 valueUpdated = false;
                 idxValue = 1.0;
             }
             else {
-                idxValue = arguments[i];
+                idxValue = argList[i];
             }
         }
         outputList.push(i, matrixRow, idxValue)
