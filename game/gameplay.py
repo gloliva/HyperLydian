@@ -4,7 +4,6 @@ from random import randint
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
-    K_r,
     K_w,
     K_1,
     K_2,
@@ -111,10 +110,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 # Cycle through players weapons
                 if event.key == K_1:
                     player.switch_weapon(0)
-                    stat_tracker.player__weapon_selected = Stat(0)
+                    stat_tracker.weapon__selected = Stat(0)
                 elif event.key == K_2:
                     player.switch_weapon(1)
-                    stat_tracker.player__weapon_selected = Stat(1)
+                    stat_tracker.weapon__selected = Stat(1)
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()

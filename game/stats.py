@@ -128,11 +128,26 @@ class AvgStat:
     def __repr__(self) -> str:
         return str(f'AvgStat(Average={self.avg}, Count={self.count})')
 
+class ListStat:
+    def __init__(self, initial_length: int = 0, initial_fill: int = 0, send: bool = True) -> None:
+        self.list = [initial_fill for _ in range(initial_length)]
+        self.send = send
+
+    def add_at_index(self, index: int, val: int):
+        self.list[index] += val
+
+    def __str__(self) -> str:
+        return str(', '.join(self.list))
+
+    def __repr__(self) -> str:
+        return str(f'ListStat(List={self.list})')
+
 
 class StatTracker:
     """Tracks game information"""
     def __init__(self) -> None:
         # Stats that track throughout each playthrough
+        self.game__max_init = Stat(0)
         self.game__play_count = Stat(0)
         self.game__time__total_played = TimeStat(0)
 
@@ -141,16 +156,20 @@ class StatTracker:
         self.time_last_enemy_killed = start_time_ms
 
         self.game__score = Stat(0)
+        self.game__playthrough_init = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
 
-        self.player__shots_fired = Stat(0)
+        self.player__avg_shots_per_second = AvgStat()
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat()
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
         self.player__near_misses = Stat(0)
-        self.player__weapon_selected = Stat(0)
+
+        self.weapon__selected = Stat(0)
+        self.weapon__total_shots_fired = Stat(0)
+        self.weapon__shots_per_weapon = ListStat(initial_length=2)
 
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
@@ -159,8 +178,8 @@ class StatTracker:
         self.game__play_count += 1
 
     def update_stats(self):
-        if self.player__shots_fired > 0:
-            self.player__accuracy = (self.enemies__hit / self.player__shots_fired) * 100
+        if self.weapon__total_shots_fired > 0:
+            self.player__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}
@@ -175,6 +194,8 @@ class StatTracker:
                 stat_dict[stat_name] = stat.time
             elif isinstance(stat, AvgStat):
                 stat_dict[stat_name] = stat.avg
+            elif isinstance(stat, ListStat):
+                stat_dict[stat_name] = stat.list
 
         return stat_dict
 
@@ -192,7 +213,7 @@ class StatTracker:
         print(f'Enemies Killed: {self.enemies__killed}')
         print(f'Enemy shots dodged: {self.player__near_misses}')
         print(f'Avg time to kill an Enemy: {self.player__avg_time_between_kills.avg / 1000}')
-        print(f'Total Shots Fired: {self.player__shots_fired}')
+        print(f'Total Shots Fired: {self.weapon__total_shots_fired}')
         print(f'Enemies Hit: {self.enemies__hit}')
         print(f'Player Shot Accuracy: {self.player__accuracy}%')
         print(

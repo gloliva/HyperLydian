@@ -96,7 +96,6 @@ class Player(Sprite):
             projectile_center=attack_center,
             movement_angle=self.current_rotation,
         )
-        stat_tracker.player__shots_fired += 1
 
     def add_projectiles_in_range(self, projectiles: List[projectiles.Projectile]):
         for projectile in projectiles:
@@ -123,6 +122,8 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
         projectile_scale=0.3,
+        track_stat=True,
+        weapon_index=0,
     )
     energy_beam = Weapon(
         projectiles.Accidental,
@@ -132,6 +133,8 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         damage=5,
         rate_of_fire=300,
         projectile_scale=0.5,
+        track_stat=True,
+        weapon_index=1,
     )
 
     # Create player object

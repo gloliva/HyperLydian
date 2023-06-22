@@ -9,6 +9,7 @@ import pygame as pg
 # project imports
 from sprites.projectiles import Projectile
 import sprites.groups as groups
+from stats import stat_tracker
 
 
 class Weapon:
@@ -26,6 +27,8 @@ class Weapon:
         rate_of_fire: Optional[int] = None,
         center_deltas: Optional[List[Tuple[int, int]]] = None,
         projectile_scale: float = 1.0,
+        weapon_index: int = 0,
+        track_stat: bool = False,
     ) -> None:
         self.projectile_type = projectile_type
         self.projectile_group = projectile_group
@@ -35,6 +38,8 @@ class Weapon:
         self.damage = damage
         self.attack_speed = attack_speed
         self.rate_of_fire = rate_of_fire if rate_of_fire is not None else self.DEFAULT_RATE_OF_FIRE
+        self.weapon_index = weapon_index
+        self.track_stat = track_stat
         self.center_deltas = center_deltas if center_deltas is not None else [(0, 0)]
         self.last_time_shot = 0
 
@@ -43,7 +48,6 @@ class Weapon:
             projectile_center: Tuple[int, int],
             movement_angle: int = None,
         ):
-
         # Handle rate of fire for weapon
         current_time = pg.time.get_ticks()
         if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
@@ -67,6 +71,11 @@ class Weapon:
                     movement_angle=movement_angle,
                 )
                 self.last_time_shot = current_time
+
+                # Track weapon firing stat
+                if self.track_stat:
+                    stat_tracker.weapon__shots_per_weapon.add_at_index(self.weapon_index, 1)
+                    stat_tracker.weapon__total_shots_fired += 1
 
     def fire_projectile(
             self,
