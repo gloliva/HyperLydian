@@ -6,6 +6,7 @@ from pygame.locals import QUIT, RESIZABLE
 from defs import SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 from gameplay import run_gameplay
 from menus import run_main_menu
+from stats import stat_tracker
 
 # initial pygame setup
 pg.init()
@@ -26,6 +27,10 @@ def main():
     main_loop = True
     next_state = GameState.MAIN_MENU
 
+    # init music
+    stat_tracker.control__max_init += 1
+    stat_tracker.send_stats()
+
     while main_loop:
         # event handler
         for event in pg.event.get():
@@ -44,6 +49,9 @@ def main():
 
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     """Stop all game loops and quit game"""
+    # turn off music
+    stat_tracker.control__max_init -= 1
+    stat_tracker.send_stats()
     print('Quitting the game')
     pass
 

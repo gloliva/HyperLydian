@@ -1,6 +1,10 @@
 # stdlib imports
 from typing import Any, Dict
 
+# project imports
+import debug
+from osc_client import osc, OSCHandler
+
 
 class Stat:
     """A stat to be sent via OSC"""
@@ -145,9 +149,11 @@ class ListStat:
 
 class StatTracker:
     """Tracks game information"""
-    def __init__(self) -> None:
+    def __init__(self, osc: OSCHandler) -> None:
+        self.osc = osc
+
         # Stats that track throughout each playthrough
-        self.game__max_init = Stat(0)
+        self.control__max_init = Stat(0)
         self.game__play_count = Stat(0)
         self.game__time__total_played = TimeStat(0)
 
@@ -155,8 +161,9 @@ class StatTracker:
         self.start_time = start_time_ms
         self.time_last_enemy_killed = start_time_ms
 
+        self.control__game_init = Stat(0)
+
         self.game__score = Stat(0)
-        self.game__playthrough_init = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
 
         self.player__avg_shots_per_second = AvgStat()
@@ -176,6 +183,12 @@ class StatTracker:
         self.enemies__killed = Stat(0)
 
         self.game__play_count += 1
+
+    def send_stats(self):
+        osc_stats = self.convert_osc_stats_to_dict()
+        self.osc.union_bundle(osc_stats)
+        if not debug.DISABLE_OSC_SEND:
+            self.osc.send_full_bundle()
 
     def update_stats(self):
         if self.weapon__total_shots_fired > 0:
@@ -229,4 +242,4 @@ class StatTracker:
         print()
 
 
-stat_tracker = StatTracker()
+stat_tracker = StatTracker(osc=osc)

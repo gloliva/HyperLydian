@@ -18,7 +18,6 @@ from attacks import Weapon
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import debug
 from events import Event, initialize_event_timers, disable_event_timers
-from osc_client import osc
 from sprites.player import create_player, Player
 import sprites.background as background
 import sprites.enemies as enemies
@@ -45,6 +44,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
     # create the player
     player = create_player(game_screen.get_rect())
+
+    # enable game music
+    stat_tracker.control__game_init += 1
 
     gameplay_loop = True
     while gameplay_loop:
@@ -157,12 +159,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         stat_tracker.enemies__num_on_screen = Stat(len(groups.all_enemies))
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
-
-        # Update OSC bundle and send via client
-        osc_stats = stat_tracker.convert_osc_stats_to_dict()
-        osc.union_bundle(osc_stats)
-        if not debug.DISABLE_OSC_SEND:
-            osc.send_full_bundle()
+        stat_tracker.send_stats()
 
         # lock FPS
         timedelta = game_clock.tick(FPS) / 1000
@@ -236,4 +233,6 @@ def end_game():
         if sprite not in groups.stars:
             sprite.kill()
 
+    stat_tracker.control__game_init -= 1
     stat_tracker.print_stats()
+    stat_tracker.send_stats()
