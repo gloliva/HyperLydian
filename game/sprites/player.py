@@ -1,4 +1,5 @@
 # stdlib imports
+from math import sqrt
 from typing import List
 
 # 3rd-party imports
@@ -23,7 +24,7 @@ from stats import stat_tracker, Stat
 
 
 class Player(Sprite):
-    DEFAULT_HEALTH = 5
+    DEFAULT_HEALTH = 10
     DEFAULT_SPEED = 5
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
@@ -54,15 +55,20 @@ class Player(Sprite):
         self.projectiles_in_range = set()
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
+        movement_vector = [0, 0]
         # move player based on key input
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -self.movement_speed)
+            movement_vector[1] -= self.movement_speed
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, self.movement_speed)
+            movement_vector[1] += self.movement_speed
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-self.movement_speed, 0)
+            movement_vector[0] -= self.movement_speed
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(self.movement_speed, 0)
+            movement_vector[0] += self.movement_speed
 
         # don't move out of bounds
         if self.rect.left < 0:
@@ -75,10 +81,19 @@ class Player(Sprite):
             self.rect.bottom = game_screen_rect.height
 
         # handle rotation
+        rotation_amount = 0
         if pressed_keys[K_q]:
+            rotation_amount = self.ROTATION_AMOUNT
             self.rotate(self.current_rotation + self.ROTATION_AMOUNT)
         if pressed_keys[K_e]:
+            rotation_amount = -self.ROTATION_AMOUNT
             self.rotate(self.current_rotation - self.ROTATION_AMOUNT)
+
+        # handle stats
+        speed = sqrt(movement_vector[0]**2 + movement_vector[1]**2)
+        stat_tracker.player__curr_speed = Stat(speed)
+        stat_tracker.player__angle = Stat(self.current_rotation)
+        stat_tracker.player__rotation_amount = Stat(rotation_amount)
 
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:

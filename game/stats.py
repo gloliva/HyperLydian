@@ -3,6 +3,7 @@ from typing import Any, Dict
 
 # project imports
 import debug
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT
 from osc_client import osc, OSCHandler
 
 
@@ -158,6 +159,10 @@ class StatTracker:
 
         # Stats that track throughout each playthrough
         self.control__max_init = Stat(0)
+        self.control__game_init = Stat(0)
+        self.control__screen_width = Stat(SCREEN_WIDTH)
+        self.control__screen_height = Stat(SCREEN_HEIGHT)
+
         self.game__play_count = Stat(0)
         self.game__time__total_played = TimeStat(0)
 
@@ -171,6 +176,9 @@ class StatTracker:
         self.game__time__current_playthrough = TimeStat(0)
 
         self.player__position = ListStat(initial_length=2)
+        self.player__curr_speed = Stat(0)
+        self.player__angle = Stat(0)
+        self.player__rotation_amount = Stat(0)
         self.player__avg_shots_per_second = AvgStat()
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat()
