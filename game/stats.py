@@ -140,6 +140,10 @@ class ListStat:
     def add_at_index(self, index: int, val: int):
         self.list[index] += val
 
+    def update(self, *vals: int):
+        for idx, val in enumerate(vals):
+            self.list[idx] = val
+
     def __str__(self) -> str:
         return str(', '.join(self.list))
 
@@ -166,6 +170,7 @@ class StatTracker:
         self.game__score = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
 
+        self.player__position = ListStat(initial_length=2)
         self.player__avg_shots_per_second = AvgStat()
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat()

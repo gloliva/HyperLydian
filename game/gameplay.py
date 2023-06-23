@@ -156,6 +156,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         pg.display.flip()
 
         # update stats tracker
+        stat_tracker.player__position.update(player.rect.centerx, player.rect.centery)
         stat_tracker.enemies__num_on_screen = Stat(len(groups.all_enemies))
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
