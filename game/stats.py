@@ -197,6 +197,7 @@ class StatTracker:
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
         self.enemies__killed = Stat(0)
+        self.enemies__avg_distance_to_hit = AvgStat()
 
         self.game__play_count += 1
 

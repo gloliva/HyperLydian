@@ -52,6 +52,7 @@ class Projectile(pg.sprite.Sprite):
 
         # Set projectile rect
         self.rect = self.surf.get_rect(center=center_position)
+        self.starting_position = self.rect.center
 
         # Create sprite mask
         self.mask = pg.mask.from_surface(self.surf)
@@ -80,6 +81,11 @@ class Projectile(pg.sprite.Sprite):
 
         if out_of_bounds:
             self.kill()
+
+    def get_distance_traveled(self) -> float:
+        x_delta = self.rect.centerx - self.starting_position[0]
+        y_delta = self.rect.centery - self.starting_position[1]
+        return math.sqrt((x_delta)**2 + (y_delta)**2)
 
 
 class EnergyBeam(Projectile):
