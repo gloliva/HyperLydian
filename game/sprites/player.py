@@ -91,6 +91,7 @@ class Player(Sprite):
 
         # handle stats
         speed = sqrt(movement_vector[0]**2 + movement_vector[1]**2)
+        stat_tracker.player__curr_velocity.update(*movement_vector)
         stat_tracker.player__curr_speed = Stat(speed)
         stat_tracker.player__angle = Stat(self.current_rotation)
         if rotation_amount != 0:
@@ -117,12 +118,12 @@ class Player(Sprite):
         for projectile in projectiles:
             if projectile not in self.projectiles_in_range:
                 self.projectiles_in_range.add(projectile)
-                stat_tracker.player__near_misses += 1
+                stat_tracker.player__dodges += 1
 
-    def update_near_misses(self, projectile: projectiles.Projectile):
+    def update_dodges(self, projectile: projectiles.Projectile):
         if projectile in self.projectiles_in_range:
             self.projectiles_in_range.remove(projectile)
-            stat_tracker.player__near_misses -= 1
+            stat_tracker.player__dodges -= 1
 
 
 def create_player(game_screen_rect: pg.Rect) -> Player:

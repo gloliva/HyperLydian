@@ -221,7 +221,7 @@ def handle_collisions(player: Player):
         collided=pg.sprite.collide_mask,
     )
     for projectile in collided:
-        player.update_near_misses(projectile)
+        player.update_dodges(projectile)
         player.take_damage(projectile.damage)
         projectile.kill()
 
