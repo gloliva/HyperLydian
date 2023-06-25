@@ -93,7 +93,8 @@ class Player(Sprite):
         speed = sqrt(movement_vector[0]**2 + movement_vector[1]**2)
         stat_tracker.player__curr_speed = Stat(speed)
         stat_tracker.player__angle = Stat(self.current_rotation)
-        stat_tracker.player__rotation_amount = Stat(rotation_amount)
+        if rotation_amount != 0:
+            stat_tracker.player__last_rotation_direction = Stat(rotation_amount)
 
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:
@@ -157,4 +158,8 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
 
     # add to sprite group
     groups.all_sprites.add(player)
+
+    # update stats
+    stat_tracker.player__starting_position.update(player.rect.centerx, player.rect.centery)
+    stat_tracker.player__starting_angle = Stat(player.INITIAL_ROTATION)
     return player

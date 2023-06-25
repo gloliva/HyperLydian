@@ -175,10 +175,12 @@ class StatTracker:
         self.game__score = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
 
+        self.player__starting_position = ListStat(initial_length=2)
+        self.player__starting_angle = Stat(0)
         self.player__position = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
-        self.player__rotation_amount = Stat(0)
+        self.player__last_rotation_direction = Stat(0)
         self.player__avg_shots_per_second = AvgStat()
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat()
