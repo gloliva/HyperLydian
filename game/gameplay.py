@@ -203,7 +203,8 @@ def handle_collisions(player: Player):
             stat_tracker.enemies__hit += 1
             enemy.take_damage(projectile.damage)
         projectile_distance = projectile.get_distance_traveled()
-        stat_tracker.enemies__avg_distance_to_hit.add(projectile_distance)
+        stat_tracker.enemies__last_hit_distance = Stat(projectile_distance)
+        stat_tracker.enemies__avg_hit_distance.add(projectile_distance)
 
     # projectile + player near misses
     collided = pg.sprite.spritecollide(

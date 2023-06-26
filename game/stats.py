@@ -111,9 +111,12 @@ class TimeStat:
 
 
 class AvgStat:
-    def __init__(self, send: bool = True) -> None:
+    def __init__(self, send_as_list: bool = False, send: bool = True) -> None:
         self.sum = 0
         self.count = 0
+        self.min = float('inf')
+        self.max = float('-inf')
+        self.send_as_list = send_as_list
         self.send = send
 
     @property
@@ -126,12 +129,16 @@ class AvgStat:
     def add(self, val: float):
         self.sum += val
         self.count += 1
+        if val > self.max:
+            self.max = val
+        if val < self.min:
+            self.min = val
 
     def __str__(self) -> str:
         return str(self.avg)
 
     def __repr__(self) -> str:
-        return str(f'AvgStat(Average={self.avg}, Count={self.count})')
+        return str(f'AvgStat(Average={self.avg}, Count={self.count}, Min={self.min}, Max={self.max})')
 
 class ListStat:
     def __init__(self, initial_length: int = 0, initial_fill: int = 0, send: bool = True) -> None:
@@ -182,7 +189,6 @@ class StatTracker:
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
         self.player__last_rotation_direction = Stat(0)
-        self.player__avg_shots_per_second = AvgStat()
         self.player__accuracy = Stat(0.0)
         self.player__avg_time_between_kills = AvgStat()
         self.player__max_health = Stat(player_max_health)
@@ -197,7 +203,8 @@ class StatTracker:
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
         self.enemies__killed = Stat(0)
-        self.enemies__avg_distance_to_hit = AvgStat()
+        self.enemies__avg_hit_distance = AvgStat(send_as_list=True)
+        self.enemies__last_hit_distance = Stat(0)
 
         self.game__play_count += 1
 
@@ -223,7 +230,7 @@ class StatTracker:
             elif isinstance(stat, TimeStat):
                 stat_dict[stat_name] = stat.time
             elif isinstance(stat, AvgStat):
-                stat_dict[stat_name] = stat.avg
+                stat_dict[stat_name] = [stat.min, stat.avg, stat.max] if stat.send_as_list else stat.avg
             elif isinstance(stat, ListStat):
                 stat_dict[stat_name] = stat.list
 
