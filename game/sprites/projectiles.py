@@ -16,7 +16,7 @@ class Projectile(pg.sprite.Sprite):
     DEFAULT_ANGLE = 0
 
     # Layers
-    DRAW_LAYER = 1
+    DRAW_LAYER = 2
 
     # Colors
     AVAILABLE_COLORS = None

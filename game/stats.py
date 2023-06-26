@@ -156,6 +156,7 @@ class AvgStat:
     def __repr__(self) -> str:
         return str(f'AvgStat(Average={self.avg}, Count={self.count}, Min={self.min}, Max={self.max})')
 
+
 class ListStat:
     def __init__(self, initial_length: int = 0, initial_fill: int = 0, send: bool = True) -> None:
         self.list = [initial_fill for _ in range(initial_length)]

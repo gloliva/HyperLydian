@@ -15,7 +15,7 @@ class Sprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
     HIT_TIMER_INCREMENT = 0.25
     PROJECTILE_SPAWN_DELTA = 0
-    DRAW_LAYER = 2
+    DRAW_LAYER = 3
     INITIAL_ROTATION = 0
     COUNT_DEATH_STAT = True
     SCORE = 0

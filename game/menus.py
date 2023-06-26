@@ -103,10 +103,15 @@ main_menu.add_text(
 def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
     """Render main menu"""
     # draw initial background
-    for _ in range(400):
-        star = background.Star(MENU_SCREEN.get_rect(), on_load=True)
-        groups.stars.add(star)
-        groups.all_sprites.add(star)
+    for _ in range(background.Note.NUM_ON_LOAD):
+        note = background.Note(MENU_SCREEN.get_rect(), on_load=True)
+        groups.notes.add(note)
+        groups.all_sprites.add(note)
+
+    for i in range(0, background.Staff.NUM_ON_LOAD):
+        staff = background.Staff(MENU_SCREEN.get_rect(), on_load=True, load_number=i)
+        groups.staff.add(staff)
+        groups.all_sprites.add(staff)
 
     # start main menu loop
     main_menu_loop = True
@@ -131,7 +136,10 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
 
         # draw background
         MENU_SCREEN.fill("black")
-        for sprite in groups.stars:
+        for sprite in groups.staff:
+            MENU_SCREEN.blit(sprite.surf, sprite.rect)
+
+        for sprite in groups.notes:
             MENU_SCREEN.blit(sprite.surf, sprite.rect)
 
         # draw text

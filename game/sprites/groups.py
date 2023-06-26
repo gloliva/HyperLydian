@@ -108,7 +108,8 @@ enemy_projectiles = Group()
 player_projectiles = Group()
 
 # Background
-stars = Group()
+notes = Group()
+staff = Group()
 
 # All
 all_sprites = LayeredGroup()

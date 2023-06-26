@@ -57,12 +57,17 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 gameplay_loop = False
                 next_state = GameState.QUIT
 
-            # handle creating stars
-            elif event.type == Event.ADD_STAR.type:
-                for _ in range(background.Star.NUM_STARS_PER_EVENT):
-                    star = background.Star(game_screen.get_rect())
-                    groups.stars.add(star)
-                    groups.all_sprites.add(star)
+            # handle creating background
+            elif event.type == Event.ADD_NOTE.type:
+                for _ in range(background.Note.NUM_NOTES_PER_EVENT):
+                    note = background.Note(game_screen.get_rect())
+                    groups.notes.add(note)
+                    groups.all_sprites.add(note)
+
+            elif event.type == Event.ADD_STAFF.type:
+                staff = background.Staff(game_screen.get_rect())
+                groups.staff.add(staff)
+                groups.all_sprites.add(staff)
 
             # handle player death
             elif event.type == Event.PLAYER_DEATH.type:
@@ -139,8 +144,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         groups.player_projectiles.update(game_screen.get_rect())
         groups.enemy_projectiles.update(game_screen.get_rect())
 
-        # move stars
-        groups.stars.update(game_screen.get_rect())
+        # move notes
+        groups.notes.update(game_screen.get_rect())
+        groups.staff.update(game_screen.get_rect())
 
         # collision checks
         handle_collisions(player)
@@ -239,7 +245,7 @@ def end_game():
     disable_event_timers()
 
     for sprite in groups.all_sprites:
-        if sprite not in groups.stars:
+        if sprite not in groups.notes:
             sprite.kill()
 
     stat_tracker.control__game_init -= 1
