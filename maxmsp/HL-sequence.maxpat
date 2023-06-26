@@ -138,13 +138,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-84",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "o.expr.codebox",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "FullPacket" ],
-					"patching_rect" : [ 454.0, 1015.0, 503.5, 57.0 ],
-					"text" : "/sequence/sustain ??= nfill(/sequence/length, 0),\n\n/sequence/sustain = /sequence/sustain[[ aseq(0, /sequence/length - 1) ]]"
+					"patching_rect" : [ 454.0, 1015.0, 503.5, 70.0 ],
+					"text" : "/sequence/sustain ??= nfill(/sequence/length, 0),\n\n/sequence/sustain = /sequence/sustain[[ aseq(0, /sequence/length - 1) ]],\n/key = /note/base % 12"
 				}
 
 			}
