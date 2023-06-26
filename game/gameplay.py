@@ -91,15 +91,18 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             elif event.type == Event.ADD_SPINNER_GRUNT.type and \
                 not groups.spinner_grunt_enemies.is_full() and \
                 not debug.NO_ENEMIES:
+
+                variant_number = randint(0, projectiles.RedAccidental.NUM_VARIANTS - 1)
                 # create Grunt object
                 grunt_weapon = Weapon(
-                    projectiles.RedMusicNote,
+                    projectiles.RedAccidental,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
                     damage=1,
                     attack_speed=4,
                     rate_of_fire=300,
                     projectile_scale=0.5,
+                    projectile_variant_number=variant_number,
                 )
                 grunt = enemies.SpinnerGrunt([grunt_weapon])
 
@@ -227,6 +230,8 @@ def handle_collisions(player: Player):
         player.update_dodges(projectile)
         player.take_damage(projectile.damage)
         projectile.kill()
+        if projectile.AVAILABLE_VARIANTS is not None and hasattr(projectile, 'variant'):
+            stat_tracker.player__last_projectile_hit_by.update(projectile.variant)
 
 
 def end_game():

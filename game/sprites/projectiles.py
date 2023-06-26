@@ -23,6 +23,7 @@ class Projectile(pg.sprite.Sprite):
     COLOR = None
 
     # Variants
+    AVAILABLE_VARIANTS = None
     NUM_VARIANTS = 1
 
     def __init__(
@@ -256,6 +257,37 @@ class Accidental(Projectile):
 
         variant = self.AVAILABLE_VARIANTS[variant_number]
         image_file = f"assets/projectiles/accidentals/{variant}.png"
+
+        # Instantiate projectile
+        super().__init__(
+            image_file,
+            center_position,
+            damage,
+            speed,
+            movement_angle,
+            image_scale,
+            variant_number,
+        )
+
+
+class RedAccidental(Projectile):
+    DEFAULT_DAMAGE = 1
+    DEFAULT_SPEED = 1
+    AVAILABLE_VARIANTS = ('sharp', 'flat')
+    NUM_VARIANTS = 2
+
+    def __init__(
+        self,
+        center_position: Tuple[int, int],
+        damage: int = None,
+        speed: int = None,
+        movement_angle: int = None,
+        image_scale: float = 1.0,
+        variant_number: int = 0,
+        ) -> None:
+
+        self.variant = self.AVAILABLE_VARIANTS[variant_number]
+        image_file = f"assets/projectiles/accidentals/red_{self.variant}.png"
 
         # Instantiate projectile
         super().__init__(

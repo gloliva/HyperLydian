@@ -28,6 +28,7 @@ class Weapon:
         center_deltas: Optional[List[Tuple[int, int]]] = None,
         projectile_scale: float = 1.0,
         weapon_index: int = 0,
+        projectile_variant_number: Optional[int] = None,
         track_stat: bool = False,
     ) -> None:
         self.projectile_type = projectile_type
@@ -39,6 +40,7 @@ class Weapon:
         self.attack_speed = attack_speed
         self.rate_of_fire = rate_of_fire if rate_of_fire is not None else self.DEFAULT_RATE_OF_FIRE
         self.weapon_index = weapon_index
+        self.projectile_variant_number = projectile_variant_number
         self.track_stat = track_stat
         self.center_deltas = center_deltas if center_deltas is not None else [(0, 0)]
         self.last_time_shot = 0
@@ -82,13 +84,16 @@ class Weapon:
             projectile_center_position: Tuple[int, int],
             movement_angle: int = None,
         ) -> None:
+        variant_number = self.projectile_variant_number if self.projectile_variant_number is not None \
+            else randint(0, self.projectile_type.NUM_VARIANTS - 1)
+
         projectile = self.projectile_type(
             center_position=projectile_center_position,
             damage=self.damage,
             speed=self.attack_speed,
             movement_angle=movement_angle,
             image_scale=self.projectile_scale,
-            variant_number=randint(0, self.projectile_type.NUM_VARIANTS - 1),
+            variant_number=variant_number,
         )
         self.projectile_group.add(projectile)
         groups.all_sprites.add(projectile)

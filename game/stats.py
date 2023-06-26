@@ -81,6 +81,22 @@ class Stat:
         return str(f'Stat(Value={self.value}, OSC={self.send})')
 
 
+class TextStat:
+    """A stat that tracks text"""
+    def __init__(self, initial_text: str = '', send: bool = True) -> None:
+        self.text = initial_text
+        self.send = send
+
+    def update(self, text: str) -> None:
+        self.text = text
+
+    def __str__(self) -> str:
+        return self.text
+
+    def __repr__(self) -> str:
+        return str(f'TextStat(Text={self.text})')
+
+
 class TimeStat:
     """A stat that tracks time in ms, seconds, minutes, and hours"""
     def __init__(self, total_ms, send: bool = True) -> None:
@@ -194,6 +210,7 @@ class StatTracker:
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
+        self.player__last_projectile_hit_by = TextStat()
         self.player__dodges = Stat(0)
 
         self.weapon__selected = Stat(0)
@@ -233,6 +250,8 @@ class StatTracker:
                 stat_dict[stat_name] = [stat.min, stat.avg, stat.max] if stat.send_as_list else stat.avg
             elif isinstance(stat, ListStat):
                 stat_dict[stat_name] = stat.list
+            elif isinstance(stat, TextStat):
+                stat_dict[stat_name] = stat.text
 
         return stat_dict
 
