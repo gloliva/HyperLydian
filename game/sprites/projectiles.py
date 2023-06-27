@@ -125,44 +125,6 @@ class RedEnergyBeam(EnergyBeam):
     COLOR = 'red'
 
 
-class EnergyOrb(Projectile):
-    DEFAULT_DAMAGE = 1
-    DEFAULT_SPEED = 12
-    DEFAULT_ANGLE = 180
-    COLOR = None
-    AVAILABLE_COLORS = ('green', 'orange')
-
-    def __init__(
-            self,
-            center_position: Tuple[int, int],
-            damage: int = None,
-            speed: int = None,
-            movement_angle: int = None,
-            image_scale: float = 1.0,
-            variant_number: int = 0,
-        ) -> None:
-        image_file = image_file = "assets/projectiles/{color}_energy_orb.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )
-
-
-class GreenEnergyOrb(EnergyOrb):
-    COLOR = 'green'
-
-
-class OrangeEnergyOrb(EnergyOrb):
-    COLOR = 'orange'
-
-
 class MusicNote(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
@@ -180,7 +142,7 @@ class MusicNote(Projectile):
         variant_number: int = 0,
         ) -> None:
 
-        image_file = "assets/projectiles/notes/{color}_note_{variant_number}.png"
+        image_file = "assets/projectiles/player/note_{variant_number}.png"
 
         # Instantiate projectile
         super().__init__(
@@ -194,8 +156,7 @@ class MusicNote(Projectile):
         )
 
 class BlueMusicNote(MusicNote):
-    COLOR = 'blue'
-    NUM_VARIANTS = 4
+    NUM_VARIANTS = 6
 
 
 class RedMusicNote(MusicNote):

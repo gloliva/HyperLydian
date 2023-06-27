@@ -23,8 +23,8 @@ class Background(pg.sprite.Sprite):
 
 
 class Note(Background):
-    NUM_NOTES_PER_EVENT = 4
-    NUM_ON_LOAD = 400
+    NUM_NOTES_PER_EVENT = 2
+    NUM_ON_LOAD = 200
     NUM_VARIANTS = 6
     DRAW_LAYER = 1
 

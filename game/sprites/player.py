@@ -138,7 +138,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         attack_speed=12,
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
-        projectile_scale=0.3,
+        projectile_scale=0.15,
         track_stat=True,
         weapon_index=0,
     )
