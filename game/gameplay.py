@@ -106,7 +106,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                     damage=1,
                     attack_speed=4,
                     rate_of_fire=300,
-                    projectile_scale=0.5,
+                    projectile_scale=0.3,
                     projectile_variant_number=variant_number,
                 )
                 grunt = enemies.SpinnerGrunt([grunt_weapon])

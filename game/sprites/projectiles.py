@@ -138,6 +138,6 @@ class Accidental(Projectile):
 class RedAccidental(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
-    IMAGE_FILE = "assets/projectiles/accidentals/red_{variant}.png"
-    AVAILABLE_VARIANTS = ('sharp', 'flat')
-    NUM_VARIANTS = 2
+    IMAGE_FILE = "assets/projectiles/enemy/accidentals/{variant}.png"
+    AVAILABLE_VARIANTS = ('natural', 'sharp', 'flat')
+    NUM_VARIANTS = 3
