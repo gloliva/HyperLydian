@@ -131,7 +131,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
 
     # Create player weapons
     energy_turret = Weapon(
-        projectiles.BlueMusicNote,
+        projectiles.MusicNote,
         groups.player_projectiles,
         Weapon.INFINITE_AMMO,
         damage=1,

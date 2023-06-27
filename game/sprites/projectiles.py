@@ -1,6 +1,6 @@
 # stdlib
 import math
-from typing import Tuple
+from typing import Optional, Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -15,6 +15,9 @@ class Projectile(pg.sprite.Sprite):
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 0
 
+    # Image
+    IMAGE_FILE = None
+
     # Layers
     DRAW_LAYER = 2
 
@@ -28,10 +31,9 @@ class Projectile(pg.sprite.Sprite):
 
     def __init__(
             self,
-            image_file: str,
             center_position: Tuple[int, int],
             damage: int,
-            movement_speed: int,
+            speed: int,
             movement_angle: int,
             image_scale: float = 1.0,
             variant_number: int = 0,
@@ -45,7 +47,13 @@ class Projectile(pg.sprite.Sprite):
                     f'Passed in color "{self.COLOR}" not in available Projectile colors: {self.AVAILABLE_COLORS}'
                 )
 
-        image_file = image_file.format(color=self.COLOR, variant_number=variant_number)
+        # Handle variants
+        self.variant_number = variant_number
+        self.variant = ''
+        if self.AVAILABLE_VARIANTS is not None:
+            self.variant = self.AVAILABLE_VARIANTS[variant_number]
+
+        image_file = self.IMAGE_FILE.format(color=self.COLOR, variant=self.variant, variant_number=variant_number)
 
         # Sprite attributes
         image = pg.image.load(construct_asset_full_path(image_file)).convert_alpha()
@@ -63,7 +71,7 @@ class Projectile(pg.sprite.Sprite):
 
         # Weapon attributes
         self.damage = damage if damage is not None else self.DEFAULT_DAMAGE
-        self.movement_speed = movement_speed if movement_speed is not None else self.DEFAULT_SPEED
+        self.movement_speed = speed if speed is not None else self.DEFAULT_SPEED
         self.movement_angle = movement_angle if movement_angle is not None else self.DEFAULT_ANGLE
 
     def update(self, game_screen_rect: pg.Rect):
@@ -89,110 +97,29 @@ class Projectile(pg.sprite.Sprite):
         return math.sqrt((x_delta)**2 + (y_delta)**2)
 
 
-class EnergyBeam(Projectile):
+class QuarterRest(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
-    AVAILABLE_COLORS = ('blue', 'red')
-
-    def __init__(
-            self,
-            center_position: Tuple[int, int],
-            damage: int = None,
-            speed: int = None,
-            movement_angle: int = None,
-            image_scale: float = 1.0,
-            variant_number: int = 0,
-        ) -> None:
-        image_file = "assets/projectiles/{color}_energy_beam.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )
-
-class BlueEnergyBeam(EnergyBeam):
-    COLOR = 'blue'
-
-
-class RedEnergyBeam(EnergyBeam):
-    COLOR = 'red'
+    IMAGE_FILE = "assets/projectiles/enemy/rests/rest.png"
 
 
 class MusicNote(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
+    IMAGE_FILE = "assets/projectiles/player/note_{variant_number}.png"
     AVAILABLE_COLORS = ('blue', 'red')
-    NUM_VARIANTS = 4
-
-    def __init__(
-        self,
-        center_position: Tuple[int, int],
-        damage: int = None,
-        speed: int = None,
-        movement_angle: int = None,
-        image_scale: float = 1.0,
-        variant_number: int = 0,
-        ) -> None:
-
-        image_file = "assets/projectiles/player/note_{variant_number}.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )
-
-class BlueMusicNote(MusicNote):
     NUM_VARIANTS = 6
-
-
-class RedMusicNote(MusicNote):
-    COLOR = 'red'
-    NUM_VARIANTS = 8
 
 
 class MusicLetter(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
+    IMAGE_FILE = "assets/projectiles/letters/{color}_letter_{variant_number}.png"
     AVAILABLE_COLORS = ('blue')
     NUM_VARIANTS = 4
-
-    def __init__(
-        self,
-        center_position: Tuple[int, int],
-        damage: int = None,
-        speed: int = None,
-        movement_angle: int = None,
-        image_scale: float = 1.0,
-        variant_number: int = 0,
-        ) -> None:
-
-        image_file = "assets/projectiles/letters/{color}_letter_{variant_number}.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )
 
 
 class BlueMusicLetter(MusicLetter):
@@ -203,60 +130,14 @@ class BlueMusicLetter(MusicLetter):
 class Accidental(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 8
+    IMAGE_FILE = "assets/projectiles/accidentals/{variant}.png"
     AVAILABLE_VARIANTS = ('natural', 'sharp', 'flat')
     NUM_VARIANTS = 3
-
-    def __init__(
-        self,
-        center_position: Tuple[int, int],
-        damage: int = None,
-        speed: int = None,
-        movement_angle: int = None,
-        image_scale: float = 1.0,
-        variant_number: int = 0,
-        ) -> None:
-
-        variant = self.AVAILABLE_VARIANTS[variant_number]
-        image_file = f"assets/projectiles/accidentals/{variant}.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )
 
 
 class RedAccidental(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
+    IMAGE_FILE = "assets/projectiles/accidentals/red_{variant}.png"
     AVAILABLE_VARIANTS = ('sharp', 'flat')
     NUM_VARIANTS = 2
-
-    def __init__(
-        self,
-        center_position: Tuple[int, int],
-        damage: int = None,
-        speed: int = None,
-        movement_angle: int = None,
-        image_scale: float = 1.0,
-        variant_number: int = 0,
-        ) -> None:
-
-        self.variant = self.AVAILABLE_VARIANTS[variant_number]
-        image_file = f"assets/projectiles/accidentals/red_{self.variant}.png"
-
-        # Instantiate projectile
-        super().__init__(
-            image_file,
-            center_position,
-            damage,
-            speed,
-            movement_angle,
-            image_scale,
-            variant_number,
-        )

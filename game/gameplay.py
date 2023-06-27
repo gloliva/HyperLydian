@@ -80,13 +80,13 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 not debug.NO_ENEMIES:
                 # create Grunt object
                 grunt_weapon = Weapon(
-                    projectiles.RedEnergyBeam,
+                    projectiles.QuarterRest,
                     groups.enemy_projectiles,
                     Weapon.INFINITE_AMMO,
                     damage=1,
                     attack_speed=randint(4, 7),
                     rate_of_fire=randint(500, 2000),
-                    projectile_scale=0.5,
+                    projectile_scale=0.35,
                 )
                 grunt = groups.strafer_grunt_enemies.create_new_grunt([grunt_weapon])
                 groups.all_sprites.add(grunt)

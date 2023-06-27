@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2154.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -393,7 +393,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 513.0, 746.0, 150.0, 33.0 ],
-									"text" : "/pattern/key : 11"
+									"text" : "/pattern/key : 1"
 								}
 
 							}
@@ -2164,7 +2164,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 96.0, 839.75, 342.0, 59.0 ],
-									"text" : "/filter/cutoff : 2300.84,\n/filter/gain : 1.83333,\n/filter/resonance : 1.2"
+									"text" : "/filter/cutoff : 2844.37,\n/filter/gain : 1.275,\n/filter/resonance : 0.8"
 								}
 
 							}
@@ -3652,7 +3652,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 150.599999999999994, 268.676524043083191, 239.333333333333343, 59.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 0,\n/shots_per_weapon : [0, 0]"
+					"text" : "/selected : 0,\n/total_shots_fired : 699,\n/shots_per_weapon : [632, 67]"
 				}
 
 			}
@@ -5846,7 +5846,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 469.5, 1786.0, 257.0, 85.0 ],
-					"text" : "/bars : 2,\n/beats : 3,\n/units : 0.,\n/tempo/bpm : 123.11,\n/time_sig : [4, 4]"
+					"text" : "/bars : 463,\n/beats : 2,\n/units : 0.,\n/tempo/bpm : 110.,\n/time_sig : [4, 4]"
 				}
 
 			}
@@ -5974,17 +5974,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 5.588250339031219, 1727.176467299461365, 76.0, 22.0 ],
 					"text" : "r global-pattr"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-231",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 226.891666666666652, 1038.0, 87.0, 22.0 ],
-					"text" : "s global-toggle"
 				}
 
 			}
@@ -6237,7 +6226,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 101.400000000000006, 360.676524043083191, 329.0, 85.0 ],
-					"text" : "/num_on_screen : 2,\n/hit : 0,\n/killed : 0,\n/avg_hit_distance : [inf, 0, -inf],\n/last_hit_distance : 0"
+					"text" : "/num_on_screen : 7,\n/hit : 295,\n/killed : 18,\n/avg_hit_distance : [11.4018, 407.497, 827.345],\n/last_hit_distance : 11.4018"
 				}
 
 			}
@@ -6296,7 +6285,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 3.0, 714.058875560760498, 304.0, 72.0 ],
-					"text" : "/play_count : 5,\n/time/total_played : [0, 2, 44, 794],\n/score : 0,\n/time/current_playthrough : [0, 0, 4, 592]"
+					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 55, 560],\n/score : 240,\n/time/current_playthrough : [0, 0, 54, 406]"
 				}
 
 			}
@@ -6310,7 +6299,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 52.200000000000003, 479.470562219619751, 272.0, 200.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [720, 800],\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 90,\n/last_rotation_direction : 0,\n/accuracy : 0.,\n/avg_time_between_kills : 0,\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 0,\n/last_projectile_hit_by : \"\",\n/dodges : 0"
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [1145, 465],\n/curr_velocity : [5, 5],\n/curr_speed : 7.07107,\n/angle : 106,\n/last_rotation_direction : -2,\n/accuracy : 42.2031,\n/avg_time_between_kills : 2879.17,\n/max_health : 10,\n/curr_health : 0,\n/health_lost : 10,\n/last_projectile_hit_by : \"flat\",\n/dodges : 19"
 				}
 
 			}
