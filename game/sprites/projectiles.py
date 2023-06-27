@@ -102,6 +102,7 @@ class QuarterRest(Projectile):
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
     IMAGE_FILE = "assets/projectiles/enemy/rests/rest.png"
+    AVAILABLE_VARIANTS = ('rest',)
 
 
 class MusicNote(Projectile):
@@ -118,7 +119,7 @@ class MusicLetter(Projectile):
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
     IMAGE_FILE = "assets/projectiles/letters/{color}_letter_{variant_number}.png"
-    AVAILABLE_COLORS = ('blue')
+    AVAILABLE_COLORS = ('blue',)
     NUM_VARIANTS = 4
 
 

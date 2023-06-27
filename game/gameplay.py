@@ -238,6 +238,7 @@ def handle_collisions(player: Player):
         projectile.kill()
         if projectile.AVAILABLE_VARIANTS is not None and hasattr(projectile, 'variant'):
             stat_tracker.player__last_projectile_hit_by.update(projectile.variant)
+            stat_tracker.player__projectile_hit_count.increase(projectile.variant)
 
 
 def end_game():

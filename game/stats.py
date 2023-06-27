@@ -1,5 +1,5 @@
 # stdlib imports
-from typing import Any, Dict
+from typing import Any, Dict, List, Union
 
 # project imports
 import debug
@@ -157,6 +157,25 @@ class AvgStat:
         return str(f'AvgStat(Average={self.avg}, Count={self.count}, Min={self.min}, Max={self.max})')
 
 
+class CounterStat:
+    def __init__(self, send: bool = True) -> None:
+        self._items = {}
+        self.send = send
+
+    @property
+    def items(self) -> List[Union[str, int]]:
+        items_list = []
+        for key, val in self._items.items():
+            items_list.extend([key, val])
+        return items_list
+
+    def increase(self, item: str) -> None:
+        if item not in self._items:
+            self._items[item] = 1
+        else:
+            self._items[item] += 1
+
+
 class ListStat:
     def __init__(self, initial_length: int = 0, initial_fill: int = 0, send: bool = True) -> None:
         self.list = [initial_fill for _ in range(initial_length)]
@@ -211,6 +230,7 @@ class StatTracker:
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
+        self.player__projectile_hit_count = CounterStat()
         self.player__last_projectile_hit_by = TextStat()
         self.player__dodges = Stat(0)
 
@@ -253,6 +273,8 @@ class StatTracker:
                 stat_dict[stat_name] = stat.list
             elif isinstance(stat, TextStat):
                 stat_dict[stat_name] = stat.text
+            elif isinstance(stat, CounterStat):
+                stat_dict[stat_name] = stat.items
 
         return stat_dict
 
