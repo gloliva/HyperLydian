@@ -23,7 +23,7 @@ import sprites.background as background
 import sprites.enemies as enemies
 import sprites.projectiles as projectiles
 import sprites.groups as groups
-from stats import stat_tracker, Stat
+from stats import stat_tracker
 
 
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
@@ -120,10 +120,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 # Cycle through players weapons
                 if event.key == K_1:
                     player.switch_weapon(0)
-                    stat_tracker.weapon__selected = Stat(0)
+                    stat_tracker.weapon__selected.update(0)
                 elif event.key == K_2:
                     player.switch_weapon(1)
-                    stat_tracker.weapon__selected = Stat(1)
+                    stat_tracker.weapon__selected.update(1)
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()
@@ -166,7 +166,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # update stats tracker
         stat_tracker.player__position.update(player.rect.centerx, player.rect.centery)
-        stat_tracker.enemies__num_on_screen = Stat(len(groups.all_enemies))
+        stat_tracker.enemies__num_on_screen.update(len(groups.all_enemies))
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
         stat_tracker.send_stats()
@@ -235,8 +235,8 @@ def handle_collisions(player: Player):
         player.update_dodges(projectile)
         player.take_damage(projectile.damage)
         projectile.kill()
+        stat_tracker.player__hit_distance.add(projectile.get_distance_traveled())
         if projectile.AVAILABLE_VARIANTS is not None and hasattr(projectile, 'variant'):
-            stat_tracker.player__last_projectile_hit_by.update(projectile.variant)
             stat_tracker.player__projectile_hit_count.increase(projectile.variant)
 
 

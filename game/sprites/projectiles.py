@@ -1,11 +1,12 @@
 # stdlib
 import math
-from typing import Optional, Tuple
+from typing import Tuple
 
 # 3rd-party imports
 import pygame as pg
 
 # project imports
+from defs import REST, SHARP, FLAT, NATURAL
 from exceptions import AssetLoadError
 from sprites.base import construct_asset_full_path
 
@@ -101,15 +102,15 @@ class QuarterRest(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
-    IMAGE_FILE = "assets/projectiles/enemy/rests/rest.png"
-    AVAILABLE_VARIANTS = ('rest',)
+    IMAGE_FILE = "projectiles/enemy/rests/rest.png"
+    AVAILABLE_VARIANTS = (REST,)
 
 
 class MusicNote(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
-    IMAGE_FILE = "assets/projectiles/player/note_{variant_number}.png"
+    IMAGE_FILE = "projectiles/player/note_{variant_number}.png"
     AVAILABLE_COLORS = ('blue', 'red')
     NUM_VARIANTS = 6
 
@@ -118,7 +119,7 @@ class MusicLetter(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
-    IMAGE_FILE = "assets/projectiles/letters/{color}_letter_{variant_number}.png"
+    IMAGE_FILE = "projectiles/letters/{color}_letter_{variant_number}.png"
     AVAILABLE_COLORS = ('blue',)
     NUM_VARIANTS = 4
 
@@ -131,14 +132,14 @@ class BlueMusicLetter(MusicLetter):
 class Accidental(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 8
-    IMAGE_FILE = "assets/projectiles/accidentals/{variant}.png"
-    AVAILABLE_VARIANTS = ('natural', 'sharp', 'flat')
+    IMAGE_FILE = "projectiles/accidentals/{variant}.png"
+    AVAILABLE_VARIANTS = (NATURAL, SHARP, FLAT)
     NUM_VARIANTS = 3
 
 
 class RedAccidental(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
-    IMAGE_FILE = "assets/projectiles/enemy/accidentals/{variant}.png"
-    AVAILABLE_VARIANTS = ('natural', 'sharp', 'flat')
+    IMAGE_FILE = "projectiles/enemy/accidentals/{variant}.png"
+    AVAILABLE_VARIANTS = (NATURAL, SHARP, FLAT)
     NUM_VARIANTS = 3

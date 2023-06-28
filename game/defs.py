@@ -22,3 +22,19 @@ class GameState(Enum):
 # OSC constants
 ADDRESS = '127.0.0.1'  # localhost
 PORT = 8001
+
+
+# Projectile types
+REST = 'rest'
+SHARP = 'sharp'
+FLAT = 'flat'
+NATURAL = 'natural'
+
+PROJECTILE_TYPES = [REST, SHARP, FLAT, NATURAL]
+
+
+# Assets constants
+PNG_PATH = 'assets'
+
+# Music constants
+NUM_VOICES = 3

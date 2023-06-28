@@ -3,15 +3,18 @@ from typing import Any, Dict, List, Union
 
 # project imports
 import debug
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, NUM_VOICES
 from osc_client import osc, OSCHandler
 
 
 class Stat:
     """A stat to be sent via OSC"""
-    def __init__(self, value, send: bool = True) -> None:
+    def __init__(self, value: Any, send: bool = True) -> None:
         self.value = value
         self.send = send
+
+    def update(self, value: Any) -> None:
+        self.value = value
 
     def __add__(self, other) -> "Stat":
         stat = Stat(self.value + other.value, self.send) \
@@ -175,8 +178,8 @@ class TrackerStat:
 
 
 class CounterStat:
-    def __init__(self, send: bool = True) -> None:
-        self._items = {}
+    def __init__(self, init_values: List[str] = None, send: bool = True) -> None:
+        self._items = {} if init_values is None else {key: 0 for key in init_values}
         self.send = send
 
     @property
@@ -220,6 +223,7 @@ class StatTracker:
         # Stats that track throughout each playthrough
         self.control__max_init = Stat(0)
         self.control__game_init = Stat(0)
+        self.control__num_voices = Stat(NUM_VOICES)
         self.control__screen_width = Stat(SCREEN_WIDTH)
         self.control__screen_height = Stat(SCREEN_HEIGHT)
 
@@ -247,8 +251,8 @@ class StatTracker:
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
-        self.player__projectile_hit_count = CounterStat()
-        self.player__last_projectile_hit_by = TextStat()
+        self.player__projectile_hit_count = CounterStat(PROJECTILE_TYPES)
+        self.player__hit_distance = TrackerStat()
         self.player__dodges = Stat(0)
 
         self.weapon__selected = Stat(0)

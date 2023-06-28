@@ -20,7 +20,7 @@ from sprites.base import Sprite
 import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
-from stats import stat_tracker, Stat
+from stats import stat_tracker
 
 
 class Player(Sprite):
@@ -33,8 +33,8 @@ class Player(Sprite):
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
-            "assets/spaceships/player_ship.png",
-            "assets/spaceships/player_ship_hit.png",
+            "spaceships/player_ship.png",
+            "spaceships/player_ship_hit.png",
         ]
         spawn_location = (
             game_screen_rect.width / 2,
@@ -92,10 +92,10 @@ class Player(Sprite):
         # handle stats
         speed = sqrt(movement_vector[0]**2 + movement_vector[1]**2)
         stat_tracker.player__curr_velocity.update(*movement_vector)
-        stat_tracker.player__curr_speed = Stat(speed)
-        stat_tracker.player__angle = Stat(self.current_rotation)
+        stat_tracker.player__curr_speed.update(speed)
+        stat_tracker.player__angle.update(self.current_rotation)
         if rotation_amount != 0:
-            stat_tracker.player__last_rotation_direction = Stat(rotation_amount)
+            stat_tracker.player__last_rotation_direction.update(rotation_amount)
 
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:
@@ -103,7 +103,7 @@ class Player(Sprite):
 
         stat_tracker.player__health_lost += damage
         super().take_damage(damage)
-        stat_tracker.player__curr_health = Stat(self.health)
+        stat_tracker.player__curr_health.update(self.health)
         if self.is_dead():
             pg.event.post(Event.PLAYER_DEATH)
 
@@ -162,5 +162,5 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
 
     # update stats
     stat_tracker.player__starting_position.update(player.rect.centerx, player.rect.centery)
-    stat_tracker.player__starting_angle = Stat(player.INITIAL_ROTATION)
+    stat_tracker.player__starting_angle.update(player.INITIAL_ROTATION)
     return player

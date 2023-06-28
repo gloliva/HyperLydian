@@ -8,6 +8,7 @@ import sys
 import pygame as pg
 
 # project imports
+from defs import PNG_PATH
 from stats import stat_tracker
 
 
@@ -154,4 +155,4 @@ def construct_asset_full_path(asset_relative_path: str) -> str:
     except Exception:
         base_path = os.path.abspath(".")
 
-    return os.path.join(base_path, asset_relative_path)
+    return os.path.join(base_path, PNG_PATH, asset_relative_path)
