@@ -10,8 +10,8 @@ autowatch = 1;
 
 // Globals
 var sustainList = new Array();
-var valueOut = new Array();
-var sustainOut = new Array();
+var valueOut;
+var sustainOut;
 var updateIdx = 0;
 var matrixRow = 0;
 
@@ -45,6 +45,7 @@ function list()
         addRest(valueList);
         bang();
     } else if (inlet == 1) {
+        sustainList = new Array();
         for (var i = 0; i < arguments.length; i++) {
             sustainList[i] = arguments[i];
         }
@@ -62,6 +63,9 @@ function bang()
 function addRest(valueList)
 {
     var sustainVal;
+    sustainOut = new Array();
+    valueOut = new Array();
+
     for (var i = 0; i < valueList.length; i++) {
         valueOut[i] = valueList[i];
     }
