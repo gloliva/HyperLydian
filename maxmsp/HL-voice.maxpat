@@ -888,7 +888,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2338.0, 128.0, 998.0, 690.0 ],
+						"rect" : [ 2139.0, -19.0, 1299.0, 980.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -918,13 +918,61 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-6",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "FullPacket" ],
+									"patching_rect" : [ 50.0, 362.0, 296.0, 22.0 ],
+									"text" : "o.union"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"patching_rect" : [ 197.0, 804.0, 51.0, 22.0 ],
+									"text" : "line 1. 5"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-4",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 197.0, 772.0, 59.0, 22.0 ],
+									"text" : "$1, $2 $3"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "FullPacket" ],
+									"patching_rect" : [ 50.0, 687.0, 166.0, 22.0 ],
+									"text" : "o.select /note/prev_frequency"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontsize" : 14.0,
 									"id" : "obj-2",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 194.0, 252.0, 105.0, 38.0 ],
+									"patching_rect" : [ 194.0, 289.0, 105.0, 38.0 ],
 									"text" : "A scale degree of -1 is a rest"
 								}
 
@@ -937,7 +985,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 158.0, 286.823529362678528, 24.0, 24.0 ]
+									"patching_rect" : [ 158.0, 323.823529362678528, 24.0, 24.0 ]
 								}
 
 							}
@@ -948,7 +996,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 50.0, 252.0, 127.0, 22.0 ],
+									"patching_rect" : [ 50.0, 289.0, 127.0, 22.0 ],
 									"text" : "o.if /scale/degree >= 0"
 								}
 
@@ -960,8 +1008,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 50.0, 483.0, 132.0, 22.0 ],
-									"text" : "o.route /note/frequency"
+									"patching_rect" : [ 197.0, 737.0, 101.0, 22.0 ],
+									"text" : "o.route /line_msg"
 								}
 
 							}
@@ -974,7 +1022,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 50.0, 519.0, 50.0, 22.0 ]
+									"patching_rect" : [ 197.0, 836.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -986,7 +1034,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 50.0, 208.0, 404.0, 31.0 ],
+									"patching_rect" : [ 50.0, 245.0, 404.0, 31.0 ],
 									"text" : "/scale/degree = /sequence/values[[ /sequence/curr_idx ]]"
 								}
 
@@ -995,13 +1043,13 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-13",
-									"linecount" : 11,
+									"linecount" : 20,
 									"maxclass" : "o.expr.codebox",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 50.0, 318.0, 700.0, 159.0 ],
-									"text" : "# Calculate current octave and scale degree\n/note/octave = /scale/degree / /scale/length,\n/scale/degree = /scale/degree % /scale/length,\n/note/octave_offset = /note/octave * 12,\n\n# Convert scale degree to corresponding half steps\n/scale/halfsteps = /scale/current[[ /scale/degree ]],\n\n# Get midi value and convert to frequency\n/note/midi_value = /note/base + /note/octave_offset + /scale/halfsteps,\n/note/frequency = mtof(/note/midi_value)"
+									"patching_rect" : [ 50.0, 397.0, 700.0, 275.0 ],
+									"text" : "/note/glide_ms ??= 20.,\n\n# Calculate current octave and scale degree\n/note/octave = /scale/degree / /scale/length,\n/scale/degree = /scale/degree % /scale/length,\n/note/octave_offset = /note/octave * 12,\n\n# Convert scale degree to corresponding half steps\n/scale/halfsteps = /scale/current[[ /scale/degree ]],\n\n# Get midi value and convert to frequency\n/note/midi_value = /note/base + /note/octave_offset + /scale/halfsteps,\n/note/frequency = mtof(/note/midi_value),\n\nif( bound(/note/prev_frequency) == 0,\n  /note/prev_frequency = /note/frequency - 1\n),\n/frequency/delta = /note/prev_frequency - /note/frequency,\n/line_msg = [/note/prev_frequency, /note/frequency, /note/glide_ms],\n/note/prev_frequency = /note/frequency"
 								}
 
 							}
@@ -1016,7 +1064,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 163.0, 30.0, 30.0 ]
+									"patching_rect" : [ 50.0, 200.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -1030,14 +1078,29 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 50.0, 552.0, 30.0, 30.0 ]
+									"patching_rect" : [ 197.0, 869.0, 30.0, 30.0 ]
 								}
 
 							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-6", 1 ],
+									"midpoints" : [ 59.5, 721.0, 771.0, 721.0, 771.0, 351.0, 336.5, 351.0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-61", 0 ],
+									"source" : [ "obj-1", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
 									"source" : [ "obj-13", 0 ]
 								}
 
@@ -1046,6 +1109,20 @@
 								"patchline" : 								{
 									"destination" : [ "obj-58", 0 ],
 									"source" : [ "obj-133", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-59", 0 ],
+									"source" : [ "obj-5", 0 ]
 								}
 
 							}
@@ -1065,14 +1142,21 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-59", 0 ],
+									"destination" : [ "obj-13", 0 ],
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
 									"source" : [ "obj-61", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
+									"destination" : [ "obj-6", 0 ],
 									"source" : [ "obj-68", 0 ]
 								}
 

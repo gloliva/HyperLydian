@@ -126,13 +126,18 @@ class TimeStat:
         return str(f'TimeStat(Hours={self.hours}, Minutes={self.minutes}, Seconds={self.seconds}, Milliseconds={self.ms})')
 
 
-class AvgStat:
-    def __init__(self, send_as_list: bool = False, send: bool = True) -> None:
+class TrackerStat:
+    def __init__(self, send_mode: int = 0, send: bool = True) -> None:
         self.sum = 0
+        self.last = None
         self.count = 0
         self.min = float('inf')
         self.max = float('-inf')
-        self.send_as_list = send_as_list
+
+        if send_mode > len(self.list):
+            send_mode = 0
+
+        self.send_mode = send_mode
         self.send = send
 
     @property
@@ -142,7 +147,19 @@ class AvgStat:
         else:
             return 0
 
+    @property
+    def list(self) -> List:
+        return [self.min, self.avg, self.last, self.max]
+
+    @property
+    def value(self) -> Union[int, float, List]:
+        if self.send_mode == 0:
+            return self.list
+
+        return self.list[self.send_mode - 1]
+
     def add(self, val: float):
+        self.last = val
         self.sum += val
         self.count += 1
         if val > self.max:
@@ -154,7 +171,7 @@ class AvgStat:
         return str(self.avg)
 
     def __repr__(self) -> str:
-        return str(f'AvgStat(Average={self.avg}, Count={self.count}, Min={self.min}, Max={self.max})')
+        return str(f'TrackerStat(Average={self.avg}, Last={self.last} Count={self.count}, Min={self.min}, Max={self.max})')
 
 
 class CounterStat:
@@ -226,7 +243,7 @@ class StatTracker:
         self.player__angle = Stat(0)
         self.player__last_rotation_direction = Stat(0)
         self.player__accuracy = Stat(0.0)
-        self.player__avg_time_between_kills = AvgStat()
+        self.player__avg_time_between_kills = TrackerStat()
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
@@ -241,8 +258,7 @@ class StatTracker:
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
         self.enemies__killed = Stat(0)
-        self.enemies__avg_hit_distance = AvgStat(send_as_list=True)
-        self.enemies__last_hit_distance = Stat(0)
+        self.enemies__hit_distance = TrackerStat()
 
         self.game__play_count += 1
 
@@ -267,8 +283,8 @@ class StatTracker:
                 stat_dict[stat_name] = stat.value
             elif isinstance(stat, TimeStat):
                 stat_dict[stat_name] = stat.time
-            elif isinstance(stat, AvgStat):
-                stat_dict[stat_name] = [stat.min, stat.avg, stat.max] if stat.send_as_list else stat.avg
+            elif isinstance(stat, TrackerStat):
+                stat_dict[stat_name] = stat.value
             elif isinstance(stat, ListStat):
                 stat_dict[stat_name] = stat.list
             elif isinstance(stat, TextStat):
