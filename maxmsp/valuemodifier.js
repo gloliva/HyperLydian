@@ -10,13 +10,13 @@ autowatch = 1;
 
 // Globals
 var sustainList = new Array();
-var valueOut;
-var sustainOut;
+var valueOut = new Array();
+var sustainOut = new Array();
 var updateIdx = 0;
 var matrixRow = 0;
 
 // Sustain
-var asr = 0;
+var ar = 0;
 var attack = 1;
 var sustain = 2;
 var release = 3;
@@ -41,9 +41,12 @@ function msg_int(i)
 function list()
 {
     if (inlet == 0) {
+        if (sustainList.length <= 0) {
+            throw new Error("Sustain List has not been set");
+        }
         var valueList = arrayfromargs(arguments);
         addRest(valueList);
-        bang();
+        output();
     } else if (inlet == 1) {
         sustainList = new Array();
         for (var i = 0; i < arguments.length; i++) {
@@ -53,7 +56,7 @@ function list()
 }
 
 
-function bang()
+function output()
 {
     outlet(1, sustainOut);
     outlet(0, valueOut);
@@ -70,7 +73,7 @@ function addRest(valueList)
         valueOut[i] = valueList[i];
     }
     valueOut[updateIdx] = -1;  // make value a rest
-    sustainList[updateIdx] = asr;
+    sustainList[updateIdx] = ar;
 
     var left = updateIdx - 1;
     var right = updateIdx + 1;
@@ -80,7 +83,7 @@ function addRest(valueList)
         if (sustainVal == sustain) {
             sustainList[left] = release;
         } else if (sustainVal == attack) {
-            sustainList[left] = asr;
+            sustainList[left] = ar;
         }
     }
 
@@ -89,7 +92,7 @@ function addRest(valueList)
         if (sustainVal == sustain) {
             sustainList[right] = attack;
         } else if (sustainVal == release) {
-            sustainList[right] = asr;
+            sustainList[right] = ar;
         }
     }
 
