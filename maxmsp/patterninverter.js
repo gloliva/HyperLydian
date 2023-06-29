@@ -98,6 +98,11 @@ function noteReverse(valueList) {
 
 
 function trueReverse(valueList) {
+    valueOut = new Array(valueList.length);
 
+    // copy over list in reverse
+    for (var i = valueList.length - 1; i >= 0; i--) {
+        valueOut[i] = valueList[valueList.length - i - 1];
+    }
 }
 

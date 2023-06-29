@@ -31,16 +31,14 @@ setoutletassist(0, "New Value Sequence");
 setoutletassist(1, "New Sustain Sequence");
 
 
-function msg_int(i)
-{
+function msg_int(i) {
     if (inlet == 2) {
         updateIdx = i;
     }
 }
 
 
-function list()
-{
+function list() {
     if (inlet == 0) {
         if (sustainList.length <= 0) {
             throw new Error("Sustain List has not been set");
@@ -57,15 +55,13 @@ function list()
 }
 
 
-function output()
-{
+function output() {
     outlet(1, sustainOut);
     outlet(0, valueOut);
 }
 
 
-function addRest(valueList)
-{
+function addRest(valueList) {
     var sustainVal;
     sustainOut = new Array();
     valueOut = new Array();
