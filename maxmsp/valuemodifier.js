@@ -14,6 +14,7 @@ var valueOut = new Array();
 var sustainOut = new Array();
 var updateIdx = 0;
 var matrixRow = 0;
+var restValue = -1;
 
 // Sustain
 var ar = 0;
@@ -72,7 +73,7 @@ function addRest(valueList)
     for (var i = 0; i < valueList.length; i++) {
         valueOut[i] = valueList[i];
     }
-    valueOut[updateIdx] = -1;  // make value a rest
+    valueOut[updateIdx] = restValue;
     sustainList[updateIdx] = ar;
 
     var left = updateIdx - 1;
