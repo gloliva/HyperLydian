@@ -133,6 +133,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
     energy_turret = Weapon(
         projectiles.MusicNote,
         groups.player_projectiles,
+        groups.all_sprites,
         Weapon.INFINITE_AMMO,
         damage=1,
         attack_speed=12,
@@ -145,6 +146,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
     energy_beam = Weapon(
         projectiles.Accidental,
         groups.player_projectiles,
+        groups.all_sprites,
         Weapon.INFINITE_AMMO,
         attack_speed=10,
         damage=5,

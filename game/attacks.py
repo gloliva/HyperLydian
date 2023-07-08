@@ -8,7 +8,6 @@ import pygame as pg
 
 # project imports
 from sprites.projectiles import Projectile
-import sprites.groups as groups
 from stats import stat_tracker
 
 
@@ -21,6 +20,7 @@ class Weapon:
         self,
         projectile_type: Projectile,
         projectile_group: pg.sprite.Group,
+        all_sprites_group: pg.sprite.Group,
         num_projectiles: Union[int, float],
         damage: Optional[int] = None,
         attack_speed: Optional[int] = None,
@@ -33,6 +33,7 @@ class Weapon:
     ) -> None:
         self.projectile_type = projectile_type
         self.projectile_group = projectile_group
+        self.all_sprites_group = all_sprites_group
         self.num_projectiles = num_projectiles
         self.curr_projectiles = num_projectiles
         self.projectile_scale = projectile_scale
@@ -96,7 +97,7 @@ class Weapon:
             variant_number=variant_number,
         )
         self.projectile_group.add(projectile)
-        groups.all_sprites.add(projectile)
+        self.all_sprites_group.add(projectile)
         self.curr_projectiles -= 1
 
     def reload_projectile(self) -> None:

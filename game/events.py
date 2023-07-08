@@ -29,7 +29,7 @@ def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
     event_timer(Event.ADD_SPINNER_GRUNT, 10000)
     event_timer(Event.ADD_NOTE, 50)
-    event_timer(Event.ADD_STAFF, 2000)
+    event_timer(Event.ADD_STAFF, 1800)
 
 
 def disable_event_timers() -> None:

@@ -105,6 +105,7 @@ class SpinnerGrunt(Sprite):
     PROJECTILE_SPAWN_DELTA = 50
     IMAGE_SCALE = 1.5
     SPAWN_QUADRANT = ['left', 'right']
+    SCREEN_BUFFER = 75
     SCORE = 25
 
     def __init__(self, weapons) -> None:
@@ -133,7 +134,7 @@ class SpinnerGrunt(Sprite):
         if self.spawn_quadrant == 'left':
             spawn_location = (
                 -100,
-                randint(75, SCREEN_HEIGHT - 75),
+                randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
             )
 
             self.stopping_point_x = spawn_location[0] + randint(300, 600)
@@ -141,7 +142,7 @@ class SpinnerGrunt(Sprite):
         elif self.spawn_quadrant == 'right':
             spawn_location = (
                 SCREEN_WIDTH + 100,
-                randint(75, SCREEN_HEIGHT - 75),
+                randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
             )
 
             self.stopping_point_x = spawn_location[0] - randint(300, 600)

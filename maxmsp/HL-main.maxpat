@@ -2014,7 +2014,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 290.0, 72.0 ],
-									"text" : "/rest/count : 10,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
+									"text" : "/rest/count : 7,\n/sharp/count : 1,\n/flat/count : 0,\n/natural/count : 2"
 								}
 
 							}
@@ -4187,7 +4187,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 96.0, 839.75, 342.0, 59.0 ],
-									"text" : "/filter/cutoff : 1223.84,\n/filter/gain : 1.375,\n/filter/resonance : 1.76"
+									"text" : "/filter/cutoff : 1963.89,\n/filter/gain : 1.61667,\n/filter/resonance : 1.28"
 								}
 
 							}
@@ -5673,7 +5673,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 150.599999999999994, 278.676524043083191, 286.599999999999966, 59.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 1096,\n/shots_per_weapon : [1096, 0]"
+					"text" : "/selected : 0,\n/total_shots_fired : 2218,\n/shots_per_weapon : [2218, 0]"
 				}
 
 			}
@@ -7790,8 +7790,8 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 162.0, 1731.5, 56.0, 22.0 ],
 					"restore" : 					{
-						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.884000000000001, 1, 1, 0.416, 2, 0, 0.684, 2, 1, 0.844, 3, 0, 0.596, 3, 1, 0.592 ],
-						"live.gain~" : [ -70.0 ]
+						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.400000000000001, 1, 1, 0.416, 2, 0, 0.772, 2, 1, 0.844, 3, 0, 0.596, 3, 1, 0.592 ],
+						"live.gain~" : [ -31.575613710050966 ]
 					}
 ,
 					"text" : "autopattr",
@@ -7866,7 +7866,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 469.5, 1786.0, 257.0, 85.0 ],
-					"text" : "/bars : 30,\n/beats : 4,\n/units : 240.,\n/tempo/bpm : 130.,\n/time_sig : [4, 4]"
+					"text" : "/bars : 78,\n/beats : 1,\n/units : 240.,\n/tempo/bpm : 130.,\n/time_sig : [4, 4]"
 				}
 
 			}
@@ -8241,13 +8241,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-43",
-					"linecount" : 4,
+					"linecount" : 5,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 101.400000000000006, 387.676524043083191, 335.799999999999955, 72.0 ],
-					"text" : "/num_on_screen : 5,\n/hit : 451,\n/killed : 20,\n/hit_distance : [45.607, 482.635, 198., 1084.49]"
+					"patching_rect" : [ 101.400000000000006, 387.676524043083191, 335.799999999999955, 85.0 ],
+					"text" : "/num_on_screen : 7,\n/hit : 1025,\n/killed : 48,\n/hit_distance : [44.7214, 371.56, 234.094, 849.706]"
 				}
 
 			}
@@ -8300,13 +8300,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-16",
-					"linecount" : 2,
+					"linecount" : 4,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 3.0, 795.058875560760498, 304.0, 46.0 ],
-					"text" : "/play_count : 0,\n/time/total_played : [0, 0, 0, 0]"
+					"patching_rect" : [ 3.0, 795.058875560760498, 304.0, 72.0 ],
+					"text" : "/play_count : 1,\n/time/total_played : [0, 2, 36, 176],\n/score : 660,\n/time/current_playthrough : [0, 2, 1, 870]"
 				}
 
 			}
@@ -8320,7 +8320,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 52.200000000000003, 516.470562219619751, 385.0, 225.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [745, 525],\n/curr_velocity : [5, 0],\n/curr_speed : 5.,\n/angle : 92,\n/last_rotation_direction : 2,\n/accuracy : 41.1496,\n/avg_time_between_kills : [0, 2971.3, 3346, 12301],\n/max_health : 10,\n/curr_health : 0,\n/health_lost : 10,\n/projectile_hit_count : [\"rest\", 10, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [238., 350.6, 245., 462.],\n/dodges : 29"
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [785, 670],\n/curr_velocity : [5, 0],\n/curr_speed : 5.,\n/angle : 116,\n/last_rotation_direction : -2,\n/accuracy : 46.2128,\n/avg_time_between_kills : [0, 2524.08, 4262, 8294],\n/max_health : 10,\n/curr_health : 0,\n/health_lost : 10,\n/projectile_hit_count : [\"rest\", 7, \"sharp\", 1, \"flat\", 0, \"natural\", 2],\n/hit_distance : [154., 342.137, 462., 513.],\n/dodges : 43"
 				}
 
 			}

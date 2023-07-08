@@ -33,7 +33,7 @@ class Note(Background):
         note_type = random.randint(0, self.NUM_VARIANTS - 1)
         image_file = construct_asset_full_path(f"backgrounds/notes/note_{note_type}.png")
         image = pg.image.load(image_file).convert()
-        self.surf = pg.transform.scale_by(pg.transform.rotate(image, random.randint(0, 359)), random.uniform(0.1, 0.5))
+        self.surf = pg.transform.scale_by(pg.transform.rotate(image, random.randint(0, 359)), random.uniform(0.05, 0.4))
         self.surf.set_alpha(random.randint(10, 255))
 
         color_image = pg.Surface(self.surf.get_size()).convert_alpha()
@@ -57,7 +57,9 @@ class Note(Background):
 
 
 class Staff(Background):
-    NUM_ON_LOAD = 4
+    NUM_ON_LOAD = 6
+    NUM_ON_SCREEN = 4
+    HEIGHT_OFFSET = 150
     DRAW_LAYER = 0
 
     def __init__(self, screen_rect: pg.Rect, on_load: bool = False, load_number: int = 1) -> None:
@@ -67,8 +69,8 @@ class Staff(Background):
         self.surf = pg.transform.scale(image, (screen_rect.width, 128))
         self.surf.set_alpha(40)
         if on_load:
-            screen_section = screen_rect.height / self.NUM_ON_LOAD
-            height = screen_section * load_number
+            screen_section = screen_rect.height / self.NUM_ON_SCREEN
+            height = (screen_section * load_number) - self.HEIGHT_OFFSET
             self.rect = self.surf.get_rect(topleft=(0, height))
         else:
             self.rect = self.surf.get_rect(
