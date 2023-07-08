@@ -1,7 +1,7 @@
 # stdlib imports
 import math
 import os
-from typing import Tuple
+from typing import List, Optional, Tuple
 import sys
 
 # 3rd-party impoarts
@@ -30,6 +30,7 @@ class Sprite(pg.sprite.Sprite):
             weapons,
             image_scale: float = 1.0,
             image_rotation: int = 0,
+            on_death_callbacks: Optional[List] = None
         ) -> None:
         super().__init__()
 
@@ -67,6 +68,7 @@ class Sprite(pg.sprite.Sprite):
         self.current_weapon_id = 0
         self.equipped_weapon = self.weapons[self.current_weapon_id]
         self.current_rotation = 0
+        self.on_death_callbacks = on_death_callbacks if on_death_callbacks is not None else []
 
         if self.INITIAL_ROTATION:
             self.rotate(self.INITIAL_ROTATION)
@@ -144,6 +146,8 @@ class Sprite(pg.sprite.Sprite):
             stat_tracker.time_last_enemy_killed = current_time
             stat_tracker.enemies__killed += 1
             stat_tracker.game__score += self.SCORE
+        for callback in self.on_death_callbacks:
+            callback()
         self.kill()
 
 

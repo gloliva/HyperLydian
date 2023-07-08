@@ -1,6 +1,6 @@
 import math
 from random import randint
-from typing import Any, List
+from typing import List, Optional
 
 # 3rd-party imports
 from pygame import Rect
@@ -87,7 +87,7 @@ class StraferGruntGroup(Group):
 
 class SpinnerGruntGroup(Group):
     INITIAL_MAX_GRUNTS = 2
-    INITIAL_CIRCLE_GRUNTS = 3
+    INITIAL_ELLIPSE_GRUNTS = 3
 
     @classmethod
     def get_oval_starting_positions(cls, num_grunts: int, screen_rect: Rect):
@@ -95,8 +95,8 @@ class SpinnerGruntGroup(Group):
 
         return [
             [
-                (screen_rect.width / 2) * math.cos(idx * angle_increment),
-                (screen_rect.height / 2) * math.sin(idx * angle_increment),
+                (screen_rect.centerx - 350) * math.cos(idx * angle_increment) + screen_rect.centerx,
+                (screen_rect.centery - 50) * math.sin(idx * angle_increment) + screen_rect.centery,
             ] for idx in range(num_grunts)
         ]
 
@@ -105,9 +105,9 @@ class SpinnerGruntGroup(Group):
 
         self.grunts_on_screen = 0
         self.max_grunts = self.INITIAL_MAX_GRUNTS
-        self.num_circle_grunts = self.INITIAL_CIRCLE_GRUNTS
+        self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
 
-    def create_new_grunt(self) -> SpinnerGrunt:
+    def create_new_grunt(self, spawn: Optional[List] = None, on_death_callbacks: Optional[List] = None) -> SpinnerGrunt:
         # Create grunt weapon
         variant_number = randint(0, projectiles.RedAccidental.NUM_VARIANTS - 1)
         grunt_weapon = Weapon(
@@ -123,7 +123,12 @@ class SpinnerGruntGroup(Group):
         )
 
         # Create grunt object
-        grunt = SpinnerGrunt([grunt_weapon])
+        args = [[grunt_weapon]]
+        if spawn is not None:
+            args.append(spawn)
+        if on_death_callbacks is not None:
+            args.append(on_death_callbacks)
+        grunt = SpinnerGrunt(*args)
 
         # Add grunt to all groups
         self.add(grunt)

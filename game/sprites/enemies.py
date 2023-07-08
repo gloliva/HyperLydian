@@ -1,5 +1,6 @@
 # stdlib imports
 from random import choice as randelem, randint
+from typing import Optional, List
 
 # 3rd-party imports
 import pygame as pg
@@ -105,16 +106,17 @@ class SpinnerGrunt(Sprite):
     PROJECTILE_SPAWN_DELTA = 50
     IMAGE_SCALE = 1.5
     SPAWN_QUADRANT = ['left', 'right']
+    SPAWN_OFFSCREEN_AMOUNT = 100
     SCREEN_BUFFER = 75
     SCORE = 25
 
-    def __init__(self, weapons) -> None:
+    def __init__(self, weapons, spawn: Optional[List] = None, on_death_callbacks: Optional[List] = None) -> None:
         image_files = [
             'spaceships/spinner_grunt.png',
             'spaceships/spinner_grunt_hit.png',
         ]
 
-        spawn_location = self.set_spawn_information()
+        spawn_location = self.set_spawn_information(spawn)
 
         super().__init__(
             image_files,
@@ -123,30 +125,47 @@ class SpinnerGrunt(Sprite):
             spawn_location,
             weapons,
             image_scale=self.IMAGE_SCALE,
+            on_death_callbacks=on_death_callbacks,
         )
 
         # Additional SpinngerGrunt attributes
         self.moving_to_position = True
 
-    def set_spawn_information(self):
-        self.spawn_quadrant = randelem(self.SPAWN_QUADRANT)
+    def set_spawn_information(self, spawn: Optional[List] = None):
+        if spawn is not None:
+            x, y = spawn[0], spawn[1]
 
-        if self.spawn_quadrant == 'left':
-            spawn_location = (
-                -100,
-                randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
-            )
+            if x < SCREEN_WIDTH / 2:
+                self.spawn_quadrant = 'left'
+                spawn_location = (
+                    -self.SPAWN_OFFSCREEN_AMOUNT, y
+                )
+            else:
+                self.spawn_quadrant = 'right'
+                spawn_location = (
+                    SCREEN_WIDTH + self.SPAWN_OFFSCREEN_AMOUNT, y
+                )
 
-            self.stopping_point_x = spawn_location[0] + randint(300, 600)
+            self.stopping_point_x = x
+        else:
+            self.spawn_quadrant = randelem(self.SPAWN_QUADRANT)
 
-        elif self.spawn_quadrant == 'right':
-            spawn_location = (
-                SCREEN_WIDTH + 100,
-                randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
-            )
+            if self.spawn_quadrant == 'left':
+                spawn_location = (
+                    -self.SPAWN_OFFSCREEN_AMOUNT,
+                    randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
+                )
 
-            self.stopping_point_x = spawn_location[0] - randint(300, 600)
-            self.INITIAL_ROTATION = 180
+                self.stopping_point_x = spawn_location[0] + randint(300, 600)
+
+            elif self.spawn_quadrant == 'right':
+                spawn_location = (
+                    SCREEN_WIDTH + self.SPAWN_OFFSCREEN_AMOUNT,
+                    randint(self.SCREEN_BUFFER, SCREEN_HEIGHT - self.SCREEN_BUFFER),
+                )
+
+                self.stopping_point_x = spawn_location[0] - randint(300, 600)
+                self.INITIAL_ROTATION = 180
 
         return spawn_location
 
@@ -180,4 +199,3 @@ class SpinnerGrunt(Sprite):
 
 class TrackerGrunt(Sprite):
     DEFAULT_HEALTH = 2
-
