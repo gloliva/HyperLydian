@@ -8,8 +8,10 @@ from pygame.sprite import Group, LayeredUpdates as LayeredGroup
 
 # project imports
 from attacks import Weapon
+from defs import SCREEN_HEIGHT
 from sprites.enemies import StraferGrunt, SpinnerGrunt
 import sprites.projectiles as projectiles
+from stats import stat_tracker
 
 
 class StraferGruntGroup(Group):
@@ -24,8 +26,15 @@ class StraferGruntGroup(Group):
         self.max_grunts_per_row = self.MAX_GRUNTS_PER_ROW
 
         # Manage grunt arrangement
-        self.grunts_per_row = [0 for _ in range(self.max_rows)]
-        self.curr_row_to_fill = 0
+        self.top_grunts_per_row = [0 for _ in range(self.max_rows)]
+        self.bottom_grunts_per_row = [0 for _ in range(self.max_rows)]
+        self.top_row_to_fill = 0
+        self.bottom_row_to_fill = 0
+
+    @property
+    def is_full(self):
+        total_grunts = sum(self.top_grunts_per_row) + sum(self.bottom_grunts_per_row)
+        return total_grunts >= self.max_grunts_per_row * self.max_rows
 
     def create_new_grunt(self) -> StraferGrunt:
         # Create grunt weapon
@@ -41,11 +50,18 @@ class StraferGruntGroup(Group):
         )
 
         # Create grunt object and set stop position
-        grunt = StraferGrunt([grunt_weapon], self.curr_row_to_fill)
+        player_vertical_half = stat_tracker.player__vertical_half.text
+        grunt_row = self.top_row_to_fill if player_vertical_half == 'bottom' else self.bottom_row_to_fill
+        spawn_direction = 1 if player_vertical_half == 'bottom' else -1
+
+        grunt = StraferGrunt([grunt_weapon], grunt_row, spawn_direction)
         grunt_y_position = (
             self.ROW_START +
-            (self.curr_row_to_fill * grunt.rect.height * self.ROW_SPACING)
+            (grunt_row * grunt.rect.height * self.ROW_SPACING)
         )
+
+        if player_vertical_half == 'top':
+            grunt_y_position = SCREEN_HEIGHT - grunt_y_position
         grunt.set_stopping_point_y(grunt_y_position)
 
         # Add grunt to all groups and update row information
@@ -61,28 +77,37 @@ class StraferGruntGroup(Group):
         """
         for grunt in grunts:
             super().add(grunt)
-            self.grunts_per_row[self.curr_row_to_fill] += 1
+            if stat_tracker.player__vertical_half.text == 'bottom':
+                self.top_grunts_per_row[self.top_row_to_fill] += 1
+            else:
+                self.bottom_grunts_per_row[self.bottom_row_to_fill] += 1
 
     def remove_internal(self, grunt: StraferGrunt) -> None:
         """Overrides AbstractGroup `remove_internal` method to handle
         removing grunt from a row.
         """
-        self.grunts_per_row[grunt.grunt_row] -= 1
+        if grunt.spawn_direction == 1:
+            self.top_grunts_per_row[grunt.grunt_row] -= 1
+        else:
+            self.bottom_grunts_per_row[grunt.grunt_row] -= 1
+
         super().remove_internal(grunt)
         self.update_curr_row()
 
     def update_curr_row(self):
-        for row, num_grunts in enumerate(self.grunts_per_row):
+        for row, num_grunts in enumerate(self.top_grunts_per_row):
             if num_grunts < self.max_grunts_per_row:
-                self.curr_row_to_fill = row
+                self.top_row_to_fill = row
+                break
+
+        for row, num_grunts in enumerate(self.bottom_grunts_per_row):
+            if num_grunts < self.max_grunts_per_row:
+                self.bottom_row_to_fill = row
                 break
 
     def set_row_limits(self, new_max_rows: int, new_max_grunts_per_row: int) -> None:
         self.max_rows = new_max_rows
         self.max_grunts_per_row = new_max_grunts_per_row
-
-    def is_full(self):
-        return sum(self.grunts_per_row) >= self.max_grunts_per_row * self.max_rows
 
 
 class SpinnerGruntGroup(Group):
@@ -106,6 +131,10 @@ class SpinnerGruntGroup(Group):
         self.grunts_on_screen = 0
         self.max_grunts = self.INITIAL_MAX_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
+
+    @property
+    def is_full(self):
+        return self.grunts_on_screen >= self.max_grunts
 
     def create_new_grunt(
         self,
@@ -157,9 +186,6 @@ class SpinnerGruntGroup(Group):
 
     def set_max_grunts(self, max_grunts: int):
         self.max_grunts = max_grunts
-
-    def is_full(self):
-        return self.grunts_on_screen >= self.max_grunts
 
 
 # Sprite Groups

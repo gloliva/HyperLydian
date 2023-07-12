@@ -61,15 +61,16 @@ class StraferGrunt(Enemy):
     IMAGE_SCALE = 1.5
     SCORE = 10
 
-    def __init__(self, weapons, row: int, special_event: bool = False) -> None:
+    def __init__(self, weapons, row: int, spawn_direction: int, special_event: bool = False) -> None:
         image_files = [
             'spaceships/strafer_grunt.png',
             'spaceships/strafer_grunt_hit.png',
         ]
-        spawn_location = (
-            randint(50, SCREEN_WIDTH - 50),
-            -100,
-        )
+
+        x = randint(50, SCREEN_WIDTH - 50)
+        y = -100 if spawn_direction == 1 else SCREEN_HEIGHT + 100
+        spawn_location = (x, y)
+
         super().__init__(
             image_files,
             self.DEFAULT_HEALTH,
@@ -83,10 +84,13 @@ class StraferGrunt(Enemy):
         # Additional Grunt attributes
         self.moving_to_position = True
         self.stopping_point_y = None
-        self.spawn_direction = 1
+        self.spawn_direction = spawn_direction
         self.strafe_direction = 1
         self.grunt_row = row
         self.overlapping_enemies = set()
+
+        if self.spawn_direction == -1:
+            self.rotate(90)
 
     def set_stopping_point_y(self, y_pos: float):
         self.stopping_point_y = y_pos
@@ -95,8 +99,10 @@ class StraferGrunt(Enemy):
         if self.stopping_point_y is None:
             raise Exception('Must Call set_stopping_point_y')
 
-        if self.rect.bottom < self.stopping_point_y:
-            self.rect.move_ip(0, self.SPAWN_SPEED)
+        if self.spawn_direction == 1 and self.rect.bottom < self.stopping_point_y:
+            self.rect.move_ip(0, self.spawn_direction * self.SPAWN_SPEED)
+        elif self.spawn_direction == -1 and self.rect.top > self.stopping_point_y:
+            self.rect.move_ip(0, self.spawn_direction * self.SPAWN_SPEED)
         else:
             self.moving_to_position = False
 

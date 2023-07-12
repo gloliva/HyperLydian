@@ -21,9 +21,6 @@ class Event:
     # Add a new spinner enemy
     ADD_SPINNER_GRUNT = PGEvent(custom_type())
 
-    # Spinner grunt elipse event
-    SPINNER_GRUNT_ELIPSE_EVENT = PGEvent(custom_type())
-
     # Add background features
     ADD_NOTE = PGEvent(custom_type())
     ADD_STAFF = PGEvent(custom_type())
@@ -67,6 +64,22 @@ class SpecialEvent:
         raise NotImplementedError(f'Special event type must {self.__class__} must override complete property')
 
 
+class TimeChallengeSpecialEvent:
+    pass
+
+
+class CountdownSpecialEvent(SpecialEvent):
+    def __init__(self, count: int) -> None:
+        self.count = count
+
+    def decrement(self):
+        self.count -= 1
+
+    @property
+    def complete(self):
+        return self.count == 0
+
+
 class SpecialEventManager:
     EVENTS = [enable_spinner_grunt_event]
     ENEMY_THRESHOLD_MULTIPLIER = 15
@@ -108,20 +121,4 @@ class SpecialEventManager:
     def end_event(self) -> None:
         self.curr_event = None
         self.event_in_progress = False
-
-
-class TimeChallengeSpecialEvent:
-    pass
-
-
-class CountdownSpecialEvent(SpecialEvent):
-    def __init__(self, count: int) -> None:
-        self.count = count
-
-    def decrement(self):
-        self.count -= 1
-
-    @property
-    def complete(self):
-        return self.count == 0
 

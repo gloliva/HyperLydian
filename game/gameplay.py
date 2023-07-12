@@ -86,7 +86,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
             # handle creating grunts
             elif event.type == Event.ADD_STRAFER_GRUNT.type and \
-                not groups.strafer_grunt_enemies.is_full() and \
+                not groups.strafer_grunt_enemies.is_full and \
                 not special_event_manager.event_queued and \
                 not special_event_manager.event_in_progress and \
                 not debug.NO_ENEMIES:
@@ -94,7 +94,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
             # Handle creating Spinner Grunts
             elif event.type == Event.ADD_SPINNER_GRUNT.type and \
-                not groups.spinner_grunt_enemies.is_full() and \
+                not groups.spinner_grunt_enemies.is_full and \
                 not special_event_manager.event_queued and \
                 not special_event_manager.event_in_progress and \
                 not debug.NO_ENEMIES:
