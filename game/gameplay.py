@@ -1,7 +1,3 @@
-# stdlib imports
-from functools import partial
-from random import choice as randelem
-
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
@@ -21,17 +17,15 @@ from defs import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     GameState,
-    SPECIAL_EVENT_THRESHOLD,
 )
 import debug
 from events import (
     Event,
-    SPECIAL_EVENTS,
-    KillChallengeSpecialEvent,
     initialize_event_timers,
     disable_event_timers,
+    SpecialEventManager,
+
 )
-from exceptions import EventFunctionError
 from sprites.player import create_player, Player
 import sprites.background as background
 import sprites.groups as groups
@@ -61,10 +55,8 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     stat_tracker.control__game_init += 1
 
     # special events
-    special_event = None
+    special_event_manager = SpecialEventManager(game_screen.get_rect())
     event_in_progress = False
-    event_function = None
-    event_threshold = SPECIAL_EVENT_THRESHOLD
 
     gameplay_loop = True
     while gameplay_loop:
@@ -95,24 +87,18 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             # handle creating grunts
             elif event.type == Event.ADD_STRAFER_GRUNT.type and \
                 not groups.strafer_grunt_enemies.is_full() and \
-                not event_in_progress and \
+                not special_event_manager.event_queued and \
+                not special_event_manager.event_in_progress and \
                 not debug.NO_ENEMIES:
                 groups.strafer_grunt_enemies.create_new_grunt()
 
             # Handle creating Spinner Grunts
             elif event.type == Event.ADD_SPINNER_GRUNT.type and \
                 not groups.spinner_grunt_enemies.is_full() and \
-                not event_in_progress and \
+                not special_event_manager.event_queued and \
+                not special_event_manager.event_in_progress and \
                 not debug.NO_ENEMIES:
                 groups.spinner_grunt_enemies.create_new_grunt()
-
-            # Handle special event for spinner grunts
-            elif event.type == Event.SPINNER_GRUNT_ELIPSE_EVENT.type and \
-                not event_in_progress and \
-                not debug.NO_ENEMIES:
-                print('Event in progress')
-                event_in_progress = True
-                event_function = partial(enable_spinner_grunt_event, game_screen.get_rect())
 
             elif event.type == KEYDOWN:
                 # Cycle through players weapons
@@ -150,21 +136,16 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         handle_collisions(player)
 
         # handle special events
-        if stat_tracker.enemies__killed > event_threshold:
-            special_event_type = randelem(SPECIAL_EVENTS)
-            pg.event.post(special_event_type)
+        standard_enemy_count = stat_tracker.enemies__standard_count
+        if special_event_manager.kill_event_should_start(standard_enemy_count):
+            special_event_manager.queue_event()
 
-        if event_in_progress:
-            if special_event is not None and special_event.complete:
-                event_in_progress = False
-                event_threshold *= 2
-                special_event = None
+        # Wait until all remaining enemies are killed before beginning event
+        if special_event_manager.event_queued and stat_tracker.enemies__num_on_screen == 0:
+            special_event_manager.start_event()
 
-            if event_in_progress and stat_tracker.enemies__num_on_screen == 0:
-                if event_function is None:
-                    raise EventFunctionError("Event is in progress but event_function is not set")
-
-                special_event = event_function()
+        if special_event_manager.event_in_progress and special_event_manager.event_is_finished:
+            special_event_manager.end_event()
 
         # screen background
         game_screen.fill((0, 0, 0,))
@@ -253,18 +234,6 @@ def handle_collisions(player: Player):
         stat_tracker.player__hit_distance.add(projectile.get_distance_traveled())
         if projectile.AVAILABLE_VARIANTS is not None and hasattr(projectile, 'variant'):
             stat_tracker.player__projectile_hit_count.increase(projectile.variant)
-
-
-def enable_spinner_grunt_event(game_screen_rect: pg.Rect):
-    num_grunts = groups.spinner_grunt_enemies.num_grunts_per_ellipse
-    start_positions = groups.SpinnerGruntGroup.get_oval_starting_positions(num_grunts, game_screen_rect)
-    special_event = KillChallengeSpecialEvent(num_grunts)
-
-    for idx in range(num_grunts):
-        spawn = start_positions[idx]
-        groups.spinner_grunt_enemies.create_new_grunt(spawn, on_death_callbacks=[special_event.decrement])
-
-    return special_event
 
 
 def end_game():

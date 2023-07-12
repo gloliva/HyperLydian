@@ -1,6 +1,6 @@
 # stdlib imports
 from random import choice as randelem, randint
-from typing import Optional, List
+from typing import Optional, List, Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -8,9 +8,51 @@ import pygame as pg
 # project imports
 from defs import SCREEN_WIDTH, SCREEN_HEIGHT
 from sprites.base import Sprite
+from stats import stat_tracker
 
 
-class StraferGrunt(Sprite):
+class Enemy(Sprite):
+    def __init__(
+            self,
+            image_files: str,
+            health: int,
+            movement_speed: int,
+            spawn_location: Tuple[int, int],
+            weapons,
+            image_scale: float = 1.0,
+            image_rotation: int = 0,
+            on_death_callbacks: Optional[List] = None,
+            special_event: bool = False,
+        ) -> None:
+        super().__init__(
+            image_files=image_files,
+            health=health,
+            movement_speed=movement_speed,
+            spawn_location=spawn_location,
+            weapons=weapons,
+            image_scale=image_scale,
+            image_rotation=image_rotation,
+            on_death_callbacks=on_death_callbacks,
+        )
+
+        # enemy tracking stats
+        stat_tracker.enemies__total += 1
+        if special_event:
+            stat_tracker.enemies__special_count += 1
+        else:
+            stat_tracker.enemies__standard_count += 1
+
+    def on_death(self):
+        # Handle tracking enemy death stats
+        current_time = pg.time.get_ticks()
+        stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
+        stat_tracker.time_last_enemy_killed = current_time
+        stat_tracker.enemies__killed += 1
+        stat_tracker.game__score += self.SCORE
+        super().on_death()
+
+
+class StraferGrunt(Enemy):
     DEFAULT_HEALTH = 20
     SPAWN_SPEED = 8
     STRAFE_SPEED = 3
@@ -19,7 +61,7 @@ class StraferGrunt(Sprite):
     IMAGE_SCALE = 1.5
     SCORE = 10
 
-    def __init__(self, weapons, row: int) -> None:
+    def __init__(self, weapons, row: int, special_event: bool = False) -> None:
         image_files = [
             'spaceships/strafer_grunt.png',
             'spaceships/strafer_grunt_hit.png',
@@ -35,11 +77,13 @@ class StraferGrunt(Sprite):
             spawn_location,
             weapons,
             image_scale=self.IMAGE_SCALE,
+            special_event=special_event,
         )
 
         # Additional Grunt attributes
         self.moving_to_position = True
         self.stopping_point_y = None
+        self.spawn_direction = 1
         self.strafe_direction = 1
         self.grunt_row = row
         self.overlapping_enemies = set()
@@ -67,7 +111,7 @@ class StraferGrunt(Sprite):
             self.rect.right = game_screen_rect.width
             self.switch_strafe_direction()
 
-    def switch_strafe_direction_on_collision(self, enemy: Sprite):
+    def switch_strafe_direction_on_collision(self, enemy: Enemy):
         if self.moving_to_position:
             if isinstance(enemy, StraferGrunt):
                 self.strafe_direction = -1 * enemy.strafe_direction
@@ -98,7 +142,7 @@ class StraferGrunt(Sprite):
         super().attack()
 
 
-class SpinnerGrunt(Sprite):
+class SpinnerGrunt(Enemy):
     DEFAULT_HEALTH = 30
     INITIAL_ROTATION = 0
     SPAWN_SPEED = 6
@@ -110,7 +154,13 @@ class SpinnerGrunt(Sprite):
     SCREEN_BUFFER = 75
     SCORE = 25
 
-    def __init__(self, weapons, spawn: Optional[List] = None, on_death_callbacks: Optional[List] = None) -> None:
+    def __init__(
+            self,
+            weapons,
+            spawn: Optional[List] = None,
+            on_death_callbacks: Optional[List] = None,
+            special_event: bool = False,
+        ) -> None:
         image_files = [
             'spaceships/spinner_grunt.png',
             'spaceships/spinner_grunt_hit.png',
@@ -126,6 +176,7 @@ class SpinnerGrunt(Sprite):
             weapons,
             image_scale=self.IMAGE_SCALE,
             on_death_callbacks=on_death_callbacks,
+            special_event=special_event,
         )
 
         # Additional SpinngerGrunt attributes
@@ -197,5 +248,5 @@ class SpinnerGrunt(Sprite):
         super().attack()
 
 
-class TrackerGrunt(Sprite):
+class TrackerGrunt(Enemy):
     DEFAULT_HEALTH = 2

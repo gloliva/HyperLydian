@@ -242,6 +242,8 @@ class StatTracker:
         self.player__starting_position = ListStat(initial_length=2)
         self.player__starting_angle = Stat(0)
         self.player__position = ListStat(initial_length=2)
+        self.player__vertical_half = TextStat()
+        self.player__horizontal_half = TextStat()
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
@@ -259,6 +261,9 @@ class StatTracker:
         self.weapon__total_shots_fired = Stat(0)
         self.weapon__shots_per_weapon = ListStat(initial_length=2)
 
+        self.enemies__total = Stat(0)
+        self.enemies__standard_count = Stat(0)
+        self.enemies__special_count = Stat(0)
         self.enemies__num_on_screen = Stat(0)
         self.enemies__hit = Stat(0)
         self.enemies__killed = Stat(0)
@@ -275,6 +280,11 @@ class StatTracker:
     def update_stats(self):
         if self.weapon__total_shots_fired > 0:
             self.player__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100
+
+        horizontal_half = "left" if self.player__position.list[0] < SCREEN_WIDTH / 2 else "right"
+        vertical_half = "top" if self.player__position.list[1] < SCREEN_HEIGHT / 2 else "bottom"
+        self.player__horizontal_half.update(horizontal_half)
+        self.player__vertical_half.update(vertical_half)
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}

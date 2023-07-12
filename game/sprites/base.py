@@ -9,7 +9,6 @@ import pygame as pg
 
 # project imports
 from defs import PNG_PATH
-from stats import stat_tracker
 
 
 class Sprite(pg.sprite.Sprite):
@@ -18,7 +17,6 @@ class Sprite(pg.sprite.Sprite):
     PROJECTILE_SPAWN_DELTA = 0
     DRAW_LAYER = 3
     INITIAL_ROTATION = 0
-    COUNT_DEATH_STAT = True
     SCORE = 0
 
     def __init__(
@@ -139,13 +137,6 @@ class Sprite(pg.sprite.Sprite):
         return self.health <= 0
 
     def on_death(self):
-        # Handle tracking enemy death stats
-        if self.COUNT_DEATH_STAT:
-            current_time = pg.time.get_ticks()
-            stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
-            stat_tracker.time_last_enemy_killed = current_time
-            stat_tracker.enemies__killed += 1
-            stat_tracker.game__score += self.SCORE
         for callback in self.on_death_callbacks:
             callback()
         self.kill()

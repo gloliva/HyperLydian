@@ -29,7 +29,6 @@ class Player(Sprite):
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
-    COUNT_DEATH_STAT = False
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [

@@ -2,5 +2,5 @@ class AssetLoadError(Exception):
     pass
 
 
-class EventFunctionError(Exception):
+class SpecialEventError(Exception):
     pass

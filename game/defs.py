@@ -19,9 +19,6 @@ class GameState(Enum):
     QUIT = 4
 
 
-SPECIAL_EVENT_THRESHOLD = 10
-
-
 # OSC constants
 ADDRESS = '127.0.0.1'  # localhost
 PORT = 8001

@@ -107,7 +107,12 @@ class SpinnerGruntGroup(Group):
         self.max_grunts = self.INITIAL_MAX_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
 
-    def create_new_grunt(self, spawn: Optional[List] = None, on_death_callbacks: Optional[List] = None) -> SpinnerGrunt:
+    def create_new_grunt(
+        self,
+        spawn: Optional[List] = None,
+        on_death_callbacks: Optional[List] = None,
+        special_event: bool = False,
+        ) -> SpinnerGrunt:
         # Create grunt weapon
         variant_number = randint(0, projectiles.RedAccidental.NUM_VARIANTS - 1)
         grunt_weapon = Weapon(
@@ -128,7 +133,7 @@ class SpinnerGruntGroup(Group):
             args.append(spawn)
         if on_death_callbacks is not None:
             args.append(on_death_callbacks)
-        grunt = SpinnerGrunt(*args)
+        grunt = SpinnerGrunt(*args, special_event=special_event)
 
         # Add grunt to all groups
         self.add(grunt)

@@ -1,6 +1,15 @@
+# stdlib imports
+from functools import partial
+from random import choice as randelem
+
 # 3rd-party imports
+import pygame as pg
 from pygame.event import custom_type, Event as PGEvent
 from pygame.time import set_timer as event_timer
+
+# project imports
+from exceptions import SpecialEventError
+import sprites.groups as groups
 
 
 # Custom Events
@@ -27,33 +36,6 @@ class Event:
     DECREASE_DIFFICULTY = PGEvent(custom_type())
 
 
-class SpecialEvent:
-    EVENTS = [Event.SPINNER_GRUNT_ELIPSE_EVENT]
-
-    @property
-    def complete(self):
-        raise NotImplementedError(f'Special event type must {self.__class__} must override complete property')
-
-
-class TimeChallengeSpecialEvent:
-    pass
-
-
-class KillChallengeSpecialEvent(SpecialEvent):
-    def __init__(self, num_enemies: int) -> None:
-        self.num_enemies = num_enemies
-
-    def decrement(self):
-        self.num_enemies -= 1
-
-    @property
-    def complete(self):
-        return self.num_enemies == 0
-
-
-SPECIAL_EVENTS = [Event.SPINNER_GRUNT_ELIPSE_EVENT]
-
-
 # Event timers
 def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
@@ -65,3 +47,81 @@ def initialize_event_timers() -> None:
 def disable_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 0)
     event_timer(Event.ADD_SPINNER_GRUNT, 0)
+
+
+def enable_spinner_grunt_event(game_screen_rect: pg.Rect):
+    num_grunts = groups.spinner_grunt_enemies.num_grunts_per_ellipse
+    start_positions = groups.SpinnerGruntGroup.get_oval_starting_positions(num_grunts, game_screen_rect)
+    special_event = CountdownSpecialEvent(num_grunts)
+
+    for idx in range(num_grunts):
+        spawn = start_positions[idx]
+        groups.spinner_grunt_enemies.create_new_grunt(spawn, on_death_callbacks=[special_event.decrement], special_event=True)
+
+    return special_event
+
+
+class SpecialEvent:
+    @property
+    def complete(self):
+        raise NotImplementedError(f'Special event type must {self.__class__} must override complete property')
+
+
+class SpecialEventManager:
+    EVENTS = [enable_spinner_grunt_event]
+    ENEMY_THRESHOLD_MULTIPLIER = 15
+    ENEMY_THRESHOLD_ADDITION = 2
+
+    def __init__(self, game_screen_rect: pg.Rect) -> None:
+        self.event_queue = []
+        self.event_count = 0
+        self.event_queued = False
+        self.event_in_progress = False
+        self.curr_event: SpecialEvent = None
+        self.game_screen_rect: pg.Rect = game_screen_rect
+
+    @property
+    def event_is_finished(self) -> bool:
+        return self.curr_event is not None and self.curr_event.complete
+
+    def kill_event_should_start(self, standard_enemies: int) -> bool:
+        threshold_increase = (self.event_count * self.ENEMY_THRESHOLD_ADDITION)
+        return standard_enemies > ((self.event_count + 1) * self.ENEMY_THRESHOLD_MULTIPLIER) + threshold_increase
+
+    def queue_event(self) -> None:
+        self.event_count += 1
+        self.event_queued = True
+        event_function = randelem(self.EVENTS)
+        self.event_queue.append(partial(event_function, self.game_screen_rect))
+
+    def start_event(self) -> None:
+        self.event_in_progress = True
+        self.event_queued = False
+
+        # Get event from queue and begin event
+        if not self.event_queue:
+            raise SpecialEventError("Special Event queue is empty but attempting to start an event")
+
+        event_function = self.event_queue.pop(0)
+        self.curr_event = event_function()
+
+    def end_event(self) -> None:
+        self.curr_event = None
+        self.event_in_progress = False
+
+
+class TimeChallengeSpecialEvent:
+    pass
+
+
+class CountdownSpecialEvent(SpecialEvent):
+    def __init__(self, count: int) -> None:
+        self.count = count
+
+    def decrement(self):
+        self.count -= 1
+
+    @property
+    def complete(self):
+        return self.count == 0
+
