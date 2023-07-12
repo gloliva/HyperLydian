@@ -237,6 +237,7 @@ class StatTracker:
         self.control__game_init = Stat(0)
 
         self.game__score = Stat(0)
+        self.game__total_frames = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
 
         self.player__starting_position = ListStat(initial_length=2)
@@ -245,7 +246,10 @@ class StatTracker:
         self.player__vertical_half = TextStat()
         self.player__horizontal_half = TextStat()
         self.player__frames_moving = Stat(0)
+        self.player__frames_still = Stat(0)
         self.player__frames_rotating = Stat(0)
+        self.player__frames_firing = Stat(0)
+        self.player__percent_firing_weapon = Stat(0.)
         self.player__percent_moving_over_rotating = Stat(50.)
         self.player__frames_per_screen_quadrant = ListStat(initial_length=4)
         self.player__curr_velocity = ListStat(initial_length=2)
@@ -307,10 +311,14 @@ class StatTracker:
             else:
                 self.player__frames_per_screen_quadrant.add_at_index(3, 1)
 
-        # Update movement vs rotating ratio
+        # Update movement vs rotating vs non-movement ratio
         total = self.player__frames_moving + self.player__frames_rotating
         if total > 0:
             self.player__percent_moving_over_rotating = (self.player__frames_moving / total) * 100
+
+        # Update firing vs not ratio
+        if self.game__total_frames > 0:
+            self.player__percent_firing_weapon = self.player__frames_firing / self.game__total_frames
 
 
 

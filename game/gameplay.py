@@ -56,10 +56,12 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
     # special events
     special_event_manager = SpecialEventManager(game_screen.get_rect())
-    event_in_progress = False
 
     gameplay_loop = True
     while gameplay_loop:
+        # update frame counter
+        stat_tracker.game__total_frames += 1
+
         # event handler
         for event in pg.event.get():
             # handle exit

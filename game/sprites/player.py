@@ -98,6 +98,8 @@ class Player(Sprite):
             stat_tracker.player__frames_rotating += 1
         if sum(movement_vector) != 0:
             stat_tracker.player__frames_moving += 1
+        else:
+            stat_tracker.player__frames_still += 1
 
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:
@@ -115,6 +117,7 @@ class Player(Sprite):
             projectile_center=attack_center,
             movement_angle=self.current_rotation,
         )
+        stat_tracker.player__frames_firing += 1
 
     def add_projectiles_in_range(self, projectiles: List[projectiles.Projectile]):
         for projectile in projectiles:
