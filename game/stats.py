@@ -244,6 +244,10 @@ class StatTracker:
         self.player__position = ListStat(initial_length=2)
         self.player__vertical_half = TextStat()
         self.player__horizontal_half = TextStat()
+        self.player__frames_moving = Stat(0)
+        self.player__frames_rotating = Stat(0)
+        self.player__percent_moving_over_rotating = Stat(50.)
+        self.player__frames_per_screen_quadrant = ListStat(initial_length=4)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
@@ -278,13 +282,37 @@ class StatTracker:
             self.osc.send_full_bundle()
 
     def update_stats(self):
+        # Update player accuracy
         if self.weapon__total_shots_fired > 0:
             self.player__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100
 
+        # Update player position stats
         horizontal_half = "left" if self.player__position.list[0] < SCREEN_WIDTH / 2 else "right"
         vertical_half = "top" if self.player__position.list[1] < SCREEN_HEIGHT / 2 else "bottom"
         self.player__horizontal_half.update(horizontal_half)
         self.player__vertical_half.update(vertical_half)
+
+        if vertical_half == "top":
+            # top left == quadrant 0
+            if horizontal_half == "left":
+                self.player__frames_per_screen_quadrant.add_at_index(0, 1)
+            # top right == quadrant 1
+            else:
+                self.player__frames_per_screen_quadrant.add_at_index(1, 1)
+        else:
+            # bottom left == quadrant 2
+            if horizontal_half == "left":
+                self.player__frames_per_screen_quadrant.add_at_index(2, 1)
+            # bottom right == quadrant 3
+            else:
+                self.player__frames_per_screen_quadrant.add_at_index(3, 1)
+
+        # Update movement vs rotating ratio
+        total = self.player__frames_moving + self.player__frames_rotating
+        if total > 0:
+            self.player__percent_moving_over_rotating = (self.player__frames_moving / total) * 100
+
+
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}

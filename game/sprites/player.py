@@ -95,6 +95,9 @@ class Player(Sprite):
         stat_tracker.player__angle.update(self.current_rotation)
         if rotation_amount != 0:
             stat_tracker.player__last_rotation_direction.update(rotation_amount)
+            stat_tracker.player__frames_rotating += 1
+        if sum(movement_vector) != 0:
+            stat_tracker.player__frames_moving += 1
 
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:
