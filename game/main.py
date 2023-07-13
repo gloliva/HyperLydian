@@ -50,6 +50,7 @@ def main():
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     """Stop all game loops and quit game"""
     # turn off music
+    stat_tracker.control__menu_init.update(0)
     stat_tracker.control__max_init -= 1
     stat_tracker.send_stats()
     print('Quitting the game')
