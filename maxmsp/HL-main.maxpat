@@ -46,7 +46,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 742.405092000961304, 1617.47061562538147, 65.0, 22.0 ],
-					"text" : "tempo 180"
+					"text" : "tempo 165"
 				}
 
 			}
@@ -162,6 +162,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 142.0, 140.25, 291.0, 87.0 ],
+									"presentation_linecount" : 6,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 49, 47, 116, 101, 109, 112, 111, 47, 98, 101, 97, 116, 95, 100, 105, 118, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 8, 0, 0, 0, 24, 47, 49, 47, 112, 97, 116, 116, 101, 114, 110, 47, 107, 101, 121, 0, 0, 44, 105, 0, 0, 0, 0, 0, 7, 0, 0, 0, 28, 47, 50, 47, 116, 101, 109, 112, 111, 47, 98, 101, 97, 116, 95, 100, 105, 118, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 16, 0, 0, 0, 24, 47, 50, 47, 112, 97, 116, 116, 101, 114, 110, 47, 107, 101, 121, 0, 0, 44, 105, 0, 0, 0, 0, 0, 7, 0, 0, 0, 28, 47, 51, 47, 116, 101, 109, 112, 111, 47, 98, 101, 97, 116, 95, 100, 105, 118, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 16, 0, 0, 0, 24, 47, 51, 47, 112, 97, 116, 116, 101, 114, 110, 47, 107, 101, 121, 0, 0, 44, 105, 0, 0, 0, 0, 0, 7 ],
 									"saved_bundle_length" : 196,
 									"text" : "/1/tempo/beat_div : 8,\n/1/pattern/key : 7,\n/2/tempo/beat_div : 16,\n/2/pattern/key : 7,\n/3/tempo/beat_div : 16,\n/3/pattern/key : 7"
@@ -3372,7 +3373,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2667.0, -146.0, 1372.0, 779.0 ],
+						"rect" : [ 2594.0, -146.0, 1372.0, 779.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4538,7 +4539,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 96.0, 839.75, 342.0, 59.0 ],
-									"text" : "/filter/cutoff : 2300.84,\n/filter/gain : 1.83333,\n/filter/resonance : 1.69333"
+									"text" : "/filter/cutoff : 1487.98,\n/filter/gain : 1.58333,\n/filter/resonance : 2.04"
 								}
 
 							}
@@ -7121,7 +7122,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 669.405092000961304, 1669.25, 65.0, 22.0 ],
-					"text" : "tempo 130"
+					"text" : "tempo 165"
 				}
 
 			}
@@ -8015,8 +8016,8 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 162.0, 1731.5, 56.0, 22.0 ],
 					"restore" : 					{
-						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.884000000000001, 1, 1, 0.416, 2, 0, 0.824, 2, 1, 0.844, 3, 0, 0.596, 3, 1, 0.592 ],
-						"live.gain~" : [ -32.401690597498842 ]
+						"GlobalMixer" : [ 0, 0, 0.752, 0, 1, 0.752, 1, 0, 0.192000000000001, 1, 1, 0.68, 2, 0, 0.876, 2, 1, 0.572, 3, 0, 0.596, 3, 1, 0.592 ],
+						"live.gain~" : [ -23.496641963872172 ]
 					}
 ,
 					"text" : "autopattr",
@@ -8091,7 +8092,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 469.5, 1786.0, 257.0, 85.0 ],
-					"text" : "/bars : 276,\n/beats : 4,\n/units : 240.,\n/tempo/bpm : 180.,\n/time_sig : [4, 4]"
+					"text" : "/bars : 104,\n/beats : 3,\n/units : 0.,\n/tempo/bpm : 165.,\n/time_sig : [4, 4]"
 				}
 
 			}
@@ -8472,7 +8473,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 101.400000000000006, 363.558875560760498, 335.799999999999955, 110.0 ],
-					"text" : "/total : 0,\n/standard_count : 0,\n/special_count : 0,\n/num_on_screen : 0,\n/hit : 0,\n/killed : 0,\n/hit_distance : [inf, 0, nil, -inf]"
+					"text" : "/total : 1,\n/standard_count : 1,\n/special_count : 0,\n/num_on_screen : 1,\n/hit : 0,\n/killed : 0,\n/hit_distance : [inf, 0, nil, -inf]"
 				}
 
 			}
@@ -8513,7 +8514,7 @@
 						"client_rect" : [ 4, 44, 358, 172 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 2316, 133, 3423, 863 ]
+						"storage_rect" : [ 2217, 71, 3743, 801 ]
 					}
 ,
 					"text" : "pattrstorage music",
@@ -8545,7 +8546,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 52.200000000000003, 508.470562219619751, 385.0, 341.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [720, 800],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames_moving : 0,\n/frames_still : 88,\n/frames_rotating : 0,\n/frames_firing : 0,\n/percent_firing_weapon : 0.,\n/percent_moving_over_rotating : 50.,\n/frames_per_screen_quadrant : [0, 0, 0, 88],\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 90,\n/last_rotation_direction : 0,\n/accuracy : 0.,\n/avg_time_between_kills : [inf, 0, nil, -inf],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 0,\n/projectile_hit_count : [\"rest\", 0, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [inf, 0, nil, -inf],\n/dodges : 0"
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [695, 650],\n/vertical_half : \"bottom\",\n/horizontal_half : \"left\",\n/frames_moving : 47,\n/frames_still : 176,\n/frames_rotating : 0,\n/frames_firing : 0,\n/percent_firing_weapon : 0.,\n/percent_moving_over_rotating : 100.,\n/frames_per_screen_quadrant : [0, 0, 128, 95],\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 90,\n/last_rotation_direction : 0,\n/accuracy : 0.,\n/avg_time_between_kills : [inf, 0, nil, -inf],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 0,\n/projectile_hit_count : [\"rest\", 0, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [inf, 0, nil, -inf],\n/dodges : 0"
 				}
 
 			}
@@ -10020,13 +10021,6 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "osc~.maxpat",
-				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "patterninverter.js",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
@@ -10052,6 +10046,13 @@
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "waveselect~.maxpat",
+				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
 				"implicit" : 1
 			}
  ],
