@@ -16,6 +16,7 @@ from pygame.locals import (
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import sprites.groups as groups
 import sprites.background as background
+from stats import stat_tracker
 
 
 pygame.font.init()
@@ -112,6 +113,10 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
         staff = background.Staff(MENU_SCREEN.get_rect(), on_load=True, load_number=i)
         groups.staff.add(staff)
         groups.all_sprites.add(staff)
+
+    # update stats
+    stat_tracker.control__menu_init += 1
+    stat_tracker.send_stats()
 
     # start main menu loop
     main_menu_loop = True

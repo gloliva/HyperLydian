@@ -223,6 +223,7 @@ class StatTracker:
         # Stats that track throughout each playthrough
         self.control__max_init = Stat(0)
         self.control__game_init = Stat(0)
+        self.control__menu_init = Stat(0)
         self.control__num_voices = Stat(NUM_VOICES)
         self.control__screen_width = Stat(SCREEN_WIDTH)
         self.control__screen_height = Stat(SCREEN_HEIGHT)
@@ -235,6 +236,7 @@ class StatTracker:
         self.time_last_enemy_killed = start_time_ms
 
         self.control__game_init = Stat(0)
+        self.control__menu_init = Stat(0)
 
         self.game__score = Stat(0)
         self.game__total_frames = Stat(0)

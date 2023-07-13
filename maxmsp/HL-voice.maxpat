@@ -916,7 +916,20 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-9",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 843.0, 371.0, 29.5, 22.0 ],
+									"text" : "0"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-6",
 									"maxclass" : "newobj",
@@ -972,7 +985,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 194.0, 289.0, 105.0, 38.0 ],
+									"patching_rect" : [ 72.0, 316.823529362678528, 105.0, 38.0 ],
 									"text" : "A scale degree of -1 is a rest"
 								}
 
@@ -985,7 +998,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 158.0, 323.823529362678528, 24.0, 24.0 ]
+									"patching_rect" : [ 843.0, 330.823529362678528, 24.0, 24.0 ]
 								}
 
 							}
@@ -996,7 +1009,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 50.0, 289.0, 127.0, 22.0 ],
+									"patching_rect" : [ 50.0, 289.0, 812.0, 22.0 ],
 									"text" : "o.if /scale/degree >= 0"
 								}
 
@@ -1022,7 +1035,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 197.0, 836.0, 50.0, 22.0 ]
+									"patching_rect" : [ 197.0, 862.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -1078,7 +1091,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 197.0, 869.0, 30.0, 30.0 ]
+									"patching_rect" : [ 197.0, 895.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -1165,6 +1178,21 @@
 								"patchline" : 								{
 									"destination" : [ "obj-70", 0 ],
 									"source" : [ "obj-68", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"source" : [ "obj-70", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-59", 0 ],
+									"midpoints" : [ 852.5, 841.0, 206.5, 841.0 ],
+									"source" : [ "obj-9", 0 ]
 								}
 
 							}
