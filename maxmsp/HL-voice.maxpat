@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2142.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,30 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-56",
+					"lockeddragscroll" : 0,
+					"lockedsize" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "waveselect~.maxpat",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 44.0, 1503.0, 225.0, 64.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ -0.47058892250061, 636.5, 225.0, 64.0 ],
+					"varname" : "waveselect~",
+					"viewvisibility" : 1
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-80",
 					"maxclass" : "button",
@@ -433,7 +457,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 1173.25, 1320.0, 56.0, 22.0 ],
+					"patching_rect" : [ 1036.25, 1507.0, 56.0, 22.0 ],
 					"restore" : 					{
 						"global-amplitude" : [ 1.0 ]
 					}
@@ -590,30 +614,6 @@
 					"patching_rect" : [ 44.0, 1242.0, 225.0, 84.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ -0.47058892250061, 494.0, 225.0, 87.0 ],
-					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgmode" : 0,
-					"border" : 0,
-					"clickthrough" : 0,
-					"enablehscroll" : 0,
-					"enablevscroll" : 0,
-					"id" : "obj-26",
-					"lockeddragscroll" : 0,
-					"lockedsize" : 0,
-					"maxclass" : "bpatcher",
-					"name" : "osc~.maxpat",
-					"numinlets" : 4,
-					"numoutlets" : 1,
-					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 44.0, 1519.0, 225.0, 65.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 637.0, 225.0, 64.0 ],
-					"varname" : "osc~",
 					"viewvisibility" : 1
 				}
 
@@ -1396,13 +1396,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-30", 0 ],
-					"source" : [ "obj-26", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-28", 0 ],
 					"source" : [ "obj-27", 0 ]
 				}
@@ -1410,7 +1403,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-26", 0 ],
+					"destination" : [ "obj-56", 0 ],
 					"source" : [ "obj-28", 0 ]
 				}
 
@@ -1731,22 +1724,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-26", 2 ],
-					"midpoints" : [ 879.5, 1472.5, 190.833333333333343, 1472.5 ],
-					"source" : [ "obj-51", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-26", 3 ],
-					"midpoints" : [ 921.5, 1501.5, 259.5, 1501.5 ],
-					"source" : [ "obj-52", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-27", 5 ],
 					"midpoints" : [ 836.5, 1231.5, 259.5, 1231.5 ],
 					"order" : 1,
@@ -1781,6 +1758,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-58", 0 ],
 					"source" : [ "obj-55", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-30", 0 ],
+					"source" : [ "obj-56", 0 ]
 				}
 
 			}
@@ -1956,7 +1940,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "osc~.maxpat",
+				"name" : "waveselect~.maxpat",
 				"bootpath" : "~/workspace/projects/hyperlydian/maxmsp",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
