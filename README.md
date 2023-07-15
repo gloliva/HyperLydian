@@ -1,5 +1,9 @@
 # HyperLydian
 
+HyperLydian is a top-down 2D space shooter that creates and evolves its own soundtrack based on player performance and play style. HyperLydian is less of a game that makes music and more of an *instrument* styled as a game.
+
+In a not-to-distance future, a race of audio-challenged aliens are on the brink of invading Earth in a plot to degrade humanity's greatest achievemnt: its music. It is up to our lone protagnist Lydian to fight off the invaders with the powers of infectious tunes and danceworthy beats... and GUNS!
+
 ## Install Instructions
 
 ### Download the Executable
@@ -48,12 +52,6 @@ You can view some basic stats (like number of enemies killed) in the terminal po
 ## Where things are at
 
 Screen size is 1440x900 (MacBook 13" default scaled resolution). Will maybe handle additional resolutions later; resize at your own risk.
-
-Music, obviously. OSC data will be sent to Max/MSP for Music generation. This is what the PyOSC stuff is for.
-
-No GUI yet, but it will happen.
-
-Eventually there will be controller support.
 
 The menu is just a placeholder, will be fleshed out towards the end.
 
