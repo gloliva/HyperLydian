@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-15",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "FullPacket", "FullPacket" ],
+					"patching_rect" : [ 352.333333333333371, 467.970562219619751, 106.0, 22.0 ],
+					"text" : "o.if bound(/tempo)"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -56,11 +68,11 @@
 					"comment" : "Note Frequency (Hz)",
 					"hint" : "Note Frequency (Hz)",
 					"id" : "obj-11",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 84.0, 178.0, 30.0, 30.0 ]
 				}
 
@@ -83,7 +95,7 @@
 					"comment" : "MS Per Beat (float)",
 					"hint" : "MS Per Beat (float)",
 					"id" : "obj-5",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -121,11 +133,11 @@
 					"comment" : "Beat Divisions (int)",
 					"hint" : "Beat Divisions (int)",
 					"id" : "obj-16",
-					"index" : 0,
+					"index" : 6,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 634.0, 17.0, 30.0, 30.0 ]
 				}
 
@@ -244,7 +256,7 @@
 					"comment" : "Sustain Type (0-3)",
 					"hint" : "Sustain Type (0-3)\n\n0 - AR\n1 - A\n2 - S\n3 - R",
 					"id" : "obj-82",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -616,11 +628,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-23",
+					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 33.0 ]
+					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 97.0 ],
+					"text" : "/curve/start : 0.,\n/curve/seq : [1., 2.28866, -0.6],\n/ms_per_beat : 222,\n/curve/len : 3,\n/curve/idxs : 1,\n/curve/x_vals : 2.28866"
 				}
 
 			}
@@ -667,7 +681,7 @@
 					"cool" : 1,
 					"hint" : "Divisor or Multiple of Clock Pulse",
 					"id" : "obj-7",
-					"index" : 0,
+					"index" : 5,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -694,7 +708,7 @@
 					"comment" : "Tempo in BPM",
 					"cool" : 1,
 					"id" : "obj-4",
-					"index" : 0,
+					"index" : 4,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -712,7 +726,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 796.083333333333599, 617.441124439239502, 79.5, 22.0 ],
 					"restore" : 					{
-						"envelope" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 0.011173184357542, 1.0, 2, -0.6, 1.0, 0.0, 0, -0.55, "curve" ]
+						"envelope" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0, 0.0, 0.010309278350515, 1.0, 2, -0.6, 1.0, 0.0, 0, 0.65, "curve" ]
 					}
 ,
 					"text" : "autopattr",
@@ -726,7 +740,7 @@
 					"comment" : "Envelope Output Value (Signal)",
 					"hint" : "Envelope Output Value (Signal)",
 					"id" : "obj-2",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -740,11 +754,11 @@
 					"comment" : "Bang to output AD Env",
 					"hint" : "Bang to output AD Env",
 					"id" : "obj-1",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 11.0, 36.0, 30.0, 30.0 ]
 				}
 
@@ -801,7 +815,7 @@
 			}
 , 			{
 				"box" : 				{
-					"addpoints_with_curve" : [ 0.0, 0.0, 0, 0.0, 0.011173184357542, 1.0, 2, -0.6, 1.0, 0.0, 0, -0.55 ],
+					"addpoints_with_curve" : [ 0.0, 0.0, 0, 0.0, 0.010309278350515, 1.0, 2, -0.6, 1.0, 0.0, 0, 0.65 ],
 					"autosustain" : 1,
 					"domain" : 1.0,
 					"grid" : 2,
@@ -943,6 +957,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-199", 0 ],
+					"source" : [ "obj-15", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-46", 0 ],
 					"source" : [ "obj-155", 1 ]
 				}
@@ -1000,7 +1021,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-199", 0 ],
+					"destination" : [ "obj-15", 0 ],
 					"source" : [ "obj-201", 0 ]
 				}
 
@@ -1186,48 +1207,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "o.collect.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.cond.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.display.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.expr.codebox.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.if.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.pack.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.select.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.union.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.var.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbomonokai",
 				"default" : 				{

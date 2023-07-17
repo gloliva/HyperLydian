@@ -71,7 +71,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1191.75, 1576.0, 45.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 488.666666666666742, 735.5, 47.0, 20.0 ],
+					"presentation_rect" : [ 494.666666666666742, 740.5, 47.0, 20.0 ],
 					"text" : "Tempo"
 				}
 
@@ -89,7 +89,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 79.666666666666686, 370.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 537.666666666666742, 735.5, 50.0, 22.0 ]
+					"presentation_rect" : [ 543.666666666666742, 740.5, 50.0, 22.0 ]
 				}
 
 			}
@@ -102,7 +102,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1191.75, 1493.0, 93.529394388198853, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 8.02941107749939, 736.5, 107.0, 20.0 ],
+					"presentation_rect" : [ 14.02941107749939, 741.5, 107.0, 20.0 ],
 					"text" : "Tempo Control"
 				}
 
@@ -131,7 +131,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 115.666666666666671, 436.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 403.25, 735.5, 50.0, 22.0 ],
+					"presentation_rect" : [ 409.25, 740.5, 50.0, 22.0 ],
 					"varname" : "beat-multiplier"
 				}
 
@@ -145,7 +145,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1191.75, 1547.0, 87.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 315.25, 735.5, 86.0, 20.0 ],
+					"presentation_rect" : [ 321.25, 740.5, 86.0, 20.0 ],
 					"text" : "Beat Multiplier"
 				}
 
@@ -159,7 +159,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1191.75, 1520.0, 87.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 145.5, 736.5, 89.0, 20.0 ],
+					"presentation_rect" : [ 151.5, 741.5, 89.0, 20.0 ],
 					"text" : "Beat Divisions"
 				}
 
@@ -188,7 +188,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 155.027777777777771, 475.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 236.02941107749939, 736.5, 50.0, 22.0 ],
+					"presentation_rect" : [ 242.02941107749939, 741.5, 50.0, 22.0 ],
 					"varname" : "beat-divisions"
 				}
 
@@ -211,7 +211,7 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 44.0, 1546.0, 225.0, 64.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 636.5, 225.0, 64.0 ],
+					"presentation_rect" : [ 5.52941107749939, 641.5, 225.0, 64.0 ],
 					"varname" : "waveselect~",
 					"viewvisibility" : 1
 				}
@@ -471,7 +471,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1044.25, 1515.0, 26.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 8.02941107749939, 704.5, 25.0, 20.0 ],
+					"presentation_rect" : [ 14.02941107749939, 709.5, 25.0, 20.0 ],
 					"text" : "On"
 				}
 
@@ -505,7 +505,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 44.0, 76.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 34.02941107749939, 702.5, 24.0, 24.0 ]
+					"presentation_rect" : [ 40.02941107749939, 707.5, 24.0, 24.0 ]
 				}
 
 			}
@@ -518,7 +518,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1044.25, 1493.0, 112.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 58.02941107749939, 704.5, 107.0, 20.0 ],
+					"presentation_rect" : [ 64.02941107749939, 709.5, 107.0, 20.0 ],
 					"text" : "Global Amplitude"
 				}
 
@@ -547,7 +547,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 171.0, 2058.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 165.0, 703.5, 50.0, 22.0 ],
+					"presentation_rect" : [ 171.0, 708.5, 50.0, 22.0 ],
 					"varname" : "global-amplitude"
 				}
 
@@ -582,7 +582,7 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 44.0, 1733.0, 393.0, 239.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 218.52941107749939, 494.0, 393.0, 238.0 ],
+					"presentation_rect" : [ 224.52941107749939, 499.0, 393.0, 238.0 ],
 					"varname" : "filterselect~",
 					"viewvisibility" : 1
 				}
@@ -618,7 +618,7 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 44.0, 1443.0, 225.0, 62.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 577.0, 225.0, 62.0 ],
+					"presentation_rect" : [ 5.52941107749939, 582.0, 225.0, 62.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -641,7 +641,7 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 44.0, 1285.0, 225.0, 84.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 494.0, 225.0, 87.0 ],
+					"presentation_rect" : [ 5.52941107749939, 499.0, 225.0, 87.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -1256,7 +1256,7 @@
 					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 439.0, 110.0, 610.0, 329.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 0.0, 612.0, 330.0 ],
+					"presentation_rect" : [ 5.52941107749939, 5.0, 612.0, 330.0 ],
 					"varname" : "HL-sequence",
 					"viewvisibility" : 1
 				}
@@ -1280,7 +1280,7 @@
 					"outlettype" : [ "signal", "" ],
 					"patching_rect" : [ 998.0, 1173.0, 608.0, 172.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 325.0, 612.0, 172.0 ],
+					"presentation_rect" : [ 5.52941107749939, 330.0, 612.0, 172.0 ],
 					"varname" : "HL-envelope",
 					"viewvisibility" : 1
 				}
@@ -1299,7 +1299,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1036.25, 1363.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 697.5, 221.0, 34.0 ],
+					"presentation_rect" : [ 5.52941107749939, 702.5, 221.0, 34.0 ],
 					"proportion" : 0.5,
 					"rounded" : 12
 				}
@@ -1318,9 +1318,28 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1174.25, 1363.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.47058892250061, 729.5, 612.0, 34.0 ],
+					"presentation_rect" : [ 5.52941107749939, 733.5, 609.48427677154541, 34.0 ],
 					"proportion" : 0.5,
 					"rounded" : 12
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.145098039215686, 0.43921568627451, 0.592156862745098, 1.0 ],
+					"border" : 2,
+					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"id" : "obj-7",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1315.508742690086365, 1363.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 0.145235508680344, 0.104895055294037, 621.579979807138443, 773.325174570083618 ],
+					"proportion" : 0.5,
+					"rounded" : 2
 				}
 
 			}
