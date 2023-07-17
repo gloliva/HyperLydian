@@ -6,7 +6,6 @@
 				"id" : 1,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.504, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -23.496641963872172 ],
 					"HL-voice::global-amplitude" : [ 3.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -48,7 +47,6 @@
 				"id" : 2,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.504, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -23.496641963872172 ],
 					"HL-voice::global-amplitude" : [ 3.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -90,7 +88,6 @@
 				"id" : 3,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.492, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 3.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -132,7 +129,6 @@
 				"id" : 4,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.492, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 3.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -174,7 +170,6 @@
 				"id" : 5,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -216,7 +211,6 @@
 				"id" : 6,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 1 ],
@@ -258,7 +252,6 @@
 				"id" : 7,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [  ],
 					"HL-voice::beat-multiplier" : [  ],
@@ -300,7 +293,6 @@
 				"id" : 8,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 2 ],
@@ -342,7 +334,6 @@
 				"id" : 9,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 2 ],
@@ -384,7 +375,6 @@
 				"id" : 10,
 				"data" : 				{
 					"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ],
-					"live.gain~" : [ -24.62216303844373 ],
 					"HL-voice::global-amplitude" : [ 5.0 ],
 					"HL-voice::beat-divisions" : [ 16 ],
 					"HL-voice::beat-multiplier" : [ 2 ],
