@@ -266,6 +266,7 @@ class StatTracker:
         self.player__projectile_hit_count = CounterStat(PROJECTILE_TYPES)
         self.player__hit_distance = TrackerStat()
         self.player__dodges = Stat(0)
+        self.player__alive_projectiles = Stat(0)
 
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
@@ -274,10 +275,11 @@ class StatTracker:
         self.enemies__total = Stat(0)
         self.enemies__standard_count = Stat(0)
         self.enemies__special_count = Stat(0)
-        self.enemies__num_on_screen = Stat(0)
+        self.enemies__num_on_screen = TrackerStat(0)
         self.enemies__hit = Stat(0)
         self.enemies__killed = Stat(0)
         self.enemies__hit_distance = TrackerStat()
+        self.enemies__alive_projectiles = Stat(0)
 
         self.game__play_count += 1
 
@@ -320,7 +322,7 @@ class StatTracker:
 
         # Update firing vs not ratio
         if self.game__total_frames > 0:
-            self.player__percent_firing_weapon = self.player__frames_firing / self.game__total_frames
+            self.player__percent_firing_weapon = (self.player__frames_firing / self.game__total_frames) * 100
 
 
 

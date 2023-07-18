@@ -143,7 +143,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             special_event_manager.queue_event()
 
         # Wait until all remaining enemies are killed before beginning event
-        if special_event_manager.event_queued and stat_tracker.enemies__num_on_screen == 0:
+        if special_event_manager.event_queued and stat_tracker.enemies__num_on_screen.last == 0:
             special_event_manager.start_event()
 
         if special_event_manager.event_in_progress and special_event_manager.event_is_finished:
@@ -164,7 +164,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # update stats tracker
         stat_tracker.player__position.update(player.rect.centerx, player.rect.centery)
-        stat_tracker.enemies__num_on_screen.update(len(groups.all_enemies))
+        stat_tracker.player__alive_projectiles.update(len(groups.player_projectiles))
+        stat_tracker.enemies__num_on_screen.add(len(groups.all_enemies))
+        stat_tracker.enemies__alive_projectiles.update(len(groups.enemy_projectiles))
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
         stat_tracker.send_stats()
