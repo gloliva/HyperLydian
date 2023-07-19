@@ -96,7 +96,7 @@ class Player(Sprite):
         if rotation_amount != 0:
             stat_tracker.player__last_rotation_direction.update(rotation_amount)
             stat_tracker.player__frames__rotating += 1
-        if sum(movement_vector) != 0:
+        if speed > 0:
             stat_tracker.player__frames__moving += 1
         else:
             stat_tracker.player__frames__still += 1
