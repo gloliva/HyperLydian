@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Union
 
 # project imports
 import debug
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, NUM_VOICES
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, NUM_VOICES, FPS
 from osc_client import osc, OSCHandler
 
 
@@ -224,6 +224,7 @@ class StatTracker:
         self.control__max_init = Stat(0)
         self.control__game_init = Stat(0)
         self.control__menu_init = Stat(0)
+        self.control__fps = Stat(FPS)
         self.control__num_voices = Stat(NUM_VOICES)
         self.control__screen_width = Stat(SCREEN_WIDTH)
         self.control__screen_height = Stat(SCREEN_HEIGHT)
@@ -247,13 +248,13 @@ class StatTracker:
         self.player__position = ListStat(initial_length=2)
         self.player__vertical_half = TextStat()
         self.player__horizontal_half = TextStat()
-        self.player__frames_moving = Stat(0)
-        self.player__frames_still = Stat(0)
-        self.player__frames_rotating = Stat(0)
-        self.player__frames_firing = Stat(0)
+        self.player__frames__moving = Stat(0)
+        self.player__frames__still = Stat(0)
+        self.player__frames__rotating = Stat(0)
+        self.player__frames__firing = Stat(0)
         self.player__percent_firing_weapon = Stat(0.)
         self.player__percent_moving_over_rotating = Stat(50.)
-        self.player__frames_per_screen_quadrant = ListStat(initial_length=4)
+        self.player__frames__per_screen_quadrant = ListStat(initial_length=4)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
@@ -303,26 +304,26 @@ class StatTracker:
         if vertical_half == "top":
             # top left == quadrant 0
             if horizontal_half == "left":
-                self.player__frames_per_screen_quadrant.add_at_index(0, 1)
+                self.player__frames__per_screen_quadrant.add_at_index(0, 1)
             # top right == quadrant 1
             else:
-                self.player__frames_per_screen_quadrant.add_at_index(1, 1)
+                self.player__frames__per_screen_quadrant.add_at_index(1, 1)
         else:
             # bottom left == quadrant 2
             if horizontal_half == "left":
-                self.player__frames_per_screen_quadrant.add_at_index(2, 1)
+                self.player__frames__per_screen_quadrant.add_at_index(2, 1)
             # bottom right == quadrant 3
             else:
-                self.player__frames_per_screen_quadrant.add_at_index(3, 1)
+                self.player__frames__per_screen_quadrant.add_at_index(3, 1)
 
         # Update movement vs rotating vs non-movement ratio
-        total = self.player__frames_moving + self.player__frames_rotating
+        total = self.player__frames__moving + self.player__frames__rotating
         if total > 0:
-            self.player__percent_moving_over_rotating = (self.player__frames_moving / total) * 100
+            self.player__percent_moving_over_rotating = (self.player__frames__moving / total) * 100
 
         # Update firing vs not ratio
         if self.game__total_frames > 0:
-            self.player__percent_firing_weapon = (self.player__frames_firing / self.game__total_frames) * 100
+            self.player__percent_firing_weapon = (self.player__frames__firing / self.game__total_frames) * 100
 
 
 
