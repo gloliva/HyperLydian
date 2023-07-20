@@ -39,7 +39,7 @@ class StraferGruntGroup(Group):
     def create_new_grunt(self) -> StraferGrunt:
         # Create grunt weapon
         grunt_weapon = Weapon(
-            projectiles.QuarterRest,
+            projectiles.EnemyQuarterRest,
             enemy_projectiles,
             all_sprites,
             Weapon.INFINITE_AMMO,
@@ -143,9 +143,9 @@ class SpinnerGruntGroup(Group):
         special_event: bool = False,
         ) -> SpinnerGrunt:
         # Create grunt weapon
-        variant_number = randint(0, projectiles.RedAccidental.NUM_VARIANTS - 1)
+        variant_number = randint(0, projectiles.EnemyAccidental.NUM_VARIANTS - 1)
         grunt_weapon = Weapon(
-            projectiles.RedAccidental,
+            projectiles.EnemyAccidental,
             enemy_projectiles,
             all_sprites,
             Weapon.INFINITE_AMMO,

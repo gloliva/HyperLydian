@@ -98,7 +98,24 @@ class Projectile(pg.sprite.Sprite):
         return math.sqrt((x_delta)**2 + (y_delta)**2)
 
 
-class QuarterRest(Projectile):
+class PlayerMusicNote(Projectile):
+    DEFAULT_DAMAGE = 1
+    DEFAULT_SPEED = 1
+    DEFAULT_ANGLE = 180
+    IMAGE_FILE = "projectiles/player/notes/note_{variant_number}.png"
+    AVAILABLE_COLORS = ('blue', 'red')
+    NUM_VARIANTS = 6
+
+
+class PlayerAccidental(Projectile):
+    DEFAULT_DAMAGE = 5
+    DEFAULT_SPEED = 8
+    IMAGE_FILE = "projectiles/player/accidentals/{variant}.png"
+    AVAILABLE_VARIANTS = (NATURAL, SHARP, FLAT)
+    NUM_VARIANTS = 3
+
+
+class EnemyQuarterRest(Projectile):
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
@@ -106,38 +123,7 @@ class QuarterRest(Projectile):
     AVAILABLE_VARIANTS = (REST,)
 
 
-class MusicNote(Projectile):
-    DEFAULT_DAMAGE = 1
-    DEFAULT_SPEED = 1
-    DEFAULT_ANGLE = 180
-    IMAGE_FILE = "projectiles/player/note_{variant_number}.png"
-    AVAILABLE_COLORS = ('blue', 'red')
-    NUM_VARIANTS = 6
-
-
-class MusicLetter(Projectile):
-    DEFAULT_DAMAGE = 5
-    DEFAULT_SPEED = 1
-    DEFAULT_ANGLE = 180
-    IMAGE_FILE = "projectiles/letters/{color}_letter_{variant_number}.png"
-    AVAILABLE_COLORS = ('blue',)
-    NUM_VARIANTS = 4
-
-
-class BlueMusicLetter(MusicLetter):
-    COLOR = 'blue'
-    NUM_VARIANTS = 10
-
-
-class Accidental(Projectile):
-    DEFAULT_DAMAGE = 5
-    DEFAULT_SPEED = 8
-    IMAGE_FILE = "projectiles/accidentals/{variant}.png"
-    AVAILABLE_VARIANTS = (NATURAL, SHARP, FLAT)
-    NUM_VARIANTS = 3
-
-
-class RedAccidental(Projectile):
+class EnemyAccidental(Projectile):
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
     IMAGE_FILE = "projectiles/enemy/accidentals/{variant}.png"

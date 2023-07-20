@@ -34,7 +34,7 @@ PROJECTILE_TYPES = [REST, SHARP, FLAT, NATURAL]
 
 
 # Assets constants
-PNG_PATH = 'assets'
+PNG_PATH = 'assets/png'
 
 # Music constants
 NUM_VOICES = 3
