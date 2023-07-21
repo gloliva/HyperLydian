@@ -7,11 +7,11 @@ import pygame as pg
 
 # project imports
 from defs import SCREEN_WIDTH, SCREEN_HEIGHT
-from sprites.base import Sprite
+from sprites.base import CharacterSprite
 from stats import stat_tracker
 
 
-class Enemy(Sprite):
+class Enemy(CharacterSprite):
     def __init__(
             self,
             image_files: str,

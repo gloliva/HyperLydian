@@ -1,6 +1,7 @@
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import QUIT, RESIZABLE
+import sounddevice as sd
 
 # project imports
 from defs import SCREEN_WIDTH, SCREEN_HEIGHT, GameState
@@ -28,6 +29,8 @@ def main():
     next_state = GameState.MAIN_MENU
 
     # init music
+    output_device_name = get_default_audio_output_device()
+    stat_tracker.control__output_device.update(output_device_name)
     stat_tracker.control__max_init += 1
     stat_tracker.send_stats()
 
@@ -45,6 +48,13 @@ def main():
 
         # lock FPS
         CLOCK.tick(60)
+
+
+def get_default_audio_output_device():
+    default_device_num = sd.default.device[1]
+    devices = sd.query_devices()
+    output_device_name = devices[default_device_num]['name']
+    return output_device_name
 
 
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):

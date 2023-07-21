@@ -16,14 +16,14 @@ from pygame.locals import (
 # project imports
 import debug
 from events import Event
-from sprites.base import Sprite
+from sprites.base import CharacterSprite
 import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
 from stats import stat_tracker
 
 
-class Player(Sprite):
+class Player(CharacterSprite):
     DEFAULT_HEALTH = 10
     DEFAULT_SPEED = 5
     INITIAL_ROTATION = 90

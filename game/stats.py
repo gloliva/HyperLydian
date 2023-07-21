@@ -224,6 +224,7 @@ class StatTracker:
         self.control__max_init = Stat(0)
         self.control__game_init = Stat(0)
         self.control__menu_init = Stat(0)
+        self.control__output_device = TextStat()
         self.control__fps = Stat(FPS)
         self.control__num_voices = Stat(NUM_VOICES)
         self.control__screen_width = Stat(SCREEN_WIDTH)

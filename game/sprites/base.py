@@ -11,7 +11,7 @@ import pygame as pg
 from defs import PNG_PATH
 
 
-class Sprite(pg.sprite.Sprite):
+class CharacterSprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
     HIT_TIMER_INCREMENT = 0.25
     PROJECTILE_SPAWN_DELTA = 0
