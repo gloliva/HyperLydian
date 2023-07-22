@@ -216,7 +216,7 @@ def handle_collisions(player: Player):
             enemy.take_damage(projectile.damage)
 
         if enemy.is_dead:
-            groups.health_upgrades.create_new_health_upgrade(enemy.rect.center)
+            groups.health_upgrades.create_new_health_upgrade_on_probability(enemy.rect.center)
 
         projectile_distance = projectile.get_distance_traveled()
         stat_tracker.enemies__hit_distance.add(projectile_distance)

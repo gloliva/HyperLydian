@@ -92,8 +92,8 @@ class Health(Upgrade):
         self.health_increase = self.HEALTH_INCREASE
 
 
-class WeakHealth(Health):
-    IMAGE_FILE = 'upgrades/health/weak_health.png'
+class SmallHealth(Health):
+    IMAGE_FILE = 'upgrades/health/small_health.png'
     IMAGE_SCALE = 0.65
     HEALTH_INCREASE = 1
     DROP_PROBABILITY = 0.5
@@ -103,6 +103,7 @@ class WeakHealth(Health):
 
 class MaxHealth(Health):
     IMAGE_FILE = 'upgrades/health/max_health.png'
+    IMAGE_SCALE = 0.75
     HEALTH_INCREASE = 10
     DROP_PROBABILITY = 0.05
     TTL_SECONDS = 4

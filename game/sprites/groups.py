@@ -199,16 +199,24 @@ class HealthUpgradeGroup(Group):
         super().__init__()
 
         # Group properties
-        self.enemy_base = 0
+        self.enemy_base_for_small = 0
+        self.enemy_base_for_max = 0
 
-    def create_new_health_upgrade(self, center_position: Tuple[int, int]):
+    def create_new_health_upgrade_on_probability(self, center_position: Tuple[int, int]):
         curr_enemies_killed = stat_tracker.enemies__killed
-        if curr_enemies_killed > (self.enemy_base + self.WEAK_THRESHOLD):
-            if upgrades.WeakHealth.should_drop():
-                health_upgrade = upgrades.WeakHealth(center_position)
+        if curr_enemies_killed > (self.enemy_base_for_max + self.MAX_THRESHOLD):
+            if upgrades.MaxHealth.should_drop():
+                health_upgrade = upgrades.MaxHealth(center_position)
                 self.add(health_upgrade)
                 all_sprites.add(health_upgrade)
-                self.enemy_base = curr_enemies_killed
+                self.enemy_base_for_max = curr_enemies_killed
+                stat_tracker.upgrades__total_dropped += 1
+        if curr_enemies_killed > (self.enemy_base_for_small + self.WEAK_THRESHOLD):
+            if upgrades.SmallHealth.should_drop():
+                health_upgrade = upgrades.SmallHealth(center_position)
+                self.add(health_upgrade)
+                all_sprites.add(health_upgrade)
+                self.enemy_base_for_small = curr_enemies_killed
                 stat_tracker.upgrades__total_dropped += 1
 
 
