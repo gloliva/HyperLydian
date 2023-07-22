@@ -1,10 +1,19 @@
+# stdlib imports
+from subprocess import Popen, PIPE
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import QUIT, RESIZABLE
 import sounddevice as sd
 
 # project imports
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, GameState
+from defs import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    GameState,
+    MAX_APPLICATION_PATH,
+)
+from debug import DISABLE_OPENING_MAX_APPLICATION
 from gameplay import run_gameplay
 from menus import run_main_menu
 from stats import stat_tracker
@@ -22,11 +31,17 @@ pg.display.set_caption('HYPER LYDIAN')
 # set up clock
 CLOCK = pg.time.Clock()
 
+# Max MSP Application
+MAX_APP = None
+
 
 def main():
     """Main Program Loop"""
     main_loop = True
     next_state = GameState.MAIN_MENU
+
+    # open Max/MSP application
+    open_max_application()
 
     # init music
     output_device_name = get_default_audio_output_device()
@@ -57,14 +72,36 @@ def get_default_audio_output_device():
     return output_device_name
 
 
+def open_max_application():
+    global MAX_APP
+
+    if DISABLE_OPENING_MAX_APPLICATION:
+        return
+
+    args = [MAX_APPLICATION_PATH]
+    MAX_APP = Popen(args, stdout=PIPE, text=True)
+
+    fully_open = False
+    # while not fully_open:
+    #     for line in MAX_APP.stdout:
+    #         pass
+
+
+def close_max_application():
+    if not DISABLE_OPENING_MAX_APPLICATION:
+        MAX_APP.terminate()
+
+
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     """Stop all game loops and quit game"""
     # turn off music
     stat_tracker.control__menu_init.update(0)
     stat_tracker.control__max_init -= 1
     stat_tracker.send_stats()
+
+    # close Max/MSP
+    close_max_application()
     print('Quitting the game')
-    pass
 
 
 # Game State transitions
