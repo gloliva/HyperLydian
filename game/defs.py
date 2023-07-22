@@ -22,7 +22,7 @@ class GameState(Enum):
 
 # OSC constants
 ADDRESS = '127.0.0.1'  # localhost
-PORT = 8001
+OUTGOING_PORT = 8001
 INCOMING_PORT = 8002
 
 
@@ -41,7 +41,7 @@ PNG_PATH = 'assets/png'
 
 # Max application constants
 # MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
-MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app/Contents/MacOS/max-hyperlydian'
+MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
 
 
 # Music constants

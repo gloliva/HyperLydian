@@ -1,5 +1,6 @@
 # stdlib imports
-from subprocess import Popen, PIPE
+import asyncio
+from subprocess import Popen
 
 # 3rd-party imports
 import pygame as pg
@@ -33,15 +34,17 @@ CLOCK = pg.time.Clock()
 
 # Max MSP Application
 MAX_APP = None
+MAX_OPEN = False
+MAX_FULLY_LOADED = False
 
 
-def main():
+async def main():
     """Main Program Loop"""
     main_loop = True
     next_state = GameState.MAIN_MENU
 
     # open Max/MSP application
-    open_max_application()
+    await open_max_application()
 
     # init music
     output_device_name = get_default_audio_output_device()
@@ -72,24 +75,53 @@ def get_default_audio_output_device():
     return output_device_name
 
 
-def open_max_application():
+def max_loaded_handler(address, *args):
+    global MAX_FULLY_LOADED
+    MAX_FULLY_LOADED = True
+
+
+def max_opened_handler(address, *args):
+    global MAX_OPEN
+    MAX_OPEN = True
+
+
+async def open_max_application():
     global MAX_APP
 
     if DISABLE_OPENING_MAX_APPLICATION:
         return
 
-    args = [MAX_APPLICATION_PATH]
-    MAX_APP = Popen(args, stdout=PIPE, text=True)
+    from pythonosc.osc_server import AsyncIOOSCUDPServer
+    from pythonosc.dispatcher import Dispatcher
 
-    fully_open = False
-    # while not fully_open:
-    #     for line in MAX_APP.stdout:
-    #         pass
+    dispatcher = Dispatcher()
+    dispatcher.map("/max_opened", max_opened_handler)
+    dispatcher.map("/max_loaded", max_loaded_handler)
+    server = AsyncIOOSCUDPServer(('127.0.0.1', 8002), dispatcher, asyncio.get_event_loop())
+    transport, _ = await server.create_serve_endpoint()
+
+    args = ['open', MAX_APPLICATION_PATH]
+    MAX_APP = Popen(args)
+
+    await wait_for_max()
+
+    transport.close()
+
+
+async def wait_for_max():
+    while not MAX_OPEN:
+        print('Waiting for Max to open...')
+        await asyncio.sleep(1)
+    while not MAX_FULLY_LOADED:
+        print('Waiting for Max to load...')
+        await asyncio.sleep(1)
+    print('Max has finished loading')
+    await asyncio.sleep(1)
 
 
 def close_max_application():
     if not DISABLE_OPENING_MAX_APPLICATION:
-        MAX_APP.terminate()
+        stat_tracker.control__max_quit.update(1)
 
 
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
@@ -97,10 +129,10 @@ def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # turn off music
     stat_tracker.control__menu_init.update(0)
     stat_tracker.control__max_init -= 1
-    stat_tracker.send_stats()
-
     # close Max/MSP
     close_max_application()
+    # send closing stats to Max
+    stat_tracker.send_stats()
     print('Quitting the game')
 
 
@@ -119,5 +151,5 @@ def transition_state(next_state: GameState, game_clock: pg.time.Clock, main_scre
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
     pg.quit()

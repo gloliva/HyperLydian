@@ -1,13 +1,16 @@
 # stdlib imports
+import asyncio
 from typing import Any, Dict, List
 
 # 3rd-party imports
+from pythonosc.dispatcher import Dispatcher
 from pythonosc.udp_client import UDPClient
 from pythonosc.osc_bundle_builder import OscBundleBuilder, IMMEDIATELY as BUNDLE_BUILD_IMMEDIATELY
 from pythonosc.osc_message_builder import OscMessageBuilder
+from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 # project imports
-from defs import ADDRESS, PORT
+from defs import ADDRESS, OUTGOING_PORT
 
 
 class OSCHandler:
@@ -68,4 +71,11 @@ class OSCHandler:
         return variable
 
 
-osc = OSCHandler(ADDRESS, PORT)
+# class OSCServer:
+#     def __init__(self, address: str, port: int) -> None:
+#         dispatcher = Dispatcher()
+#         dispatcher.map("/max_fully_open", filter_handler)
+#         self.server = AsyncIOOSCUDPServer((address, port), dispatcher, asyncio.get_event_loop())
+
+
+osc = OSCHandler(ADDRESS, OUTGOING_PORT)

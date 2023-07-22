@@ -1,0 +1,1 @@
+open thispatcherinclude "Macintosh HD:/Users/gloliva/workspace/projects/hyperlydian/maxmsp/music.json"
