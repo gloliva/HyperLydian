@@ -71,6 +71,10 @@ class CharacterSprite(pg.sprite.Sprite):
         if self.INITIAL_ROTATION:
             self.rotate(self.INITIAL_ROTATION)
 
+    @property
+    def is_dead(self):
+        return self.health <= 0
+
     def update(self, *args, **kwargs):
         if self.hit_animation_on:
             self.show_hit_animation()
@@ -119,7 +123,7 @@ class CharacterSprite(pg.sprite.Sprite):
         # will need to change this later if working with multiple sprites for animation
         self.curr_image_id = 1
         self.show_hit_animation()
-        if self.is_dead():
+        if self.is_dead:
             self.on_death()
 
     def show_hit_animation(self):
@@ -132,9 +136,6 @@ class CharacterSprite(pg.sprite.Sprite):
         if image_id == 0:
             self.curr_image_id = 0
             self.hit_animation_on = False
-
-    def is_dead(self):
-        return self.health <= 0
 
     def on_death(self):
         for callback in self.on_death_callbacks:

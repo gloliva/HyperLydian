@@ -108,8 +108,13 @@ class Player(CharacterSprite):
         stat_tracker.player__health_lost += damage
         super().take_damage(damage)
         stat_tracker.player__curr_health.update(self.health)
-        if self.is_dead():
+        if self.is_dead:
             pg.event.post(Event.PLAYER_DEATH)
+
+    def heal(self, health: int) -> None:
+        self.health += health
+        if self.health > self.max_health:
+            self.health = self.max_health
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)

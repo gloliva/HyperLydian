@@ -130,6 +130,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         groups.player_projectiles.update(game_screen.get_rect())
         groups.enemy_projectiles.update(game_screen.get_rect())
 
+        # move upgrades
+        groups.health_upgrades.update(timedelta=timedelta)
+
         # move notes
         groups.notes.update(game_screen.get_rect())
         groups.staff.update(game_screen.get_rect())
@@ -211,8 +214,25 @@ def handle_collisions(player: Player):
         for enemy in enemies:
             stat_tracker.enemies__hit += 1
             enemy.take_damage(projectile.damage)
+
+        if enemy.is_dead:
+            groups.health_upgrades.create_new_health_upgrade(enemy.rect.center)
+
         projectile_distance = projectile.get_distance_traveled()
         stat_tracker.enemies__hit_distance.add(projectile_distance)
+
+    # health upgrades + player collision
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.health_upgrades,
+        dokill=False,
+        collided=pg.sprite.collide_mask,
+    )
+
+    for health_upgrade in collided:
+        player.heal(health_upgrade.health_increase)
+        health_upgrade.kill()
+        stat_tracker.upgrades__picked_up += 1
 
     # projectile + player near misses
     collided = pg.sprite.spritecollide(

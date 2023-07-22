@@ -1,6 +1,6 @@
 import math
 from random import randint
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 # 3rd-party imports
 from pygame import Rect
@@ -11,9 +11,11 @@ from attacks import Weapon
 from defs import SCREEN_HEIGHT
 from sprites.enemies import StraferGrunt, SpinnerGrunt
 import sprites.projectiles as projectiles
+import sprites.upgrades as upgrades
 from stats import stat_tracker
 
 
+# Custom Enemy Groups
 class StraferGruntGroup(Group):
     MAX_GRUNTS_PER_ROW = 3
     MAX_ROWS = 2
@@ -188,6 +190,28 @@ class SpinnerGruntGroup(Group):
         self.max_grunts = max_grunts
 
 
+# Custom Upgrade Groups
+class HealthUpgradeGroup(Group):
+    WEAK_THRESHOLD = 5
+    MAX_THRESHOLD = 20
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        # Group properties
+        self.enemy_base = 0
+
+    def create_new_health_upgrade(self, center_position: Tuple[int, int]):
+        curr_enemies_killed = stat_tracker.enemies__killed
+        if curr_enemies_killed > (self.enemy_base + self.WEAK_THRESHOLD):
+            if upgrades.WeakHealth.should_drop():
+                health_upgrade = upgrades.WeakHealth(center_position)
+                self.add(health_upgrade)
+                all_sprites.add(health_upgrade)
+                self.enemy_base = curr_enemies_killed
+                stat_tracker.upgrades__total_dropped += 1
+
+
 # Sprite Groups
 # Enemies
 all_enemies = Group()
@@ -197,6 +221,9 @@ enemy_projectiles = Group()
 
 # Player
 player_projectiles = Group()
+
+# Upgrades
+health_upgrades = HealthUpgradeGroup()
 
 # Background
 notes = Group()
