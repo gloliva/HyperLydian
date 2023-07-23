@@ -115,6 +115,7 @@ class Player(CharacterSprite):
         self.health += health
         if self.health > self.max_health:
             self.health = self.max_health
+        stat_tracker.player__curr_health.update(self.health)
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
