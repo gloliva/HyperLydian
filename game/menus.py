@@ -17,43 +17,10 @@ from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import sprites.groups as groups
 import sprites.background as background
 from stats import stat_tracker
-
-
-pygame.font.init()
+from text import Text, SelectableText
 
 
 MENU_SCREEN = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
-
-
-class Text:
-    def __init__(self,
-                 text: str,
-                 font_name: str,
-                 text_size: int,
-                 text_color: Tuple,
-                 text_background: Tuple,
-                 text_center: Tuple,
-                 antialias: bool = True) -> None:
-        self.font = pygame.font.Font(
-            pygame.font.match_font(font_name),
-            text_size,
-        )
-        self.surface = self.font.render(text, antialias, text_color, text_background)
-        self.rect = self.surface.get_rect(center=text_center)
-
-
-class SelectableText(Text):
-    def __init__(self,
-                 text: str,
-                 font_name: str,
-                 text_size: int,
-                 text_color: Tuple,
-                 text_background: Tuple,
-                 text_center: Tuple,
-                 transition_state: GameState,
-                 antialias: bool = True) -> None:
-        super().__init__(text, font_name, text_size, text_color, text_background, text_center, antialias)
-        self.transition_state = transition_state
 
 
 class Menu:
@@ -81,21 +48,21 @@ class Menu:
 
     def render_all_text(self):
         for text in self.all_text:
-            MENU_SCREEN.blit(text.surface, text.rect)
+            MENU_SCREEN.blit(text.surf, text.rect)
 
 
 # Create Main Menu
 main_menu = Menu(GameState.MAIN_MENU)
 main_menu.add_text(
     Text(
-        'HyperLydian', 'chalkduster', 128, 'darkmagenta', (0, 0, 0, 100), (SCREEN_WIDTH/2, 250)
+        'HyperLydian', 'chalkduster', 128, 'darkmagenta', (SCREEN_WIDTH/2, 250), (0, 0, 0, 100),
     ),
     SelectableText(
-        'Press Enter to Start', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 600),
+        'Press Enter to Start', 'chalkduster', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600), (0, 0, 0, 100),
         transition_state=GameState.GAMEPLAY
     ),
     SelectableText(
-        'Press Esc to Quit', 'chalkduster', 48, (255, 255, 255, 255), (0, 0, 0, 100), (SCREEN_WIDTH/2, 700),
+        'Press Esc to Quit', 'chalkduster', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700), (0, 0, 0, 100),
         transition_state=GameState.QUIT,
     ),
 )

@@ -1,4 +1,4 @@
-pygame-ce~=2.2
+pygame-ce~=2.3
 pygame-gui~=0.6
 python-osc~=1.8
 sounddevice~=0.4
