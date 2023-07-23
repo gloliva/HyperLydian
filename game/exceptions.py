@@ -4,3 +4,7 @@ class AssetLoadError(Exception):
 
 class SpecialEventError(Exception):
     pass
+
+
+class MenuRenderingError(Exception):
+    pass

@@ -16,6 +16,7 @@ from defs import (
     FPS,
 )
 from debug import DISABLE_OPENING_MAX_APPLICATION
+from menus.base import Menu
 from sprites.menus import StudioLogo
 from text import Text
 
@@ -32,20 +33,26 @@ MAXIMUM_LOADTIME = 30
 
 # Loading Screen Text
 LOADING_STR = 'LOADING'
-MAX_OPEN_STR = 'Opening Max/MSP'
-MAX_LOAD_STR = 'Starting Music'
+MAX_OPEN_STR = 'Waiting for Max/MSP to open.'
+MAX_LOAD_STR = 'Waiting for Max/MSP to finish loading.'
+BEYOND_LOADTIME_STR = 'Taking longer to load than usual.'
 LOADING_DOT_STR = '.'
 PERCENT_LOADED_STR = '{0}% Loaded'
 
+REASON_TEXT = Text(MAX_OPEN_STR, 'spacemono', 48, 'white')
 LOADING_TEXT = Text(LOADING_STR, 'spacemono', 48, 'white')
 LOADING_DOT_TEXT = Text(LOADING_DOT_STR, 'spacemono', 48, 'white')
 PERCENT_TEXT = Text(PERCENT_LOADED_STR, 'spacemono', 48, 'white')
 
-LOADING_SCREEN_TEXT = [
+
+# Loading Screen Menu
+LOADING_MENU = Menu(GameState.LOADING_SCREEN)
+LOADING_MENU.add_text(
+    REASON_TEXT,
     LOADING_TEXT,
     LOADING_DOT_TEXT,
     PERCENT_TEXT,
-]
+)
 
 
 def loading_screen(game_clock: pg.time.Clock, main_screen: pg.Surface) -> None:
@@ -119,10 +126,15 @@ def show_studio_logo_screen(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
 
 async def wait_for_max_to_load(main_screen: pg.Surface):
+    LOADING_MENU.add_screen(menu_screen=main_screen)
+
     # Set screen position for loading screen text
     screen_rect = main_screen.get_rect()
     text_height_position = screen_rect.height - 50
 
+    REASON_TEXT.update_position(
+        {'bottomleft': (50, text_height_position - REASON_TEXT.rect.height)}
+    )
     LOADING_TEXT.update_position(
         {'bottomleft': (50, text_height_position)}
     )
@@ -140,15 +152,18 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
 
         # update loading dots
         loading_dot_str = LOADING_DOT_STR * ((elapsed_load_time % 3) + 1)
-        LOADING_DOT_TEXT.update_text(loading_dot_str)
+        LOADING_MENU.update_text(loading_dot_str, LOADING_DOT_TEXT)
 
         # update loading percent
-        percent = int((elapsed_load_time / MAXIMUM_LOADTIME) * 100)
-        PERCENT_TEXT.update_text(PERCENT_LOADED_STR.format(percent))
+        if elapsed_load_time < MAXIMUM_LOADTIME:
+            percent = int((elapsed_load_time / MAXIMUM_LOADTIME) * 100)
+        else:
+            LOADING_MENU.update_text(BEYOND_LOADTIME_STR, REASON_TEXT)
+            percent = 99
+        LOADING_MENU.update_text(PERCENT_LOADED_STR.format(percent), PERCENT_TEXT)
 
         # Draw text to the screen
-        for text in LOADING_SCREEN_TEXT:
-            main_screen.blit(text.surf, text.rect)
+        LOADING_MENU.render_all_text()
 
         # render screen
         pg.display.flip()
@@ -157,16 +172,17 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
         elapsed_load_time += 1
         await asyncio.sleep(1)
 
-    PERCENT_TEXT.update_text(PERCENT_LOADED_STR.format(99))
+    LOADING_MENU.update_text(MAX_LOAD_STR, REASON_TEXT)
+    LOADING_MENU.update_text(PERCENT_LOADED_STR.format(99), PERCENT_TEXT)
 
     # Wait for Max to loadbang everything
     while not MAX_FULLY_LOADED:
         main_screen.fill("black")
         loading_dot_str = LOADING_DOT_STR * ((elapsed_load_time % 3) + 1)
-        LOADING_DOT_TEXT.update_text(loading_dot_str)
+        LOADING_MENU.update_text(loading_dot_str, LOADING_DOT_TEXT)
 
-        for text in LOADING_SCREEN_TEXT:
-            main_screen.blit(text.surf, text.rect)
+        # Draw text to the screen
+        LOADING_MENU.render_all_text()
 
         # render screen
         pg.display.flip()

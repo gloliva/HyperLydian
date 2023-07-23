@@ -23,7 +23,7 @@ MENU_SCREEN = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 
 
 # Create Main Menu
-main_menu = Menu(GameState.MAIN_MENU)
+main_menu = Menu(GameState.MAIN_MENU, MENU_SCREEN)
 main_menu.add_text(
     SelectableText(
         'Press Enter to Start', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600),
