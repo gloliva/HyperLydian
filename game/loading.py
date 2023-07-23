@@ -16,7 +16,7 @@ from defs import (
     FPS,
 )
 from debug import DISABLE_OPENING_MAX_APPLICATION
-from sprites.base import construct_asset_full_path
+from sprites.menus import StudioLogo
 from text import Text
 
 
@@ -174,18 +174,3 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
         # Increment waiting time
         elapsed_load_time += 1
         await asyncio.sleep(1)
-
-
-class StudioLogo(pg.sprite.Sprite):
-    TOTAL_SCREEN_TIME = 6
-    FADE_IN_SECONDS = 2
-    FADE_OUT_SECONDS = 2
-
-    def __init__(self, screen_rect: pg.Rect, scale_resolution: int) -> None:
-        super().__init__()
-        image_file = construct_asset_full_path('logo/hello_drama_studios.png')
-        image = pg.image.load(image_file).convert()
-        self.surf = pg.transform.scale(image, (scale_resolution, scale_resolution))
-        self.rect = self.surf.get_rect(
-            center=screen_rect.center
-        )

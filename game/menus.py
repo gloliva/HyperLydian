@@ -16,6 +16,7 @@ from pygame.locals import (
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 import sprites.groups as groups
 import sprites.background as background
+from sprites.menus import Title
 from stats import stat_tracker
 from text import Text, SelectableText
 
@@ -54,15 +55,15 @@ class Menu:
 # Create Main Menu
 main_menu = Menu(GameState.MAIN_MENU)
 main_menu.add_text(
-    Text(
-        'HyperLydian', 'chalkduster', 128, 'darkmagenta', (SCREEN_WIDTH/2, 250), (0, 0, 0, 100),
-    ),
+    # Text(
+    #     'HyperLydian', 'chalkduster', 128, 'darkmagenta', (SCREEN_WIDTH/2, 250), (0, 0, 0, 100),
+    # ),
     SelectableText(
-        'Press Enter to Start', 'chalkduster', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600), (0, 0, 0, 100),
+        'Press Enter to Start', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600), (0, 0, 0, 100),
         transition_state=GameState.GAMEPLAY
     ),
     SelectableText(
-        'Press Esc to Quit', 'chalkduster', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700), (0, 0, 0, 100),
+        'Press Esc to Quit', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700), (0, 0, 0, 100),
         transition_state=GameState.QUIT,
     ),
 )
@@ -80,6 +81,9 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
         staff = background.Staff(MENU_SCREEN.get_rect(), on_load=True, load_number=i)
         groups.staff.add(staff)
         groups.all_sprites.add(staff)
+
+    # hyperlydian Title
+    title = Title(MENU_SCREEN.get_rect())
 
     # update stats
     stat_tracker.control__menu_init += 1
@@ -113,6 +117,9 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
 
         for sprite in groups.notes:
             MENU_SCREEN.blit(sprite.surf, sprite.rect)
+
+        # draw title
+        MENU_SCREEN.blit(title.surf, title.rect)
 
         # draw text
         main_menu.render_all_text()
