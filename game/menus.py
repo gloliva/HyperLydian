@@ -55,15 +55,12 @@ class Menu:
 # Create Main Menu
 main_menu = Menu(GameState.MAIN_MENU)
 main_menu.add_text(
-    # Text(
-    #     'HyperLydian', 'chalkduster', 128, 'darkmagenta', (SCREEN_WIDTH/2, 250), (0, 0, 0, 100),
-    # ),
     SelectableText(
-        'Press Enter to Start', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600), (0, 0, 0, 100),
-        transition_state=GameState.GAMEPLAY
+        'Press Enter to Start', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600),
+        transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'Press Esc to Quit', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700), (0, 0, 0, 100),
+        'Press Esc to Quit', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700),
         transition_state=GameState.QUIT,
     ),
 )

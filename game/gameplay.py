@@ -234,6 +234,18 @@ def handle_collisions(player: Player):
         health_upgrade.kill()
         stat_tracker.upgrades__picked_up += 1
 
+    # health upgrades + grunt collision
+    collided = pg.sprite.groupcollide(
+        groups.strafer_grunt_enemies,
+        groups.health_upgrades,
+        dokilla=False,
+        dokillb=False,
+        collided=pg.sprite.collide_rect,
+    )
+
+    for grunt in collided:
+        grunt.switch_strafe_direction()
+
     # projectile + player near misses
     collided = pg.sprite.spritecollide(
         player,

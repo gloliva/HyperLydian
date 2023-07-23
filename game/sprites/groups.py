@@ -211,7 +211,7 @@ class HealthUpgradeGroup(Group):
                 all_sprites.add(health_upgrade)
                 self.enemy_base_for_max = curr_enemies_killed
                 stat_tracker.upgrades__total_dropped += 1
-        if curr_enemies_killed > (self.enemy_base_for_small + self.WEAK_THRESHOLD):
+        elif curr_enemies_killed > (self.enemy_base_for_small + self.WEAK_THRESHOLD):
             if upgrades.SmallHealth.should_drop():
                 health_upgrade = upgrades.SmallHealth(center_position)
                 self.add(health_upgrade)

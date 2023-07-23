@@ -55,9 +55,9 @@ class SelectableText(Text):
                  font_name: str,
                  text_size: int,
                  text_color: Tuple,
-                 text_background: Tuple,
                  text_center: Tuple,
                  transition_state: GameState,
+                 text_background: Optional[Tuple] = None,
                  antialias: bool = True) -> None:
-        super().__init__(text, font_name, text_size, text_color, text_background, text_center, antialias)
+        super().__init__(text, font_name, text_size, text_color, text_center, text_background, antialias)
         self.transition_state = transition_state
