@@ -32,8 +32,8 @@ class Player(CharacterSprite):
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
-            "spaceships/player_ship.png",
-            "spaceships/player_ship_hit.png",
+            "spaceships/player/player_ship.png",
+            "spaceships/player/player_ship_hit.png",
         ]
         spawn_location = (
             game_screen_rect.width / 2,

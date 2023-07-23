@@ -47,20 +47,25 @@ def main():
     stat_tracker.control__max_init += 1
     stat_tracker.send_stats()
 
-    while main_loop:
-        # event handler
-        for event in pg.event.get():
-            # Quit the game
-            if event.type == QUIT:
+    try:
+        while main_loop:
+            # event handler
+            for event in pg.event.get():
+                # Quit the game
+                if event.type == QUIT:
+                    main_loop = False
+
+            # move to the next state
+            next_state = transition_state(next_state, CLOCK, MAIN_SCREEN)
+            if next_state is None:
                 main_loop = False
 
-        # move to the next state
-        next_state = transition_state(next_state, CLOCK, MAIN_SCREEN)
-        if next_state is None:
-            main_loop = False
-
-        # lock FPS
-        CLOCK.tick(60)
+            # lock FPS
+            CLOCK.tick(60)
+    except Exception:
+        # Catch all exception, close Max Application if anything errors out
+        quit_game(CLOCK, MAIN_SCREEN)
+        raise
 
 
 def get_default_audio_output_device():

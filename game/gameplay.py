@@ -198,7 +198,7 @@ def handle_collisions(player: Player):
             if grunt == collided_enemy or grunt in handled_enemies:
                 continue
 
-            grunt.switch_strafe_direction_on_collision(collided_enemy)
+            grunt.switch_strafe_direction_on_enemy_collision(collided_enemy)
             handled_enemies.add(grunt)
 
     # projectiles + enemies collision
@@ -243,8 +243,9 @@ def handle_collisions(player: Player):
         collided=pg.sprite.collide_rect,
     )
 
-    for grunt in collided:
-        grunt.switch_strafe_direction()
+    for grunt, upgrades in collided.items():
+        for upgrade in upgrades:
+            grunt.switch_strafe_direction_on_upgrade_collision(upgrade)
 
     # projectile + player near misses
     collided = pg.sprite.spritecollide(

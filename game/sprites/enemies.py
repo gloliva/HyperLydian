@@ -88,6 +88,7 @@ class StraferGrunt(Enemy):
         self.strafe_direction = 1
         self.grunt_row = row
         self.overlapping_enemies = set()
+        self.overlapping_upgrades = set()
 
         if self.spawn_direction == -1:
             self.rotate(90)
@@ -117,13 +118,18 @@ class StraferGrunt(Enemy):
             self.rect.right = game_screen_rect.width
             self.switch_strafe_direction()
 
-    def switch_strafe_direction_on_collision(self, enemy: Enemy):
+    def switch_strafe_direction_on_enemy_collision(self, enemy: Enemy):
         if self.moving_to_position:
             if isinstance(enemy, StraferGrunt):
                 self.strafe_direction = -1 * enemy.strafe_direction
         elif enemy not in self.overlapping_enemies and not enemy.moving_to_position:
             self.switch_strafe_direction()
             self.overlapping_enemies.add(enemy)
+
+    def switch_strafe_direction_on_upgrade_collision(self, upgrade: Enemy):
+        if upgrade not in self.overlapping_upgrades:
+            self.switch_strafe_direction()
+            self.overlapping_upgrades.add(upgrade)
 
     def switch_strafe_direction(self):
         self.strafe_direction *= -1
@@ -132,6 +138,10 @@ class StraferGrunt(Enemy):
         for enemy in self.overlapping_enemies.copy():
             if not pg.sprite.collide_rect(self, enemy):
                 self.overlapping_enemies.remove(enemy)
+
+        for upgrade in self.overlapping_upgrades.copy():
+            if not pg.sprite.collide_rect(self, upgrade):
+                self.overlapping_upgrades.remove(upgrade)
 
         super().update(*args, **kwargs)
 
