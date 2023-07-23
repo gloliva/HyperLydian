@@ -14,8 +14,9 @@ SCREEN_HEIGHT = 900
 
 # Define game states
 class GameState(Enum):
-    MAIN_MENU = 0
-    GAMEPLAY = 1
+    LOADING_SCREEN = 0
+    MAIN_MENU = 1
+    GAMEPLAY = 2
     DEATH_MENU = 3
     QUIT = 4
 
