@@ -1,6 +1,3 @@
-# stdlib imports
-from typing import Tuple
-
 # 3rd-party imports
 import pygame as pg
 

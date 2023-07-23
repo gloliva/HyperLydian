@@ -14,9 +14,9 @@ from defs import (
     GameState,
 )
 from debug import DISABLE_OPENING_MAX_APPLICATION
-from loading import loading_screen
+from menus.loading import loading_screen
 from gameplay import run_gameplay
-from menus import run_main_menu
+from menus.main_menu import run_main_menu
 from stats import stat_tracker
 
 # initial pygame setup
@@ -37,9 +37,6 @@ def main():
     """Main Program Loop"""
     main_loop = True
     next_state = GameState.LOADING_SCREEN
-
-    # open Max/MSP application
-    # await loading_screen()
 
     # init music
     output_device_name = get_default_audio_output_device()
