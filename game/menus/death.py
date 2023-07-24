@@ -11,6 +11,7 @@ from pygame.locals import (
 # project imports
 from defs import GameState, FPS
 from menus.base import Menu
+from sprites.menus import DeathScreenTitle
 from stats import stat_tracker
 from text import Text
 
@@ -40,6 +41,8 @@ DEATH_MENU.add_text(
 def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
     next_state = None
     DEATH_MENU.add_screen(menu_screen=main_screen)
+
+    death_menu_message = DeathScreenTitle(main_screen.get_rect())
 
     # Update Stats text
     stats_str = STATS_STR.format(
@@ -79,6 +82,9 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
 
         # draw background
         main_screen.fill("black")
+
+        # draw title
+        main_screen.blit(death_menu_message.surf, death_menu_message.rect)
 
         # draw text
         DEATH_MENU.render_all_text()

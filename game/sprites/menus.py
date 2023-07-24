@@ -29,3 +29,13 @@ class Title(pg.sprite.Sprite):
         self.rect = self.surf.get_rect(
             center=(screen_rect.centerx, 250)
         )
+
+class DeathScreenTitle(pg.sprite.Sprite):
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__()
+        image_file = construct_asset_full_path('logo/you_died.png')
+        image  = pg.image.load(image_file).convert_alpha()
+        self.surf = pg.transform.scale_by(image, 2)
+        self.rect = self.surf.get_rect(
+            center=(screen_rect.centerx, 150)
+        )
