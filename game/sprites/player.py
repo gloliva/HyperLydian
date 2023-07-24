@@ -16,7 +16,7 @@ from pygame.locals import (
 # project imports
 import debug
 from events import Event
-from sprites.base import CharacterSprite
+from sprites.base import CharacterSprite, construct_asset_full_path
 import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
@@ -29,11 +29,17 @@ class Player(CharacterSprite):
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
+    HIT_TIMER_INCREMENT = 0.125
+    HEAL_TIMER_INCREMENT = 0.125
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         image_files = [
             "spaceships/player/player_ship.png",
             "spaceships/player/player_ship_hit.png",
+        ]
+        heal_image_files = [
+            "spaceships/player/player_ship.png",
+            "spaceships/player/player_ship_upgrade.png",
         ]
         spawn_location = (
             game_screen_rect.width / 2,
@@ -51,7 +57,21 @@ class Player(CharacterSprite):
 
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
+        self.heal_animation_on = False
+        self.heal_images = [
+            pg.transform.scale_by(
+                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
+                self.IMAGE_SCALE,
+            )
+            for image_file in heal_image_files
+        ]
         self.projectiles_in_range = set()
+
+    def update(self, *args, **kwargs) -> None:
+        if self.heal_animation_on:
+            self.show_heal_animation()
+
+        super().update(*args, **kwargs)
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
         movement_vector = [0, 0]
@@ -116,6 +136,21 @@ class Player(CharacterSprite):
         if self.health > self.max_health:
             self.health = self.max_health
         stat_tracker.player__curr_health.update(self.health)
+
+        self.heal_animation_on = True
+        self.curr_image_id = 1
+        self.show_heal_animation()
+
+    def show_heal_animation(self):
+        self.curr_image_id = (self.curr_image_id + self.HEAL_TIMER_INCREMENT) % self.num_images
+        image_id = int(self.curr_image_id)
+        self.surf = pg.transform.rotate(
+            self.heal_images[image_id],
+            self.current_rotation,
+        )
+        if image_id == 0:
+            self.curr_image_id = 0
+            self.heal_animation_on = False
 
     def attack(self):
         attack_center = (self.rect.centerx, self.rect.centery)
