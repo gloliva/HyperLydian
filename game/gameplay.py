@@ -1,3 +1,6 @@
+# stdlib imports
+from random import randint, choice as randelem
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
@@ -11,7 +14,6 @@ from pygame.locals import (
 )
 
 # project imports
-from attacks import Weapon
 from defs import (
     FPS,
     SCREEN_WIDTH,
@@ -56,6 +58,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
     # special events
     special_event_manager = SpecialEventManager(game_screen.get_rect())
+
+    # difficulty manager
+    difficulty_manager = DifficultyManager()
 
     gameplay_loop = True
     while gameplay_loop:
@@ -139,6 +144,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
         # collision checks
         handle_collisions(player)
+
+        # update difficulty
+        difficulty_manager.update_difficulty(special_event_manager)
 
         # handle special events
         standard_enemy_count = stat_tracker.enemies__standard_count
@@ -284,3 +292,57 @@ def end_game():
     stat_tracker.control__game_init -= 1
     stat_tracker.print_stats()
     stat_tracker.send_stats()
+
+
+class DifficultyManager:
+    KILL_THRESHOLD = 20
+    EVENT_THRESHOLD = 2
+    STANDARD_FUNCTIONS = [
+        groups.strafer_grunt_enemies.change_max_rows,
+        groups.strafer_grunt_enemies.change_grunts_per_row,
+        groups.spinner_grunt_enemies.change_max_grunts,
+    ]
+    SPECIAL_FUNCTIONS = [
+        groups.spinner_grunt_enemies.change_grunts_per_ellipse_event,
+    ]
+
+    def roll_probability(self) -> int:
+        player_max_health = stat_tracker.player__max_health.value
+        return randint(0, player_max_health - 1)
+
+    def __init__(self) -> None:
+        self.standard_change_count = 0
+        self.special_change_count = 0
+
+    def update_difficulty(self, event_manager: SpecialEventManager) -> None:
+        self.update_standard_difficulty()
+        self.update_special_event_difficulty(event_manager)
+
+    def update_standard_difficulty(self) -> None:
+        num_enemies_killed = stat_tracker.enemies__killed.value
+
+        if num_enemies_killed >= (self.standard_change_count + 1) * self.KILL_THRESHOLD:
+            player_curr_health = stat_tracker.player__curr_health.value
+            change_difficulty_function = randelem(self.STANDARD_FUNCTIONS)
+
+            if self.roll_probability() < player_curr_health:
+                change_difficulty_function(1)
+            elif self.roll_probability() > player_curr_health:
+                change_difficulty_function(-1)
+
+            # update count whether difficulty changes or not
+            self.standard_change_count += 1
+
+    def update_special_event_difficulty(self, event_manager: SpecialEventManager) -> None:
+        if event_manager.event_count >= (self.special_change_count + 1) * self.EVENT_THRESHOLD:
+            player_curr_health = stat_tracker.player__curr_health.value
+            change_difficulty_function = randelem(self.SPECIAL_FUNCTIONS)
+            # increase difficulty
+            if self.roll_probability() < player_curr_health:
+                change_difficulty_function(1)
+            # decrease difficulty
+            elif self.roll_probability() > player_curr_health:
+                change_difficulty_function(-1)
+
+            # update count whether difficulty changes or not
+            self.special_change_count += 1

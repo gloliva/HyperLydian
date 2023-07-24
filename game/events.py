@@ -50,7 +50,6 @@ def enable_spinner_grunt_event(game_screen_rect: pg.Rect):
     num_grunts = groups.spinner_grunt_enemies.num_grunts_per_ellipse
     start_positions = groups.SpinnerGruntGroup.get_oval_starting_positions(num_grunts, game_screen_rect)
     rotation_angles = groups.SpinnerGruntGroup.get_rotation_angles_from_start_positions(start_positions, game_screen_rect)
-    print(rotation_angles)
     special_event = CountdownSpecialEvent(num_grunts)
 
     for idx in range(num_grunts):

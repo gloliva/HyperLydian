@@ -17,15 +17,18 @@ from stats import stat_tracker
 
 # Custom Enemy Groups
 class StraferGruntGroup(Group):
-    MAX_GRUNTS_PER_ROW = 3
-    MAX_ROWS = 2
+    MAX_ROWS = 4
+    MAX_GRUNTS_PER_ROW = 6
+    MIN_GRUNTS_PER_ROW = 2
+    INITIAL_GRUNTS_PER_ROW = 3
+    INITIAL_ROWS = 2
     ROW_START = 150
     ROW_SPACING = 1.25
 
     def __init__(self) -> None:
         super().__init__()
-        self.max_rows = self.MAX_ROWS
-        self.max_grunts_per_row = self.MAX_GRUNTS_PER_ROW
+        self.max_rows = self.INITIAL_ROWS
+        self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
 
         # Manage grunt arrangement
         self.top_grunts_per_row = [0 for _ in range(self.max_rows)]
@@ -107,6 +110,14 @@ class StraferGruntGroup(Group):
                 self.bottom_row_to_fill = row
                 break
 
+    def change_max_rows(self, row_delta: int):
+        self.max_rows += row_delta
+        self.max_rows = max(1, min(self.MAX_ROWS, self.max_rows))
+
+    def change_grunts_per_row(self, grunt_delta: int):
+        self.max_grunts_per_row += grunt_delta
+        self.max_grunts_per_row = max(self.MIN_GRUNTS_PER_ROW, min(self.MAX_GRUNTS_PER_ROW, self.max_grunts_per_row))
+
     def set_row_limits(self, new_max_rows: int, new_max_grunts_per_row: int) -> None:
         self.max_rows = new_max_rows
         self.max_grunts_per_row = new_max_grunts_per_row
@@ -114,6 +125,8 @@ class StraferGruntGroup(Group):
 
 class SpinnerGruntGroup(Group):
     INITIAL_MAX_GRUNTS = 2
+    MIN_ELLIPSE_GRUNTS = 2
+    MAX_ELLIPSE_GRUNTS = 6
     INITIAL_ELLIPSE_GRUNTS = 3
 
     @classmethod
@@ -145,6 +158,7 @@ class SpinnerGruntGroup(Group):
 
         self.grunts_on_screen = 0
         self.max_grunts = self.INITIAL_MAX_GRUNTS
+        self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
 
     @property
@@ -179,6 +193,10 @@ class SpinnerGruntGroup(Group):
             args.append(on_death_callbacks)
         grunt = SpinnerGrunt(*args, special_event=special_event)
 
+        # Set an initial rotation angle
+        angle = randint(0, 359)
+        grunt.rotate(angle)
+
         # Add grunt to all groups
         self.add(grunt)
         all_enemies.add(grunt)
@@ -193,6 +211,13 @@ class SpinnerGruntGroup(Group):
     def remove_internal(self, grunt: SpinnerGrunt) -> None:
         super().remove_internal(grunt)
         self.grunts_on_screen -= 1
+
+    def change_grunts_per_ellipse_event(self, num_delta: int):
+        self.num_grunts_per_ellipse += num_delta
+        self.num_grunts_per_ellipse = max(
+            self.MIN_ELLIPSE_GRUNTS,
+            min(self.num_grunts_per_ellipse, self.MAX_ELLIPSE_GRUNTS)
+        )
 
     def change_max_grunts(self, max_delta: int):
         self.max_grunts += max_delta
