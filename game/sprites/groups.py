@@ -117,7 +117,7 @@ class SpinnerGruntGroup(Group):
     INITIAL_ELLIPSE_GRUNTS = 3
 
     @classmethod
-    def get_oval_starting_positions(cls, num_grunts: int, screen_rect: Rect):
+    def get_oval_starting_positions(cls, num_grunts: int, screen_rect: Rect) -> List[Tuple[float]]:
         angle_increment = (2 * math.pi) / num_grunts
 
         return [
@@ -126,6 +126,19 @@ class SpinnerGruntGroup(Group):
                 (screen_rect.centery - 50) * math.sin(idx * angle_increment) + screen_rect.centery,
             ] for idx in range(num_grunts)
         ]
+
+    @classmethod
+    def get_rotation_angles_from_start_positions(
+            cls,
+            start_positions: List[Tuple[float]],
+            screen_rect: Rect,
+        ) -> List[float]:
+        rotation_angles = []
+        for x, y in start_positions:
+            angle_to_center = math.atan2(screen_rect.centery - y, x - screen_rect.centerx)
+            rotation_angles.append(math.degrees(angle_to_center) + 180)
+
+        return rotation_angles
 
     def __init__(self) -> None:
         super().__init__()
