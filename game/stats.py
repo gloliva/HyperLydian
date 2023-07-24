@@ -114,6 +114,15 @@ class TimeStat:
     def time(self):
         return (self.hours, self.minutes, self.seconds, self.ms)
 
+    @property
+    def time_display(self) -> str:
+        time_str = [f'{self.seconds} Seconds']
+        if self.minutes > 0:
+            time_str.insert(0, f'{self.minutes} Minutes')
+        if self.hours > 0:
+            time_str.insert(0, f'{self.hours} Hours')
+        return ' '.join(time_str)
+
     def __sub__(self, other) -> "TimeStat":
         if isinstance(other, TimeStat):
             return TimeStat(self.total_ms - other.total_ms)

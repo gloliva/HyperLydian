@@ -55,7 +55,7 @@ LOADING_MENU.add_text(
 )
 
 
-def loading_screen(game_clock: pg.time.Clock, main_screen: pg.Surface) -> None:
+def loading_screen(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
     asyncio.run(open_max_application(game_clock, main_screen))
     return GameState.MAIN_MENU
 

@@ -89,7 +89,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             # handle player death
             elif event.type == Event.PLAYER_DEATH.type:
                 gameplay_loop = False
-                next_state = GameState.MAIN_MENU
+                next_state = GameState.DEATH_MENU
 
             # handle creating grunts
             elif event.type == Event.ADD_STRAFER_GRUNT.type and \
