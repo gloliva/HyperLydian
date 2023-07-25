@@ -43,7 +43,9 @@ class Text:
 
     def update_text(self, text: str):
         render_args = self.get_render_args(text)
+        prev_center = self.rect.center
         self.surf = self.font.render(*render_args)
+        self.rect = self.surf.get_rect(center=prev_center)
 
     def update_position(self, position_kwargs: Dict[str, Tuple[int, int]]):
         self.rect = self.surf.get_rect(**position_kwargs)

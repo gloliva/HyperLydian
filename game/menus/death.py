@@ -1,6 +1,7 @@
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
+    K_UP,
     K_DOWN,
     K_ESCAPE,
     K_RETURN,
@@ -9,56 +10,43 @@ from pygame.locals import (
 )
 
 # project imports
-from defs import GameState, FPS
+from defs import GameState, FPS, SCREEN_WIDTH
 from menus.base import Menu
 from sprites.menus import DeathScreenTitle
 from stats import stat_tracker
-from text import Text
+from text import Text, SelectableText
 
 
-# Death Screen Text
-STATS_STR = (
-    'SCORE: {score}\n'
-    'ENEMIES KILLED: {enemies_killed}\n'
-    'PLAYER ACCURACY: {accuracy}%\n'
-    'PLAYER HEALTH LOST: {health_lost}\n'
-    'UPGRADES PICKED UP: {upgrades_picked_up}\n'
-    'TIME SURVIVED: {game_time}\n'
-    'TOTAL TIME PLAYED: {total_time}\n'
-)
-
-
-STATS_TEXT = Text(STATS_STR, 'spacemono', 36, 'white')
+# Define text
+STATS_TEXT = Text('', 'spacemono', 24, 'white')
+RESTART_TEXT = SelectableText('RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650), transition_state=GameState.GAMEPLAY)
+MENU_TEXT = SelectableText('BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 725), transition_state=GameState.MAIN_MENU)
+QUIT_TEXT = SelectableText('QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 800), transition_state=GameState.QUIT)
 
 
 # Death Screen Menu
 DEATH_MENU = Menu(GameState.DEATH_MENU)
 DEATH_MENU.add_text(
     STATS_TEXT,
+    RESTART_TEXT,
+    MENU_TEXT,
+    QUIT_TEXT,
 )
 
 
 def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
     next_state = None
     DEATH_MENU.add_screen(menu_screen=main_screen)
+    DEATH_MENU.init_menu_select()
 
-    death_menu_message = DeathScreenTitle(main_screen.get_rect())
+    screen_rect = main_screen.get_rect()
+    death_menu_message = DeathScreenTitle(screen_rect)
 
-    # Update Stats text
-    stats_str = STATS_STR.format(
-        score=stat_tracker.game__score,
-        enemies_killed=stat_tracker.enemies__killed,
-        accuracy=int(stat_tracker.player__accuracy.value),
-        health_lost=stat_tracker.player__health_lost,
-        upgrades_picked_up=stat_tracker.upgrades__picked_up,
-        game_time=stat_tracker.game__time__current_playthrough.time_display,
-        total_time=stat_tracker.game__time__total_played.time_display,
-    )
     STATS_TEXT.update_position(
-        {'center': main_screen.get_rect().center}
+        {'center': (screen_rect.centerx, screen_rect.centery - 50)}
     )
 
-    DEATH_MENU.update_text(stats_str, STATS_TEXT)
+    DEATH_MENU.update_text(stat_tracker.get_endgame_stats(), STATS_TEXT)
 
     death_menu_loop = True
     while death_menu_loop:
@@ -71,10 +59,13 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
 
                 if event.key == K_RETURN:
                     death_menu_loop = False
-                    next_state = GameState.GAMEPLAY
+                    next_state = DEATH_MENU.select_text()
 
                 if event.key == K_DOWN:
-                    pass
+                    DEATH_MENU.move_text_cursor(1)
+
+                if event.key == K_UP:
+                    DEATH_MENU.move_text_cursor(-1)
 
             elif event.type == QUIT:
                 death_menu_loop = False
@@ -87,7 +78,7 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
         main_screen.blit(death_menu_message.surf, death_menu_message.rect)
 
         # draw text
-        DEATH_MENU.render_all_text()
+        DEATH_MENU.update()
 
         # render screen
         pg.display.flip()

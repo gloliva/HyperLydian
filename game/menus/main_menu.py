@@ -27,19 +27,19 @@ MENU_SCREEN = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 MAIN_MENU = Menu(GameState.MAIN_MENU, MENU_SCREEN)
 MAIN_MENU.add_text(
     SelectableText(
-        'Start', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 400),
+        'START', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 400),
         transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'Settings', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 525),
+        'SETTINGS', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 525),
         transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'Credits', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 650),
+        'CREDITS', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 650),
         transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'Quit', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 775),
+        'QUIT', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 775),
         transition_state=GameState.QUIT,
     ),
 )

@@ -28,7 +28,7 @@ class MainTitle(pg.sprite.Sprite):
         super().__init__()
         image_file = construct_asset_full_path('logo/title.png')
         image  = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.scale_by(image, 2)
+        self.surf = pg.transform.scale_by(image, 2.2)
         self.rect = self.surf.get_rect(
             center=(screen_rect.centerx, 200)
         )
@@ -39,7 +39,7 @@ class DeathScreenTitle(pg.sprite.Sprite):
         super().__init__()
         image_file = construct_asset_full_path('logo/you_died.png')
         image  = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.scale_by(image, 2.5)
+        self.surf = pg.transform.scale_by(image, 1.5)
         self.rect = self.surf.get_rect(
             center=(screen_rect.centerx, 150)
         )
@@ -52,8 +52,7 @@ class MenuSelect(pg.sprite.Sprite):
     def __init__(self, center: Optional[pg.Rect] = None) -> None:
         super().__init__()
         image_file = construct_asset_full_path('logo/menu_select.png')
-        image  = pg.image.load(image_file).convert_alpha()
-        self.surf = pg.transform.scale_by(image, 2)
+        self.surf = pg.image.load(image_file).convert_alpha()
 
         if center is None:
             center = (0, 0)

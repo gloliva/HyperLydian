@@ -225,6 +225,16 @@ class ListStat:
 
 
 class StatTracker:
+    OUTPUT_STATS_FORMAT = [
+        'SCORE:              {buffer}{value}',
+        'ENEMIES KILLED:     {buffer}{value}',
+        'PLAYER ACCURACY:    {buffer}{value}%',
+        'PLAYER HEALTH LOST: {buffer}{value}',
+        'UPGRADES PICKED UP: {buffer}{value}',
+        'TIME SURVIVED:      {buffer}{value}',
+        'TOTAL TIME PLAYED:  {buffer}{value}',
+    ]
+
     """Tracks game information"""
     def __init__(self, osc: OSCHandler) -> None:
         self.osc = osc
@@ -392,6 +402,38 @@ class StatTracker:
             f'{self.game__time__total_played.seconds} Seconds'
         )
         print()
+
+    def get_endgame_stats(self) -> str:
+        stats_to_report = [
+            self.game__score,
+            self.enemies__killed,
+            int(self.player__accuracy.value),
+            self.player__health_lost,
+            self.upgrades__picked_up,
+            self.game__time__current_playthrough.time_display,
+            self.game__time__total_played.time_display,
+        ]
+
+        # Format lines without buffer
+        stats_str_no_buffer = [
+            stat_str.format(buffer=0, value=stats_to_report[idx])
+            for idx, stat_str in enumerate(self.OUTPUT_STATS_FORMAT)
+        ]
+
+        # Calculate buffer for each line
+        longest_line = len(max(stats_str_no_buffer, key=len))
+        buffer_per_line = [
+            ' ' * (longest_line - len(line)) for line in stats_str_no_buffer
+        ]
+
+        # Re-format lines with buffer
+        stats_str_with_buffer = [
+            stat_str.format(buffer=buffer_per_line[idx], value=stats_to_report[idx])
+            for idx, stat_str in enumerate(self.OUTPUT_STATS_FORMAT)
+        ]
+
+        return '\n'.join(stats_str_with_buffer)
+
 
 
 stat_tracker = StatTracker(osc=osc)
