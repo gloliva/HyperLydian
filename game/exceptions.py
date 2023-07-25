@@ -8,3 +8,7 @@ class SpecialEventError(Exception):
 
 class MenuRenderingError(Exception):
     pass
+
+
+class MenuSelectionError(Exception):
+    pass

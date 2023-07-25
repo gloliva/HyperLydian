@@ -1,6 +1,7 @@
 # 3rd-party imports
 import pygame
 from pygame.locals import (
+    K_UP,
     K_DOWN,
     K_ESCAPE,
     K_RETURN,
@@ -14,7 +15,7 @@ from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 from menus.base import Menu
 import sprites.groups as groups
 import sprites.background as background
-from sprites.menus import Title
+from sprites.menus import MainTitle
 from stats import stat_tracker
 from text import SelectableText
 
@@ -23,14 +24,22 @@ MENU_SCREEN = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 
 
 # Create Main Menu
-main_menu = Menu(GameState.MAIN_MENU, MENU_SCREEN)
-main_menu.add_text(
+MAIN_MENU = Menu(GameState.MAIN_MENU, MENU_SCREEN)
+MAIN_MENU.add_text(
     SelectableText(
-        'Press Enter to Start', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 600),
+        'Start', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 400),
         transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'Press Esc to Quit', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 700),
+        'Settings', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 525),
+        transition_state=GameState.GAMEPLAY,
+    ),
+    SelectableText(
+        'Credits', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 650),
+        transition_state=GameState.GAMEPLAY,
+    ),
+    SelectableText(
+        'Quit', 'spacemono', 64, (255, 255, 255, 255), (SCREEN_WIDTH/2, 775),
         transition_state=GameState.QUIT,
     ),
 )
@@ -50,7 +59,8 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
         groups.all_sprites.add(staff)
 
     # hyperlydian Title
-    title = Title(MENU_SCREEN.get_rect())
+    title = MainTitle(MENU_SCREEN.get_rect())
+    MAIN_MENU.init_menu_select()
 
     # update stats
     stat_tracker.control__menu_init += 1
@@ -68,10 +78,13 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
 
                 if event.key == K_RETURN:
                     main_menu_loop = False
-                    next_state = GameState.GAMEPLAY
+                    next_state = MAIN_MENU.select_text()
 
                 if event.key == K_DOWN:
-                    pass
+                    MAIN_MENU.move_text_cursor(1)
+
+                if event.key == K_UP:
+                    MAIN_MENU.move_text_cursor(-1)
 
             elif event.type == QUIT:
                 main_menu_loop = False
@@ -89,7 +102,7 @@ def run_main_menu(game_clock: pygame.time.Clock, main_screen: pygame.Surface):
         MENU_SCREEN.blit(title.surf, title.rect)
 
         # draw text
-        main_menu.render_all_text()
+        MAIN_MENU.update()
 
         # draw menu to main display
         main_screen.blit(MENU_SCREEN, MENU_SCREEN.get_rect())
