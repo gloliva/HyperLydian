@@ -18,7 +18,7 @@ pg.display.init()
 class Menu:
     # Animation Alpha Values
     ALPHA_VALUES = [255, 255, 122, 0, 0]
-    SELECTED_TIMER_INCREMENT = 0.125
+    SELECTED_TIMER_INCREMENT = 0.2
 
     def __init__(self, menu_name: GameState, menu_screen: Optional[pg.Surface] = None) -> None:
         # Menu properties
@@ -86,6 +86,11 @@ class Menu:
                 f'{self.menu_name.name} Menu does not have a menu_screen associated with it'
             )
         for text in self.all_text:
+            for offset in text.outline_offsets:
+                text_center = text.rect.center
+                offset_center = (text_center[0] + offset[0], text_center[1] + offset[1])
+                self.menu_screen.blit(text.outline_surf, text.outline_surf.get_rect(center=offset_center))
+
             self.menu_screen.blit(text.surf, text.rect)
 
     def select_text(self) -> GameState:

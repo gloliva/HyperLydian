@@ -1,5 +1,6 @@
 # stdlib imports
 from enum import Enum
+from math import sqrt
 
 # Game frames
 FPS = 60

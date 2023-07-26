@@ -81,10 +81,11 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                     groups.notes.add(note)
                     groups.all_sprites.add(note)
 
-            elif event.type == Event.ADD_STAFF.type:
-                staff = background.Staff(game_screen.get_rect())
-                groups.staff.add(staff)
-                groups.all_sprites.add(staff)
+            elif event.type == Event.ADD_STAR.type:
+                for _ in range(background.Star.NUM_STARS_PER_EVENT):
+                    star = background.Star(game_screen.get_rect())
+                    groups.stars.add(star)
+                    groups.all_sprites.add(star)
 
             # handle player death
             elif event.type == Event.PLAYER_DEATH.type:
@@ -138,9 +139,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         # move upgrades
         groups.health_upgrades.update(timedelta=timedelta)
 
-        # move notes
+        # move background
         groups.notes.update(game_screen.get_rect())
-        groups.staff.update(game_screen.get_rect())
+        groups.stars.update(game_screen.get_rect())
 
         # collision checks
         handle_collisions(player)

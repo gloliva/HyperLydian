@@ -272,6 +272,7 @@ player_projectiles = Group()
 health_upgrades = HealthUpgradeGroup()
 
 # Background
+stars = Group()
 notes = Group()
 staff = Group()
 
