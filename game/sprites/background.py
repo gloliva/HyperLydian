@@ -35,12 +35,13 @@ class Background(pg.sprite.Sprite):
 
 
 class Note(Background):
-    NUM_NOTES_PER_EVENT = 2
+    NUM_NOTES_PER_EVENT = 4
     NUM_NOTES_PER_MENU_EVENT = 10
     NUM_ON_LOAD = 60
     NUM_VARIANTS = 6
     DRAW_LAYER = 1
     MENU_SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
+    GAMEPLAY_SPAWN_SIDE = ['left', 'top', 'right']
     NUM_MOVEMENT_POINTS = 20
     ALPHA_BOUNDS = [100, 200]
     SCALE_BOUNDS = [0.15, 1]
@@ -86,7 +87,7 @@ class Note(Background):
 
         # Set note color
         color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(0, 255)))
+        color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(50, 255)))
         self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
 
         # Spawn randomly across the screen
@@ -108,17 +109,36 @@ class Note(Background):
                 x, y = screen_rect.width - 20, randint(20, screen_rect.height - 20)
             else:
                 x, y = randint(20, screen_rect.width - 20), screen_rect.height - 20
+
             self.rect = self.surf.get_rect(
                 center=(x, y)
             )
         # Spawn outside the screen
         else:
+            spawn_side = randelem(self.GAMEPLAY_SPAWN_SIDE)
+            if spawn_side == 'left':
+                x, y = randint(-100, -20), randint(-100, -20),
+                self.direction = 'right'
+            elif spawn_side == 'top':
+                x, y = randint(20, screen_rect.width - 20), randint(-100, -20)
+                self.direction = 'bottom'
+            else:
+                x, y = randint(screen_rect.width + 20, screen_rect.width + 100), randint(-100, -20)
+                self.direction = 'left'
+
             self.rect = self.surf.get_rect(
-                center=(
-                    randint(0, screen_rect.width),
-                    randint(-100, -20),
-                )
+                center=(x, y)
             )
+
+        # Gameplayer parameters
+        self.rotation_amount = uniform(0.1, 1.5) * randelem([1, -1])
+        if not on_load and not in_menu:
+            if self.direction == 'left':
+                self.movement_vector = (randint(1, 4), randint(1, 4))
+            elif self.direction == 'right':
+                self.movement_vector = (randint(-4, -1), randint(1, 4))
+            else:
+                self.movement_vector = (randint(-4, 4), randint(1, 4))
 
         # Menu animation parameters
         self.movement_counter = 0
@@ -148,7 +168,15 @@ class Note(Background):
             else:
                 self.kill()
         else:
+            self.move_in_game(screen_rect)
+            self.rotate(self.current_rotation + self.rotation_amount)
             super().update(screen_rect)
+
+    def move_in_game(self, screen_rect: pg.Rect) -> None:
+        self.rect.move_ip(*self.movement_vector)
+
+        if self.rect.top > screen_rect.height:
+            self.kill()
 
     def move_in_menu(self, blackhole_rect: pg.Rect) -> None:
         path = self.interpolate_between_points(self.spawn_center, blackhole_rect, self.NUM_MOVEMENT_POINTS)
@@ -201,7 +229,6 @@ class BrokenNote(Background):
         should_update = (self.frame_counter % self.FRAME_THRESHOLD) == 0
 
         if self.direction == 'left':
-
             x, y = -1, randint(0, 1) if should_update else self.prev_y
         elif self.direction == 'right':
             x, y = 1, randint(-1, 0) if should_update else self.prev_y

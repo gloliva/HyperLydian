@@ -37,7 +37,7 @@ class Event:
 def initialize_event_timers() -> None:
     event_timer(Event.ADD_STRAFER_GRUNT, 2000)
     event_timer(Event.ADD_SPINNER_GRUNT, 10000)
-    event_timer(Event.ADD_NOTE, 50)
+    event_timer(Event.ADD_NOTE, 400)
     event_timer(Event.ADD_STAR, 50)
 
 
