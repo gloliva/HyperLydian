@@ -10,7 +10,7 @@ from pygame.locals import (
 )
 
 # project imports
-from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
+from defs import FPS, SCREEN_WIDTH, GameState
 from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
@@ -28,6 +28,11 @@ AUTHOR_TEXT = Text(
     'spacemono', 36, 'white', (SCREEN_WIDTH/2, 360),
     outline_size=2,
 )
+APPRECIATION_TEXT = Text(
+    'Thank you for playing',
+    'spacemono', 28, 'cadetblue1', (SCREEN_WIDTH/2, 460),
+    outline_size=2,
+)
 MENU_TEXT = SelectableText(
     'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650),
      outline_size=2, transition_state=GameState.MAIN_MENU,
@@ -39,6 +44,7 @@ CREDITS_MENU = Menu(GameState.CREDITS)
 CREDITS_MENU.add_text(
     CREDITS_TEXT,
     AUTHOR_TEXT,
+    APPRECIATION_TEXT,
     MENU_TEXT,
 )
 
