@@ -12,16 +12,27 @@ from pygame.locals import (
 # project imports
 from defs import GameState, FPS, SCREEN_WIDTH
 from menus.base import Menu
+import sprites.groups as groups
+import sprites.background as background
 from sprites.menus import DeathScreenTitle
 from stats import stat_tracker
 from text import Text, SelectableText
 
 
 # Define text
-STATS_TEXT = Text('', 'spacemono', 24, 'white')
-RESTART_TEXT = SelectableText('RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650), transition_state=GameState.GAMEPLAY)
-MENU_TEXT = SelectableText('BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 725), transition_state=GameState.MAIN_MENU)
-QUIT_TEXT = SelectableText('QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 800), transition_state=GameState.QUIT)
+STATS_TEXT = Text('', 'spacemono', 24, 'white', outline_size=2)
+RESTART_TEXT = SelectableText(
+    'RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650),
+    outline_size=2, transition_state=GameState.GAMEPLAY
+)
+MENU_TEXT = SelectableText(
+    'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 725),
+     outline_size=2, transition_state=GameState.MAIN_MENU
+)
+QUIT_TEXT = SelectableText(
+    'QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 800),
+     outline_size=2, transition_state=GameState.QUIT
+)
 
 
 # Death Screen Menu
@@ -48,6 +59,16 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
 
     DEATH_MENU.update_text(stat_tracker.get_endgame_stats(), STATS_TEXT)
 
+    # Add broken notes to background
+    for _ in range(background.BrokenNote.NUM_ON_LOAD):
+        note = background.BrokenNote(main_screen.get_rect())
+        groups.broken_notes.add(note)
+        groups.all_sprites.add(note)
+
+    # destroyed ship
+    destroyed_ship = background.DestroyedShip(main_screen.get_rect())
+    groups.all_sprites.add(destroyed_ship)
+
     death_menu_loop = True
     while death_menu_loop:
         # event handler
@@ -71,8 +92,17 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
                 death_menu_loop = False
                 next_state = GameState.QUIT
 
+        # update background
+        groups.broken_notes.update(screen_rect)
+        groups.stars.update(screen_rect, in_menu=True)
+        destroyed_ship.update(screen_rect)
+
         # draw background
         main_screen.fill("black")
+
+        # draw all sprites
+        for sprite in groups.all_sprites:
+            main_screen.blit(sprite.surf, sprite.rect)
 
         # draw title
         main_screen.blit(death_menu_message.surf, death_menu_message.rect)
@@ -85,5 +115,11 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
 
         # lock FPS
         game_clock.tick(FPS)
+
+    # Remove all sprites except stars
+    for sprite in groups.all_sprites:
+        if sprite in groups.stars:
+            continue
+        sprite.kill()
 
     return next_state

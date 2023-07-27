@@ -273,6 +273,7 @@ health_upgrades = HealthUpgradeGroup()
 
 # Background
 stars = Group()
+broken_notes = Group()
 notes = Group()
 staff = Group()
 

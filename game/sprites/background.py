@@ -163,6 +163,76 @@ class Note(Background):
         self.rect = self.surf.get_rect(center=prev_center)
 
 
+class BrokenNote(Background):
+    NUM_ON_LOAD = 80
+    NUM_VARIANTS = 12
+    DIRECTION = ['left', 'top', 'right', 'bottom']
+    FRAME_THRESHOLD = 360
+    DRAW_LAYER = 1
+
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__()
+        note_type = randint(0, self.NUM_VARIANTS - 1)
+        image_file = construct_asset_full_path(f"backgrounds/notes/broken_note_{note_type}.png")
+        image = pg.image.load(image_file).convert_alpha()
+        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), uniform(0.05, 0.4))
+        self.surf = self.image
+        self.surf.set_alpha(randint(100, 240))
+
+        self.rect = self.surf.get_rect(
+            center=(
+                randint(1, screen_rect.width - 1),
+                randint(1, screen_rect.height - 1),
+            )
+        )
+
+        # Movement parameters
+        self.prev_x = 0
+        self.prev_y = 0
+        self.frame_counter = 0
+        self.direction = randelem(self.DIRECTION)
+        self.rotation_amount = uniform(0.1, 1.5) * randelem([1, -1])
+
+    def update(self, screen_rect: pg.Rect) -> None:
+        self.drift(screen_rect)
+        self.rotate(self.current_rotation + self.rotation_amount)
+
+    def drift(self, screen_rect: pg.Rect) -> None:
+        should_update = (self.frame_counter % self.FRAME_THRESHOLD) == 0
+
+        if self.direction == 'left':
+
+            x, y = -1, randint(0, 1) if should_update else self.prev_y
+        elif self.direction == 'right':
+            x, y = 1, randint(-1, 0) if should_update else self.prev_y
+        elif self.direction == "top":
+            x, y = randint(-1, 0) if should_update else self.prev_x, -1
+        else:
+            x, y = randint(0, 1) if should_update else self.prev_x, 1
+        self.rect.move_ip(x, y)
+
+        self.prev_x, self.prev_y = x, y
+        self.frame_counter += 1
+
+        # don't move out of bounds
+        if self.rect.left < -10:
+            self.rect.left = -10
+            self.direction = 'right'
+            self.rotation_amount *= -1
+        if self.rect.right > screen_rect.width + 20:
+            self.rect.right = screen_rect.width + 20
+            self.direction = 'left'
+            self.rotation_amount *= -1
+        if self.rect.top <= -10:
+            self.rect.top = -10
+            self.direction = 'bottom'
+            self.rotation_amount *= -1
+        if self.rect.bottom > screen_rect.height + 20:
+            self.rect.bottom = screen_rect.height + 20
+            self.direction = 'top'
+            self.rotation_amount *= -1
+
+
 class Star(Background):
     NUM_ON_LOAD = 800
     NUM_STARS_PER_EVENT = 2
@@ -170,7 +240,7 @@ class Star(Background):
     STAR_TYPES = ['star_tiny', 'star_small']
     ALPHA_VALUES = [50, 50, 50, 50, 100, 150, 200, 255, 200, 100]
 
-    def __init__(self, screen_rect: pg.Rect, on_load: bool = False, in_menu: bool = False) -> None:
+    def __init__(self, screen_rect: pg.Rect, on_load: bool = False) -> None:
         super().__init__()
         star_type = randelem(self.STAR_TYPES)
         image_file = construct_asset_full_path(f"backgrounds/stars/{star_type}.png")
@@ -210,6 +280,7 @@ class Star(Background):
         alpha_value = self.ALPHA_VALUES[alpha_id]
         self.surf.set_alpha(alpha_value)
 
+
 class BlackHole(Background):
     ROTATION_AMOUNT = 4
     MOVEMENT_VALUES = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
@@ -241,3 +312,22 @@ class BlackHole(Background):
         move_id = int(self.movement_id)
         x, y = self.MOVEMENT_VALUES[move_id]
         self.rect.move_ip(x, y)
+
+
+class DestroyedShip(Background):
+    ROTATION_AMOUNT = 0.1
+    DRAW_LAYER = 3
+
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__()
+        image_file = construct_asset_full_path(f"spaceships/player/destroyed_player_ship.png")
+        image = pg.image.load(image_file).convert_alpha()
+        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), 5)
+        self.surf = self.image
+
+        self.rect = self.surf.get_rect(
+            center=(300, screen_rect.height - 200)
+        )
+
+    def update(self, _: pg.Rect):
+        self.rotate(self.current_rotation + self.ROTATION_AMOUNT)

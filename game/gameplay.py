@@ -287,7 +287,7 @@ def end_game():
     disable_event_timers()
 
     for sprite in groups.all_sprites:
-        if sprite not in groups.notes:
+        if sprite not in groups.stars:
             sprite.kill()
 
     stat_tracker.control__game_init -= 1
