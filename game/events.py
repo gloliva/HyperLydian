@@ -65,11 +65,19 @@ def enable_spinner_grunt_event(game_screen_rect: pg.Rect):
         grunt = groups.spinner_grunt_enemies.create_new_grunt(
             spawn,
             on_death_callbacks=[special_event.decrement],
-            special_event=True
+            special_event=True,
         )
         grunt.rotate(angle)
 
     return special_event
+
+
+def enable_asteroid_field_event():
+    pass
+
+
+def enable_note_burst_event():
+    pass
 
 
 class SpecialEvent:
@@ -78,8 +86,17 @@ class SpecialEvent:
         raise NotImplementedError(f'Special event type must {self.__class__} must override complete property')
 
 
-class TimeChallengeSpecialEvent:
-    pass
+class TimeChallengeSpecialEvent(SpecialEvent):
+    def __init__(self, time_in_sec: int) -> None:
+        self.time_in_sec = time_in_sec
+        self.curr_time = 0
+
+    def update_time(self, timedelta: float) -> None:
+        self.curr_time += timedelta
+
+    @property
+    def complete(self):
+        return self.curr_time > self.time_in_sec
 
 
 class CountdownSpecialEvent(SpecialEvent):
@@ -91,7 +108,7 @@ class CountdownSpecialEvent(SpecialEvent):
 
     @property
     def complete(self):
-        return self.count == 0
+        return self.count <= 0
 
 
 class SpecialEventManager:

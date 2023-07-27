@@ -21,6 +21,10 @@ class Upgrade(pg.sprite.Sprite):
     # Animation Alpha Values
     ALPHA_VALUES = [255, 0]
 
+    # Movement
+    MOVEMENT_VALUES = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
+    MOVEMENT_INCREMENT = 0.05
+
     # Time to Live
     TTL_SECONDS = None
     EXPIRATION_SECONDS = None
@@ -55,16 +59,28 @@ class Upgrade(pg.sprite.Sprite):
         self.num_alpha_values = len(self.ALPHA_VALUES)
         self.curr_alpha_id = 0
 
+        # Movement properties
+        self.movement_id = 0
+        self.num_movement_values = len(self.MOVEMENT_VALUES)
+
     def update(self, *_: Any, **kwargs: Any) -> None:
         timedelta = kwargs.get('timedelta')
         if timedelta is None:
             raise KeyError(f'timedelta keyword arg not passed into {self.__class__} update method.')
+
+        self.move()
 
         self.time_alive += timedelta
         if self.expiration_animation_on:
             self.show_expiration_animation()
         elif self.time_alive > (self.TTL_SECONDS - self.EXPIRATION_SECONDS):
             self.expiration_animation_on = True
+
+    def move(self) -> None:
+        self.movement_id = (self.movement_id + self.MOVEMENT_INCREMENT) % self.num_movement_values
+        move_id = int(self.movement_id)
+        x, y = self.MOVEMENT_VALUES[move_id]
+        self.rect.move_ip(x, y)
 
     def show_expiration_animation(self) -> None:
         if self.time_alive > (self.TTL_SECONDS):

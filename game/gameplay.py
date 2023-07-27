@@ -312,7 +312,6 @@ def end_game():
             sprite.kill()
 
     stat_tracker.control__game_init -= 1
-    stat_tracker.print_stats()
     stat_tracker.send_stats()
 
 

@@ -44,11 +44,11 @@ class Note(Background):
     MENU_SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
     GAMEPLAY_SPAWN_SIDE = ['left', 'top', 'right']
     GAMEPLAY_COLORS = [
-        (37, 255, 63),   # green
-        (250, 255, 99),  # yellow
-        (130, 251, 255), # cyan
-        (248, 130, 255), # pink
-        (226, 180, 255), # light purple
+        "gold",
+        "cyan",
+        "green",
+        "yellow",
+        "pink",
     ]
     NUM_MOVEMENT_POINTS = 20
     ALPHA_BOUNDS = [100, 200]
@@ -82,13 +82,13 @@ class Note(Background):
         super().__init__()
         note_type = randint(0, self.NUM_VARIANTS - 1)
         image_file = construct_asset_full_path(f"backgrounds/notes/note_{note_type}.png")
-        self.image = pg.image.load(image_file).convert()
+        self.image = pg.image.load(image_file).convert_alpha()
 
         # Initial rotation
         self.image = pg.transform.rotate(self.image, randint(0, 359))
         if not in_menu:
             self.image = pg.transform.scale_by(self.image, uniform(0.1, 0.5))
-            self.image.set_alpha(randint(50, 200))
+            # self.image.set_alpha(randint(50, 255))
 
         # Save image to reference when rotating / scaling
         self.surf = self.image
