@@ -178,11 +178,6 @@ class Star(Background):
         self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), uniform(0.05, 0.4))
         self.surf = self.image
 
-        # Set star color
-        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(0, 255)))
-        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
-
         # Set star rect
         if on_load:
             self.rect = self.surf.get_rect(
@@ -202,7 +197,7 @@ class Star(Background):
         # star attributes
         self.curr_alpha_id = 0
         self.num_alpha_values = len(self.ALPHA_VALUES)
-        self.twinkle_increment = uniform(0.05, 0.5)
+        self.twinkle_increment = uniform(0.1, 0.5)
 
     def update(self, screen_rect: pg.Rect, in_menu: bool = False):
         self.show_twinkle_animation()
