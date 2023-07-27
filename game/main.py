@@ -17,6 +17,7 @@ from debug import DISABLE_OPENING_MAX_APPLICATION
 from menus.loading import loading_screen
 from gameplay import run_gameplay
 from menus.main_menu import run_main_menu
+from menus.credits import run_credits_menu
 from menus.death import run_death_menu
 from stats import stat_tracker
 
@@ -94,6 +95,7 @@ def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
 GAME_STATE_TO_LOOP_MAP = {
     GameState.LOADING_SCREEN: loading_screen,
     GameState.MAIN_MENU: run_main_menu,
+    GameState.CREDITS: run_credits_menu,
     GameState.GAMEPLAY: run_gameplay,
     GameState.DEATH_MENU: run_death_menu,
     GameState.QUIT: quit_game,

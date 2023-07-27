@@ -17,9 +17,10 @@ SCREEN_HEIGHT = 900
 class GameState(Enum):
     LOADING_SCREEN = 0
     MAIN_MENU = 1
-    GAMEPLAY = 2
-    DEATH_MENU = 3
-    QUIT = 4
+    CREDITS = 2
+    GAMEPLAY = 3
+    DEATH_MENU = 4
+    QUIT = 5
 
 
 # OSC constants

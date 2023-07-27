@@ -8,6 +8,7 @@ import pygame as pg
 from defs import GameState
 from exceptions import MenuRenderingError, MenuSelectionError
 from sprites.menus import MenuSelect
+import sprites.groups as groups
 from text import Text, SelectableText
 
 
@@ -41,6 +42,7 @@ class Menu:
         if not self.selectable_text:
             return
 
+        self.selectable_text_pos = 0
         text = self.selectable_text[0]
         self.menu_select.set_center(text.rect.center)
         self.menu_select.set_scale(text.rect.width, text.rect.height)
@@ -105,3 +107,8 @@ class Menu:
         alpha_id = int(self.curr_alpha_id)
         alpha_value = self.ALPHA_VALUES[alpha_id]
         self.menu_select.set_alpha(alpha_value)
+
+
+def clean_up_menu():
+    for sprite in groups.all_sprites:
+        sprite.kill()

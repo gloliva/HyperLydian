@@ -322,7 +322,7 @@ class DestroyedShip(Background):
         super().__init__()
         image_file = construct_asset_full_path(f"spaceships/player/destroyed_player_ship.png")
         image = pg.image.load(image_file).convert_alpha()
-        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), 5)
+        self.image = pg.transform.scale_by(image, 5)
         self.surf = self.image
 
         self.rect = self.surf.get_rect(

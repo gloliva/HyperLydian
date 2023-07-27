@@ -13,7 +13,7 @@ from pygame.locals import (
 # project imports
 from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
 from events import Event, initialize_menu_timers, disable_menu_timers
-from menus.base import Menu
+from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
 from sprites.menus import MainTitle
@@ -40,7 +40,7 @@ MAIN_MENU.add_text(
     SelectableText(
         'CREDITS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 655),
         outline_size=2,
-        transition_state=GameState.GAMEPLAY,
+        transition_state=GameState.CREDITS,
     ),
     SelectableText(
         'QUIT', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 755),
@@ -145,6 +145,7 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # disable menu events
     disable_menu_timers()
 
+    clean_up_menu()
     return next_state
 
 
@@ -154,5 +155,5 @@ def handle_collisions(blackhole: background.BlackHole):
         blackhole,
         groups.stars,
         dokill=True,
-        collided=pg.sprite.collide_rect,
+        collided=pg.sprite.collide_circle_ratio(0.6),
     )

@@ -11,7 +11,7 @@ from pygame.locals import (
 
 # project imports
 from defs import GameState, FPS, SCREEN_WIDTH
-from menus.base import Menu
+from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
 from sprites.menus import DeathScreenTitle
@@ -47,10 +47,11 @@ DEATH_MENU.add_text(
 
 def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
     next_state = None
+    screen_rect = main_screen.get_rect()
+
     DEATH_MENU.add_screen(menu_screen=main_screen)
     DEATH_MENU.init_menu_select()
 
-    screen_rect = main_screen.get_rect()
     death_menu_message = DeathScreenTitle(screen_rect)
 
     STATS_TEXT.update_position(
@@ -116,10 +117,6 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
         # lock FPS
         game_clock.tick(FPS)
 
-    # Remove all sprites except stars
-    for sprite in groups.all_sprites:
-        if sprite in groups.stars:
-            continue
-        sprite.kill()
-
+    clean_up_menu()
     return next_state
+

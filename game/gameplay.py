@@ -37,6 +37,7 @@ from stats import stat_tracker
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # create game screen
     game_screen = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
+    screen_rect = game_screen.get_rect()
 
     # track stats for this playthrough
     stat_tracker.init_new_playthrough(
@@ -50,14 +51,20 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # handle frame-independent phsyics
     timedelta = 0
 
+    # create the background
+    for _ in range(background.Star.NUM_ON_LOAD):
+        star = background.Star(screen_rect, on_load=True)
+        groups.stars.add(star)
+        groups.all_sprites.add(star)
+
     # create the player
-    player = create_player(game_screen.get_rect())
+    player = create_player(screen_rect)
 
     # enable game music
     stat_tracker.control__game_init += 1
 
     # special events
-    special_event_manager = SpecialEventManager(game_screen.get_rect())
+    special_event_manager = SpecialEventManager(screen_rect)
 
     # difficulty manager
     difficulty_manager = DifficultyManager()
@@ -77,13 +84,13 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             # handle creating background
             elif event.type == Event.ADD_NOTE.type:
                 for _ in range(background.Note.NUM_NOTES_PER_EVENT):
-                    note = background.Note(game_screen.get_rect())
+                    note = background.Note(screen_rect)
                     groups.notes.add(note)
                     groups.all_sprites.add(note)
 
             elif event.type == Event.ADD_STAR.type:
                 for _ in range(background.Star.NUM_STARS_PER_EVENT):
-                    star = background.Star(game_screen.get_rect())
+                    star = background.Star(screen_rect)
                     groups.stars.add(star)
                     groups.all_sprites.add(star)
 
@@ -123,25 +130,25 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             player.attack()
 
         # move the player
-        player.update(pressed_keys, game_screen.get_rect())
+        player.update(pressed_keys, screen_rect)
 
         # move enemies
-        groups.all_enemies.update(game_screen.get_rect())
+        groups.all_enemies.update(screen_rect)
 
         # enemy attacks
         for enemy in groups.all_enemies:
             enemy.attack()
 
         # move projectiles
-        groups.player_projectiles.update(game_screen.get_rect())
-        groups.enemy_projectiles.update(game_screen.get_rect())
+        groups.player_projectiles.update(screen_rect)
+        groups.enemy_projectiles.update(screen_rect)
 
         # move upgrades
         groups.health_upgrades.update(timedelta=timedelta)
 
         # move background
-        groups.notes.update(game_screen.get_rect())
-        groups.stars.update(game_screen.get_rect())
+        groups.notes.update(screen_rect)
+        groups.stars.update(screen_rect)
 
         # collision checks
         handle_collisions(player)
@@ -169,7 +176,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
             game_screen.blit(sprite.surf, sprite.rect)
 
         # draw game screen to display
-        main_screen.blit(game_screen, game_screen.get_rect())
+        main_screen.blit(game_screen, screen_rect)
 
         # render screen
         pg.display.flip()

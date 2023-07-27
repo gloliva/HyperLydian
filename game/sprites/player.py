@@ -29,10 +29,11 @@ class Player(CharacterSprite):
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
+    MENU_SPEED = 6
     HIT_TIMER_INCREMENT = 0.125
     HEAL_TIMER_INCREMENT = 0.125
 
-    def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
+    def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon], in_menu: bool = False) -> None:
         image_files = [
             "spaceships/player/player_ship.png",
             "spaceships/player/player_ship_hit.png",
@@ -66,6 +67,9 @@ class Player(CharacterSprite):
             for image_file in heal_image_files
         ]
         self.projectiles_in_range = set()
+
+        # Menu attributes
+        self.menu_direction = self.MENU_SPEED
 
     def update(self, *args, **kwargs) -> None:
         if self.heal_animation_on:
@@ -121,6 +125,17 @@ class Player(CharacterSprite):
         else:
             stat_tracker.player__frames__still += 1
 
+    def move_in_menu(self, game_screen_rect: pg.Rect):
+        self.rect.move_ip(self.menu_direction, 0)
+
+        # don't move out of bounds
+        if self.rect.left < 0:
+            self.rect.left = 0
+            self.menu_direction *= -1
+        if self.rect.right > game_screen_rect.width:
+            self.rect.right = game_screen_rect.width
+            self.menu_direction *= -1
+
     def take_damage(self, damage: int) -> None:
         if debug.PLAYER_INVINCIBLE:
             return
@@ -152,13 +167,14 @@ class Player(CharacterSprite):
             self.curr_image_id = 0
             self.heal_animation_on = False
 
-    def attack(self):
+    def attack(self, in_menu: bool = False):
         attack_center = (self.rect.centerx, self.rect.centery)
         self.equipped_weapon.attack(
             projectile_center=attack_center,
             movement_angle=self.current_rotation,
         )
-        stat_tracker.player__frames__firing += 1
+        if not in_menu:
+            stat_tracker.player__frames__firing += 1
 
     def add_projectiles_in_range(self, projectiles: List[projectiles.Projectile]):
         for projectile in projectiles:
@@ -172,8 +188,9 @@ class Player(CharacterSprite):
             stat_tracker.player__dodges -= 1
 
 
-def create_player(game_screen_rect: pg.Rect) -> Player:
+def create_player(game_screen_rect: pg.Rect, in_menu: bool = False) -> Player:
     """Creates a new Player object"""
+    track_stat = True if not in_menu else False
 
     # Create player weapons
     energy_turret = Weapon(
@@ -186,7 +203,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
         projectile_scale=0.15,
-        track_stat=True,
+        track_stat=track_stat,
         weapon_index=0,
     )
     energy_beam = Weapon(
@@ -198,7 +215,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
         damage=5,
         rate_of_fire=300,
         projectile_scale=0.5,
-        track_stat=True,
+        track_stat=track_stat,
         weapon_index=1,
     )
 
@@ -209,6 +226,7 @@ def create_player(game_screen_rect: pg.Rect) -> Player:
     groups.all_sprites.add(player)
 
     # update stats
-    stat_tracker.player__starting_position.update(player.rect.centerx, player.rect.centery)
-    stat_tracker.player__starting_angle.update(player.INITIAL_ROTATION)
+    if track_stat:
+        stat_tracker.player__starting_position.update(player.rect.centerx, player.rect.centery)
+        stat_tracker.player__starting_angle.update(player.INITIAL_ROTATION)
     return player
