@@ -237,6 +237,20 @@ def handle_collisions(player: Player):
         projectile_distance = projectile.get_distance_traveled()
         stat_tracker.enemies__hit_distance.add(projectile_distance)
 
+    # notes + player collision
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.notes,
+        dokill=False,
+        collided=pg.sprite.collide_circle_ratio(0.6),
+    )
+
+    for note in collided:
+        player.collect_note()
+        note.kill()
+        stat_tracker.game__score += note.SCORE
+        stat_tracker.notes__collected += 1
+
     # health upgrades + player collision
     collided = pg.sprite.spritecollide(
         player,

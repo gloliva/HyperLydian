@@ -230,6 +230,7 @@ class StatTracker:
         'ENEMIES KILLED:     {buffer}{value}',
         'PLAYER ACCURACY:    {buffer}{value}%',
         'PLAYER HEALTH LOST: {buffer}{value}',
+        'NOTES RECOVERED:    {buffer}{value}',
         'UPGRADES PICKED UP: {buffer}{value}',
         'TIME SURVIVED:      {buffer}{value}',
         'TOTAL TIME PLAYED:  {buffer}{value}',
@@ -289,6 +290,8 @@ class StatTracker:
         self.player__hit_distance = TrackerStat()
         self.player__dodges = Stat(0)
         self.player__alive_projectiles = Stat(0)
+
+        self.notes__collected = Stat(0)
 
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
@@ -409,6 +412,7 @@ class StatTracker:
             self.enemies__killed,
             int(self.player__accuracy.value),
             self.player__health_lost,
+            self.notes__collected,
             self.upgrades__picked_up,
             self.game__time__current_playthrough.time_display,
             self.game__time__total_played.time_display,

@@ -32,6 +32,7 @@ class Player(CharacterSprite):
     MENU_SPEED = 6
     HIT_TIMER_INCREMENT = 0.125
     HEAL_TIMER_INCREMENT = 0.125
+    COLLECTED_TIMER_INCREMENT = 0.125
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon], in_menu: bool = False) -> None:
         image_files = [
@@ -41,6 +42,10 @@ class Player(CharacterSprite):
         heal_image_files = [
             "spaceships/player/player_ship.png",
             "spaceships/player/player_ship_upgrade.png",
+        ]
+        collected_image_files = [
+            "spaceships/player/player_ship.png",
+            "spaceships/player/player_ship_collected.png",
         ]
         spawn_location = (
             game_screen_rect.width / 2,
@@ -66,6 +71,14 @@ class Player(CharacterSprite):
             )
             for image_file in heal_image_files
         ]
+        self.collected_animation_on = False
+        self.collected_images = [
+            pg.transform.scale_by(
+                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
+                self.IMAGE_SCALE,
+            )
+            for image_file in collected_image_files
+        ]
         self.projectiles_in_range = set()
 
         # Menu attributes
@@ -74,6 +87,8 @@ class Player(CharacterSprite):
     def update(self, *args, **kwargs) -> None:
         if self.heal_animation_on:
             self.show_heal_animation()
+        elif self.collected_animation_on:
+            self.show_collected_animation()
 
         super().update(*args, **kwargs)
 
@@ -156,6 +171,11 @@ class Player(CharacterSprite):
         self.curr_image_id = 1
         self.show_heal_animation()
 
+    def collect_note(self) -> None:
+        self.collected_animation_on = True
+        self.curr_image_id = 1
+        self.show_collected_animation()
+
     def show_heal_animation(self):
         self.curr_image_id = (self.curr_image_id + self.HEAL_TIMER_INCREMENT) % self.num_images
         image_id = int(self.curr_image_id)
@@ -166,6 +186,17 @@ class Player(CharacterSprite):
         if image_id == 0:
             self.curr_image_id = 0
             self.heal_animation_on = False
+
+    def show_collected_animation(self):
+        self.curr_image_id = (self.curr_image_id + self.COLLECTED_TIMER_INCREMENT) % self.num_images
+        image_id = int(self.curr_image_id)
+        self.surf = pg.transform.rotate(
+            self.collected_images[image_id],
+            self.current_rotation,
+        )
+        if image_id == 0:
+            self.curr_image_id = 0
+            self.collected_animation_on = False
 
     def attack(self, in_menu: bool = False):
         attack_center = (self.rect.centerx, self.rect.centery)

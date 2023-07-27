@@ -54,7 +54,7 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
     """Render main menu"""
     # draw initial background
     for _ in range(background.Note.NUM_ON_LOAD):
-        note = background.Note(MENU_SCREEN.get_rect(), on_load=True)
+        note = background.Note(MENU_SCREEN.get_rect(), on_load=True, in_menu=True)
         groups.notes.add(note)
         groups.all_sprites.add(note)
 

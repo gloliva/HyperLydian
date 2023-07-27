@@ -35,13 +35,21 @@ class Background(pg.sprite.Sprite):
 
 
 class Note(Background):
-    NUM_NOTES_PER_EVENT = 4
+    SCORE = 1
+    NUM_NOTES_PER_EVENT = 2
     NUM_NOTES_PER_MENU_EVENT = 10
     NUM_ON_LOAD = 60
     NUM_VARIANTS = 6
     DRAW_LAYER = 1
     MENU_SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
     GAMEPLAY_SPAWN_SIDE = ['left', 'top', 'right']
+    GAMEPLAY_COLORS = [
+        (37, 255, 63),   # green
+        (250, 255, 99),  # yellow
+        (130, 251, 255), # cyan
+        (248, 130, 255), # pink
+        (226, 180, 255), # light purple
+    ]
     NUM_MOVEMENT_POINTS = 20
     ALPHA_BOUNDS = [100, 200]
     SCALE_BOUNDS = [0.15, 1]
@@ -79,15 +87,18 @@ class Note(Background):
         # Initial rotation
         self.image = pg.transform.rotate(self.image, randint(0, 359))
         if not in_menu:
-            self.image = pg.transform.scale_by(self.image, uniform(0.05, 0.5))
-            self.image.set_alpha(randint(10, 255))
+            self.image = pg.transform.scale_by(self.image, uniform(0.1, 0.5))
+            self.image.set_alpha(randint(50, 200))
 
         # Save image to reference when rotating / scaling
         self.surf = self.image
 
         # Set note color
         color_image = pg.Surface(self.surf.get_size()).convert_alpha()
-        color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(50, 255)))
+        if in_menu:
+            color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(50, 255)))
+        else:
+            color_image.fill(color=randelem(self.GAMEPLAY_COLORS))
         self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
 
         # Spawn randomly across the screen
