@@ -59,7 +59,7 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
         groups.all_sprites.add(note)
 
     for _ in range(background.Star.NUM_ON_LOAD):
-        star = background.Star(MENU_SCREEN.get_rect(), on_load=True)
+        star = background.Star(MENU_SCREEN.get_rect(), on_load=True, in_menu=True)
         groups.stars.add(star)
         groups.all_sprites.add(star)
 
@@ -110,7 +110,11 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
         # update background
         blackhole.update(main_screen.get_rect(), in_menu=True)
 
+        # update notes
         groups.notes.update(MENU_SCREEN.get_rect(), in_menu=True, blackhole_rect=blackhole.rect)
+
+        # update stars
+        groups.stars.update(MENU_SCREEN.get_rect(), in_menu=True)
 
         # draw background
         MENU_SCREEN.fill("black")

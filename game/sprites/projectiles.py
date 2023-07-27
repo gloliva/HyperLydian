@@ -20,7 +20,7 @@ class Projectile(pg.sprite.Sprite):
     IMAGE_FILE = None
 
     # Layers
-    DRAW_LAYER = 2
+    DRAW_LAYER = 4
 
     # Colors
     AVAILABLE_COLORS = None

@@ -28,7 +28,7 @@ class Upgrade(pg.sprite.Sprite):
     EXPIRATION_TIMER_INCREMENT_INCREASE_THRESHOLD = 1
 
     # Layers
-    DRAW_LAYER = 2
+    DRAW_LAYER = 3
 
     @classmethod
     def should_drop(cls) -> bool:

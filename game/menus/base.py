@@ -17,8 +17,8 @@ pg.display.init()
 
 class Menu:
     # Animation Alpha Values
-    ALPHA_VALUES = [255, 255, 122, 0, 0]
-    SELECTED_TIMER_INCREMENT = 0.2
+    ALPHA_VALUES = [255, 255, 122, 0, 0, 122]
+    SELECTED_TIMER_INCREMENT = 0.25
 
     def __init__(self, menu_name: GameState, menu_screen: Optional[pg.Surface] = None) -> None:
         # Menu properties

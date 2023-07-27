@@ -39,7 +39,7 @@ class Note(Background):
     NUM_NOTES_PER_MENU_EVENT = 10
     NUM_ON_LOAD = 60
     NUM_VARIANTS = 6
-    DRAW_LAYER = 2
+    DRAW_LAYER = 1
     MENU_SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
     NUM_MOVEMENT_POINTS = 20
     ALPHA_BOUNDS = [100, 200]
@@ -164,12 +164,13 @@ class Note(Background):
 
 
 class Star(Background):
-    NUM_ON_LOAD = 400
+    NUM_ON_LOAD = 800
     NUM_STARS_PER_EVENT = 2
     DRAW_LAYER = 0
     STAR_TYPES = ['star_tiny', 'star_small']
+    ALPHA_VALUES = [50, 50, 50, 50, 100, 150, 200, 255, 200, 100]
 
-    def __init__(self, screen_rect: pg.Rect, on_load: bool = False) -> None:
+    def __init__(self, screen_rect: pg.Rect, on_load: bool = False, in_menu: bool = False) -> None:
         super().__init__()
         star_type = randelem(self.STAR_TYPES)
         image_file = construct_asset_full_path(f"backgrounds/stars/{star_type}.png")
@@ -198,6 +199,21 @@ class Star(Background):
                 )
             )
 
+        # star attributes
+        self.curr_alpha_id = 0
+        self.num_alpha_values = len(self.ALPHA_VALUES)
+        self.twinkle_increment = uniform(0.05, 0.5)
+
+    def update(self, screen_rect: pg.Rect, in_menu: bool = False):
+        self.show_twinkle_animation()
+        if not in_menu:
+            super().update(screen_rect)
+
+    def show_twinkle_animation(self) -> None:
+        self.curr_alpha_id = (self.curr_alpha_id + self.twinkle_increment) % self.num_alpha_values
+        alpha_id = int(self.curr_alpha_id)
+        alpha_value = self.ALPHA_VALUES[alpha_id]
+        self.surf.set_alpha(alpha_value)
 
 class BlackHole(Background):
     ROTATION_AMOUNT = 4
