@@ -1,5 +1,5 @@
 # stdlib imports
-from random import choices as weightedelem
+from random import randint, choices as weightedelem
 from typing import List
 
 # 3rd-party imports
@@ -9,6 +9,7 @@ from pygame.time import set_timer as event_timer
 
 # project imports
 from exceptions import SpecialEventError
+import sprites.background as background
 import sprites.groups as groups
 from stats import stat_tracker
 
@@ -65,7 +66,8 @@ class SpecialEvent:
         raise NotImplementedError(f'Special event type must {self.__class__} must override complete property')
 
     def on_start(self):
-        raise NotImplementedError(f'Special event type must {self.__class__} must override `on_start` method')
+        """Override method to for pre-event handling"""
+        pass
 
     def update(self, *args, **kwargs):
         """Override method to handle updates every frame"""
@@ -114,37 +116,67 @@ class SpinnerGruntSwarm(SpecialEvent):
         return self.num_grunts <= 0 or self.curr_time > self.MAX_TIME
 
 
-class AsteroidField(SpecialEvent):
-    pass
+class LetterField(SpecialEvent):
+    LETTERS_PER_SECOND = 10
+    EVENT_LENGTH_MIN = 8
+    EVENT_LENGTH_MAX = 20
 
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__(screen_rect)
 
-class NoteBurst(SpecialEvent):
-    pass
-
-
-class TimeChallengeSpecialEvent(SpecialEvent):
-    def __init__(self, time_in_sec: int) -> None:
-        self.time_in_sec = time_in_sec
-        self.curr_time = 0
+        # Event attributes
+        self.player_health = stat_tracker.player__curr_health.value
+        self.event_length = randint(self.EVENT_LENGTH_MIN, self.EVENT_LENGTH_MAX)
+        self.prev_time = -1
 
     def update(self, *args, **kwargs):
-        timedelta = kwargs.get('timedelta')
-        if timedelta is None:
-            raise KeyError(f'timedelta keyword arg not passed into {self.__class__} update method.')
+        if int(self.curr_time) > self.prev_time:
+            num_letters = self.LETTERS_PER_SECOND + randint(0, self.player_health - 1)
+            for _ in range(num_letters):
+                letter = background.Letter(self.screen_rect)
+                groups.letters.add(letter)
+                groups.all_sprites.add(letter)
+            self.prev_time = int(self.curr_time)
 
-        self.update_time(timedelta)
-
-    def update_time(self, timedelta: float) -> None:
-        self.curr_time += timedelta
+        super().update(*args, **kwargs)
 
     @property
     def is_complete(self):
-        return self.curr_time > self.time_in_sec
+        return self.curr_time > self.event_length
+
+
+class NoteBurst(SpecialEvent):
+    NOTES_PER_SECOND = 40
+    EVENT_LENGTH_MIN = 3
+    EVENT_LENGTH_MAX = 15
+
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__(screen_rect)
+
+        # Event attributes
+        self.player_health = stat_tracker.player__curr_health.value
+        self.event_length = randint(self.EVENT_LENGTH_MIN, self.EVENT_LENGTH_MAX)
+        self.prev_time = -1
+
+    def update(self, *args, **kwargs):
+        if int(self.curr_time) > self.prev_time:
+            num_notes = self.NOTES_PER_SECOND + randint(0, self.player_health - 1)
+            for _ in range(num_notes):
+                note = background.Note(self.screen_rect)
+                groups.notes.add(note)
+                groups.all_sprites.add(note)
+            self.prev_time = int(self.curr_time)
+
+        super().update(*args, **kwargs)
+
+    @property
+    def is_complete(self):
+        return self.curr_time > self.event_length
 
 
 class SpecialEventManager:
-    EVENTS = [SpinnerGruntSwarm]
-    EVENT_WEIGHTS = [1] # once all events are done: [5, 5, 2]
+    EVENTS = [SpinnerGruntSwarm, LetterField, NoteBurst]
+    EVENT_WEIGHTS = [5, 5, 2]
     ENEMY_THRESHOLD_MULTIPLIER = 15
     ENEMY_THRESHOLD_ADDITION = 2
 

@@ -275,7 +275,7 @@ health_upgrades = HealthUpgradeGroup()
 stars = Group()
 broken_notes = Group()
 notes = Group()
-staff = Group()
+letters = Group()
 
 # All
 all_sprites = LayeredGroup()

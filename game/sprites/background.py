@@ -334,6 +334,140 @@ class Star(Background):
         self.surf.set_alpha(alpha_value)
 
 
+class Letter(Background):
+    NUM_VARIANTS = 7
+    DAMAGE = 1
+    SPEED_MAX = 4
+    SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
+    DRAW_LAYER = 3
+    OPPOSITE_MOVEMENT = {
+        'top': 'bottom',
+        'bottom': 'top',
+        'left': 'right',
+        'right': 'left',
+    }
+
+    def __init__(self, screen_rect: pg.Rect) -> None:
+        super().__init__()
+        letter_type = randint(0, self.NUM_VARIANTS - 1)
+        image_file = construct_asset_full_path(f"backgrounds/letters/letter_{letter_type}.png")
+        image = pg.image.load(image_file).convert_alpha()
+        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), uniform(0.4, 1))
+        self.surf = self.image
+
+        # Spawn outside of the screen
+        spawn_side = randelem(self.SPAWN_SIDE)
+        if spawn_side == 'left':
+            x, y = randint(-100, -20), randint(-100, -20),
+            self.direction = 'right'
+        elif spawn_side == 'top':
+            x, y = randint(20, screen_rect.width - 20), randint(-100, -20)
+            self.direction = 'bottom'
+        elif spawn_side == 'right':
+            x, y = randint(screen_rect.width + 20, screen_rect.width + 100), randint(-100, -20)
+            self.direction = 'left'
+        else:
+            x, y = randint(20, screen_rect.width - 20), randint(screen_rect.height + 20, screen_rect.height + 100)
+            self.direction = 'top'
+
+        self.rect = self.surf.get_rect(
+            center=(x, y)
+        )
+
+        self.rotation_amount = uniform(0.1, 0.8) * randelem([1, -1])
+        self.set_movement_vector()
+
+        # gameplay parameters
+        self.damage = self.DAMAGE
+        self.overlapping_letters = set()
+
+    def reverse_rotation(self) -> None:
+        self.rotation_amount *= -1
+
+    def set_movement_vector(self) -> None:
+        if self.direction == 'left':
+            self.movement_vector = (randint(1, self.SPEED_MAX), randint(-self.SPEED_MAX, self.SPEED_MAX))
+        elif self.direction == 'top':
+            self.movement_vector = (randint(-self.SPEED_MAX, self.SPEED_MAX), randint(-self.SPEED_MAX, -1))
+        elif self.direction == 'right':
+            self.movement_vector = (randint(-self.SPEED_MAX, -1), randint(-self.SPEED_MAX, self.SPEED_MAX))
+        else:
+            self.movement_vector = (randint(-self.SPEED_MAX, self.SPEED_MAX), randint(1, self.SPEED_MAX))
+
+    def reverse_direction(self) -> None:
+        x, y = self.movement_vector
+        x *= -1
+        y *= -1
+
+        if x < 0:
+            x += 1
+        else:
+            x -= 1
+
+        if y < 0:
+            y += 1
+        else:
+            y -= 1
+
+        speed = sqrt(x**2 + y**2)
+        if speed == 0:
+            if self.direction == 'left':
+                x -= 1
+            elif self.direction == 'top':
+                y -= 1
+            elif self.direction == 'right':
+                x += 1
+            else:
+                y += 1
+
+        self.movement_vector = [x, y]
+
+    def change_movement_on_collision(self, letter: "Letter") -> None:
+        self.direction = self.OPPOSITE_MOVEMENT[self.direction]
+
+        if letter not in self.overlapping_letters:
+            self.reverse_direction()
+            self.reverse_rotation()
+            self.overlapping_letters.add(letter)
+
+    def update(self, screen_rect: pg.Rect):
+        for letter in self.overlapping_letters.copy():
+            if not pg.sprite.collide_circle(self, letter):
+                self.overlapping_letters.remove(letter)
+
+        self.move(screen_rect)
+        self.rotate(self.current_rotation + self.rotation_amount)
+
+    def move(self, screen_rect: pg.Rect) -> None:
+        self.rect.move_ip(*self.movement_vector)
+
+        # Check to see if moved offscreen
+        if self.direction == 'bottom' and \
+            (self.rect.top > screen_rect.height or
+             self.rect.left > screen_rect.width or
+             self.rect.right < 0
+            ):
+            self.kill()
+        elif self.direction == 'top' and \
+            (self.rect.bottom < 0 or
+             self.rect.left > screen_rect.width or
+             self.rect.right < 0
+            ):
+            self.kill()
+        elif self.direction == 'left' and \
+            (self.rect.right < 0 or
+             self.rect.top > screen_rect.height or
+             self.rect.bottom < 0 or self.rect.left
+            ):
+            self.kill()
+        elif self.direction == 'right' and \
+            (self.rect.left > screen_rect.width or
+             self.rect.top > screen_rect.height or
+             self.rect.bottom < 0 or self.rect.left
+            ):
+            self.kill()
+
+
 class BlackHole(Background):
     ROTATION_AMOUNT = 4
     MOVEMENT_VALUES = [(1, 1), (-1, 1), (-1, -1), (1, -1)]

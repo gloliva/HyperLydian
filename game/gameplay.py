@@ -149,6 +149,7 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         # move background
         groups.notes.update(screen_rect)
         groups.stars.update(screen_rect)
+        groups.letters.update(screen_rect)
 
         # collision checks
         handle_collisions(player)
@@ -252,6 +253,45 @@ def handle_collisions(player: Player):
         note.kill()
         stat_tracker.notes__score += note.score
         stat_tracker.notes__collected += 1
+
+    # letters + player collision
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.letters,
+        dokill=False,
+        collided=pg.sprite.collide_rect_ratio(0.6),
+    )
+
+    for letter in collided:
+        player.take_damage(letter.damage)
+        letter.kill()
+
+    # letter + letter collison
+    # change letter movement
+    handled_letters = set()
+    for letter in groups.letters:
+        collided_letters = pg.sprite.spritecollide(
+            letter,
+            groups.letters,
+            dokill=False,
+            collided=pg.sprite.collide_circle_ratio(0.6),
+        )
+        for collided_letter in collided_letters:
+            # skip for enemy colliding with itself and if the enemy has already been handled
+            if letter == collided_letter or letter in handled_letters:
+                continue
+
+            letter.change_movement_on_collision(collided_letter)
+            handled_letters.add(letter)
+
+    # letter + player projectiles
+    collided = pg.sprite.groupcollide(
+        groups.player_projectiles,
+        groups.letters,
+        dokilla=True,
+        dokillb=False,
+        collided=pg.sprite.collide_rect_ratio(0.5),
+    )
 
     # health upgrades + player collision
     collided = pg.sprite.spritecollide(
