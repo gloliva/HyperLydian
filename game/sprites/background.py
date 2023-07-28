@@ -425,13 +425,16 @@ class Letter(Background):
 
     def reverse_direction(self, collision_letter: "Letter") -> None:
         collision_image_scale = collision_letter.image_scale
+        similar_size = abs(self.image_scale - collision_image_scale) < 0.5
         x, y = self.movement_vector
-        x *= -1
-        y *= -1
+
+        if similar_size or (self.image_scale < collision_image_scale):
+            x *= -1
+            y *= -1
 
         # If image sizes are within 0.5, come to near stop in opposite direction
         # Otherwise, the larger image loses momentum and the smaller image gains momentum
-        if abs(self.image_scale - collision_image_scale) < 0.5:
+        if similar_size:
             if x != 0:
                 x = 1 if x > 0 else -1
             if y != 0:
@@ -452,13 +455,13 @@ class Letter(Background):
             speed = sqrt(x**2 + y**2)
             if speed == 0:
                 if self.direction == 'left':
-                    x -= 1
+                    x -= randint(0, 1)
                 elif self.direction == 'top':
-                    y -= 1
+                    y -= randint(0, 1)
                 elif self.direction == 'right':
-                    x += 1
+                    x += randint(0, 1)
                 else:
-                    y += 1
+                    y += randint(0, 1)
 
         self.movement_vector = [x, y]
 
