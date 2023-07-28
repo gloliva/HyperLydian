@@ -34,6 +34,9 @@ class Event:
     INCREASE_DIFFICULTY = PGEvent(custom_type())
     DECREASE_DIFFICULTY = PGEvent(custom_type())
 
+    # Animation events
+    FADE_OUT_LETTERS = PGEvent(custom_type())
+
 
 # Event timers
 def initialize_event_timers() -> None:
@@ -54,6 +57,14 @@ def initialize_menu_timers() -> None:
 
 def disable_menu_timers() -> None:
     event_timer(Event.ADD_NOTE, 0)
+
+
+def disable_timers_on_special_event() -> None:
+    event_timer(Event.ADD_NOTE, 0)
+
+
+def re_enable_timers_after_special_event() -> None:
+    event_timer(Event.ADD_NOTE, 400)
 
 
 class SpecialEvent:
@@ -129,6 +140,9 @@ class LetterField(SpecialEvent):
         self.event_length = randint(self.EVENT_LENGTH_MIN, self.EVENT_LENGTH_MAX)
         self.prev_time = -1
 
+    def on_start(self):
+        disable_timers_on_special_event()
+
     def update(self, *args, **kwargs):
         if int(self.curr_time) > self.prev_time:
             num_letters = self.LETTERS_PER_SECOND + randint(0, self.player_health - 1)
@@ -139,6 +153,10 @@ class LetterField(SpecialEvent):
             self.prev_time = int(self.curr_time)
 
         super().update(*args, **kwargs)
+
+    def on_end(self):
+        re_enable_timers_after_special_event()
+        pg.event.post(Event.FADE_OUT_LETTERS)
 
     @property
     def is_complete(self):
@@ -158,6 +176,9 @@ class NoteBurst(SpecialEvent):
         self.event_length = randint(self.EVENT_LENGTH_MIN, self.EVENT_LENGTH_MAX)
         self.prev_time = -1
 
+    def on_start(self):
+        disable_timers_on_special_event()
+
     def update(self, *args, **kwargs):
         if int(self.curr_time) > self.prev_time:
             num_notes = self.NOTES_PER_SECOND + randint(0, self.player_health - 1)
@@ -169,6 +190,9 @@ class NoteBurst(SpecialEvent):
 
         super().update(*args, **kwargs)
 
+    def on_end(self):
+        re_enable_timers_after_special_event()
+
     @property
     def is_complete(self):
         return self.curr_time > self.event_length
@@ -176,7 +200,7 @@ class NoteBurst(SpecialEvent):
 
 class SpecialEventManager:
     EVENTS = [SpinnerGruntSwarm, LetterField, NoteBurst]
-    EVENT_WEIGHTS = [5, 5, 2]
+    EVENT_WEIGHTS = [5, 4, 2]
     ENEMY_THRESHOLD_MULTIPLIER = 15
     ENEMY_THRESHOLD_ADDITION = 2
 

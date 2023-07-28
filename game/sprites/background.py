@@ -31,8 +31,14 @@ class Background(pg.sprite.Sprite):
             self.kill()
 
     def rotate(self, rotation_angle: int):
+        curr_alpha = self.surf.get_alpha()
         self.current_rotation = rotation_angle % 360
+
         self.surf = pg.transform.rotate(self.image, self.current_rotation + rotation_angle)
+
+        # make sure alpha value is the same
+        if curr_alpha is not None:
+            self.surf.set_alpha(curr_alpha)
 
         # make sure image retains its previous center
         current_image_center = self.rect.center
@@ -335,17 +341,28 @@ class Star(Background):
 
 
 class Letter(Background):
+    # Image
     NUM_VARIANTS = 7
-    DAMAGE = 1
-    SPEED_MAX = 4
-    SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
     DRAW_LAYER = 3
+
+    # Gameplay
+    DAMAGE = 1
+
+    # Spawn
+    SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
+
+    # Movement
+    SPEED_MAX = 4
     OPPOSITE_MOVEMENT = {
         'top': 'bottom',
         'bottom': 'top',
         'left': 'right',
         'right': 'left',
     }
+
+    # Animation
+    FADE_INCREMENT = 0.2
+    ALPHA_VALUES = [255, 232, 200, 182, 150, 122, 100, 73, 50, 22, 1]
 
     def __init__(self, screen_rect: pg.Rect) -> None:
         super().__init__()
@@ -380,6 +397,11 @@ class Letter(Background):
         # gameplay parameters
         self.damage = self.DAMAGE
         self.overlapping_letters = set()
+
+        # Animation parameters
+        self.show_fade_out = False
+        self.curr_alpha_id = 0
+        self.num_alpha_values = len(self.ALPHA_VALUES)
 
     def reverse_rotation(self) -> None:
         self.rotation_amount *= -1
@@ -435,6 +457,9 @@ class Letter(Background):
             if not pg.sprite.collide_circle(self, letter):
                 self.overlapping_letters.remove(letter)
 
+        if self.show_fade_out:
+            self.fade_out()
+
         self.move(screen_rect)
         self.rotate(self.current_rotation + self.rotation_amount)
 
@@ -467,6 +492,19 @@ class Letter(Background):
             ):
             self.kill()
 
+    def enable_fade_out(self) -> None:
+        self.show_fade_out = True
+
+    def fade_out(self) -> None:
+        self.curr_alpha_id = (self.curr_alpha_id + self.FADE_INCREMENT)
+
+        if self.curr_alpha_id >= self.num_alpha_values:
+            self.kill()
+            return
+
+        alpha_id = int(self.curr_alpha_id)
+        alpha_value = self.ALPHA_VALUES[alpha_id]
+        self.surf.set_alpha(alpha_value)
 
 class BlackHole(Background):
     ROTATION_AMOUNT = 4

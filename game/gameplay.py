@@ -115,6 +115,11 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 not debug.NO_ENEMIES:
                 groups.spinner_grunt_enemies.create_new_grunt()
 
+            # Hanlde LetterField event fade out
+            elif event.type == Event.FADE_OUT_LETTERS.type:
+                for letter in groups.letters:
+                    letter.enable_fade_out()
+
             elif event.type == KEYDOWN:
                 # Cycle through players weapons
                 if event.key == K_1:
