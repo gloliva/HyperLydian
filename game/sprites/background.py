@@ -45,6 +45,9 @@ class Background(pg.sprite.Sprite):
         self.rect = self.surf.get_rect()
         self.rect.center = current_image_center
 
+        if hasattr(self, 'mask'):
+            self.mask = pg.mask.from_surface(self.surf)
+
 
 class Note(Background):
     SCORE = 1
@@ -369,7 +372,8 @@ class Letter(Background):
         letter_type = randint(0, self.NUM_VARIANTS - 1)
         image_file = construct_asset_full_path(f"backgrounds/letters/letter_{letter_type}.png")
         image = pg.image.load(image_file).convert_alpha()
-        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), uniform(0.4, 1))
+        self.image_scale = uniform(0.4, 1.)
+        self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), self.image_scale)
         self.surf = self.image
 
         # Spawn outside of the screen
@@ -403,6 +407,9 @@ class Letter(Background):
         self.curr_alpha_id = 0
         self.num_alpha_values = len(self.ALPHA_VALUES)
 
+        # Sprite mask
+        self.mask = pg.mask.from_surface(self.surf)
+
     def reverse_rotation(self) -> None:
         self.rotation_amount *= -1
 
@@ -416,31 +423,42 @@ class Letter(Background):
         else:
             self.movement_vector = (randint(-self.SPEED_MAX, self.SPEED_MAX), randint(1, self.SPEED_MAX))
 
-    def reverse_direction(self) -> None:
+    def reverse_direction(self, collision_letter: "Letter") -> None:
+        collision_image_scale = collision_letter.image_scale
         x, y = self.movement_vector
         x *= -1
         y *= -1
 
-        if x < 0:
-            x += 1
+        # If image sizes are within 0.5, come to near stop in opposite direction
+        # Otherwise, the larger image loses momentum and the smaller image gains momentum
+        if abs(self.image_scale - collision_image_scale) < 0.5:
+            if x != 0:
+                x = 1 if x > 0 else -1
+            if y != 0:
+                y = 1 if y > 0 else -1
         else:
-            x -= 1
+            momentum = 1 if self.image_scale > collision_image_scale else -1
 
-        if y < 0:
-            y += 1
-        else:
-            y -= 1
-
-        speed = sqrt(x**2 + y**2)
-        if speed == 0:
-            if self.direction == 'left':
-                x -= 1
-            elif self.direction == 'top':
-                y -= 1
-            elif self.direction == 'right':
-                x += 1
+            if x < 0:
+                x += (1 * momentum)
             else:
-                y += 1
+                x -= (1 * momentum)
+
+            if y < 0:
+                y += (1 * momentum)
+            else:
+                y -= (1 * momentum)
+
+            speed = sqrt(x**2 + y**2)
+            if speed == 0:
+                if self.direction == 'left':
+                    x -= 1
+                elif self.direction == 'top':
+                    y -= 1
+                elif self.direction == 'right':
+                    x += 1
+                else:
+                    y += 1
 
         self.movement_vector = [x, y]
 
@@ -448,7 +466,7 @@ class Letter(Background):
         self.direction = self.OPPOSITE_MOVEMENT[self.direction]
 
         if letter not in self.overlapping_letters:
-            self.reverse_direction()
+            self.reverse_direction(letter)
             self.reverse_rotation()
             self.overlapping_letters.add(letter)
 
@@ -505,6 +523,7 @@ class Letter(Background):
         alpha_id = int(self.curr_alpha_id)
         alpha_value = self.ALPHA_VALUES[alpha_id]
         self.surf.set_alpha(alpha_value)
+
 
 class BlackHole(Background):
     ROTATION_AMOUNT = 4

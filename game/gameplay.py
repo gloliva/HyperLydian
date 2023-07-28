@@ -267,7 +267,7 @@ def handle_collisions(player: Player):
         player,
         groups.letters,
         dokill=False,
-        collided=pg.sprite.collide_rect_ratio(0.6),
+        collided=pg.sprite.collide_mask,
     )
 
     for letter in collided:
@@ -282,7 +282,7 @@ def handle_collisions(player: Player):
             letter,
             groups.letters,
             dokill=False,
-            collided=pg.sprite.collide_circle_ratio(0.6),
+            collided=pg.sprite.collide_mask,
         )
         for collided_letter in collided_letters:
             # skip for enemy colliding with itself and if the enemy has already been handled
