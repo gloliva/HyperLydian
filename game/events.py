@@ -8,9 +8,11 @@ from pygame.event import custom_type, Event as PGEvent
 from pygame.time import set_timer as event_timer
 
 # project imports
+from defs import ScreenSide
 from exceptions import SpecialEventError
 import sprites.background as background
 import sprites.groups as groups
+import sprites.indicators as indicators
 from stats import stat_tracker
 
 
@@ -139,11 +141,25 @@ class LetterField(SpecialEvent):
         self.player_health = stat_tracker.player__curr_health.value
         self.event_length = randint(self.EVENT_LENGTH_MIN, self.EVENT_LENGTH_MAX)
         self.prev_time = -1
+        self.warning_animation_on = True
 
     def on_start(self):
         disable_timers_on_special_event()
+        for side in ScreenSide.ALL_SIDES:
+            warning_bar = indicators.SideBar(
+                self.screen_rect, spawn_side=side, on_death_callbacks=[self.end_warning_phase]
+            )
+            groups.side_bars.add(warning_bar)
+            groups.all_sprites.add(warning_bar)
+
+    def end_warning_phase(self):
+        self.warning_animation_on = False
 
     def update(self, *args, **kwargs):
+        # Return early if in pre-phase
+        if self.warning_animation_on:
+            return
+
         if int(self.curr_time) > self.prev_time:
             num_letters = self.LETTERS_PER_SECOND + randint(0, self.player_health - 1)
             for _ in range(num_letters):

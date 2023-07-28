@@ -156,6 +156,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         groups.stars.update(screen_rect)
         groups.letters.update(screen_rect)
 
+        # move indicators
+        groups.side_bars.update(screen_rect)
+
         # collision checks
         handle_collisions(player)
 

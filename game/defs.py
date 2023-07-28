@@ -13,6 +13,16 @@ SCREEN_WIDTH = 1440
 SCREEN_HEIGHT = 900
 
 
+class ScreenSide:
+    LEFT = 'left',
+    RIGHT = 'right'
+    TOP = 'top'
+    BOTTOM = 'bottom'
+
+    NUM_SIDES = 4
+    ALL_SIDES = [LEFT, RIGHT, TOP, BOTTOM]
+
+
 # Define game states
 class GameState(Enum):
     LOADING_SCREEN = 0

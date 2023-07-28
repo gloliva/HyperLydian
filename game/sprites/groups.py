@@ -277,5 +277,8 @@ broken_notes = Group()
 notes = Group()
 letters = Group()
 
+# Indicators
+side_bars = Group()
+
 # All
 all_sprites = LayeredGroup()
