@@ -73,6 +73,7 @@ class Indicator(pg.sprite.Sprite):
 class SideBar(Indicator):
     # Image
     TYPES = ['warning']
+    OFFSET = 24
 
     # Spawn
     SPAWN_SIDES = ScreenSide.ALL_SIDES
@@ -92,17 +93,30 @@ class SideBar(Indicator):
         curr_image_rect = image.get_rect()
 
         if spawn_side == ScreenSide.LEFT:
-            self.image = pg.transform.scale(pg.transform.rotate(image, 90), (curr_image_rect.width, screen_rect.height))
-            rect_kwargs = {'topleft': (0, 0)}
+            self.image = pg.transform.scale(
+                pg.transform.rotate(image, 90),
+                (curr_image_rect.width, screen_rect.height - self.OFFSET)
+            )
+            rect_kwargs = {'bottomleft': (0, screen_rect.height)}
         elif spawn_side == ScreenSide.TOP:
-            self.image = pg.transform.scale(image, (screen_rect.width, curr_image_rect.height))
+            self.image = pg.transform.scale(
+                image,
+                (screen_rect.width - self.OFFSET, curr_image_rect.height)
+            )
             rect_kwargs = {'topleft': (0, 0)}
         elif spawn_side == ScreenSide.RIGHT:
-            self.image = pg.transform.scale(pg.transform.rotate(image, 270), (curr_image_rect.width, screen_rect.height))
+            self.image = pg.transform.scale(
+                pg.transform.rotate(image, 270),
+                (curr_image_rect.width, screen_rect.height - self.OFFSET)
+            )
             rect_kwargs = {'topright': (screen_rect.width, 0)}
         else:
-            self.image = pg.transform.scale(pg.transform.rotate(image, 180), (screen_rect.width, curr_image_rect.height))
-            rect_kwargs = {'bottomleft': (0, screen_rect.height)}
+            self.image = pg.transform.scale(
+                pg.transform.rotate(image, 180),
+                (screen_rect.width - self.OFFSET, curr_image_rect.height)
+            )
+            rect_kwargs = {'bottomright': (screen_rect.width, screen_rect.height)}
 
         self.surf = self.image
+        self.surf.set_alpha(150)
         self.rect = self.surf.get_rect(**rect_kwargs)
