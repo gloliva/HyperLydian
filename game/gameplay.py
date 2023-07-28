@@ -327,6 +327,17 @@ def handle_collisions(player: Player):
         for upgrade in upgrades:
             grunt.switch_strafe_direction_on_upgrade_collision(upgrade)
 
+    # strafer grunt + player collision
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.strafer_grunt_enemies,
+        dokill=False,
+        collided=pg.sprite.collide_mask,
+    )
+
+    for enemy in collided:
+        enemy.switch_strafe_direction_on_player_collision(player)
+
     # projectile + player near misses
     collided = pg.sprite.spritecollide(
         player,
@@ -376,6 +387,10 @@ class DifficultyManager:
     SPECIAL_FUNCTIONS = [
         groups.spinner_grunt_enemies.change_grunts_per_ellipse_event,
     ]
+    RESET_FUNCTIONS = [
+        groups.strafer_grunt_enemies.reset,
+        groups.spinner_grunt_enemies.reset,
+    ]
 
     def roll_probability(self) -> int:
         player_max_health = stat_tracker.player__max_health.value
@@ -384,6 +399,11 @@ class DifficultyManager:
     def __init__(self) -> None:
         self.standard_change_count = 0
         self.special_change_count = 0
+        self.reset_difficulty()
+
+    def reset_difficulty(self):
+        for reset_func in self.RESET_FUNCTIONS:
+            reset_func()
 
     def update_difficulty(self, event_manager: SpecialEventManager) -> None:
         self.update_standard_difficulty()

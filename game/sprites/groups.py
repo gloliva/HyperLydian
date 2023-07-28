@@ -3,7 +3,7 @@ from random import randint
 from typing import List, Optional, Tuple
 
 # 3rd-party imports
-from pygame import Rect
+import pygame as pg
 from pygame.sprite import Group, LayeredUpdates as LayeredGroup
 
 # project imports
@@ -122,6 +122,10 @@ class StraferGruntGroup(Group):
         self.max_rows = new_max_rows
         self.max_grunts_per_row = new_max_grunts_per_row
 
+    def reset(self):
+        self.max_rows = self.INITIAL_ROWS
+        self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
+
 
 class SpinnerGruntGroup(Group):
     INITIAL_MAX_GRUNTS = 2
@@ -130,7 +134,7 @@ class SpinnerGruntGroup(Group):
     INITIAL_ELLIPSE_GRUNTS = 3
 
     @classmethod
-    def get_oval_starting_positions(cls, num_grunts: int, screen_rect: Rect) -> List[Tuple[float]]:
+    def get_oval_starting_positions(cls, num_grunts: int, screen_rect: pg.Rect) -> List[Tuple[float]]:
         angle_increment = (2 * math.pi) / num_grunts
 
         return [
@@ -144,7 +148,7 @@ class SpinnerGruntGroup(Group):
     def get_rotation_angles_from_start_positions(
             cls,
             start_positions: List[Tuple[float]],
-            screen_rect: Rect,
+            screen_rect: pg.Rect,
         ) -> List[float]:
         rotation_angles = []
         for x, y in start_positions:
@@ -191,7 +195,17 @@ class SpinnerGruntGroup(Group):
             args.append(spawn)
         if on_death_callbacks is not None:
             args.append(on_death_callbacks)
-        grunt = SpinnerGrunt(*args, special_event=special_event)
+
+        recreate_grunt = True
+        while recreate_grunt:
+            grunt = SpinnerGrunt(*args, special_event=special_event)
+            collided = pg.sprite.spritecollideany(
+                grunt,
+                spinner_grunt_enemies,
+            )
+
+            if spawn is not None or collided is None:
+                recreate_grunt = False
 
         # Set an initial rotation angle
         angle = randint(0, 359)
@@ -226,6 +240,11 @@ class SpinnerGruntGroup(Group):
 
     def set_max_grunts(self, max_grunts: int):
         self.max_grunts = max_grunts
+
+    def reset(self):
+        self.max_grunts = self.INITIAL_MAX_GRUNTS
+        self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
+        self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
 
 
 # Custom Upgrade Groups

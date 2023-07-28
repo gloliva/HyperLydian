@@ -426,9 +426,11 @@ class Letter(Background):
     def reverse_direction(self, collision_letter: "Letter") -> None:
         collision_image_scale = collision_letter.image_scale
         similar_size = abs(self.image_scale - collision_image_scale) < 0.5
+        self_is_smaller = self.image_scale < collision_image_scale
+
         x, y = self.movement_vector
 
-        if similar_size or (self.image_scale < collision_image_scale):
+        if similar_size or (self_is_smaller):
             x *= -1
             y *= -1
 
@@ -440,7 +442,7 @@ class Letter(Background):
             if y != 0:
                 y = 1 if y > 0 else -1
         else:
-            momentum = 1 if self.image_scale > collision_image_scale else -1
+            momentum = 1 if not self_is_smaller else -1
 
             if x < 0:
                 x += (1 * momentum)
@@ -453,7 +455,7 @@ class Letter(Background):
                 y -= (1 * momentum)
 
             speed = sqrt(x**2 + y**2)
-            if speed == 0:
+            if speed == 0 and self_is_smaller:
                 if self.direction == 'left':
                     x -= randint(0, 1)
                 elif self.direction == 'top':

@@ -33,7 +33,7 @@ MAIN_MENU.add_text(
         transition_state=GameState.GAMEPLAY,
     ),
     SelectableText(
-        'SETTINGS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 555),
+        'HOW TO PLAY', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 555),
         outline_size=2,
         transition_state=GameState.GAMEPLAY,
     ),
