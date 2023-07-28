@@ -1,5 +1,11 @@
 # stdlib imports
-from random import randint, uniform, choice as randelem
+from math import sqrt
+from random import (
+    randint,
+    uniform,
+    choice as randelem,
+    choices as weightedelem
+)
 from typing import Optional, List, Tuple
 
 # 3rd-party imports
@@ -43,16 +49,12 @@ class Note(Background):
     DRAW_LAYER = 1
     MENU_SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
     GAMEPLAY_SPAWN_SIDE = ['left', 'top', 'right']
-    GAMEPLAY_COLORS = [
-        "gold",
-        "cyan",
-        "green",
-        "yellow",
-        "pink",
-    ]
     NUM_MOVEMENT_POINTS = 20
     ALPHA_BOUNDS = [100, 200]
     SCALE_BOUNDS = [0.15, 1]
+    SPEED_MAX = 4
+    SCALE_MIN = 0.2
+    SCALE_MAX = 0.5
 
     @staticmethod
     def interpolate_between_points(start: pg.Rect, end: pg.Rect, num_points: int) -> List[Tuple[int, int]]:
@@ -81,25 +83,25 @@ class Note(Background):
     def __init__(self, screen_rect: pg.Rect, on_load: bool = False, in_menu: bool = False) -> None:
         super().__init__()
         note_type = randint(0, self.NUM_VARIANTS - 1)
-        image_file = construct_asset_full_path(f"backgrounds/notes/note_{note_type}.png")
+        note = 'white_note_{0}'.format(note_type) if in_menu else 'gold_note_{0}'.format(note_type)
+        image_file = construct_asset_full_path(f"backgrounds/notes/{note}.png")
         self.image = pg.image.load(image_file).convert_alpha()
 
         # Initial rotation
+        image_scale = 0
         self.image = pg.transform.rotate(self.image, randint(0, 359))
         if not in_menu:
-            self.image = pg.transform.scale_by(self.image, uniform(0.1, 0.5))
-            # self.image.set_alpha(randint(50, 255))
+            image_scale = uniform(self.SCALE_MIN, self.SCALE_MAX)
+            self.image = pg.transform.scale_by(self.image, image_scale)
 
         # Save image to reference when rotating / scaling
         self.surf = self.image
 
-        # Set note color
-        color_image = pg.Surface(self.surf.get_size()).convert_alpha()
+        # Set note color if in menu
         if in_menu:
-            color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(50, 255)))
-        else:
-            color_image.fill(color=randelem(self.GAMEPLAY_COLORS))
-        self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
+            color_image = pg.Surface(self.surf.get_size()).convert_alpha()
+            color_image.fill((randint(0, 255), randint(0, 255), randint(0, 255), randint(180, 255)))
+            self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
 
         # Spawn randomly across the screen
         if on_load:
@@ -142,14 +144,18 @@ class Note(Background):
             )
 
         # Gameplayer parameters
+        self.movement_vector = [0, 0]
         self.rotation_amount = uniform(0.1, 1.5) * randelem([1, -1])
         if not on_load and not in_menu:
             if self.direction == 'left':
-                self.movement_vector = (randint(1, 4), randint(1, 4))
+                self.movement_vector = (randint(1, self.SPEED_MAX), randint(1, self.SPEED_MAX))
             elif self.direction == 'right':
-                self.movement_vector = (randint(-4, -1), randint(1, 4))
+                self.movement_vector = (randint(-self.SPEED_MAX, -1), randint(1, self.SPEED_MAX))
             else:
-                self.movement_vector = (randint(-4, 4), randint(1, 4))
+                self.movement_vector = (randint(-self.SPEED_MAX, self.SPEED_MAX), randint(1, self.SPEED_MAX))
+
+        speed = sqrt(self.movement_vector[0]**2 + self.movement_vector[1]**2)
+        self.score = int(speed) + int((1 - image_scale) * 10)
 
         # Menu animation parameters
         self.movement_counter = 0
@@ -277,14 +283,23 @@ class Star(Background):
     DRAW_LAYER = 0
     STAR_TYPES = ['star_tiny', 'star_small']
     ALPHA_VALUES = [50, 50, 50, 50, 100, 150, 200, 255, 200, 100]
+    STAR_COLORS = ['white', 'red', 'yellow', 'blue', 'orange']
+    STAR_WEIGHTS = [40, 1, 10, 1, 5]
 
     def __init__(self, screen_rect: pg.Rect, on_load: bool = False) -> None:
         super().__init__()
         star_type = randelem(self.STAR_TYPES)
+        star_color = weightedelem(self.STAR_COLORS, weights=self.STAR_WEIGHTS)[0]
         image_file = construct_asset_full_path(f"backgrounds/stars/{star_type}.png")
         image = pg.image.load(image_file).convert_alpha()
         self.image = pg.transform.scale_by(pg.transform.rotate(image, randint(0, 359)), uniform(0.05, 0.4))
         self.surf = self.image
+
+        # Set star color
+        if star_color != 'white':
+            color_image = pg.Surface(self.surf.get_size()).convert_alpha()
+            color_image.fill(star_color)
+            self.surf.blit(color_image, (0,0), special_flags=pg.BLEND_RGBA_MULT)
 
         # Set star rect
         if on_load:

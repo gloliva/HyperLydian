@@ -292,6 +292,7 @@ class StatTracker:
         self.player__alive_projectiles = Stat(0)
 
         self.notes__collected = Stat(0)
+        self.notes__score = Stat(0)
 
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
@@ -309,6 +310,7 @@ class StatTracker:
         self.enemies__killed = Stat(0)
         self.enemies__hit_distance = TrackerStat()
         self.enemies__alive_projectiles = Stat(0)
+        self.enemies__score = Stat(0)
 
         self.game__play_count += 1
 
@@ -319,6 +321,9 @@ class StatTracker:
             self.osc.send_full_bundle()
 
     def update_stats(self):
+        # Update score
+        self.game__score = self.enemies__score + self.notes__score
+
         # Update player accuracy
         if self.weapon__total_shots_fired > 0:
             self.player__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100

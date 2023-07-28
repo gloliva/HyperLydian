@@ -165,6 +165,8 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         if special_event_manager.event_queued and stat_tracker.enemies__num_on_screen.last == 0:
             special_event_manager.start_event()
 
+        special_event_manager.update(timedelta=timedelta)
+
         if special_event_manager.event_in_progress and special_event_manager.event_is_finished:
             special_event_manager.end_event()
 
@@ -248,7 +250,7 @@ def handle_collisions(player: Player):
     for note in collided:
         player.collect_note()
         note.kill()
-        stat_tracker.game__score += note.SCORE
+        stat_tracker.notes__score += note.score
         stat_tracker.notes__collected += 1
 
     # health upgrades + player collision
