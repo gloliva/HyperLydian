@@ -1,6 +1,5 @@
 # stdlib imports
 from enum import Enum
-from math import sqrt
 
 # Game frames
 FPS = 60
@@ -28,9 +27,10 @@ class GameState(Enum):
     LOADING_SCREEN = 0
     MAIN_MENU = 1
     CREDITS = 2
-    GAMEPLAY = 3
-    DEATH_MENU = 4
-    QUIT = 5
+    HOW_TO_PLAY = 3
+    GAMEPLAY = 4
+    DEATH_MENU = 5
+    QUIT = 6
 
 
 # OSC constants
@@ -53,7 +53,6 @@ PNG_PATH = 'assets/png'
 
 
 # Max application constants
-# MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
 MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
 
 

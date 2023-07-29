@@ -7,6 +7,7 @@ from pygame.locals import (
     K_w,
     K_1,
     K_2,
+    K_r,
     K_SPACE,
     KEYDOWN,
     QUIT,
@@ -128,6 +129,9 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                 elif event.key == K_2:
                     player.switch_weapon(1)
                     stat_tracker.weapon__selected.update(1)
+                elif event.key == K_r:
+                    player.cycle_weapons()
+                    stat_tracker.weapon__selected.update(player.current_weapon_id)
 
         # get pressed key events
         pressed_keys = pg.key.get_pressed()

@@ -235,8 +235,8 @@ class SpinnerGruntGroup(Group):
 
     def change_max_grunts(self, max_delta: int):
         self.max_grunts += max_delta
-        if self.max_grunts < 0:
-            self.max_grunts = 0
+        if self.max_grunts < 1:
+            self.max_grunts = 1
 
     def set_max_grunts(self, max_grunts: int):
         self.max_grunts = max_grunts

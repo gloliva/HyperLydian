@@ -35,7 +35,7 @@ MAIN_MENU.add_text(
     SelectableText(
         'HOW TO PLAY', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 555),
         outline_size=2,
-        transition_state=GameState.GAMEPLAY,
+        transition_state=GameState.HOW_TO_PLAY,
     ),
     SelectableText(
         'CREDITS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 655),

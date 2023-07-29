@@ -100,6 +100,10 @@ class CharacterSprite(pg.sprite.Sprite):
         self.current_weapon_id = weapon_id
         self.equipped_weapon = self.weapons[self.current_weapon_id]
 
+    def cycle_weapons(self):
+        self.current_weapon_id = (self.current_weapon_id + 1) % len(self.weapons)
+        self.equipped_weapon = self.weapons[self.current_weapon_id]
+
     def rotate(self, rotation_angle: int):
         self.current_rotation = rotation_angle % 360
         image = self.images[int(self.curr_image_id)]
