@@ -247,7 +247,10 @@ class BrokenNote(Background):
         self.direction = randelem(self.DIRECTION)
         self.rotation_amount = uniform(0.1, 1.5) * randelem([1, -1])
 
-    def update(self, screen_rect: pg.Rect) -> None:
+    def update(self, screen_rect: pg.Rect, fade_out: bool = False, alpha: int = 255) -> None:
+        if fade_out:
+            self.surf.set_alpha(alpha)
+
         self.drift(screen_rect)
         self.rotate(self.current_rotation + self.rotation_amount)
 

@@ -10,7 +10,14 @@ from pygame.locals import (
 )
 
 # project imports
-from defs import GameState, FPS, SCREEN_WIDTH
+from defs import (
+    GameState,
+    FPS,
+    SCREEN_WIDTH,
+    MAX_ALPHA,
+    FADE_FRAMES,
+    FADE_MULTIPLIER,
+)
 from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
@@ -117,6 +124,41 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
         # lock FPS
         game_clock.tick(FPS)
 
+    # fade out if starting game
+    if next_state == GameState.GAMEPLAY:
+        start_game_fade_out(game_clock, main_screen, destroyed_ship)
+
     clean_up_menu()
     return next_state
 
+
+def start_game_fade_out(game_clock: pg.time.Clock, main_screen: pg.Surface, destroyed_ship: background.DestroyedShip):
+    screen_rect = main_screen.get_rect()
+    fade_surf = pg.Surface(main_screen.get_size())
+    fade_surf.fill('white')
+    curr_fade_out_frame = 0
+
+    while curr_fade_out_frame < FADE_FRAMES:
+        # update fade out alpha
+        new_alpha = int(curr_fade_out_frame * FADE_MULTIPLIER)
+        fade_surf.set_alpha(new_alpha)
+
+        # update background
+        groups.broken_notes.update(screen_rect, fade_out=True, alpha=MAX_ALPHA-new_alpha)
+        groups.stars.update(screen_rect, in_menu=True)
+        destroyed_ship.update(screen_rect)
+
+        # draw all sprites
+        for sprite in groups.all_sprites:
+            main_screen.blit(sprite.surf, sprite.rect)
+
+        # handle fade-in on game start
+        main_screen.blit(fade_surf, fade_surf.get_rect())
+
+        # render screen
+        pg.display.flip()
+
+        curr_fade_out_frame += 1
+
+        # lock FPS
+        game_clock.tick(FPS)

@@ -30,7 +30,6 @@ from events import (
     initialize_event_timers,
     disable_event_timers,
     SpecialEventManager,
-
 )
 from sprites.player import create_player, Player
 import sprites.background as background

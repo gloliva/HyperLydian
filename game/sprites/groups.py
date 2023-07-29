@@ -174,6 +174,7 @@ class SpinnerGruntGroup(Group):
         spawn: Optional[List] = None,
         on_death_callbacks: Optional[List] = None,
         special_event: bool = False,
+        in_menu: bool = False,
         ) -> SpinnerGrunt:
         # Create grunt weapon
         variant_number = randint(0, projectiles.EnemyAccidental.NUM_VARIANTS - 1)
@@ -198,7 +199,7 @@ class SpinnerGruntGroup(Group):
 
         recreate_grunt = True
         while recreate_grunt:
-            grunt = SpinnerGrunt(*args, special_event=special_event)
+            grunt = SpinnerGrunt(*args, special_event=special_event, in_menu=in_menu)
             collided = pg.sprite.spritecollideany(
                 grunt,
                 spinner_grunt_enemies,

@@ -61,6 +61,14 @@ def disable_menu_timers() -> None:
     event_timer(Event.ADD_NOTE, 0)
 
 
+def initialize_credits_timers() -> None:
+    event_timer(Event.ADD_SPINNER_GRUNT, 1000)
+
+
+def disable_credits_timers() -> None:
+    event_timer(Event.ADD_SPINNER_GRUNT, 0)
+
+
 def disable_timers_on_special_event() -> None:
     event_timer(Event.ADD_NOTE, 0)
 

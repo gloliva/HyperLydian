@@ -23,6 +23,7 @@ class Enemy(CharacterSprite):
             image_rotation: int = 0,
             on_death_callbacks: Optional[List] = None,
             special_event: bool = False,
+            in_menu: bool = False,
         ) -> None:
         super().__init__(
             image_files=image_files,
@@ -35,6 +36,13 @@ class Enemy(CharacterSprite):
             on_death_callbacks=on_death_callbacks,
         )
 
+        # Additional enemy attributes
+        self.in_menu = in_menu
+
+        # Don't track stats if in a menu
+        if self.in_menu:
+            return
+
         # enemy tracking stats
         stat_tracker.enemies__total += 1
         if special_event:
@@ -44,11 +52,12 @@ class Enemy(CharacterSprite):
 
     def on_death(self):
         # Handle tracking enemy death stats
-        current_time = pg.time.get_ticks()
-        stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
-        stat_tracker.time_last_enemy_killed = current_time
-        stat_tracker.enemies__killed += 1
-        stat_tracker.enemies__score += self.SCORE
+        if not self.in_menu:
+            current_time = pg.time.get_ticks()
+            stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
+            stat_tracker.time_last_enemy_killed = current_time
+            stat_tracker.enemies__killed += 1
+            stat_tracker.enemies__score += self.SCORE
         super().on_death()
 
 
@@ -186,6 +195,7 @@ class SpinnerGrunt(Enemy):
             spawn: Optional[List] = None,
             on_death_callbacks: Optional[List] = None,
             special_event: bool = False,
+            in_menu: bool = False,
         ) -> None:
         image_files = [
             'spaceships/spinner_grunt.png',
@@ -203,6 +213,7 @@ class SpinnerGrunt(Enemy):
             image_scale=self.IMAGE_SCALE,
             on_death_callbacks=on_death_callbacks,
             special_event=special_event,
+            in_menu=in_menu,
         )
 
         # Additional SpinngerGrunt attributes
