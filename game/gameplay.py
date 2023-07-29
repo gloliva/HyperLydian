@@ -20,6 +20,9 @@ from defs import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     GameState,
+    FADE_FRAMES,
+    FADE_MULTIPLIER,
+    MAX_ALPHA,
 )
 import debug
 from events import (
@@ -57,6 +60,11 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         star = background.Star(screen_rect, on_load=True)
         groups.stars.add(star)
         groups.all_sprites.add(star)
+
+    # handle fade-in
+    fade_surf = pg.Surface(main_screen.get_size())
+    fade_surf.fill('white')
+    curr_fade_in_frame = 0
 
     # create the player
     player = create_player(screen_rect)
@@ -133,6 +141,12 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
                     player.cycle_weapons()
                     stat_tracker.weapon__selected.update(player.current_weapon_id)
 
+        # handle fade-in on game start
+        if curr_fade_in_frame < FADE_FRAMES:
+            new_alpha = MAX_ALPHA - int(curr_fade_in_frame * FADE_MULTIPLIER)
+            fade_surf.set_alpha(new_alpha)
+            curr_fade_in_frame += 1
+
         # get pressed key events
         pressed_keys = pg.key.get_pressed()
         if pressed_keys[K_w] or pressed_keys[K_SPACE]:
@@ -189,6 +203,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         # draw all sprites
         for sprite in groups.all_sprites:
             game_screen.blit(sprite.surf, sprite.rect)
+
+        # handle fade-in on game start
+        if curr_fade_in_frame < FADE_FRAMES:
+            game_screen.blit(fade_surf, fade_surf.get_rect())
 
         # draw game screen to display
         main_screen.blit(game_screen, screen_rect)

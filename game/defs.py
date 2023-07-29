@@ -33,6 +33,11 @@ class GameState(Enum):
     QUIT = 6
 
 
+# Menu Transition
+MAX_ALPHA = 255
+FADE_FRAMES = int(FPS * 0.5)
+FADE_MULTIPLIER = MAX_ALPHA / FADE_FRAMES
+
 # OSC constants
 ADDRESS = '127.0.0.1'  # localhost
 OUTGOING_PORT = 8001

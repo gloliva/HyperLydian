@@ -11,7 +11,15 @@ from pygame.locals import (
 )
 
 # project imports
-from defs import FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GameState
+from defs import (
+    FPS,
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    GameState,
+    MAX_ALPHA,
+    FADE_FRAMES,
+    FADE_MULTIPLIER,
+)
 from events import Event, initialize_menu_timers, disable_menu_timers
 from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
@@ -145,8 +153,47 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
     # disable menu events
     disable_menu_timers()
 
+    # fade out if starting game
+    if next_state == GameState.GAMEPLAY:
+        start_game_fade_out(game_clock, main_screen, blackhole)
+
     clean_up_menu()
     return next_state
+
+
+def start_game_fade_out(game_clock: pg.time.Clock, main_screen: pg.Surface, blackhole: background.BlackHole):
+    fade_surf = pg.Surface(main_screen.get_size())
+    fade_surf.fill('white')
+    curr_fade_out_frame = 0
+
+    while curr_fade_out_frame < FADE_FRAMES:
+        # update fade out alpha
+        new_alpha = int(curr_fade_out_frame * FADE_MULTIPLIER)
+        fade_surf.set_alpha(new_alpha)
+
+        # update background
+        blackhole.update(main_screen.get_rect(), in_menu=True)
+
+        # update notes
+        groups.notes.update(MENU_SCREEN.get_rect(), in_menu=True, blackhole_rect=blackhole.rect)
+
+        # update stars
+        groups.stars.update(MENU_SCREEN.get_rect(), in_menu=True)
+
+        # draw all sprites
+        for sprite in groups.all_sprites:
+            main_screen.blit(sprite.surf, sprite.rect)
+
+        # handle fade-in on game start
+        main_screen.blit(fade_surf, fade_surf.get_rect())
+
+        # render screen
+        pg.display.flip()
+
+        curr_fade_out_frame += 1
+
+        # lock FPS
+        game_clock.tick(FPS)
 
 
 def handle_collisions(blackhole: background.BlackHole):
