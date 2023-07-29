@@ -358,7 +358,7 @@ class Letter(Background):
     SPAWN_SIDE = ['left', 'top', 'right', 'bottom']
 
     # Movement
-    SPEED_MAX = 4
+    SPEED_MAX = 6
     OPPOSITE_MOVEMENT = {
         'top': 'bottom',
         'bottom': 'top',

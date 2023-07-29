@@ -16,7 +16,6 @@ from defs import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     GameState,
-    MAX_ALPHA,
     FADE_FRAMES,
     FADE_MULTIPLIER,
 )
