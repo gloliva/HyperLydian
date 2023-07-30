@@ -1,4 +1,4 @@
-![title_card](assets/png/github/title_card.png)
+![title_card](assets/png/github/title_card.png) <!-- markdownlint-disable-line -->
 
 Welcome to HyperLydian, a top-down 2D space shooter that goes beyond the ordinary gaming experience by blending multidirectional shooter gameplay with dynamic music creation. Prepare to embark on an extraordinary journey where your actions as a player shape the very fabric of the soundtrack.
 
