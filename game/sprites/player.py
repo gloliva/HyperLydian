@@ -64,6 +64,7 @@ class Player(CharacterSprite):
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
         self.heal_animation_on = False
+        self.health_image_id = 0
         self.heal_images = [
             pg.transform.scale_by(
                 pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
@@ -72,6 +73,7 @@ class Player(CharacterSprite):
             for image_file in heal_image_files
         ]
         self.collected_animation_on = False
+        self.collected_image_id = 0
         self.collected_images = [
             pg.transform.scale_by(
                 pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
@@ -85,9 +87,9 @@ class Player(CharacterSprite):
         self.menu_direction = self.MENU_SPEED
 
     def update(self, *args, **kwargs) -> None:
-        if self.heal_animation_on:
+        if self.heal_animation_on and (not self.collected_animation_on) and (not self.hit_animation_on):
             self.show_heal_animation()
-        elif self.collected_animation_on:
+        elif self.collected_animation_on and (not self.heal_animation_on) and (not self.hit_animation_on):
             self.show_collected_animation()
 
         super().update(*args, **kwargs)
@@ -168,34 +170,34 @@ class Player(CharacterSprite):
         stat_tracker.player__curr_health.update(self.health)
 
         self.heal_animation_on = True
-        self.curr_image_id = 1
+        self.health_image_id = 1
         self.show_heal_animation()
 
     def collect_note(self) -> None:
         self.collected_animation_on = True
-        self.curr_image_id = 1
+        self.collected_image_id = 1
         self.show_collected_animation()
 
     def show_heal_animation(self):
-        self.curr_image_id = (self.curr_image_id + self.HEAL_TIMER_INCREMENT) % self.num_images
-        image_id = int(self.curr_image_id)
+        self.health_image_id = (self.health_image_id + self.HEAL_TIMER_INCREMENT) % self.num_images
+        image_id = int(self.health_image_id)
         self.surf = pg.transform.rotate(
             self.heal_images[image_id],
             self.current_rotation,
         )
         if image_id == 0:
-            self.curr_image_id = 0
+            self.health_image_id = 0
             self.heal_animation_on = False
 
     def show_collected_animation(self):
-        self.curr_image_id = (self.curr_image_id + self.COLLECTED_TIMER_INCREMENT) % self.num_images
-        image_id = int(self.curr_image_id)
+        self.collected_image_id = (self.collected_image_id + self.COLLECTED_TIMER_INCREMENT) % self.num_images
+        image_id = int(self.collected_image_id)
         self.surf = pg.transform.rotate(
             self.collected_images[image_id],
             self.current_rotation,
         )
         if image_id == 0:
-            self.curr_image_id = 0
+            self.collected_image_id = 0
             self.collected_animation_on = False
 
     def attack(self, in_menu: bool = False):
