@@ -1,29 +1,37 @@
-# HyperLydian
+![title_card](assets/png/github/title_card.png)
 
-HyperLydian is a top-down 2D space shooter that creates and evolves its own soundtrack based on player performance and play style. HyperLydian is less of a game that makes music and more of an *instrument* styled as a game.
+Welcome to HyperLydian, a top-down 2D space shooter that goes beyond the ordinary gaming experience by blending multidirectional shooter gameplay with dynamic music creation. Prepare to embark on an extraordinary journey where your actions as a player shape the very fabric of the soundtrack.
 
-In a not-to-distance future, a race of audio-challenged aliens are on the brink of invading Earth in a plot to degrade humanity's greatest achievemnt: its music. It is up to our lone protagnist Lydian to fight off the invaders with the powers of infectious tunes and danceworthy beats... and GUNS!
+In a not-so-distant future, Earth faces an invasion from an alien race that is devoid of the ability to appreciate music. Intent on dismantling humanity's greatest achievement, they threaten to erase the essence of rhythm and melody from our world. Standing as the last line of defense, our courageous protagonist, Lydian, emerges to confront the invaders head-on, armed with the power of infectious tunes, danceworthy beats... and GUNS!
 
-## Install Instructions
+HyperLydian immerses you in a unique amalgamation of interactive gameplay and creative music-making. Each move you make, every shot you fire, and every adversary you overcome will dynamically influence the evolving soundtrack. It's not just a game; it's a musical instrument disguised as a space shooter.
 
-### Download the Executable
+The fate of humanity's music rests in your hands. So, jump into the cosmic battlefield and let the melody of the universe guide your way to victory! The power of music is not just in the notes, but in your hands as you wield the guns and the groove to save humanity.
 
-If you have a MacBook, you can download the executable from itch.io:
-[Download Game Here](https://gloliva.itch.io/hyperlydian)
+## How to Install and Run
 
-The password to view the page is: `earlyaccess`
+### Option 1: MacOS Application
 
-To run the game, find the downloaded executable in your files and double click on it, or find it in your terminal and run `./hyperlydian`.
+#### *Download the Application*
 
-### Install from Source
+A MacBook is required to run the Python and Max/MSP standalone applications.
+
+You can download the main application from either:
+
+1. The releases page
+2. The [HyperLydian itch.io](https://gloliva.itch.io/hyperlydian) page (password to view the page is `earlyaccess`)
+
+#### *Run the Game*
+
+### Option 2: Install from Source
 
 If you don't have a Mac (or just want to be more up-to-date with changes), you'll need to install and run this game with Python
 
-#### Requirements
+#### *Requirements*
 
 You will need at least Python 3.7, although preferably Python 3.9+. Has been tested with Python 3.8 and Python 3.11. If you need help installing a new version of Python, check out [pyenv](https://github.com/pyenv/pyenv).
 
-#### Install
+#### *Install*
 
 Will make this into a proper package at the end, but for now:
 
@@ -35,7 +43,7 @@ source .venv/bin/activate  # or activate.fish if using fish shell
 python3 -m pip install -r requirements.txt
 ```
 
-#### Run Game
+#### *Run Game*
 
 From the project directory:
 
@@ -43,30 +51,65 @@ From the project directory:
 python3 game/main.py
 ```
 
+### OS Requirements
+
+A MacBook is required to run the Python and Max/MSP standalone applications. A MacBook can run the game in any of the ways detailed in the Installations Instructions section.
+
+A Windows machine should be able to run this game if:
+
+1. You have [Max 8](https://cycling74.com/downloads) installed (you do not need a Max License to open and run a Max collective)
+2. Download the HyperLydian Max Collective from the releases page
+3. Build the Python game from source
+
+Please see the Installation Instructions for more details around the different ways to install and run the game.
+
+### Computer Specs
+
+This software was built and tested on a computer with the following specs:
+
+```text
+MacBook Pro 2020
+CPU:    2.3 GHz Quad-Core Intel Core i7
+Memory: 32 GB
+```
+
+The Python application is relatively lightweight and should run fine on most computers. Max/MSP is faily CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music.
+
 ## How to Play
 
-Shoot everything you see. View the controls down below.
+Maneuver around the screen, shooting at enemies, dodging bullets, and reclaiming notes.
 
-You can view some basic stats (like number of enemies killed) in the terminal post-game; these will be added to a post-game menu eventually.
+RED objects are dangerous and will damage the player if you collide with them.
 
-## Where things are at
+GOLD notes will increase your score; collect them by flying into them.
 
-Screen size is 1440x900 (MacBook 13" default scaled resolution). Will maybe handle additional resolutions later; resize at your own risk.
+Occasionally enemies will drop BLUE health packs, fly into these to heal the player. Get them quickly before they disappear.
 
-The menu is just a placeholder, will be fleshed out towards the end.
-
-Extremely in-progress; everything subject to change.
+Explore different play styles to see how the music evolves: shoot enemies from up close or at a distance, swap between different weapons, focus on movement or rotation, constantly shoot or time your shots carefully; different play styles will reward different musical explorations.
 
 ## Controls
 
-`Arrow Keys` - Move
+### In Menu
 
-`Space` or `W` - Shoot
+`Arrow Keys` - Move Menu Selection Up / Down
 
-`1`, `2` - Switch between first and second weapon
+`Enter` - Select Menu Item
 
-`Q` - Rotate CCW
+### In Game
 
-`E` - Rotate CW
+`Arrow Keys` - Move Player
 
-### *GOOD LUCK*
+`W` or `Space` - Shoot
+
+`R` - Switch Weapon
+
+`Q` - Rotate Player Counter-Clockwise
+
+`E` - Rotate Player Clockwise
+
+
+## Credits
+
+All programming, art assets, and music written, designed, and created by Gregg Oliva.
+
+Thank you for playing my game.
