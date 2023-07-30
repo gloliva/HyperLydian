@@ -15,8 +15,9 @@ from pygame.locals import (
 
 # project imports
 import debug
+from defs import ImageType
 from events import Event
-from sprites.base import CharacterSprite, construct_asset_full_path
+from sprites.base import CharacterSprite
 import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
@@ -30,30 +31,23 @@ class Player(CharacterSprite):
     ROTATION_AMOUNT = 2
     IMAGE_SCALE = 1.5
     MENU_SPEED = 6
-    HIT_TIMER_INCREMENT = 0.125
-    HEAL_TIMER_INCREMENT = 0.125
-    COLLECTED_TIMER_INCREMENT = 0.125
+    ANIMATION_TIMER_INCREMENT = 0.1 # 25
 
-    def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon], in_menu: bool = False) -> None:
-        image_files = [
-            "spaceships/player/player_ship.png",
-            "spaceships/player/player_ship_hit.png",
-        ]
-        heal_image_files = [
-            "spaceships/player/player_ship.png",
-            "spaceships/player/player_ship_upgrade.png",
-        ]
-        collected_image_files = [
-            "spaceships/player/player_ship.png",
-            "spaceships/player/player_ship_collected.png",
-        ]
+    def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         spawn_location = (
             game_screen_rect.width / 2,
             game_screen_rect.height - 100,
         )
 
+        image_types_to_files = {
+            ImageType.DEFAULT: ["spaceships/player/player_ship.png"],
+            ImageType.HIT: ["spaceships/player/player_ship_hit.png"],
+            ImageType.HEAL: ["spaceships/player/player_ship_upgrade.png"],
+            ImageType.COLLECT: ["spaceships/player/player_ship_collected.png"]
+        }
+
         super().__init__(
-            image_files,
+            image_types_to_files,
             self.DEFAULT_HEALTH,
             self.DEFAULT_SPEED,
             spawn_location,
@@ -63,36 +57,10 @@ class Player(CharacterSprite):
 
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
-        self.heal_animation_on = False
-        self.health_image_id = 0
-        self.heal_images = [
-            pg.transform.scale_by(
-                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
-                self.IMAGE_SCALE,
-            )
-            for image_file in heal_image_files
-        ]
-        self.collected_animation_on = False
-        self.collected_image_id = 0
-        self.collected_images = [
-            pg.transform.scale_by(
-                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
-                self.IMAGE_SCALE,
-            )
-            for image_file in collected_image_files
-        ]
         self.projectiles_in_range = set()
 
         # Menu attributes
         self.menu_direction = self.MENU_SPEED
-
-    def update(self, *args, **kwargs) -> None:
-        if self.heal_animation_on and (not self.collected_animation_on) and (not self.hit_animation_on):
-            self.show_heal_animation()
-        elif self.collected_animation_on and (not self.heal_animation_on) and (not self.hit_animation_on):
-            self.show_collected_animation()
-
-        super().update(*args, **kwargs)
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
         movement_vector = [0, 0]
@@ -169,36 +137,16 @@ class Player(CharacterSprite):
             self.health = self.max_health
         stat_tracker.player__curr_health.update(self.health)
 
-        self.heal_animation_on = True
-        self.health_image_id = 1
-        self.show_heal_animation()
+        self.animation_on = True
+        self.image_type = ImageType.HEAL
+        self.curr_image_id = 0
+        self.show_animation()
 
     def collect_note(self) -> None:
-        self.collected_animation_on = True
-        self.collected_image_id = 1
-        self.show_collected_animation()
-
-    def show_heal_animation(self):
-        self.health_image_id = (self.health_image_id + self.HEAL_TIMER_INCREMENT) % self.num_images
-        image_id = int(self.health_image_id)
-        self.surf = pg.transform.rotate(
-            self.heal_images[image_id],
-            self.current_rotation,
-        )
-        if image_id == 0:
-            self.health_image_id = 0
-            self.heal_animation_on = False
-
-    def show_collected_animation(self):
-        self.collected_image_id = (self.collected_image_id + self.COLLECTED_TIMER_INCREMENT) % self.num_images
-        image_id = int(self.collected_image_id)
-        self.surf = pg.transform.rotate(
-            self.collected_images[image_id],
-            self.current_rotation,
-        )
-        if image_id == 0:
-            self.collected_image_id = 0
-            self.collected_animation_on = False
+        self.animation_on = True
+        self.image_type = ImageType.COLLECT
+        self.curr_image_id = 0
+        self.show_animation()
 
     def attack(self, in_menu: bool = False):
         attack_center = (self.rect.centerx, self.rect.centery)

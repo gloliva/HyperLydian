@@ -33,6 +33,14 @@ class GameState(Enum):
     QUIT = 6
 
 
+# Animations
+class ImageType:
+    DEFAULT = 'default'
+    HIT = 'hit'
+    HEAL = 'heal'
+    COLLECT = 'collect'
+
+
 # Menu Transition
 MAX_ALPHA = 255
 FADE_FRAMES = int(FPS * 0.5)

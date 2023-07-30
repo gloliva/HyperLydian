@@ -1,12 +1,12 @@
 # stdlib imports
 from random import choice as randelem, randint
-from typing import Optional, List, Tuple
+from typing import Dict, Optional, List, Tuple
 
 # 3rd-party imports
 import pygame as pg
 
 # project imports
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, ImageType
 from sprites.base import CharacterSprite
 from stats import stat_tracker
 
@@ -14,7 +14,7 @@ from stats import stat_tracker
 class Enemy(CharacterSprite):
     def __init__(
             self,
-            image_files: str,
+            image_types_to_files: Dict[str, List[str]],
             health: int,
             movement_speed: int,
             spawn_location: Tuple[int, int],
@@ -26,7 +26,7 @@ class Enemy(CharacterSprite):
             in_menu: bool = False,
         ) -> None:
         super().__init__(
-            image_files=image_files,
+            image_types_to_files=image_types_to_files,
             health=health,
             movement_speed=movement_speed,
             spawn_location=spawn_location,
@@ -71,17 +71,17 @@ class StraferGrunt(Enemy):
     SCORE = 10
 
     def __init__(self, weapons, row: int, spawn_direction: int, special_event: bool = False) -> None:
-        image_files = [
-            'spaceships/strafer_grunt.png',
-            'spaceships/strafer_grunt_hit.png',
-        ]
+        image_types_to_files = {
+            ImageType.DEFAULT: ['spaceships/strafer_grunt.png'],
+            ImageType.HIT: ['spaceships/strafer_grunt_hit.png'],
+        }
 
         x = randint(50, SCREEN_WIDTH - 50)
         y = -100 if spawn_direction == 1 else SCREEN_HEIGHT + 100
         spawn_location = (x, y)
 
         super().__init__(
-            image_files,
+            image_types_to_files,
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_location,
@@ -197,15 +197,15 @@ class SpinnerGrunt(Enemy):
             special_event: bool = False,
             in_menu: bool = False,
         ) -> None:
-        image_files = [
-            'spaceships/spinner_grunt.png',
-            'spaceships/spinner_grunt_hit.png',
-        ]
+        image_types_to_files = {
+            ImageType.DEFAULT: ['spaceships/spinner_grunt.png'],
+            ImageType.HIT: ['spaceships/spinner_grunt_hit.png'],
+        }
 
         spawn_location = self.set_spawn_information(spawn)
 
         super().__init__(
-            image_files,
+            image_types_to_files,
             self.DEFAULT_HEALTH,
             self.SPAWN_SPEED,
             spawn_location,

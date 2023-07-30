@@ -1,19 +1,19 @@
 # stdlib imports
 import math
 import os
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 import sys
 
 # 3rd-party impoarts
 import pygame as pg
 
 # project imports
-from defs import PNG_PATH
+from defs import PNG_PATH, ImageType
 
 
 class CharacterSprite(pg.sprite.Sprite):
     """Base Sprite class to be subclassed by player and enemy objects"""
-    HIT_TIMER_INCREMENT = 0.25
+    ANIMATION_TIMER_INCREMENT = 0.25
     PROJECTILE_SPAWN_DELTA = 0
     DRAW_LAYER = 5
     INITIAL_ROTATION = 0
@@ -21,30 +21,37 @@ class CharacterSprite(pg.sprite.Sprite):
 
     def __init__(
             self,
-            image_files: str,
+            image_types_to_files: Dict[str, List[str]],
             health: int,
             movement_speed: int,
             spawn_location: Tuple[int, int],
             weapons,
             image_scale: float = 1.0,
             image_rotation: int = 0,
-            on_death_callbacks: Optional[List] = None
+            on_death_callbacks: Optional[List] = None,
         ) -> None:
         super().__init__()
 
         # Load Sprite images
-        self.images = [
-            pg.transform.rotozoom(
-                pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
-                image_rotation,
-                image_scale
-            ) for image_file in image_files
-        ]
-        self.num_images = len(image_files)
+        self.images = {
+            image_type : [
+                pg.transform.rotozoom(
+                    pg.image.load(construct_asset_full_path(image_file)).convert_alpha(),
+                    image_rotation,
+                    image_scale,
+                ) for image_file in image_files
+
+            ]
+            for image_type, image_files in image_types_to_files.items()
+        }
+
+        # Animation attributes
         self.curr_image_id = 0
+        self.image_type = ImageType.DEFAULT
+        self.animation_on = False
 
         # Select sprite image to display
-        self.surf = self.images[self.curr_image_id]
+        self.surf = self.images[self.image_type][self.curr_image_id]
 
         # Get sprite rect
         self.rect = self.surf.get_rect(center=spawn_location)
@@ -55,9 +62,6 @@ class CharacterSprite(pg.sprite.Sprite):
 
         # Set layer sprite is drawn to
         self._layer = self.DRAW_LAYER
-
-        # Hit animation attributes
-        self.hit_animation_on = False
 
         # Sprite attributes
         self.health = health
@@ -76,8 +80,8 @@ class CharacterSprite(pg.sprite.Sprite):
         return self.health <= 0
 
     def update(self, *args, **kwargs):
-        if self.hit_animation_on:
-            self.show_hit_animation()
+        if self.animation_on:
+            self.show_animation()
 
         self.move(*args, **kwargs)
 
@@ -106,7 +110,7 @@ class CharacterSprite(pg.sprite.Sprite):
 
     def rotate(self, rotation_angle: int):
         self.current_rotation = rotation_angle % 360
-        image = self.images[int(self.curr_image_id)]
+        image = self.images[self.image_type][int(self.curr_image_id)]
         self.surf = pg.transform.rotate(image, rotation_angle)
 
         # make sure image retains its previous center
@@ -122,24 +126,28 @@ class CharacterSprite(pg.sprite.Sprite):
         if self.health < 0:
             self.health = 0
 
-        self.hit_animation_on = True
-        # TODO: setting this to 1 uses the hit sprite png
-        # will need to change this later if working with multiple sprites for animation
-        self.curr_image_id = 1
-        self.show_hit_animation()
+        self.animation_on = True
+        self.image_type = ImageType.HIT
+        self.curr_image_id = 0
+        self.show_animation()
         if self.is_dead:
             self.on_death()
 
-    def show_hit_animation(self):
-        self.curr_image_id = (self.curr_image_id + self.HIT_TIMER_INCREMENT) % self.num_images
+    def show_animation(self):
+        self.curr_image_id += self.ANIMATION_TIMER_INCREMENT
         image_id = int(self.curr_image_id)
+
+        # End animation
+        if image_id >= len(self.images[self.image_type]):
+            self.curr_image_id = 0
+            image_id = 0
+            self.image_type = ImageType.DEFAULT
+            self.animation_on = False
+
         self.surf = pg.transform.rotate(
-            self.images[image_id],
+            self.images[self.image_type][image_id],
             self.current_rotation,
         )
-        if image_id == 0:
-            self.curr_image_id = 0
-            self.hit_animation_on = False
 
     def on_death(self):
         for callback in self.on_death_callbacks:
