@@ -73,7 +73,9 @@ CPU:    2.3 GHz Quad-Core Intel Core i7
 Memory: 32 GB
 ```
 
-The Python application is relatively lightweight and should run fine on most computers. Max/MSP is faily CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music.
+The Python application is relatively lightweight and should run fine on most computers. Max/MSP is faily CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music. Your experience may very if running an a computer that has less than 16 GB RAM.
+
+If you experience any issues with Max/MSP, you may find more success by downloading Max and opening the HyperLydian Mac collective instead of running the standalone application.
 
 ## How to Play
 
@@ -106,7 +108,6 @@ Explore different play styles to see how the music evolves: shoot enemies from u
 `Q` - Rotate Player Counter-Clockwise
 
 `E` - Rotate Player Clockwise
-
 
 ## Credits
 
