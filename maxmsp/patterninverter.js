@@ -4,7 +4,7 @@
     Author: gloliva
 */
 
-inlets = 3;
+inlets = 4;
 outlets = 2;
 autowatch = 1;
 
@@ -12,6 +12,7 @@ autowatch = 1;
 var sustainList = new Array();
 var valueOut = new Array();
 var sustainOut = new Array();
+var scaleLength = 7;
 var updateMode = 0;
 var matrixRow = 0;
 var restValue = -1;
@@ -29,6 +30,8 @@ setoutletassist(1, "New Sustain Sequence");
 function msg_int(i) {
     if (inlet == 2) {
         updateMode = i;
+    } else if (inlet == 3) {
+        scaleLength = i;
     }
 }
 
@@ -42,9 +45,15 @@ function list() {
 
         var valueList = arrayfromargs(arguments);
         if (updateMode == 0) {
-            noteReverse(valueList);
+            identity(valueList);
         } else if (updateMode == 1) {
+            noteReverse(valueList);
+        } else if (updateMode == 2) {
             trueReverse(valueList);
+        } else if (updateMode == 3) {
+            inverse(valueList);
+        } else {
+            reverseInverse(valueList);
         }
         output();
     // Copy Sustain list
@@ -106,3 +115,22 @@ function trueReverse(valueList) {
     }
 }
 
+
+function identity(valueList) {
+    valueOut = new Array(valueList.length);
+
+    // copy over list as is
+    for (var i = 0; i < valueList.length; i++){
+        valueOut[i] = valueList[i];
+    }
+}
+
+
+function inverse(valueList) {
+    var current;
+}
+
+
+function reverseInverse(valueList) {
+    ;
+}
