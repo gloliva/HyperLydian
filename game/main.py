@@ -25,12 +25,15 @@ from stats import stat_tracker
 # initial pygame setup
 pg.init()
 
+# set app icon
+pg.display.set_icon(pg.image.load('assets/png/icons/game_icon.png'))
+
 # set up display
 MAIN_SCREEN = pg.display.set_mode(
     (SCREEN_WIDTH, SCREEN_HEIGHT),
     flags=RESIZABLE,
 )
-pg.display.set_caption('HYPER LYDIAN')
+pg.display.set_caption('HyperLydian')
 
 # set up clock
 CLOCK = pg.time.Clock()
