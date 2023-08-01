@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 2754.0, -211.0, 1212.0, 1319.0 ],
+		"rect" : [ 2754.0, -211.0, 764.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -68,11 +68,11 @@
 					"comment" : "Note Frequency (Hz)",
 					"hint" : "Note Frequency (Hz)",
 					"id" : "obj-11",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "FullPacket" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 84.0, 178.0, 30.0, 30.0 ]
 				}
 
@@ -95,7 +95,7 @@
 					"comment" : "MS Per Beat (float)",
 					"hint" : "MS Per Beat (float)",
 					"id" : "obj-5",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -133,11 +133,11 @@
 					"comment" : "Beat Divisions (int)",
 					"hint" : "Beat Divisions (int)",
 					"id" : "obj-16",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 634.0, 17.0, 30.0, 30.0 ]
 				}
 
@@ -256,7 +256,7 @@
 					"comment" : "Sustain Type (0-3)",
 					"hint" : "Sustain Type (0-3)\n\n0 - AR\n1 - A\n2 - S\n3 - R",
 					"id" : "obj-82",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -362,7 +362,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -628,13 +628,11 @@
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-23",
-					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 97.0 ],
-					"text" : "/curve/start : 0.,\n/curve/seq : [1., 2.28866, -0.6],\n/ms_per_beat : 222,\n/curve/len : 3,\n/curve/idxs : 1,\n/curve/x_vals : 2.28866"
+					"patching_rect" : [ 183.833333333333371, 784.0, 527.0, 33.0 ]
 				}
 
 			}
@@ -681,7 +679,7 @@
 					"cool" : 1,
 					"hint" : "Divisor or Multiple of Clock Pulse",
 					"id" : "obj-7",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -708,7 +706,7 @@
 					"comment" : "Tempo in BPM",
 					"cool" : 1,
 					"id" : "obj-4",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -740,7 +738,7 @@
 					"comment" : "Envelope Output Value (Signal)",
 					"hint" : "Envelope Output Value (Signal)",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -754,11 +752,11 @@
 					"comment" : "Bang to output AD Env",
 					"hint" : "Bang to output AD Env",
 					"id" : "obj-1",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 11.0, 36.0, 30.0, 30.0 ]
 				}
 
@@ -817,10 +815,13 @@
 				"box" : 				{
 					"addpoints_with_curve" : [ 0.0, 0.0, 0, 0.0, 0.010309278350515, 1.0, 2, -0.6, 1.0, 0.0, 0, 0.65 ],
 					"autosustain" : 1,
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"domain" : 1.0,
 					"grid" : 2,
+					"gridcolor" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"gridstep_x" : 0.05,
 					"id" : "obj-155",
+					"linecolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ],
 					"maxclass" : "function",
 					"mode" : 1,
 					"numinlets" : 1,
@@ -837,7 +838,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.399998277425766, 0.400010287761688, 0.400003433227539, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-14",
@@ -1207,6 +1208,48 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "o.collect.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.cond.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.display.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.expr.codebox.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.if.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.pack.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.select.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.union.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.var.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbomonokai",
 				"default" : 				{

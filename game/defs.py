@@ -1,5 +1,6 @@
 # stdlib imports
 from enum import Enum
+import os
 
 # Game frames
 FPS = 60
@@ -48,9 +49,12 @@ FADE_MULTIPLIER = MAX_ALPHA / FADE_FRAMES
 
 
 # OSC constants
+OUTGOING_PORT_ENV_VAR = os.environ.get('OUT_PORT')
+INCOMING_PORT_ENV_VAR = os.environ.get('IN_PORT')
+
 ADDRESS = '127.0.0.1'  # localhost
-OUTGOING_PORT = 8001
-INCOMING_PORT = 8002
+OUTGOING_PORT = 8001 if OUTGOING_PORT_ENV_VAR is None else int(OUTGOING_PORT_ENV_VAR)
+INCOMING_PORT = 8002 if INCOMING_PORT_ENV_VAR is None else int(INCOMING_PORT_ENV_VAR)
 
 
 # Projectile types

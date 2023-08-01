@@ -96,7 +96,8 @@
 					"patching_rect" : [ 1176.75, 1698.0, 45.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 493.408805052439448, 762.0, 47.0, 20.0 ],
-					"text" : "Tempo"
+					"text" : "Tempo",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -127,7 +128,8 @@
 					"patching_rect" : [ 1176.75, 1615.0, 93.529394388198853, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.771549463272095, 763.0, 107.0, 20.0 ],
-					"text" : "Tempo Control"
+					"text" : "Tempo Control",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -170,7 +172,8 @@
 					"patching_rect" : [ 1176.75, 1669.0, 87.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 319.992138385772705, 762.0, 86.0, 20.0 ],
-					"text" : "Beat Multiplier"
+					"text" : "Beat Multiplier",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -184,7 +187,8 @@
 					"patching_rect" : [ 1176.75, 1642.0, 87.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.242138385772705, 763.0, 89.0, 20.0 ],
-					"text" : "Beat Divisions"
+					"text" : "Beat Divisions",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -496,7 +500,8 @@
 					"patching_rect" : [ 1029.25, 1637.0, 26.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 14.02941107749939, 718.5, 25.0, 20.0 ],
-					"text" : "On"
+					"text" : "On",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -543,7 +548,8 @@
 					"patching_rect" : [ 1029.25, 1615.0, 112.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 64.02941107749939, 719.5, 107.0, 20.0 ],
-					"text" : "Global Amplitude"
+					"text" : "Global Amplitude",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -1313,7 +1319,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.4, 0.4, 0.4, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-14",
@@ -1332,7 +1338,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.4, 0.4, 0.4, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-67",
@@ -1351,7 +1357,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.145098039215686, 0.43921568627451, 0.592156862745098, 1.0 ],
+					"bgcolor" : [ 0.199999153614044, 0.200005099177361, 0.20000171661377, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-7",
