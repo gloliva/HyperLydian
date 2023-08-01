@@ -102,11 +102,19 @@ class Player(CharacterSprite):
         stat_tracker.player__curr_velocity.update(*movement_vector)
         stat_tracker.player__curr_speed.update(speed)
         stat_tracker.player__angle.update(self.current_rotation)
-        if rotation_amount != 0:
+
+        # rotating and moving
+        if rotation_amount != 0 and speed > 0:
+            stat_tracker.player__last_rotation_direction.update(rotation_amount)
+            stat_tracker.player__frames__moving_and_rotating += 1
+        # only rotating
+        elif rotation_amount != 0:
             stat_tracker.player__last_rotation_direction.update(rotation_amount)
             stat_tracker.player__frames__rotating += 1
-        if speed > 0:
+        # only moving
+        elif speed > 0:
             stat_tracker.player__frames__moving += 1
+        # completely still
         else:
             stat_tracker.player__frames__still += 1
 

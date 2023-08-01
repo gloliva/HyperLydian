@@ -270,6 +270,7 @@ class StatTracker:
         self.player__position = ListStat(initial_length=2)
         self.player__vertical_half = TextStat()
         self.player__horizontal_half = TextStat()
+        self.player__frames__moving_and_rotating = Stat(0)
         self.player__frames__moving = Stat(0)
         self.player__frames__still = Stat(0)
         self.player__frames__rotating = Stat(0)
