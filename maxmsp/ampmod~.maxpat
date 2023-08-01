@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -118,7 +118,8 @@
 					"patching_rect" : [ 419.0, 601.0, 69.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 4.700000000000045, 4.0, 85.0, 20.0 ],
-					"text" : "ampmod~"
+					"text" : "ampmod~",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -132,7 +133,8 @@
 					"patching_rect" : [ 419.0, 662.0, 69.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.0, 56.0, 69.0, 20.0 ],
-					"text" : "Mod Depth"
+					"text" : "Mod Depth",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -146,7 +148,8 @@
 					"patching_rect" : [ 419.0, 630.0, 64.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.0, 27.0, 64.0, 20.0 ],
-					"text" : "Mod Freq"
+					"text" : "Mod Freq",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -229,6 +232,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"format" : 6,
 					"id" : "obj-25",
 					"maxclass" : "flonum",
@@ -287,6 +291,13 @@
 			}
 , 			{
 				"box" : 				{
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color1" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "gradient",
 					"id" : "obj-12",
 					"items" : [ "Bypass", ",", "Ring", "Mod", ",", "Amp", "Mod" ],
 					"maxclass" : "umenu",
@@ -296,7 +307,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 218.200000000000045, 469.0, 85.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.700000000000045, 26.0, 85.0, 22.0 ]
+					"presentation_rect" : [ 4.700000000000045, 26.0, 85.0, 22.0 ],
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -329,6 +341,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"format" : 6,
 					"id" : "obj-22",
 					"maxclass" : "flonum",
@@ -345,6 +358,13 @@
 			}
 , 			{
 				"box" : 				{
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color1" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "gradient",
 					"id" : "obj-15",
 					"items" : [ "Sine", ",", "Triangle", ",", "Saw", ",", "Square", ",", "Input", "Wave" ],
 					"maxclass" : "umenu",
@@ -354,7 +374,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 583.533333333333303, 155.0, 85.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.700000000000045, 56.0, 85.0, 22.0 ]
+					"presentation_rect" : [ 4.700000000000045, 56.0, 85.0, 22.0 ],
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -478,7 +499,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.399998277425766, 0.400010287761688, 0.400003433227539, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-23",

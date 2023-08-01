@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 2192.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -72,12 +72,14 @@
 					"patching_rect" : [ 192.200000000000045, 444.0, 78.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 142.700000000000045, 5.0, 68.0, 20.0 ],
-					"text" : "Frequency"
+					"text" : "Frequency",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"fontface" : 0,
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -90,7 +92,8 @@
 					"patching_rect" : [ 10.700000000000045, 156.0, 56.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 148.700000000000045, 29.0, 56.0, 22.0 ],
-					"sig" : 0.0
+					"sig" : 0.0,
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -121,7 +124,8 @@
 					"patching_rect" : [ 190.200000000000045, 419.0, 82.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 5.0, 85.0, 20.0 ],
-					"text" : "waveselect~"
+					"text" : "waveselect~",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -2097,6 +2101,13 @@
 			}
 , 			{
 				"box" : 				{
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color1" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "gradient",
 					"id" : "obj-15",
 					"items" : [ "Std", "Bass", ",", "Punchy", "Bass", ",", "FM", "Bass", ",", "Deep", "Sub", "Bass", ",", "Basic", "Lead", ",", "Complex", "Lead", ",", "Detune", "Lead", ",", "Saw", ",", "Square", ",", "Triangle", ",", "White", "Noise", ",", "Pink", "Noise" ],
 					"maxclass" : "umenu",
@@ -2440,7 +2451,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.399998277425766, 0.400010287761688, 0.400003433227539, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-14",

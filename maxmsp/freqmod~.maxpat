@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -105,7 +105,8 @@
 					"patching_rect" : [ 718.0, 242.0, 69.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.0, 7.0, 85.0, 20.0 ],
-					"text" : "freqmod~"
+					"text" : "freqmod~",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -119,7 +120,8 @@
 					"patching_rect" : [ 718.0, 303.0, 69.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.0, 34.0, 69.0, 20.0 ],
-					"text" : "Mod Depth"
+					"text" : "Mod Depth",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -133,12 +135,14 @@
 					"patching_rect" : [ 718.0, 271.0, 64.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.0, 8.0, 64.0, 20.0 ],
-					"text" : "Mod Freq"
+					"text" : "Mod Freq",
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"format" : 6,
 					"id" : "obj-22",
 					"maxclass" : "flonum",
@@ -149,12 +153,14 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 336.300000000000011, 69.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 98.0, 7.0, 50.0, 22.0 ]
+					"presentation_rect" : [ 98.0, 7.0, 50.0, 22.0 ],
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
 					"format" : 6,
 					"id" : "obj-21",
 					"maxclass" : "flonum",
@@ -165,7 +171,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 411.900000000000091, 275.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 98.0, 33.0, 50.0, 22.0 ]
+					"presentation_rect" : [ 98.0, 33.0, 50.0, 22.0 ],
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -183,6 +190,13 @@
 			}
 , 			{
 				"box" : 				{
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color1" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "gradient",
 					"id" : "obj-15",
 					"items" : [ "Bypass", ",", "Sine", ",", "Triangle", ",", "Saw", ",", "Square", ",", "Input", "Wave" ],
 					"maxclass" : "umenu",
@@ -192,7 +206,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 99.700000000000045, 104.0, 85.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 33.0, 85.0, 22.0 ]
+					"presentation_rect" : [ 5.0, 33.0, 85.0, 22.0 ],
+					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -360,7 +375,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.058823529411765, 0.67843137254902, 1.0, 1.0 ],
+					"bgcolor" : [ 0.399998277425766, 0.400010287761688, 0.400003433227539, 1.0 ],
 					"border" : 2,
 					"bordercolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-14",

@@ -250,6 +250,8 @@
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "signal", "FullPacket" ],
 					"patching_rect" : [ 3719.437500536440893, 588.382351517677307, 622.0, 763.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 620.0, 794.617648000000031, 622.0, 763.0 ],
 					"varname" : "HL-drum[1]",
 					"viewvisibility" : 1
 				}
@@ -344,6 +346,8 @@
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "signal", "FullPacket" ],
 					"patching_rect" : [ 2922.437500536440893, 588.382351517677307, 622.0, 763.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 0.0, 794.617648000000031, 622.0, 763.0 ],
 					"varname" : "HL-drum",
 					"viewvisibility" : 1
 				}
@@ -401,7 +405,7 @@
 					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 2553.0, 39.38237738609314, 249.812500178813934, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1613.687499821195615, 805.38237738609314, 249.812500178813934, 128.0 ],
+					"presentation_rect" : [ 1281.687499821195615, 835.920437932014465, 249.812500178813934, 128.0 ],
 					"varname" : "voice-modifier-selection",
 					"viewvisibility" : 1
 				}
@@ -428,7 +432,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 296.571428571428555, 160.90578830242157, 150.0, 46.0 ],
-					"text" : "/collected : 99,\n/score : 918"
+					"text" : "/collected : 8,\n/score : 63"
 				}
 
 			}
@@ -487,7 +491,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 390.0, 1430.0, 150.0, 341.0 ],
-									"text" : "/3/pattern/values : [7, 9, 10, -1, -1, -1, -1, 9, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],\n/3/pattern/sustain : [0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0]"
+									"text" : "/3/pattern/values : [-1, -1, -1, -2., -1., -2., -1., -2., -1, -1, -1, 0, -1, -1, -1, -2., -1, -1, -1, 0, -1, 0, -1, -1, 7, 8, 8, 8, 10, 9, 8, 9],\n/3/pattern/sustain : [0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0]"
 								}
 
 							}
@@ -2485,7 +2489,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 666.5, 2737.0, 151.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 9.5, 962.25, 151.0, 20.0 ],
+					"presentation_rect" : [ 1685.5, 824.420437932014465, 151.0, 20.0 ],
 					"text" : "Tempo / Pattern Control",
 					"textjustification" : 1
 				}
@@ -2500,7 +2504,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 675.0, 2711.0, 134.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 18.0, 821.25, 134.0, 20.0 ],
+					"presentation_rect" : [ 1537.0, 824.420437932014465, 134.0, 20.0 ],
 					"text" : "Receiving Game Data",
 					"textjustification" : 1
 				}
@@ -3529,8 +3533,8 @@
 					"patching_rect" : [ 248.14285714285711, 242.90578830242157, 219.066666666666549, 59.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 1489.0, 1114.25, 405.000000000000227, 59.0 ],
-					"text" : "/total_dropped : 10,\n/picked_up : 10,\n/missed : 0"
+					"presentation_rect" : [ 1518.0, 1857.25, 405.000000000000227, 59.0 ],
+					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0"
 				}
 
 			}
@@ -4064,7 +4068,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 711.0, 688.25, 299.0, 33.0 ],
-									"text" : "/moving : 6526,\n/still : 6534,\n/fps : 60,\n/bpm : 174.069,\n/prev/moving : 6526,\n/prev/still : 6383,\n/prev/tempo/min : 120,\n/prev/tempo/max : 190,\n/range : [120, 190],\n/min : 120,\n/max : 190,\n/selected : 0,\n/prev/selected : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/in_transition : 0,\n/moving_delta : 0,\n/still_delta : 151,\n/selected_delta : 0,\n/mode : 1"
+									"text" : "/moving : 973,\n/still : 1347,\n/fps : 60,\n/bpm : 134.04,\n/prev/moving : 973,\n/prev/still : 1024,\n/prev/tempo/min : 120,\n/prev/tempo/max : 190,\n/range : [120, 190],\n/min : 120,\n/max : 190,\n/selected : 0,\n/prev/selected : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/in_transition : 0,\n/moving_delta : 0,\n/still_delta : 323,\n/selected_delta : 0,\n/mode : 1"
 								}
 
 							}
@@ -7580,7 +7584,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 53.0, 423.117648482322693, 134.0, 33.0 ],
-									"text" : "/curr_melody : 3"
+									"text" : "/curr_melody : 4"
 								}
 
 							}
@@ -10210,7 +10214,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 33.0 ],
-									"text" : "/rest/count : 7,\n/sharp/count : 1,\n/flat/count : 3,\n/natural/count : 1"
+									"text" : "/rest/count : 5,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
 								}
 
 							}
@@ -12158,13 +12162,12 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-409",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 110.0, 849.75, 189.0, 59.0 ],
-									"text" : "/filter/cutoff : 0.447009,\n/filter/gain : 1.29389,\n/filter/resonance : 4.01333"
+									"text" : "/filter/resonance : 5.12"
 								}
 
 							}
@@ -13024,7 +13027,7 @@
 					"patching_rect" : [ 199.714285714285722, 339.264754772186279, 271.39999999999992, 136.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 9,
-					"presentation_rect" : [ 1.499999999999773, 1114.25, 265.000000000000227, 136.0 ],
+					"presentation_rect" : [ 30.499999999999773, 1857.25, 265.000000000000227, 136.0 ],
 					"text" : "/max_init : 0,\n/game_init : 0,\n/menu_init : 0,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900"
 				}
 
@@ -13547,8 +13550,8 @@
 					"patching_rect" : [ 151.285714285714278, 507.117751121520996, 320.599999999999909, 59.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 675.500000000000227, 1114.25, 405.000000000000227, 59.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 4642,\n/shots_per_weapon : [4642, 0]"
+					"presentation_rect" : [ 704.500000000000227, 1857.25, 405.000000000000227, 59.0 ],
+					"text" : "/selected : 0,\n/total_shots_fired : 788,\n/shots_per_weapon : [788, 0]"
 				}
 
 			}
@@ -15623,8 +15626,11 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"columns" : 6,
 					"dialmode" : 2,
+					"elementcolor" : [ 0.199999153614044, 0.200005099177361, 0.20000171661377, 1.0 ],
 					"id" : "obj-101",
 					"maxclass" : "matrixctrl",
 					"numinlets" : 1,
@@ -15633,7 +15639,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 803.0, 1875.499974131584167, 451.0, 149.88237738609314 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 754.25, 809.25, 356.0, 168.0 ],
+					"presentation_rect" : [ 1311.500000000004547, 981.11762261390686, 478.0, 168.0 ],
 					"rows" : 2,
 					"varname" : "GlobalMixer"
 				}
@@ -15743,8 +15749,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1757.0, 362.170437932014465, 56.0, 22.0 ],
 					"restore" : 					{
-						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.492, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.5, 3, 1, 0.48, 4, 0, 0.112, 4, 1, 0.092, 5, 0, 0.076, 5, 1, 0.096 ],
-						"live.gain~" : [ -10.0 ]
+						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.856000000000001, 1, 1, 0.804, 2, 0, 0.912, 2, 1, 0.86, 3, 0, 0.596, 3, 1, 0.592 ]
 					}
 ,
 					"text" : "autopattr",
@@ -15781,7 +15786,7 @@
 					"outlettype" : [ "signal", "FullPacket" ],
 					"patching_rect" : [ 533.499999999999773, 588.382351517677307, 622.000000000000455, 798.617648482322693 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.499999999999773, 0.382351517677307, 621.500000000000227, 798.617648482322693 ],
+					"presentation_rect" : [ 0.0, 0.0, 621.5, 798.617648000000031 ],
 					"varname" : "HL-voice[2]",
 					"viewvisibility" : 1
 				}
@@ -15821,7 +15826,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1000.400000000000091, 259.75, 257.0, 110.0 ],
-					"text" : "/bars : 620,\n/beats : 2,\n/units : 180.,\n/ppq : 480.,\n/tempo/bpm : 135.,\n/time_sig : [4, 4],\n/total_beats : 2478"
+					"text" : "/bars : 1,\n/beats : 2,\n/units : 240.,\n/ppq : 480.,\n/tempo/bpm : 135.,\n/time_sig : [4, 4],\n/total_beats : 2"
 				}
 
 			}
@@ -15867,7 +15872,7 @@
 					"outlettype" : [ "signal", "FullPacket" ],
 					"patching_rect" : [ 1324.0, 588.382351517677307, 627.812500178813934, 798.617648482322693 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 622.0, 0.382351517677307, 620.5, 798.617648482322693 ],
+					"presentation_rect" : [ 620.0, 0.382351517677307, 620.5, 798.617648482322693 ],
 					"varname" : "HL-voice[1]",
 					"viewvisibility" : 1
 				}
@@ -15891,7 +15896,7 @@
 					"outlettype" : [ "signal", "FullPacket" ],
 					"patching_rect" : [ 2121.125000357618319, 588.382351517677307, 627.00000000000955, 798.617648482322693 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1241.5, 0.382351517677307, 622.00000000000955, 798.617648482322693 ],
+					"presentation_rect" : [ 1239.5, 0.382351517677307, 622.00000000000955, 798.617648482322693 ],
 					"varname" : "HL-voice",
 					"viewvisibility" : 1
 				}
@@ -15933,6 +15938,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"checkedcolor" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"id" : "obj-230",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
@@ -15941,7 +15948,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 570.499999999999886, 34.829562067985535, 86.75, 86.75 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 33.5, 985.25, 103.0, 103.0 ]
+					"presentation_rect" : [ 1709.5, 848.420437932014465, 103.0, 103.0 ],
+					"uncheckedcolor" : [ 0.501958668231964, 0.501973569393158, 0.5019651055336, 1.0 ]
 				}
 
 			}
@@ -16002,7 +16010,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1757.0, 93.420437932014465, 93.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 470.0, 902.420437932014465, 93.0, 22.0 ],
+					"presentation_rect" : [ 1645.0, 1310.420437932014465, 93.0, 22.0 ],
 					"text" : "read music.json"
 				}
 
@@ -16138,7 +16146,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 803.0, 2230.132351517677307, 394.0, 47.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 754.25, 1004.36762261390686, 356.0, 47.0 ],
+					"presentation_rect" : [ 1372.500000000004547, 1175.932429909706116, 356.0, 47.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "live.gain~",
@@ -16150,20 +16158,22 @@
 						}
 
 					}
-,
-					"varname" : "live.gain~"
+
 				}
 
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
+					"elementcolor" : [ 0.501958668231964, 0.501973569393158, 0.5019651055336, 1.0 ],
 					"id" : "obj-72",
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
 					"patching_rect" : [ 803.0, 2318.779411911964417, 113.25, 113.25 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 233.000000000000227, 841.75, 103.0, 103.0 ]
+					"presentation_rect" : [ 1499.00000000000432, 1254.75, 103.0, 103.0 ]
 				}
 
 			}
@@ -16179,8 +16189,8 @@
 					"patching_rect" : [ 102.857142857142861, 600.558875560760498, 369.799999999999955, 136.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 9,
-					"presentation_rect" : [ 268.5, 1114.25, 405.000000000000227, 136.0 ],
-					"text" : "/total : 92,\n/standard_count : 84,\n/special_count : 8,\n/num_on_screen : [0, 4.07884, 0, 9],\n/hit : 2075,\n/killed : 97,\n/hit_distance : [10.8167, 371.358, 132., 1325.44],\n/alive_projectiles : 0,\n/score : 1330"
+					"presentation_rect" : [ 297.5, 1857.25, 405.000000000000227, 136.0 ],
+					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 3.00138, 0, 7],\n/hit : 352,\n/killed : 18,\n/hit_distance : [33.541, 308.328, 165., 950.329],\n/alive_projectiles : 0,\n/score : 240"
 				}
 
 			}
@@ -16205,7 +16215,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1789.0, 153.920437932014465, 89.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 472.0, 876.920437932014465, 89.0, 22.0 ],
+					"presentation_rect" : [ 1647.0, 1284.920437932014465, 89.0, 22.0 ],
 					"text" : "storagewindow"
 				}
 
@@ -16247,8 +16257,8 @@
 					"patching_rect" : [ 6.0, 1176.0, 304.0, 85.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 5,
-					"presentation_rect" : [ 1896.000000000000227, 1114.25, 405.000000000000227, 85.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 4, 33, 426],\n/score : 2248,\n/total_frames : 16350,\n/time/current_playthrough : [0, 4, 29, 891]"
+					"presentation_rect" : [ 1925.000000000000227, 1857.25, 405.000000000000227, 85.0 ],
+					"text" : "/play_count : 1,\n/time/total_played : [0, 1, 15, 229],\n/score : 303,\n/total_frames : 2890,\n/time/current_playthrough : [0, 0, 48, 177]"
 				}
 
 			}
@@ -16264,8 +16274,8 @@
 					"patching_rect" : [ 54.428571428571431, 773.558772921562195, 418.999999999999943, 366.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 27,
-					"presentation_rect" : [ 1082.500000000000455, 1114.25, 408.0, 366.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [517, 529],\n/vertical_half : \"bottom\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 2241,\n/frames/moving : 6526,\n/frames/still : 6538,\n/frames/rotating : 1045,\n/frames/firing : 15440,\n/percent_firing_weapon : 94.4342,\n/percent_moving_over_rotating : 86.1973,\n/frames/per_screen_quadrant : [2135, 4279, 4559, 5377],\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 106,\n/last_rotation_direction : -2,\n/accuracy : 44.7006,\n/avg_time_between_kills : [0, 2734.56, 993, 9372],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 12,\n/projectile_hit_count : [\"rest\", 7, \"sharp\", 1, \"flat\", 3, \"natural\", 1],\n/hit_distance : [4., 369.184, 5., 736.],\n/dodges : 64,\n/alive_projectiles : 0"
+					"presentation_rect" : [ 1111.500000000000455, 1857.25, 408.0, 366.0 ],
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [981, 548],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 425,\n/frames/moving : 973,\n/frames/still : 1350,\n/frames/rotating : 142,\n/frames/firing : 2543,\n/percent_firing_weapon : 87.9931,\n/percent_moving_over_rotating : 87.2646,\n/frames/per_screen_quadrant : [21, 658, 747, 1464],\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 48,\n/last_rotation_direction : -2,\n/accuracy : 44.6701,\n/avg_time_between_kills : [0, 2095.83, 1075, 6463],\n/max_health : 10,\n/curr_health : 5,\n/health_lost : 7,\n/projectile_hit_count : [\"rest\", 5, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [133., 204.8, 133., 404.],\n/dodges : 7,\n/alive_projectiles : 0"
 				}
 
 			}
@@ -16307,6 +16317,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.098038777709007, 0.098041713237762, 0.09804005920887, 1.0 ],
+					"checkedcolor" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"id" : "obj-7",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
@@ -16315,7 +16327,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 6.0, 34.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 33.5, 845.25, 103.0, 103.0 ]
+					"presentation_rect" : [ 1552.5, 848.420437932014465, 103.0, 103.0 ],
+					"uncheckedcolor" : [ 0.501958668231964, 0.501973569393158, 0.5019651055336, 1.0 ]
 				}
 
 			}
@@ -16343,7 +16356,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 6.0, 2045.0, 161.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1199.0, 841.75, 161.0, 22.0 ]
+					"presentation_rect" : [ 1470.000000000004547, 1365.75, 161.0, 22.0 ]
 				}
 
 			}
