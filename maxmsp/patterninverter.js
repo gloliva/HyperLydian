@@ -19,6 +19,7 @@ var scaleLength = 7;
 var updateMode = 0;
 var matrixRow = 0;
 var restValue = -1;
+var maxPatternRange = 15;
 
 // Sustain
 var matrixRow = 0;
@@ -27,6 +28,7 @@ var attack = 1;
 var sustain = 2;
 var release = 3;
 
+// Swapping sustain values for reverse modifier
 var envelopeInverseMap = {};
 envelopeInverseMap[full] = full;
 envelopeInverseMap[attack] =release;
@@ -163,11 +165,59 @@ function identity(valueList) {
 
 
 function inverse(valueList) {
-    var current;
+    // output lists
+    valueOut = new Array(valueList.length);
+    sustainOut = new Array();
+
+    // lists for handling distance calculations
+    distanceList = new Array();
+    updatedList = new Array();
+
+    // first distance calculation will always be 0
+    distanceList.push(0);
+    // updatedList starts the same as valueList
+    updatedList.push(valueList[0]);
+
+    var prev = valueList[0];
+    var curr = 0;
+
+    // calculate distances between consecutive non-rest notes
+    for (var i = 1; i < valueList.length; i++) {
+        curr = valueList[i];
+        if (curr == -1) {
+            // skip values that are -1
+            distanceList.push(0);
+        } else {
+            distanceList.push(prev - curr);
+            prev = curr;
+        }
+    }
+
+    // create updatedList based on distance calculations
+    for (var i = 1; i < distanceList.length; i++) {
+        if (valueList[i] == -1) {
+            // keep rest notes
+            updatedList.push(-1);
+        } else {
+            updatedList.push((updatedList[i - 1] + distanceList[i]) % maxPatternRange);
+        }
+    }
+
+    // copy updatedList in valueOut
+    for (var i = 0; i < updatedList.length; i++) {
+        valueOut[i] = updatedList[i];
+    }
+
+    // copy over sustain list as is
+    for (var i = 0; i < sustainList.length; i++) {
+        sustainOut.push(i, matrixRow, sustainList[i]);
+    }
+
+    return updatedList;
 }
 
 
 function reverseInverse(valueList) {
-    inverse(valueList);
-    trueReverse(valueList);
+    var updatedList = inverse(valueList);
+    trueReverse(updatedList);
 }
