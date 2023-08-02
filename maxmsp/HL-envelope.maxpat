@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 4034.0, -11.0, 1852.0, 959.0 ],
+		"rect" : [ 1693.0, -48.0, 1555.0, 959.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,25 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "FullPacket" ],
+					"patching_rect" : [ 379.0, 277.970562219619751, 334.0, 22.0 ],
+					"text" : "o.union"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-6",
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1061.0, 518.0, 150.0, 33.0 ]
+					"patching_rect" : [ 778.833333333333599, 229.529437780380249, 150.0, 33.0 ]
 				}
 
 			}
@@ -64,16 +76,16 @@
 			}
 , 			{
 				"box" : 				{
-					"annotation" : "Variable & Tempo Variables (OSC)",
-					"comment" : "Variable & Tempo Variables (OSC)",
-					"hint" : "Value Variables (OSC)",
+					"annotation" : "OSC Variables (OSC)",
+					"comment" : "OSC Variables (OSC)",
+					"hint" : "OSC Variables (OSC)",
 					"id" : "obj-11",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 91.0, 18.0, 30.0, 30.0 ]
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 18.0, 52.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -95,7 +107,7 @@
 					"comment" : "MS Per Beat (float)",
 					"hint" : "MS Per Beat (float)",
 					"id" : "obj-5",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -160,18 +172,6 @@
 					"outlettype" : [ "FullPacket", "FullPacket" ],
 					"patching_rect" : [ 338.833333333333371, 893.0, 254.0, 22.0 ],
 					"text" : "o.if bound(/sustain/type) && /sustain/type == 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-90",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 18.0, 57.0, 92.0, 22.0 ],
-					"text" : "o.var"
 				}
 
 			}
@@ -581,7 +581,7 @@
 					"comment" : "Envelope Output Value (Signal)",
 					"hint" : "Envelope Output Value (Signal)",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -591,28 +591,13 @@
 			}
 , 			{
 				"box" : 				{
-					"annotation" : "Bang to output AD Env",
-					"comment" : "Bang to output AD Env",
-					"hint" : "Bang to output AD Env",
-					"id" : "obj-1",
-					"index" : 1,
-					"maxclass" : "inlet",
-					"numinlets" : 0,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 18.0, 18.0, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-208",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "FullPacket" ],
-					"patching_rect" : [ 379.0, 417.0, 138.0, 22.0 ],
-					"text" : "o.select /ms_per_beat"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "FullPacket" ],
+					"patching_rect" : [ 379.0, 416.0, 334.0, 22.0 ],
+					"text" : "o.select /ms_per_beat /bpm"
 				}
 
 			}
@@ -625,7 +610,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "FullPacket" ],
-					"patching_rect" : [ 379.0, 283.970562219619751, 334.5, 95.0 ],
+					"patching_rect" : [ 379.0, 309.470562219619751, 334.5, 95.0 ],
 					"text" : "/beat_mult ??= 1.,\n/beat_div ??= 4,\n\n/beat_div = /beat_div / 4,\n/ms_per_beat = (60000 / /bpm) / /beat_div,\n/ms_per_beat = /ms_per_beat * /beat_mult"
 				}
 
@@ -676,7 +661,7 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-90", 0 ],
+					"destination" : [ "obj-199", 0 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -733,7 +718,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-90", 1 ],
+					"destination" : [ "obj-8", 0 ],
 					"source" : [ "obj-11", 0 ]
 				}
 
@@ -756,6 +741,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-208", 0 ],
 					"source" : [ "obj-199", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 1 ],
+					"midpoints" : [ 546.0, 448.0, 723.0, 448.0, 723.0, 271.0, 703.5, 271.0 ],
+					"source" : [ "obj-208", 1 ]
 				}
 
 			}
@@ -845,16 +838,25 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-8", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-103", 0 ],
 					"midpoints" : [ 749.5, 791.5, 395.333333333333371, 791.5 ],
+					"order" : 1,
 					"source" : [ "obj-8", 2 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-199", 0 ],
-					"source" : [ "obj-8", 1 ]
+					"destination" : [ "obj-6", 0 ],
+					"order" : 0,
+					"source" : [ "obj-8", 2 ]
 				}
 
 			}
@@ -875,22 +877,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-6", 0 ],
-					"order" : 0,
-					"source" : [ "obj-90", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
-					"order" : 1,
-					"source" : [ "obj-90", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-73", 0 ],
 					"midpoints" : [ 348.333333333333371, 942.0, 95.0, 942.0, 95.0, 172.0, 143.0, 172.0 ],
 					"source" : [ "obj-97", 0 ]
@@ -905,6 +891,48 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "o.collect.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.cond.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.display.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.expr.codebox.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.if.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.pack.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.route.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.select.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.union.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "o.var.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbomonokai",
 				"default" : 				{
