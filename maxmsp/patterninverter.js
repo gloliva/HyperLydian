@@ -194,12 +194,14 @@ function inverse(valueList) {
     }
 
     // create updatedList based on distance calculations
+    var prev_idx = 0;
     for (var i = 1; i < distanceList.length; i++) {
         if (valueList[i] == -1) {
             // keep rest notes
             updatedList.push(-1);
         } else {
-            updatedList.push((updatedList[i - 1] + distanceList[i]) % maxPatternRange);
+            updatedList.push((updatedList[prev_idx] + distanceList[i]) % maxPatternRange);
+            prev_idx = i;
         }
     }
 
