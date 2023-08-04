@@ -29,9 +29,10 @@ class GameState(Enum):
     MAIN_MENU = 1
     CREDITS = 2
     HOW_TO_PLAY = 3
-    GAMEPLAY = 4
-    DEATH_MENU = 5
-    QUIT = 6
+    SETTINGS = 4
+    GAMEPLAY = 5
+    DEATH_MENU = 6
+    QUIT = 7
 
 
 # Animations

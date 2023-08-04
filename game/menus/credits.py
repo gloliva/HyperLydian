@@ -23,7 +23,7 @@ from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
 from sprites.player import create_player
-from text import Text, SelectableText
+from text import Text, TransitionText
 
 # Define text
 CREDITS_TEXT = Text(
@@ -41,7 +41,7 @@ APPRECIATION_TEXT = Text(
     'spacemono', 28, 'cadetblue1', (SCREEN_WIDTH/2, 460),
     outline_size=2,
 )
-MENU_TEXT = SelectableText(
+MENU_TEXT = TransitionText(
     'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 750),
      outline_size=2, transition_state=GameState.MAIN_MENU,
 )

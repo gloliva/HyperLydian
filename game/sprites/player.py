@@ -22,16 +22,23 @@ import sprites.groups as groups
 import sprites.projectiles as projectiles
 from attacks import Weapon
 from stats import stat_tracker
+from settings_manager import settings_manager
 
 
 class Player(CharacterSprite):
+    # Sprite
     DEFAULT_HEALTH = 10
+    EASY_MODE_HEALTH = 15
     DEFAULT_SPEED = 5
     INITIAL_ROTATION = 90
     ROTATION_AMOUNT = 2
-    IMAGE_SCALE = 1.5
+
+    # Menu
     MENU_SPEED = 6
-    ANIMATION_TIMER_INCREMENT = 0.1 # 25
+
+    # Image
+    IMAGE_SCALE = 1.5
+    ANIMATION_TIMER_INCREMENT = 0.1
 
     def __init__(self, game_screen_rect: pg.Rect, weapons: List[Weapon]) -> None:
         spawn_location = (
@@ -46,9 +53,11 @@ class Player(CharacterSprite):
             ImageType.COLLECT: ["spaceships/player/player_ship_collected.png"]
         }
 
+        health = self.DEFAULT_HEALTH if not settings_manager.easy_mode else self.EASY_MODE_HEALTH
+
         super().__init__(
             image_types_to_files,
-            self.DEFAULT_HEALTH,
+            health,
             self.DEFAULT_SPEED,
             spawn_location,
             weapons,
@@ -56,7 +65,7 @@ class Player(CharacterSprite):
         )
 
         # Additional Player attributes
-        self.max_health = self.DEFAULT_HEALTH
+        self.max_health = health
         self.projectiles_in_range = set()
         self.last_time_hit = pg.time.get_ticks()
         self.last_time_note_collected = pg.time.get_ticks()
@@ -141,7 +150,7 @@ class Player(CharacterSprite):
         super().take_damage(damage)
         stat_tracker.player__curr_health.update(self.health)
         self.last_time_hit = curr_time
-        if self.is_dead:
+        if self.is_dead and not settings_manager.player_invincible:
             pg.event.post(Event.PLAYER_DEATH)
 
     def heal(self, health: int) -> None:
@@ -181,10 +190,18 @@ class Player(CharacterSprite):
             self.projectiles_in_range.remove(projectile)
             stat_tracker.player__dodges -= 1
 
+    def on_death(self):
+        if settings_manager.player_invincible:
+            self.health = 1
+            return
+
+        super().on_death()
+
 
 def create_player(game_screen_rect: pg.Rect, in_menu: bool = False) -> Player:
     """Creates a new Player object"""
     track_stat = True if not in_menu else False
+    damage_increase = 2 if settings_manager.easy_mode else 0
 
     # Create player weapons
     energy_turret = Weapon(
@@ -192,7 +209,7 @@ def create_player(game_screen_rect: pg.Rect, in_menu: bool = False) -> Player:
         groups.player_projectiles,
         groups.all_sprites,
         Weapon.INFINITE_AMMO,
-        damage=1,
+        damage=1 + damage_increase,
         attack_speed=12,
         rate_of_fire=100,
         center_deltas=[(0, 24), (0, -24)],
@@ -206,7 +223,7 @@ def create_player(game_screen_rect: pg.Rect, in_menu: bool = False) -> Player:
         groups.all_sprites,
         Weapon.INFINITE_AMMO,
         attack_speed=10,
-        damage=5,
+        damage=5 + damage_increase,
         rate_of_fire=300,
         projectile_scale=0.5,
         track_stat=track_stat,

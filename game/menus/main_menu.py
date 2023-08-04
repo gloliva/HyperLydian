@@ -25,7 +25,7 @@ import sprites.groups as groups
 import sprites.background as background
 from sprites.menus import MainTitle
 from stats import stat_tracker
-from text import SelectableText
+from text import TransitionText
 
 
 MENU_SCREEN = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
@@ -34,23 +34,28 @@ MENU_SCREEN = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
 # Create Main Menu
 MAIN_MENU = Menu(GameState.MAIN_MENU, MENU_SCREEN)
 MAIN_MENU.add_text(
-    SelectableText(
-        'START', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 455),
+    TransitionText(
+        'START', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 415),
         outline_size=2,
         transition_state=GameState.GAMEPLAY,
     ),
-    SelectableText(
-        'HOW TO PLAY', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 555),
+    TransitionText(
+        'HOW TO PLAY', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 515),
         outline_size=2,
         transition_state=GameState.HOW_TO_PLAY,
     ),
-    SelectableText(
-        'CREDITS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 655),
+    TransitionText(
+        'SETTINGS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 615),
+        outline_size=2,
+        transition_state=GameState.SETTINGS,
+    ),
+    TransitionText(
+        'CREDITS', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 715),
         outline_size=2,
         transition_state=GameState.CREDITS,
     ),
-    SelectableText(
-        'QUIT', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 755),
+    TransitionText(
+        'QUIT', 'spacemono', 48, (255, 255, 255, 255), (SCREEN_WIDTH/2, 815),
         outline_size=2,
         transition_state=GameState.QUIT,
     ),

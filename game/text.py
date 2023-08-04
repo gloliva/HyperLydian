@@ -74,6 +74,13 @@ class Text:
 
 
 class SelectableText(Text):
+    """Base Text class for handling text that can be selected in a menu"""
+
+    def get_selection(self):
+        raise NotImplementedError('Child class of SelectableText must override `get_selection` method.')
+
+
+class TransitionText(SelectableText):
     def __init__(self,
                  text: str,
                  font_name: str,
@@ -97,3 +104,67 @@ class SelectableText(Text):
             antialias
         )
         self.transition_state = transition_state
+
+    def get_selection(self):
+        return self.transition_state
+
+
+class OptionText(SelectableText):
+    BOOLEAN_SETTINGS = {
+        'OFF': False,
+        'ON': True,
+    }
+
+    def __init__(self,
+                 base_text: str,
+                 text_options: List[str],
+                 font_name: str,
+                 text_size: int,
+                 text_color: Tuple,
+                 text_center: Tuple,
+                 starting_option: int = 0,
+                 delimiter: str = ':',
+                 whitespace_len: int = 1,
+                 outline_size: int = 0,
+                 outline_color: str = "black",
+                 text_background: Optional[Tuple] = None,
+                 antialias: bool = True) -> None:
+
+        # Option Text attributes
+        self.base_text = base_text
+        self.options = text_options
+        self.delimiter = delimiter
+        self.whitespace_len = whitespace_len
+        self.num_options = len(self.options)
+        self.curr_option = starting_option
+
+        super().__init__(
+            self.format_text(),
+            font_name,
+            text_size,
+            text_color,
+            text_center,
+            outline_size,
+            outline_color,
+            text_background,
+            antialias
+        )
+
+    def format_text(self) -> str:
+        whitespace = ' ' * self.whitespace_len
+        return f'{self.base_text}{self.delimiter}{whitespace}{self.options[self.curr_option]}'
+
+    def get_selection(self):
+        self.next_option()
+        option = self.options[self.curr_option]
+        return [self.base_text, self.BOOLEAN_SETTINGS[option]]
+
+    def next_option(self):
+        self.curr_option = (self.curr_option + 1) % self.num_options
+        text = self.format_text()
+        self.update_text(text)
+
+    def prev_option(self):
+        self.curr_option = (self.curr_option - 1) % self.num_options
+        text = self.format_text()
+        self.update_text(text)

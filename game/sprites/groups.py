@@ -12,6 +12,7 @@ from defs import SCREEN_HEIGHT
 from sprites.enemies import StraferGrunt, SpinnerGrunt
 import sprites.projectiles as projectiles
 import sprites.upgrades as upgrades
+from settings_manager import settings_manager
 from stats import stat_tracker
 
 
@@ -22,12 +23,13 @@ class StraferGruntGroup(Group):
     MIN_GRUNTS_PER_ROW = 2
     INITIAL_GRUNTS_PER_ROW = 3
     INITIAL_ROWS = 2
+    EASY_MODE_ROWS = 1
     ROW_START = 150
     ROW_SPACING = 1.25
 
     def __init__(self) -> None:
         super().__init__()
-        self.max_rows = self.INITIAL_ROWS
+        self.max_rows = self.INITIAL_ROWS if not settings_manager.easy_mode else self.EASY_MODE_ROWS
         self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
 
         # Manage grunt arrangement
@@ -42,6 +44,7 @@ class StraferGruntGroup(Group):
         return total_grunts >= self.max_grunts_per_row * self.max_rows
 
     def create_new_grunt(self) -> StraferGrunt:
+        rate_of_fire = randint(500, 2000) if not settings_manager.easy_mode else randint(1000, 2500)
         # Create grunt weapon
         grunt_weapon = Weapon(
             projectiles.EnemyQuarterRest,
@@ -50,7 +53,7 @@ class StraferGruntGroup(Group):
             Weapon.INFINITE_AMMO,
             damage=1,
             attack_speed=randint(4, 7),
-            rate_of_fire=randint(500, 2000),
+            rate_of_fire=rate_of_fire,
             projectile_scale=0.35,
         )
 
@@ -114,24 +117,35 @@ class StraferGruntGroup(Group):
         self.max_rows += row_delta
         self.max_rows = max(1, min(self.MAX_ROWS, self.max_rows))
 
+        # Increase number of rows
+        if row_delta > 0:
+            self.top_grunts_per_row.extend([0 for _ in range(row_delta)])
+            self.bottom_grunts_per_row.extend([0 for _ in range(row_delta)])
+        # Decrease number of rows
+        else:
+            for _ in range(abs(row_delta)):
+                self.top_grunts_per_row.pop()
+                self.bottom_grunts_per_row.pop()
+
     def change_grunts_per_row(self, grunt_delta: int):
         self.max_grunts_per_row += grunt_delta
         self.max_grunts_per_row = max(self.MIN_GRUNTS_PER_ROW, min(self.MAX_GRUNTS_PER_ROW, self.max_grunts_per_row))
 
-    def set_row_limits(self, new_max_rows: int, new_max_grunts_per_row: int) -> None:
-        self.max_rows = new_max_rows
-        self.max_grunts_per_row = new_max_grunts_per_row
-
     def reset(self):
-        self.max_rows = self.INITIAL_ROWS
+        self.max_rows = self.INITIAL_ROWS if not settings_manager.easy_mode else self.EASY_MODE_ROWS
         self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
 
 
 class SpinnerGruntGroup(Group):
+    # Standard Gameplay
     INITIAL_MAX_GRUNTS = 2
+    EASY_MODE_GRUNTS = 1
+
+    # Special Eventn
     MIN_ELLIPSE_GRUNTS = 2
     MAX_ELLIPSE_GRUNTS = 6
     INITIAL_ELLIPSE_GRUNTS = 3
+    EASY_MODE_ELLIPSE_GRUNTS = 2
 
     @classmethod
     def get_oval_starting_positions(cls, num_grunts: int, screen_rect: pg.Rect) -> List[Tuple[float]]:
@@ -161,23 +175,24 @@ class SpinnerGruntGroup(Group):
         super().__init__()
 
         self.grunts_on_screen = 0
-        self.max_grunts = self.INITIAL_MAX_GRUNTS
+        self.max_grunts = self.INITIAL_MAX_GRUNTS if not settings_manager.easy_mode else self.EASY_MODE_GRUNTS
         self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
-        self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
+        self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS if not settings_manager.easy_mode else self.EASY_MODE_ELLIPSE_GRUNTS
 
     @property
     def is_full(self):
         return self.grunts_on_screen >= self.max_grunts
 
     def create_new_grunt(
-        self,
-        spawn: Optional[List] = None,
-        on_death_callbacks: Optional[List] = None,
-        special_event: bool = False,
-        in_menu: bool = False,
+            self,
+            spawn: Optional[List] = None,
+            on_death_callbacks: Optional[List] = None,
+            special_event: bool = False,
+            in_menu: bool = False,
         ) -> SpinnerGrunt:
         # Create grunt weapon
         variant_number = randint(0, projectiles.EnemyAccidental.NUM_VARIANTS - 1)
+        rate_of_fire = 300 if not settings_manager.easy_mode else 600
         grunt_weapon = Weapon(
             projectiles.EnemyAccidental,
             enemy_projectiles,
@@ -185,7 +200,7 @@ class SpinnerGruntGroup(Group):
             Weapon.INFINITE_AMMO,
             damage=1,
             attack_speed=4,
-            rate_of_fire=300,
+            rate_of_fire=rate_of_fire,
             projectile_scale=0.3,
             projectile_variant_number=variant_number,
         )

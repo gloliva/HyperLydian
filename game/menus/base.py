@@ -95,12 +95,18 @@ class Menu:
 
             self.menu_screen.blit(text.surf, text.rect)
 
+    def get_current_text(self) -> Text:
+        if not self.select_text:
+            return
+
+        return self.selectable_text[self.selectable_text_pos]
+
     def select_text(self) -> GameState:
         if not self.selectable_text:
             return
 
         text = self.selectable_text[self.selectable_text_pos]
-        return text.transition_state
+        return text.get_selection()
 
     def show_selected_animation(self) -> None:
         self.curr_alpha_id = (self.curr_alpha_id + self.SELECTED_TIMER_INCREMENT) % self.num_alpha_values

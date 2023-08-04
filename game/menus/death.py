@@ -23,20 +23,20 @@ import sprites.groups as groups
 import sprites.background as background
 from sprites.menus import DeathScreenTitle
 from stats import stat_tracker
-from text import Text, SelectableText
+from text import Text, TransitionText
 
 
 # Define text
 STATS_TEXT = Text('', 'spacemono', 24, 'white', outline_size=2)
-RESTART_TEXT = SelectableText(
+RESTART_TEXT = TransitionText(
     'RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650),
     outline_size=2, transition_state=GameState.GAMEPLAY
 )
-MENU_TEXT = SelectableText(
+MENU_TEXT = TransitionText(
     'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 725),
      outline_size=2, transition_state=GameState.MAIN_MENU
 )
-QUIT_TEXT = SelectableText(
+QUIT_TEXT = TransitionText(
     'QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 800),
      outline_size=2, transition_state=GameState.QUIT
 )

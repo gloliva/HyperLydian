@@ -14,7 +14,7 @@ from defs import FPS, SCREEN_WIDTH, GameState
 from menus.base import Menu, clean_up_menu
 import sprites.groups as groups
 import sprites.background as background
-from text import Text, SelectableText
+from text import Text, TransitionText
 
 
 # Define text
@@ -57,13 +57,13 @@ GOOD_LUCK_TEXT = Text(
     'spacemono', 36, 'white', (SCREEN_WIDTH/2, 625),
     outline_size=2, outline_color="black"
 )
-MENU_TEXT = SelectableText(
+MENU_TEXT = TransitionText(
     'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 750),
      outline_size=2, transition_state=GameState.MAIN_MENU,
 )
 
 
-# Credits Screen Menu
+# How to Play Menu
 HOW_TO_PLAY_MENU = Menu(GameState.HOW_TO_PLAY)
 HOW_TO_PLAY_MENU.add_text(
     DESCRIPTION_LINE1_TEXT,
