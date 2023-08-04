@@ -10,7 +10,7 @@ inlets = 2;
 outlets = 1;
 autowatch = 1;
 
-// Globals
+// Input/Output variables
 var weights = new Array();
 var outputValue;
 
@@ -21,6 +21,12 @@ setoutletassist(0, "Selected value");
 
 
 function list() {
+    /*
+        A list is passed through an inlet.
+        Used to assign the value sequence and weight sequence.
+
+        A list through the first inlet calls the weightedChoice function.
+    */
     if (inlet == 0) {
         var valueList = arrayfromargs(arguments);
 
@@ -40,11 +46,18 @@ function list() {
 
 
 function output() {
+    /*
+        Outputs the value from the first outlet
+    */
     outlet(0, outputValue);
 }
 
 
 function weightedChoice(values, weights) {
+    /*
+        Recreates Python's random.choices function for selecting a value from a list
+        based on weights.
+    */
     var totalWeight = 0;
     for (var i = 0; i < weights.length; i++) {
         totalWeight += weights[i];

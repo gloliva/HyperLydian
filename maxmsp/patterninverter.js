@@ -1,8 +1,15 @@
 /*
     Invert or reverse a pattern value list.
 
-    Inspired by the 12-tone technique transformations,
-    giving the inversion or retrograde of a pattern.
+    Inspired by 12-tone technique transformations, such as taking the inversion or retrograde
+    of a sequence of notes. Shout out to Schoenberg.
+
+    Available modes:
+    - 0: identity; keep pattern exactly the same
+    - 1: note reverse; reverse the note values, but keep them in the same position respecting rests
+    - 2: true reverse; reverse the entire pattern
+    - 3: inverse; calculate distances between non-rest notes, and swap the direction
+    - 4: reverseInverse; calculates the Inverse, then reverses this pattern
 
     Author: gloliva
 */
@@ -11,17 +18,18 @@ inlets = 4;
 outlets = 2;
 autowatch = 1;
 
-// Globals
-var sustainList = new Array();
-var valueOut = new Array();
-var sustainOut = new Array();
+// Input/Output variables
+var patternOut = new Array();
+var envelopeIn = new Array();
+var envelopeOut = new Array();
+
+// Pattern Variables
 var scaleLength = 7;
 var updateMode = 0;
-var matrixRow = 0;
 var restValue = -1;
 var maxPatternRange = 15;
 
-// Sustain
+// Envelope variables
 var matrixRow = 0;
 var full = 0;
 var attack = 1;
@@ -37,16 +45,20 @@ envelopeInverseMap[release] = attack;
 
 
 // set inlet/outlet assist
-setinletassist(0, "Sequence Value List");
-setinletassist(1, "Sequence Sustain List");
+setinletassist(0, "Sequence Pattern List");
+setinletassist(1, "Sequence Envelope List");
 setinletassist(2, "Sequence Update Mode");
 setinletassist(3, "Scale Length");
 
-setoutletassist(0, "New Value Sequence");
-setoutletassist(1, "New Sustain Sequence");
+setoutletassist(0, "Output Pattern Sequence");
+setoutletassist(1, "Output Envelope Sequence");
 
 
 function msg_int(i) {
+    /*
+        An integer is passed through an inlet.
+        Used to assign the update mode and the sequence scale length.
+    */
     if (inlet == 2) {
         updateMode = i;
     } else if (inlet == 3) {
@@ -56,57 +68,92 @@ function msg_int(i) {
 
 
 function list() {
+    /*
+        A list is passed through an inlet.
+        Used to assign the envelope sequence and note sequence.
+
+        A list through the first inlet calls the corresponding transformation function.
+    */
+
     // Perform sequence modification
     if (inlet == 0) {
-        if (sustainList.length <= 0) {
+        if (envelopeIn.length <= 0) {
             throw new Error("Sustain List has not been set");
         }
 
-        var valueList = arrayfromargs(arguments);
+        var patternIn = arrayfromargs(arguments);
         if (updateMode == 0) {
-            identity(valueList);
+            identity(patternIn);
         } else if (updateMode == 1) {
-            noteReverse(valueList);
+            noteReverse(patternIn);
         } else if (updateMode == 2) {
-            trueReverse(valueList);
+            trueReverse(patternIn);
         } else if (updateMode == 3) {
-            inverse(valueList);
+            inverse(patternIn);
         } else {
-            reverseInverse(valueList);
+            reverseInverse(patternIn);
         }
         output();
     // Copy Sustain list
     } else if (inlet == 1) {
-        sustainList = new Array();
+        envelopeIn = new Array();
         for (var i = 0; i < arguments.length; i++) {
-            sustainList[i] = arguments[i];
+            envelopeIn[i] = arguments[i];
         }
     }
 }
 
 
-function output()
-{
-    if (sustainOut.length > 0) {
-        outlet(1, sustainOut);
+function output() {
+    /*
+        Outputs the new envelope through outlet 2 and the new pattern through outlet 1
+    */
+    if (envelopeOut.length > 0) {
+        outlet(1, envelopeOut);
     }
-    outlet(0, valueOut);
+    outlet(0, patternOut);
 }
 
 
-function noteReverse(valueList) {
-    valueOut = new Array(valueList.length);
-    sustainOut = new Array();
+function identity(patternIn) {
+    /*
+        Identity transformation function. Keep everything exactly as-is.
+        Ensures that there aren't too many transformations being done.
+    */
+    patternOut = new Array(patternIn.length);
+    envelopeOut = new Array();
+
+    // copy over list as is
+    for (var i = 0; i < patternIn.length; i++){
+        patternOut[i] = patternIn[i];
+    }
+
+    // copy over sustain list as is
+    for (var i = 0; i < envelopeIn.length; i++) {
+        envelopeOut.push(i, matrixRow, envelopeIn[i]);
+    }
+}
+
+
+function noteReverse(patternIn) {
+    /*
+        Reverses note values while keeping notes in the same order respective of rest placement.
+
+        Input list: [1, rest, 4, 5, rest, rest, 7]
+        Output list: [7, rest, 5, 4, rest, rest, 1]
+    */
+    patternOut = new Array(patternIn.length);
+    envelopeOut = new Array();
     var enabledNotes = new Array();
     var enabledIndexes = new Array();
 
     // fill with rests
-    for (var i = 0; i < valueOut.length; i++) {
-        valueOut[i] = restValue;
+    for (var i = 0; i < patternOut.length; i++) {
+        patternOut[i] = restValue;
     }
 
-    for (var i = 0; i < valueList.length; i++) {
-        var note = valueList[i];
+    for (var i = 0; i < patternIn.length; i++) {
+        var note = patternIn[i];
         if (note >= 0) {
             enabledNotes.push(note);
             enabledIndexes.push(i);
@@ -120,54 +167,52 @@ function noteReverse(valueList) {
         note = enabledNotes[i];
         idx = enabledIndexes[i];
 
-        valueOut[idx] = note;
+        patternOut[idx] = note;
     }
 
     // copy over sustain list as is
-    for (var i = 0; i < sustainList.length; i++) {
-        sustainOut.push(i, matrixRow, sustainList[i]);
+    for (var i = 0; i < envelopeIn.length; i++) {
+        envelopeOut.push(i, matrixRow, envelopeIn[i]);
     }
 }
 
 
-function trueReverse(valueList) {
-    valueOut = new Array(valueList.length);
-    sustainOut = new Array();
+function trueReverse(patternIn) {
+    /*
+        Reverses the entire pattern.
+
+        Input list: [1, rest, 4, 5, rest, rest, 7]
+        Output list: [7, rest, rest, 5, 4, rest, 1]
+    */
+    patternOut = new Array(patternIn.length);
+    envelopeOut = new Array();
 
     // copy over list in reverse
-    for (var i = valueList.length - 1; i >= 0; i--) {
-        valueOut[i] = valueList[valueList.length - i - 1];
+    for (var i = patternIn.length - 1; i >= 0; i--) {
+        patternOut[i] = patternIn[patternIn.length - i - 1];
     }
 
     // copy over sustain in reverse, swapping attack and release values
     var currElem;
-    for (var i = sustainList.length - 1; i >= 0; i--) {
-        currElem = sustainList[sustainList.length - i - 1];
-        sustainOut.push(sustainList.length - i - 1, matrixRow, envelopeInverseMap[currElem]);
+    for (var i = envelopeIn.length - 1; i >= 0; i--) {
+        currElem = envelopeIn[envelopeIn.length - i - 1];
+        envelopeOut.push(envelopeIn.length - i - 1, matrixRow, envelopeInverseMap[currElem]);
     }
 }
 
 
-function identity(valueList) {
-    valueOut = new Array(valueList.length);
-    sustainOut = new Array();
+function inverse(patternIn) {
+    /*
+        Calculate distances between non-rest notes, and swap the direction.
+        Inspired by inversion transformation from the 12-tone technique; however, instead of swapping
+        the true distance between notes (such as m3 becoming a M6), just swaps the "distance" between the notes
+        in the scale, so a distance of 3 scale indexes becomes -3.
 
-    // copy over list as is
-    for (var i = 0; i < valueList.length; i++){
-        valueOut[i] = valueList[i];
-    }
-
-    // copy over sustain list as is
-    for (var i = 0; i < sustainList.length; i++) {
-        sustainOut.push(i, matrixRow, sustainList[i]);
-    }
-}
-
-
-function inverse(valueList) {
-    // output lists
-    valueOut = new Array(valueList.length);
-    sustainOut = new Array();
+        Input list: [5, 3, rest, 6, 2, rest]
+        Output list: [5, 7, rest, 4, 8, rest]
+    */
+    patternOut = new Array(patternIn.length);
+    envelopeOut = new Array();
 
     // lists for handling distance calculations
     distanceList = new Array();
@@ -175,16 +220,16 @@ function inverse(valueList) {
 
     // first distance calculation will always be 0
     distanceList.push(0);
-    // updatedList starts the same as valueList
-    updatedList.push(valueList[0]);
+    // updatedList starts the same as patternIn
+    updatedList.push(patternIn[0]);
 
-    var prev = valueList[0];
+    var prev = patternIn[0];
     var curr = 0;
 
     // calculate distances between consecutive non-rest notes
-    for (var i = 1; i < valueList.length; i++) {
-        curr = valueList[i];
-        if (curr == -1) {
+    for (var i = 1; i < patternIn.length; i++) {
+        curr = patternIn[i];
+        if (curr == restValue) {
             // skip values that are -1
             distanceList.push(0);
         } else {
@@ -196,7 +241,7 @@ function inverse(valueList) {
     // create updatedList based on distance calculations
     var prev_idx = 0;
     for (var i = 1; i < distanceList.length; i++) {
-        if (valueList[i] == -1) {
+        if (patternIn[i] == -1) {
             // keep rest notes
             updatedList.push(-1);
         } else {
@@ -205,21 +250,27 @@ function inverse(valueList) {
         }
     }
 
-    // copy updatedList in valueOut
+    // copy updatedList in patternOut
     for (var i = 0; i < updatedList.length; i++) {
-        valueOut[i] = updatedList[i];
+        patternOut[i] = updatedList[i];
     }
 
     // copy over sustain list as is
-    for (var i = 0; i < sustainList.length; i++) {
-        sustainOut.push(i, matrixRow, sustainList[i]);
+    for (var i = 0; i < envelopeIn.length; i++) {
+        envelopeOut.push(i, matrixRow, envelopeIn[i]);
     }
 
     return updatedList;
 }
 
 
-function reverseInverse(valueList) {
-    var updatedList = inverse(valueList);
+function reverseInverse(patternIn) {
+    /*
+        Performs an inversion, then performs a true reverse.
+
+        Input list: [5, 3, rest, 6, 2, rest]
+        Output list: [rest, 8, 4, rest, 7, 5]
+    */
+    var updatedList = inverse(patternIn);
     trueReverse(updatedList);
 }

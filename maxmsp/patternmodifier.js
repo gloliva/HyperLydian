@@ -46,6 +46,10 @@ setoutletassist(1, "Output Envelope Sequence");
 
 
 function msg_int(i) {
+    /*
+        An integer is passed through an inlet.
+        Used to assign the update mode and any additional arguments used by update functions.
+    */
     if (inlet == 2) {
         updateMode = i;
     } else if (inlet == 3) {
@@ -55,6 +59,10 @@ function msg_int(i) {
 
 
 function msg_float(f) {
+    /*
+        A float is passed through an inlet.
+        Used to assign additional arguments used by update functions.
+    */
     if (inlet == 3) {
         extraArgs = f;
     }
@@ -62,6 +70,13 @@ function msg_float(f) {
 
 
 function list() {
+    /*
+        A list is passed through an inlet.
+        Used to assign the envelope sequence and note sequence.
+
+        A list through the first inlet calls the corresponding transformation function.
+    */
+
     // Call Pattern modifier function
     if (inlet == 0) {
         // Make sure envelopeIn is set
@@ -91,7 +106,6 @@ function list() {
                 completeChaos(patternIn);
                 break;
         }
-
         output();
     // Copy Sustain list over
     } else if (inlet == 1) {
@@ -107,6 +121,9 @@ function list() {
 
 
 function output() {
+    /*
+        Outputs the new envelope through outlet 2 and the new pattern through outlet 1
+    */
     if (envelopeOut.length > 0) {
         outlet(1, envelopeOut);
     }
@@ -115,6 +132,12 @@ function output() {
 
 
 function restsToNotes(patternIn) {
+    /*
+        Convert rests to notes based on a probability that's passed in via extra args.
+
+        Added notes are weighted towards notes that already occur within the pattern, although
+        a totally random note can appear with lower probability.
+    */
     var probability = extraArgs;
     var noteFrequency = {};
 
@@ -166,6 +189,9 @@ function restsToNotes(patternIn) {
 
 
 function notesToRests(patternIn) {
+    /*
+        Convert notes to rests based on a probability that's passed in via extra args.
+    */
     var probability = extraArgs[0];
     var maxChanges = extraArgs[1];
     var numChanges = 0;
@@ -233,16 +259,134 @@ function notesToRests(patternIn) {
 
 
 function convertToSteps(patternIn) {
+    /*
+        Restrict the distance between consecutive notes, making the pattern more "stepwise".
 
+        A "step" in this context is a "scale distance" of 0, 1, or 2. It's not true steps, but restricts
+        the distance between notes.
+    */
+    patternOut = new Array();
+    envelopeOut = new Array();
+
+    var startingPoint = -1;
+    var prevNote;
+    var currNote;
+    var updatedNote;
+    var distance;
+    var sign;
+
+    // get starting point
+    for (var i = 0; i < patternIn.length; i++) {
+        if (patternIn[i] != restValue) {
+            startingPoint = i + 1;
+            prevNote = patternIn[i];
+            break;
+        }
+    }
+
+    // fill up output prior to starting point
+    for (var i = 0; i < startingPoint; i++) {
+        patternOut[i] = patternIn[i];
+    }
+
+    // start updating distances
+    for (var i = startingPoint; i < patternIn.length; i++) {
+        currNote = patternIn[i];
+        if (currNote == restValue) {
+            // skip rests
+            updatedNote = currNote;
+        } else {
+            // convert to steps
+            distance = currNote - prevNote;
+            if (Math.abs(distance) > 2) {
+                sign = distance < 0 ? -1 : 1;
+                updatedNote = (prevNote + (sign * randInt(1, 2))) % maxPatternRange;
+            } else {
+                updatedNote = currNote;
+            }
+            prevNote = updatedNote;
+        }
+
+        patternOut[i] = updatedNote;
+    }
+
+    // copy over envelope list
+    for (var i = 0; i < envelopeIn.length; i++) {
+        envelopeOut.push(i, matrixRow, envelopeIn[i]);
+    }
 }
 
 
 function convertToLeaps(patternIn) {
+    /*
+        Expands the distance between consecutive notes, making the pattern full of leaps.
 
+        A "leap" in this context is a "scale distance" of 3 or more.
+    */
+    patternOut = new Array();
+    envelopeOut = new Array();
+
+    var startingPoint = -1;
+    var prevNote;
+    var currNote;
+    var updatedNote;
+    var distance;
+    var sign;
+
+    // get starting point
+    for (var i = 0; i < patternIn.length; i++) {
+        if (patternIn[i] != restValue) {
+            startingPoint = i + 1;
+            prevNote = patternIn[i];
+            break;
+        }
+    }
+
+    // fill up output prior to starting point
+    for (var i = 0; i < startingPoint; i++) {
+        patternOut[i] = patternIn[i];
+    }
+
+    // start updating distances
+    for (var i = startingPoint; i < patternIn.length; i++) {
+        currNote = patternIn[i];
+
+        if (currNote == restValue) {
+            // skip rests
+            updatedNote = currNote;
+        } else {
+            // convert to steps
+            distance = currNote - prevNote;
+            post("distance");
+            post(distance);
+            post();
+            if (Math.abs(distance) < 3 && distance != 0) {
+                sign = distance < 0 ? -1 : 1;
+                updatedNote = (prevNote + (sign * randInt(3, 7))) % maxPatternRange;
+            } else {
+                updatedNote = currNote;
+            }
+            prevNote = updatedNote;
+        }
+
+        patternOut[i] = updatedNote;
+    }
+
+
+    // copy over envelope list
+    for (var i = 0; i < envelopeIn.length; i++) {
+        envelopeOut.push(i, matrixRow, envelopeIn[i]);
+    }
 }
 
 
 function constrainedChaos(patternIn) {
+    /*
+        Adds a bit of randomness to the pattern.
+
+        Based on the input probability, will adjust a current step by a constrained range defined by
+        input `min` and `max` variables passed in via extra args.
+    */
     var probability = extraArgs[0];
     var min = extraArgs[1];
     var max = extraArgs[2];
@@ -271,7 +415,13 @@ function constrainedChaos(patternIn) {
 }
 
 
-function completeChaos(patternIn){
+function completeChaos(patternIn) {
+    /*
+        Adds a LOT of randomness to the pattern.
+
+        Total randomness of the full range of values (spanning 2 octaves of the scale).
+        Useful for updating a stagnant pattern.
+    */
     var probability = extraArgs;
 
     patternOut = new Array();
@@ -296,12 +446,18 @@ function completeChaos(patternIn){
 
 
 function randInt(min, max) {
-    // Recreates Python's random.randint function
+    /*
+        Recreates Python's random.randint function
+    */
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 
 function weightedChoice(values, weights) {
+    /*
+        Recreates Python's random.choices function for selecting a value from a list
+        based on weights.
+    */
     var totalWeight = 0;
     for (var i = 0; i < weights.length; i++) {
         totalWeight += weights[i];
