@@ -6,18 +6,31 @@
     Author: gloliva
 */
 
-inlets = 2;
+inlets = 3;
 outlets = 1;
 autowatch = 1;
 
 // Input/Output variables
 var weights = new Array();
-var outputValue;
+var numChoices = 1;
+var outputValue = new Array();
 
 // set intlet/outlet assist
 setinletassist(0, "List of input values");
 setinletassist(1, "List of corresponding weights");
-setoutletassist(0, "Selected value");
+setinletassist(2, "Number of choices to return");
+setoutletassist(0, "Selected value(s)");
+
+
+function msg_int(i) {
+    /*
+        An integer is passed through an inlet.
+        Used to assign the the number of choices to return.
+    */
+    if (inlet == 2) {
+        numChoices = i;
+    }
+}
 
 
 function list() {
@@ -34,7 +47,10 @@ function list() {
             throw new Error("Input values and weights are not the same length");
         }
 
-        weightedChoice(valueList, weights);
+        outputValue = new Array();
+        for (var i = 0; i < numChoices; i++) {
+            weightedChoice(valueList, weights);
+        }
         output();
     } else {
         weights = new Array();
@@ -47,7 +63,7 @@ function list() {
 
 function output() {
     /*
-        Outputs the value from the first outlet
+        Outputs the value(s) from the first outlet
     */
     outlet(0, outputValue);
 }
@@ -69,7 +85,7 @@ function weightedChoice(values, weights) {
         randomValue -= weights[i];
 
         if (randomValue <= 0) {
-            outputValue = values[i];
+            outputValue.push(values[i]);
             return;
         }
     }
