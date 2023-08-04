@@ -402,12 +402,17 @@ def end_game():
 
 
 class DifficultyManager:
+    # Change difficulty thresholds
     KILL_THRESHOLD = 20
     EVENT_THRESHOLD = 2
+
+    # Difficulty functions
     STANDARD_FUNCTIONS = [
         groups.strafer_grunt_enemies.change_max_rows,
         groups.strafer_grunt_enemies.change_grunts_per_row,
+        groups.strafer_grunt_enemies.change_spawn_timer,
         groups.spinner_grunt_enemies.change_max_grunts,
+        groups.spinner_grunt_enemies.change_spawn_timer,
     ]
     SPECIAL_FUNCTIONS = [
         groups.spinner_grunt_enemies.change_grunts_per_ellipse_event,

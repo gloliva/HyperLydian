@@ -9,6 +9,7 @@ from pygame.sprite import Group, LayeredUpdates as LayeredGroup
 # project imports
 from attacks import Weapon
 from defs import SCREEN_HEIGHT
+from events import Event, update_timer
 from sprites.enemies import StraferGrunt, SpinnerGrunt
 import sprites.projectiles as projectiles
 import sprites.upgrades as upgrades
@@ -18,14 +19,25 @@ from stats import stat_tracker
 
 # Custom Enemy Groups
 class StraferGruntGroup(Group):
+    # Min / Max number of grunts
     MAX_ROWS = 4
     MAX_GRUNTS_PER_ROW = 6
     MIN_GRUNTS_PER_ROW = 2
+
+    # Initial settings
     INITIAL_GRUNTS_PER_ROW = 3
     INITIAL_ROWS = 2
     EASY_MODE_ROWS = 1
+
+    # Row spacing
     ROW_START = 150
     ROW_SPACING = 1.25
+
+    # Spawn timer
+    INITIAL_TIMER = 2000
+    MAX_TIMER = 2500
+    MIN_TIMER = 500
+    TIMER_INCREMENT = 250
 
     def __init__(self) -> None:
         super().__init__()
@@ -37,6 +49,9 @@ class StraferGruntGroup(Group):
         self.bottom_grunts_per_row = [0 for _ in range(self.max_rows)]
         self.top_row_to_fill = 0
         self.bottom_row_to_fill = 0
+
+        # spawn timer
+        self.spawn_timer = self.INITIAL_TIMER
 
     @property
     def is_full(self):
@@ -131,6 +146,12 @@ class StraferGruntGroup(Group):
         self.max_grunts_per_row += grunt_delta
         self.max_grunts_per_row = max(self.MIN_GRUNTS_PER_ROW, min(self.MAX_GRUNTS_PER_ROW, self.max_grunts_per_row))
 
+    def change_spawn_timer(self, spawn_delta: int):
+        increment = self.TIMER_INCREMENT * spawn_delta
+        self.spawn_timer += increment
+        self.spawn_timer = max(self.MIN_TIMER, min(self.MAX_TIMER, self.spawn_timer))
+        update_timer(Event.ADD_STRAFER_GRUNT, self.spawn_timer)
+
     def reset(self):
         self.max_rows = self.INITIAL_ROWS if not settings_manager.easy_mode else self.EASY_MODE_ROWS
         self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
@@ -141,11 +162,17 @@ class SpinnerGruntGroup(Group):
     INITIAL_MAX_GRUNTS = 2
     EASY_MODE_GRUNTS = 1
 
-    # Special Eventn
+    # Special Events
     MIN_ELLIPSE_GRUNTS = 2
-    MAX_ELLIPSE_GRUNTS = 6
+    MAX_ELLIPSE_GRUNTS = 7
     INITIAL_ELLIPSE_GRUNTS = 3
     EASY_MODE_ELLIPSE_GRUNTS = 2
+
+    # Spawn timer
+    INITIAL_TIMER = 10000
+    MAX_TIMER = 15000
+    MIN_TIMER = 3000
+    TIMER_INCREMENT = 1000
 
     @classmethod
     def get_oval_starting_positions(cls, num_grunts: int, screen_rect: pg.Rect) -> List[Tuple[float]]:
@@ -174,10 +201,14 @@ class SpinnerGruntGroup(Group):
     def __init__(self) -> None:
         super().__init__()
 
+        # Manage how many grunts can spawn at a timen
         self.grunts_on_screen = 0
         self.max_grunts = self.INITIAL_MAX_GRUNTS if not settings_manager.easy_mode else self.EASY_MODE_GRUNTS
         self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS if not settings_manager.easy_mode else self.EASY_MODE_ELLIPSE_GRUNTS
+
+        # spawn timer
+        self.spawn_timer = self.INITIAL_TIMER
 
     @property
     def is_full(self):
@@ -256,6 +287,12 @@ class SpinnerGruntGroup(Group):
 
     def set_max_grunts(self, max_grunts: int):
         self.max_grunts = max_grunts
+
+    def change_spawn_timer(self, spawn_delta: int):
+        increment = self.TIMER_INCREMENT * spawn_delta
+        self.spawn_timer += increment
+        self.spawn_timer = max(self.MIN_TIMER, min(self.MAX_TIMER, self.spawn_timer))
+        update_timer(Event.ADD_SPINNER_GRUNT, self.spawn_timer)
 
     def reset(self):
         self.max_grunts = self.INITIAL_MAX_GRUNTS
