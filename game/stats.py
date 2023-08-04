@@ -255,8 +255,11 @@ class StatTracker:
         self.game__time__total_played = TimeStat(0)
 
     def init_new_playthrough(self, start_time_ms: int = 0, player_max_health: int = 0):
+        # Time trackers
         self.start_time = start_time_ms
         self.time_last_enemy_killed = start_time_ms
+        self.time_player_last_hit = start_time_ms
+        self.time_last_collected_note = start_time_ms
 
         self.control__game_init = Stat(0)
         self.control__menu_init = Stat(0)
@@ -275,15 +278,16 @@ class StatTracker:
         self.player__frames__still = Stat(0)
         self.player__frames__rotating = Stat(0)
         self.player__frames__firing = Stat(0)
-        self.player__percent_firing_weapon = Stat(0.)
-        self.player__percent_moving_over_rotating = Stat(50.)
+        self.player__percent__firing_weapon = Stat(0.)
+        self.player__percent__moving_over_rotating = Stat(50.)
         self.player__frames__per_screen_quadrant = ListStat(initial_length=4)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
         self.player__last_rotation_direction = Stat(0)
-        self.player__accuracy = Stat(0.0)
-        self.player__avg_time_between_kills = TrackerStat()
+        self.player__percent__accuracy = Stat(0.0)
+        self.player__time__between_kills = TrackerStat()
+        self.player__time__between_getting_hit = TrackerStat()
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
@@ -293,7 +297,11 @@ class StatTracker:
         self.player__alive_projectiles = Stat(0)
 
         self.notes__collected = Stat(0)
+        self.notes__total = Stat(0)
         self.notes__score = Stat(0)
+        self.notes__time__between_collecting = TrackerStat()
+        self.notes__time__lifespan = TrackerStat()
+        self.notes__percent__collected = Stat(0)
 
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
@@ -302,6 +310,9 @@ class StatTracker:
         self.upgrades__total_dropped = Stat(0)
         self.upgrades__picked_up = Stat(0)
         self.upgrades__missed = Stat(0)
+        self.upgrades__time__between_collecting = TrackerStat()
+        self.upgrades__time__lifespan = TrackerStat()
+        self.upgrades__percent__collected = Stat(0)
 
         self.enemies__total = Stat(0)
         self.enemies__standard_count = Stat(0)
@@ -312,6 +323,7 @@ class StatTracker:
         self.enemies__hit_distance = TrackerStat()
         self.enemies__alive_projectiles = Stat(0)
         self.enemies__score = Stat(0)
+        self.enemies__time__lifespan = TrackerStat()
 
         self.game__play_count += 1
 
@@ -327,7 +339,7 @@ class StatTracker:
 
         # Update player accuracy
         if self.weapon__total_shots_fired > 0:
-            self.player__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100
+            self.player__percent__accuracy = (self.enemies__hit / self.weapon__total_shots_fired) * 100
 
         # Update player position stats
         horizontal_half = "left" if self.player__position.list[0] < SCREEN_WIDTH / 2 else "right"
@@ -353,11 +365,18 @@ class StatTracker:
         # Update movement vs rotating vs non-movement ratio
         total = self.player__frames__moving + self.player__frames__rotating
         if total > 0:
-            self.player__percent_moving_over_rotating = (self.player__frames__moving / total) * 100
+            self.player__percent__moving_over_rotating = (self.player__frames__moving / total) * 100
 
         # Update firing vs not ratio
         if self.game__total_frames > 0:
-            self.player__percent_firing_weapon = (self.player__frames__firing / self.game__total_frames) * 100
+            self.player__percent__firing_weapon = (self.player__frames__firing / self.game__total_frames) * 100
+
+        # Upgrade percentage
+        if self.upgrades__total_dropped > 0:
+            self.upgrades__percent__collected = (self.upgrades__picked_up / self.upgrades__total_dropped) * 100
+
+        if self.notes__total > 0:
+            self.notes__percent__collected = (self.notes__collected / self.notes__total) * 100
 
 
 
@@ -396,10 +415,10 @@ class StatTracker:
         print(f'Score: {self.game__score}')
         print(f'Enemies Killed: {self.enemies__killed}')
         print(f'Enemy shots dodged: {self.player__dodges}')
-        print(f'Avg time to kill an Enemy: {self.player__avg_time_between_kills.avg / 1000}')
+        print(f'Avg time to kill an Enemy: {self.player__time__between_kills.avg / 1000}')
         print(f'Total Shots Fired: {self.weapon__total_shots_fired}')
         print(f'Enemies Hit: {self.enemies__hit}')
-        print(f'Player Shot Accuracy: {self.player__accuracy}%')
+        print(f'Player Shot Accuracy: {self.player__percent__accuracy}%')
         print(
             f'Time Survived: {self.game__time__current_playthrough.hours} Hours, '
             f'{self.game__time__current_playthrough.minutes} Minutes, '
@@ -416,7 +435,7 @@ class StatTracker:
         stats_to_report = [
             self.game__score,
             self.enemies__killed,
-            int(self.player__accuracy.value),
+            int(self.player__percent__accuracy.value),
             self.player__health_lost,
             self.notes__collected,
             self.upgrades__picked_up,

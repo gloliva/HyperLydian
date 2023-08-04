@@ -38,6 +38,7 @@ class Enemy(CharacterSprite):
 
         # Additional enemy attributes
         self.in_menu = in_menu
+        self.spawn_time = pg.time.get_ticks()
 
         # Don't track stats if in a menu
         if self.in_menu:
@@ -54,7 +55,8 @@ class Enemy(CharacterSprite):
         # Handle tracking enemy death stats
         if not self.in_menu:
             current_time = pg.time.get_ticks()
-            stat_tracker.player__avg_time_between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
+            stat_tracker.enemies__time__lifespan.add(current_time - self.spawn_time)
+            stat_tracker.player__time__between_kills.add(current_time - stat_tracker.time_last_enemy_killed)
             stat_tracker.time_last_enemy_killed = current_time
             stat_tracker.enemies__killed += 1
             stat_tracker.enemies__score += self.SCORE

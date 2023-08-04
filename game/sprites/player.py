@@ -58,6 +58,8 @@ class Player(CharacterSprite):
         # Additional Player attributes
         self.max_health = self.DEFAULT_HEALTH
         self.projectiles_in_range = set()
+        self.last_time_hit = pg.time.get_ticks()
+        self.last_time_note_collected = pg.time.get_ticks()
 
         # Menu attributes
         self.menu_direction = self.MENU_SPEED
@@ -133,9 +135,12 @@ class Player(CharacterSprite):
         if debug.PLAYER_INVINCIBLE:
             return
 
+        curr_time = pg.time.get_ticks()
+        stat_tracker.player__time__between_getting_hit.add(curr_time - self.last_time_hit)
         stat_tracker.player__health_lost += damage
         super().take_damage(damage)
         stat_tracker.player__curr_health.update(self.health)
+        self.last_time_hit = curr_time
         if self.is_dead:
             pg.event.post(Event.PLAYER_DEATH)
 

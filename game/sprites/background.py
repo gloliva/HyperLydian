@@ -13,6 +13,7 @@ import pygame as pg
 
 # project imports
 from sprites.base import construct_asset_full_path
+from stats import stat_tracker
 
 
 class Background(pg.sprite.Sprite):
@@ -179,6 +180,12 @@ class Note(Background):
         self.alpha_values = alpha_values[::-1]
         self.scale_values = scale_values[::-1]
 
+        # Additional note values
+        self.spawn_time = pg.time.get_ticks()
+
+        if not in_menu and not on_load:
+            stat_tracker.notes__total += 1
+
     def update(
             self,
             screen_rect: pg.Rect,
@@ -215,6 +222,12 @@ class Note(Background):
         self.surf = pg.transform.scale_by(self.image, scale_value)
         self.surf.set_alpha(alpha_value)
         self.rect = self.surf.get_rect(center=prev_center)
+
+    def kill(self) -> None:
+        if stat_tracker.control__game_init.value == 1:
+            current_time = pg.time.get_ticks()
+            stat_tracker.notes__time__lifespan.add(current_time - self.spawn_time)
+        super().kill()
 
 
 class BrokenNote(Background):

@@ -279,6 +279,8 @@ def handle_collisions(player: Player):
 
     for note in collided:
         player.collect_note()
+        curr_time = pg.time.get_ticks()
+        stat_tracker.notes__time__between_collecting.add(curr_time - note.spawn_time)
         note.kill()
         stat_tracker.notes__score += note.score
         stat_tracker.notes__collected += 1
@@ -332,6 +334,8 @@ def handle_collisions(player: Player):
 
     for health_upgrade in collided:
         player.heal(health_upgrade.health_increase)
+        curr_time = pg.time.get_ticks()
+        stat_tracker.upgrades__time__between_collecting.add(curr_time - health_upgrade.spawn_time)
         health_upgrade.kill()
         stat_tracker.upgrades__picked_up += 1
 

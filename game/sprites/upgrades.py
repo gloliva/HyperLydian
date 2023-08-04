@@ -58,6 +58,7 @@ class Upgrade(pg.sprite.Sprite):
         self.expiration_animation_on = False
         self.num_alpha_values = len(self.ALPHA_VALUES)
         self.curr_alpha_id = 0
+        self.spawn_time = pg.time.get_ticks()
 
         # Movement properties
         self.movement_id = 0
@@ -106,6 +107,11 @@ class Health(Upgrade):
 
         # Health Upgrade properties
         self.health_increase = self.HEALTH_INCREASE
+
+    def kill(self) -> None:
+        current_time = pg.time.get_ticks()
+        stat_tracker.upgrades__time__lifespan.add(current_time - self.spawn_time)
+        super().kill()
 
 
 class SmallHealth(Health):
