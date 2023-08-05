@@ -33,6 +33,10 @@ class StraferGruntGroup(Group):
     ROW_START = 150
     ROW_SPACING = 1.25
 
+    # Health adjustment
+    HEALTH_INCREMENT = 5
+    MIN_HEALTH = 10
+
     # Spawn timer
     INITIAL_TIMER = 2000
     MAX_TIMER = 2500
@@ -50,7 +54,10 @@ class StraferGruntGroup(Group):
         self.top_row_to_fill = 0
         self.bottom_row_to_fill = 0
 
-        # spawn timer
+        # Health adjustment
+        self.additional_health = 0
+
+        # Spawn event adjustment
         self.spawn_timer = self.INITIAL_TIMER
 
     @property
@@ -77,7 +84,7 @@ class StraferGruntGroup(Group):
         grunt_row = self.top_row_to_fill if player_vertical_half == 'bottom' else self.bottom_row_to_fill
         spawn_direction = 1 if player_vertical_half == 'bottom' else -1
 
-        grunt = StraferGrunt([grunt_weapon], grunt_row, spawn_direction)
+        grunt = StraferGrunt([grunt_weapon], grunt_row, spawn_direction, additional_health=self.additional_health)
         grunt_y_position = (
             self.ROW_START +
             (grunt_row * grunt.rect.height * self.ROW_SPACING)
@@ -146,6 +153,9 @@ class StraferGruntGroup(Group):
         self.max_grunts_per_row += grunt_delta
         self.max_grunts_per_row = max(self.MIN_GRUNTS_PER_ROW, min(self.MAX_GRUNTS_PER_ROW, self.max_grunts_per_row))
 
+    def change_grunt_health(self, health_delta: int):
+        self.additional_health = max(self.MIN_HEALTH, health_delta * self.HEALTH_INCREMENT)
+
     def change_spawn_timer(self, spawn_delta: int):
         increment = self.TIMER_INCREMENT * spawn_delta
         self.spawn_timer += increment
@@ -167,6 +177,10 @@ class SpinnerGruntGroup(Group):
     MAX_ELLIPSE_GRUNTS = 7
     INITIAL_ELLIPSE_GRUNTS = 3
     EASY_MODE_ELLIPSE_GRUNTS = 2
+
+    # Health adjustment
+    HEALTH_INCREMENT = 3
+    MIN_HEALTH = 20
 
     # Spawn timer
     INITIAL_TIMER = 10000
@@ -207,7 +221,10 @@ class SpinnerGruntGroup(Group):
         self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS if not settings_manager.easy_mode else self.EASY_MODE_ELLIPSE_GRUNTS
 
-        # spawn timer
+        # Health adjustment
+        self.additional_health = 0
+
+        # Spawn event adjustment
         self.spawn_timer = self.INITIAL_TIMER
 
     @property
@@ -245,7 +262,7 @@ class SpinnerGruntGroup(Group):
 
         recreate_grunt = True
         while recreate_grunt:
-            grunt = SpinnerGrunt(*args, special_event=special_event, in_menu=in_menu)
+            grunt = SpinnerGrunt(*args, special_event=special_event, in_menu=in_menu, additional_health=self.additional_health)
             collided = pg.sprite.spritecollideany(
                 grunt,
                 spinner_grunt_enemies,
@@ -287,6 +304,9 @@ class SpinnerGruntGroup(Group):
 
     def set_max_grunts(self, max_grunts: int):
         self.max_grunts = max_grunts
+
+    def change_grunt_health(self, health_delta: int):
+        self.additional_health = max(self.MIN_HEALTH, health_delta * self.HEALTH_INCREMENT)
 
     def change_spawn_timer(self, spawn_delta: int):
         increment = self.TIMER_INCREMENT * spawn_delta

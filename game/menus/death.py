@@ -26,18 +26,29 @@ from stats import stat_tracker
 from text import Text, TransitionText
 
 
+# Text selection function
+def reset_music():
+    stat_tracker.control__reset_music.update(1)
+    stat_tracker.send_stats()
+
+
 # Define text
 STATS_TEXT = Text('', 'spacemono', 24, 'white', outline_size=2)
-RESTART_TEXT = TransitionText(
-    'RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 650),
+CONTINUE_TEXT = TransitionText(
+    'CONTINUE', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 600),
     outline_size=2, transition_state=GameState.GAMEPLAY
 )
+RESTART_TEXT = TransitionText(
+    'RESTART', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 675),
+    outline_size=2, transition_state=GameState.GAMEPLAY,
+    on_select_functions=[reset_music],
+)
 MENU_TEXT = TransitionText(
-    'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 725),
+    'BACK TO MENU', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 750),
      outline_size=2, transition_state=GameState.MAIN_MENU
 )
 QUIT_TEXT = TransitionText(
-    'QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 800),
+    'QUIT', 'spacemono', 36, 'white', (SCREEN_WIDTH/2, 825),
      outline_size=2, transition_state=GameState.QUIT
 )
 
@@ -46,6 +57,7 @@ QUIT_TEXT = TransitionText(
 DEATH_MENU = Menu(GameState.DEATH_MENU)
 DEATH_MENU.add_text(
     STATS_TEXT,
+    CONTINUE_TEXT,
     RESTART_TEXT,
     MENU_TEXT,
     QUIT_TEXT,

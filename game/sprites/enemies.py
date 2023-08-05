@@ -72,7 +72,14 @@ class StraferGrunt(Enemy):
     IMAGE_SCALE = 1.5
     SCORE = 10
 
-    def __init__(self, weapons, row: int, spawn_direction: int, special_event: bool = False) -> None:
+    def __init__(
+            self,
+            weapons,
+            row: int,
+            spawn_direction: int,
+            special_event: bool = False,
+            additional_health: int = 0
+        ) -> None:
         image_types_to_files = {
             ImageType.DEFAULT: ['spaceships/strafer_grunt.png'],
             ImageType.HIT: ['spaceships/strafer_grunt_hit.png'],
@@ -84,7 +91,7 @@ class StraferGrunt(Enemy):
 
         super().__init__(
             image_types_to_files,
-            self.DEFAULT_HEALTH,
+            self.DEFAULT_HEALTH + additional_health,
             self.SPAWN_SPEED,
             spawn_location,
             weapons,
@@ -198,6 +205,7 @@ class SpinnerGrunt(Enemy):
             on_death_callbacks: Optional[List] = None,
             special_event: bool = False,
             in_menu: bool = False,
+            additional_health: int = 0,
         ) -> None:
         image_types_to_files = {
             ImageType.DEFAULT: ['spaceships/spinner_grunt.png'],
@@ -208,7 +216,7 @@ class SpinnerGrunt(Enemy):
 
         super().__init__(
             image_types_to_files,
-            self.DEFAULT_HEALTH,
+            self.DEFAULT_HEALTH + additional_health,
             self.SPAWN_SPEED,
             spawn_location,
             weapons,

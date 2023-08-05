@@ -250,18 +250,22 @@ class SpecialEventManager:
 
     def kill_event_should_start(self, standard_enemies: int) -> bool:
         threshold_increase = (self.event_count * self.ENEMY_THRESHOLD_ADDITION)
-        return standard_enemies > ((self.event_count + 1) * self.ENEMY_THRESHOLD_MULTIPLIER) + threshold_increase
+        threshold_base = (self.event_count + 1) * self.ENEMY_THRESHOLD_MULTIPLIER
+
+        event_in_progress = self.event_queued or self.event_in_progress
+        return not event_in_progress and standard_enemies > threshold_base + threshold_increase
 
     def queue_event(self) -> None:
-        self.event_count += 1
         self.event_queued = True
         event_type = weightedelem(self.EVENTS, weights=self.EVENT_WEIGHTS)[0]
         event = event_type(self.screen_rect)
         self.event_queue.append(event)
 
     def start_event(self) -> None:
+        self.event_count += 1
         self.event_in_progress = True
         self.event_queued = False
+        stat_tracker.game__num_events.update(self.event_count)
 
         # Get event from queue and begin event
         if not self.event_queue:

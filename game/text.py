@@ -1,5 +1,5 @@
 # stdlib imports
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 # 3rd-party imports
 import pygame as pg
@@ -91,6 +91,7 @@ class TransitionText(SelectableText):
                  outline_size: int = 0,
                  outline_color: str = "black",
                  text_background: Optional[Tuple] = None,
+                 on_select_functions: List[Callable] = None,
                  antialias: bool = True) -> None:
         super().__init__(
             text,
@@ -103,9 +104,18 @@ class TransitionText(SelectableText):
             text_background,
             antialias
         )
+
+        # Transition attributes
         self.transition_state = transition_state
 
+        # Selection attributes
+        self.on_select_functions = on_select_functions if on_select_functions is not None else []
+
     def get_selection(self):
+        # Call on-selection functions, if any
+        for func in self.on_select_functions:
+            func()
+
         return self.transition_state
 
 
@@ -128,6 +138,7 @@ class OptionText(SelectableText):
                  outline_size: int = 0,
                  outline_color: str = "black",
                  text_background: Optional[Tuple] = None,
+                 on_select_functions: List[Callable] = None,
                  antialias: bool = True) -> None:
 
         # Option Text attributes
@@ -150,6 +161,9 @@ class OptionText(SelectableText):
             antialias
         )
 
+        # Selection attributes
+        self.on_select_functions = on_select_functions if on_select_functions is not None else []
+
     def format_text(self) -> str:
         whitespace = ' ' * self.whitespace_len
         return f'{self.base_text}{self.delimiter}{whitespace}{self.options[self.curr_option]}'
@@ -157,6 +171,11 @@ class OptionText(SelectableText):
     def get_selection(self):
         self.next_option()
         option = self.options[self.curr_option]
+
+        # Call on-selection functions, if any
+        for func in self.on_select_functions:
+            func()
+
         return [self.base_text, self.BOOLEAN_SETTINGS[option]]
 
     def next_option(self):

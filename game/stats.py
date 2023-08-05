@@ -141,7 +141,7 @@ class TimeStat:
 class TrackerStat:
     def __init__(self, send_mode: int = 0, send: bool = True) -> None:
         self.sum = 0
-        self.last = None
+        self.last = 0
         self.count = 0
         self.min = float('inf')
         self.max = float('-inf')
@@ -263,10 +263,12 @@ class StatTracker:
 
         self.control__game_init = Stat(0)
         self.control__menu_init = Stat(0)
+        self.control__reset_music = Stat(0)
 
         self.game__score = Stat(0)
         self.game__total_frames = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
+        self.game__num_events = Stat(0)
 
         self.player__starting_position = ListStat(initial_length=2)
         self.player__starting_angle = Stat(0)
