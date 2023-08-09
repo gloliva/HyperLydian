@@ -40,6 +40,42 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-52",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 4122.286458735663473, 749.470562219619751, 77.0, 22.0 ],
+					"text" : "r metro-reset"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-47",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 3327.286458735663928, 754.470562219619751, 77.0, 22.0 ],
+					"text" : "r metro-reset"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-30",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 2754.868750268227814, 754.558772921562195, 77.0, 22.0 ],
+					"text" : "r metro-reset"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-24",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -3929,7 +3965,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 4326.093750625856956, 719.617751121520996, 66.0, 22.0 ],
+					"patching_rect" : [ 4326.093750625856956, 754.470562219619751, 66.0, 22.0 ],
 					"text" : "r seq-reset"
 				}
 
@@ -3941,7 +3977,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 3529.953125402330443, 719.617751121520996, 66.0, 22.0 ],
+					"patching_rect" : [ 3529.953125402330443, 754.470562219619751, 66.0, 22.0 ],
 					"text" : "r seq-reset"
 				}
 
@@ -17206,7 +17242,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 9,
 					"presentation_rect" : [ 287.999999999999318, 1650.25, 405.000000000000227, 136.0 ],
-					"text" : "/max_init : 0,\n/game_init : 0,\n/menu_init : 0,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900",
+					"text" : "/max_init : 1,\n/game_init : 0,\n/menu_init : 1,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18964,7 +19000,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1958.382368624210358, 137.38237738609314, 56.0, 22.0 ],
 					"restore" : 					{
-						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.504000000000001, 1, 1, 0.504, 2, 0, 0.788, 2, 1, 0.84, 3, 0, 0.5, 3, 1, 0.504, 4, 0, 0.176, 4, 1, 0.164, 5, 0, 0.184, 5, 1, 0.192 ]
+						"GlobalMixer" : [ 0, 0, 1.0, 0, 1, 1.0, 1, 0, 0.564000000000001, 1, 1, 0.588, 2, 0, 0.732, 2, 1, 0.76, 3, 0, 0.692, 3, 1, 0.616, 4, 0, 0.132, 4, 1, 0.124, 5, 0, 0.184, 5, 1, 0.192 ]
 					}
 ,
 					"text" : "autopattr",
@@ -19029,7 +19065,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1025.539999999999964, 231.796729207038879, 257.0, 110.0 ],
-					"text" : "/bars : 19,\n/beats : 2,\n/units : 327.2,\n/ppq : 480.,\n/tempo/bpm : 135.,\n/time_sig : [4, 4],\n/total_beats : 74"
+					"text" : "/bars : 55,\n/beats : 4,\n/units : 294.587,\n/ppq : 480.,\n/tempo/bpm : 135.,\n/time_sig : [4, 4],\n/total_beats : 220"
 				}
 
 			}
@@ -21038,7 +21074,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-156", 2 ],
+					"destination" : [ "obj-156", 3 ],
 					"source" : [ "obj-358", 0 ]
 				}
 
@@ -21052,7 +21088,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-186", 2 ],
+					"destination" : [ "obj-186", 3 ],
 					"source" : [ "obj-360", 0 ]
 				}
 
@@ -21180,6 +21216,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-156", 2 ],
+					"source" : [ "obj-47", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-49", 0 ],
 					"source" : [ "obj-48", 0 ]
 				}
@@ -21217,6 +21260,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-289", 0 ],
 					"source" : [ "obj-503", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-186", 2 ],
+					"source" : [ "obj-52", 0 ]
 				}
 
 			}
