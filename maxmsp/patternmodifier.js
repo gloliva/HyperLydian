@@ -357,9 +357,6 @@ function convertToLeaps(patternIn) {
         } else {
             // convert to steps
             distance = currNote - prevNote;
-            post("distance");
-            post(distance);
-            post();
             if (Math.abs(distance) < 3 && distance != 0) {
                 sign = distance < 0 ? -1 : 1;
                 updatedNote = (prevNote + (sign * randInt(3, 7))) % maxPatternRange;
