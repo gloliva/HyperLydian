@@ -161,7 +161,7 @@ class TrackerStat:
 
     @property
     def list(self) -> List:
-        return [self.min, self.avg, self.last, self.max]
+        return [self.min, self.avg, self.last, self.max, self.count]
 
     @property
     def value(self) -> Union[int, float, List]:
