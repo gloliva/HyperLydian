@@ -82,7 +82,7 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
     MAIN_MENU.init_menu_select()
 
     # update stats
-    stat_tracker.control__menu_init += 1
+    stat_tracker.control__menu_init.update(1)
     stat_tracker.send_stats()
 
     # initialize events
