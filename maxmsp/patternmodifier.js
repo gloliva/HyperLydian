@@ -138,7 +138,9 @@ function restsToNotes(patternIn) {
         Added notes are weighted towards notes that already occur within the pattern, although
         a totally random note can appear with lower probability.
     */
-    var probability = extraArgs;
+    var probability = extraArgs[0];
+    var maxChanges = extraArgs[1];
+    var numChanges = 0;
     var noteFrequency = {};
 
     patternOut = new Array();
@@ -170,11 +172,12 @@ function restsToNotes(patternIn) {
     var note;
     for (var i = 0; i < patternIn.length; i++) {
         currValue = patternIn[i];
-        if (currValue === restValue && Math.random() < probability) {
+        if (currValue === restValue && Math.random() < probability && numChanges < maxChanges) {
             note = parseInt(weightedChoice(notes, weights));
             if (note === restValue) {
                 note = randInt(0, maxPatternRange - 1);
             }
+            numChanges += 1;
             patternOut[i] = note;
         } else {
             patternOut[i] = currValue;
