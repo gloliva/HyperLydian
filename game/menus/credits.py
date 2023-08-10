@@ -108,7 +108,7 @@ def run_credits_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> Game
                 not groups.spinner_grunt_enemies.is_full:
                 spawn = (
                     randint(50, screen_rect.width - 50),
-                    randint(50, screen_rect.height/2)
+                    randint(50, int(screen_rect.height/2))
                 )
                 groups.spinner_grunt_enemies.create_new_grunt(spawn=spawn, in_menu=True)
 

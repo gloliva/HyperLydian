@@ -1308,26 +1308,24 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-41",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "FullPacket" ],
-					"patching_rect" : [ 107.5, 1548.0, 173.5, 35.0 ],
-					"text" : "o.route /mod_wave /mod_freq /mod_depth"
+					"patching_rect" : [ 107.5, 1548.0, 173.5, 22.0 ],
+					"text" : "o.route /wave /factor /depth"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-40",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "FullPacket" ],
-					"patching_rect" : [ 97.199999999999989, 1389.0, 183.800000000000011, 35.0 ],
-					"text" : "o.route /mod_type /mod_wave /mod_freq /mod_depth"
+					"patching_rect" : [ 97.199999999999989, 1389.0, 183.800000000000011, 22.0 ],
+					"text" : "o.route /type /wave /factor /depth"
 				}
 
 			}
@@ -1338,7 +1336,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "FullPacket" ],
-					"patching_rect" : [ 97.199999999999989, 1357.0, 609.0, 22.0 ],
+					"patching_rect" : [ 97.199999999999989, 1357.0, 390.000000000000057, 22.0 ],
 					"text" : "o.route /am /fm"
 				}
 
@@ -2353,7 +2351,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-41", 0 ],
-					"midpoints" : [ 401.699999999999989, 1538.0, 117.0, 1538.0 ],
+					"midpoints" : [ 292.200000000000045, 1538.0, 117.0, 1538.0 ],
 					"source" : [ "obj-39", 1 ]
 				}
 
