@@ -117,9 +117,11 @@ class StraferGruntGroup(Group):
         removing grunt from a row.
         """
         if grunt.spawn_direction == 1:
-            self.top_grunts_per_row[grunt.grunt_row] -= 1
+            if grunt.grunt_row < len(self.top_grunts_per_row):
+                self.top_grunts_per_row[grunt.grunt_row] -= 1
         else:
-            self.bottom_grunts_per_row[grunt.grunt_row] -= 1
+            if grunt.grunt_row < len(self.bottom_grunts_per_row):
+                self.bottom_grunts_per_row[grunt.grunt_row] -= 1
 
         super().remove_internal(grunt)
         self.update_curr_row()
