@@ -59,6 +59,7 @@ class CharacterSprite(pg.sprite.Sprite):
 
         # Create sprite mask
         self.mask = pg.mask.from_surface(self.surf)
+        self.mask_size = self.mask.get_size()
 
         # Set layer sprite is drawn to
         self._layer = self.DRAW_LAYER
@@ -120,6 +121,7 @@ class CharacterSprite(pg.sprite.Sprite):
 
         # generate new mask
         self.mask = pg.mask.from_surface(self.surf)
+        self.mask_size = self.mask.get_size()
 
     def take_damage(self, damage: int) -> None:
         self.health -= damage

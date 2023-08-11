@@ -67,6 +67,7 @@ class Player(CharacterSprite):
         # Additional Player attributes
         self.max_health = health
         self.projectiles_in_range = set()
+        self.overlapping_enemies = set()
         self.last_time_hit = pg.time.get_ticks()
         self.last_time_note_collected = pg.time.get_ticks()
 
@@ -75,17 +76,21 @@ class Player(CharacterSprite):
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
         movement_vector = [0, 0]
+
+        # check collided enemies
+        enemy_collision_vector = self.get_enemy_collision_vector()
+
         # move player based on key input
-        if pressed_keys[K_UP]:
+        if pressed_keys[K_UP] and enemy_collision_vector[2] != 1:
             self.rect.move_ip(0, -self.movement_speed)
             movement_vector[1] -= self.movement_speed
-        if pressed_keys[K_DOWN]:
+        if pressed_keys[K_DOWN] and enemy_collision_vector[3] != 1:
             self.rect.move_ip(0, self.movement_speed)
             movement_vector[1] += self.movement_speed
-        if pressed_keys[K_LEFT]:
+        if pressed_keys[K_LEFT] and enemy_collision_vector[0] != 1:
             self.rect.move_ip(-self.movement_speed, 0)
             movement_vector[0] -= self.movement_speed
-        if pressed_keys[K_RIGHT]:
+        if pressed_keys[K_RIGHT] and enemy_collision_vector[1] != 1:
             self.rect.move_ip(self.movement_speed, 0)
             movement_vector[0] += self.movement_speed
 
@@ -129,6 +134,44 @@ class Player(CharacterSprite):
         else:
             stat_tracker.player__frames__still += 1
 
+        # calculate angle quadrant
+        if self.current_rotation >= 0 and self.current_rotation < 90:
+            stat_tracker.player__frames__per_angle_quadrant.add_at_index(0, 1)
+        elif self.current_rotation >= 90 and self.current_rotation < 180:
+            stat_tracker.player__frames__per_angle_quadrant.add_at_index(1, 1)
+        elif self.current_rotation >= 180 and self.current_rotation < 270:
+            stat_tracker.player__frames__per_angle_quadrant.add_at_index(2, 1)
+        else:
+            stat_tracker.player__frames__per_angle_quadrant.add_at_index(3, 1)
+
+    def get_enemy_collision_vector(self):
+        enemy_collision_vector = [0, 0, 0, 0]
+        threshold = int(self.mask_size[0] * 0.45)
+
+        for enemy in self.overlapping_enemies.copy():
+            collide_point = pg.sprite.collide_mask(self, enemy)
+            if collide_point is None:
+                # No longer collidingn
+                self.overlapping_enemies.remove(enemy)
+                continue
+
+            horizontal, vertical = collide_point[0], collide_point[1]
+
+            # check left
+            if horizontal < threshold:
+                enemy_collision_vector[0] = 1
+            # check right
+            if horizontal > (self.mask_size[0] - threshold):
+                enemy_collision_vector[1] = 1
+            # check top
+            if vertical < threshold:
+                enemy_collision_vector[2] = 1
+            # check bottom
+            if vertical > (self.mask_size[1] - threshold):
+                enemy_collision_vector[3] = 1
+
+        return enemy_collision_vector
+
     def move_in_menu(self, game_screen_rect: pg.Rect):
         self.rect.move_ip(self.menu_direction, 0)
 
@@ -158,6 +201,7 @@ class Player(CharacterSprite):
         if self.health > self.max_health:
             self.health = self.max_health
         stat_tracker.player__curr_health.update(self.health)
+        stat_tracker.player__health_gained += health
 
         self.animation_on = True
         self.image_type = ImageType.HEAL
@@ -189,6 +233,11 @@ class Player(CharacterSprite):
         if projectile in self.projectiles_in_range:
             self.projectiles_in_range.remove(projectile)
             stat_tracker.player__dodges -= 1
+
+    def update_enemies_collided(self, enemy: CharacterSprite) -> None:
+        if enemy not in self.overlapping_enemies:
+            self.overlapping_enemies.add(enemy)
+            stat_tracker.player__enemies_collided += 1
 
     def on_death(self):
         if settings_manager.player_invincible:

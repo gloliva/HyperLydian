@@ -363,6 +363,17 @@ def handle_collisions(player: Player):
     for enemy in collided:
         enemy.switch_strafe_direction_on_player_collision(player)
 
+    # player + enemy collision
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.all_enemies,
+        dokill=False,
+        collided=pg.sprite.collide_mask,
+    )
+
+    for enemy in collided:
+        player.update_enemies_collided(enemy)
+
     # projectile + player near misses
     collided = pg.sprite.spritecollide(
         player,

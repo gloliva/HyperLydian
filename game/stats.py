@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Union
 
 # project imports
 import debug
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, NUM_VOICES, FPS
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, REST, NUM_VOICES, FPS
 from osc_client import osc, OSCHandler
 
 
@@ -189,6 +189,7 @@ class TrackerStat:
 class CounterStat:
     def __init__(self, init_values: List[str] = None, send: bool = True) -> None:
         self._items = {} if init_values is None else {key: 0 for key in init_values}
+        self.count = 0
         self.send = send
 
     @property
@@ -198,11 +199,16 @@ class CounterStat:
             items_list.extend([key, val])
         return items_list
 
+    def get(self, item: str) -> int:
+        return self._items[item]
+
     def increase(self, item: str) -> None:
         if item not in self._items:
             self._items[item] = 1
         else:
             self._items[item] += 1
+
+        self.count += 1
 
 
 class ListStat:
@@ -216,6 +222,9 @@ class ListStat:
     def update(self, *vals: int):
         for idx, val in enumerate(vals):
             self.list[idx] = val
+
+    def get(self, index: int) -> Stat:
+        return Stat(self.list[index])
 
     def __str__(self) -> str:
         return str(', '.join(self.list))
@@ -269,6 +278,7 @@ class StatTracker:
         self.game__total_frames = Stat(0)
         self.game__time__current_playthrough = TimeStat(0)
         self.game__num_events = Stat(0)
+        self.game__percent__note_over_enemy_score = Stat(50.)
 
         self.player__starting_position = ListStat(initial_length=2)
         self.player__starting_angle = Stat(0)
@@ -280,10 +290,14 @@ class StatTracker:
         self.player__frames__still = Stat(0)
         self.player__frames__rotating = Stat(0)
         self.player__frames__firing = Stat(0)
+        self.player__frames__per_screen_quadrant = ListStat(initial_length=4)
+        self.player__frames__per_angle_quadrant = ListStat(initial_length=4)
         self.player__percent__firing_weapon = Stat(0.)
         self.player__percent__moving_over_rotating = Stat(50.)
         self.player__percent__moving_and_rotating = Stat(50.)
-        self.player__frames__per_screen_quadrant = ListStat(initial_length=4)
+        self.player__percent__health_lost_over_gained = Stat(50.)
+        self.player__percent__dodges_over_enemy_collision = Stat(50.)
+        self.player__percent__hit_rests_over_accidentals = Stat(50.)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
@@ -294,8 +308,10 @@ class StatTracker:
         self.player__max_health = Stat(player_max_health)
         self.player__curr_health = Stat(player_max_health)
         self.player__health_lost = Stat(0)
+        self.player__health_gained = Stat(0)
         self.player__projectile_hit_count = CounterStat(PROJECTILE_TYPES)
         self.player__hit_distance = TrackerStat()
+        self.player__enemies_collided = Stat(0)
         self.player__dodges = Stat(0)
         self.player__alive_projectiles = Stat(0)
 
@@ -389,11 +405,28 @@ class StatTracker:
 
         # Update weapon usage
         if self.weapon__total_shots_fired > 0:
-            self.weapon__percent__one_over_two = Stat(
-                (self.weapon__shots_per_weapon.list[0] / self.weapon__total_shots_fired.value) * 100
-            )
+            self.weapon__percent__one_over_two = \
+                (self.weapon__shots_per_weapon.get(0) / self.weapon__total_shots_fired) * 100
 
+        # Health lost vs gained
+        total = self.player__health_lost + self.player__health_gained
+        if total > 0:
+            self.player__percent__health_lost_over_gained = (self.player__health_lost / total) * 100
 
+        # Dodges vs enemy collisions
+        total = self.player__dodges + self.player__enemies_collided
+        if total > 0:
+            self.player__percent__dodges_over_enemy_collision = (self.player__dodges / total) * 100
+
+        # Rests vs accidentals
+        projectile_hit_count = self.player__projectile_hit_count.count
+        if projectile_hit_count > 0:
+            num_rests = self.player__projectile_hit_count.get(REST)
+            self.player__percent__hit_rests_over_accidentals = (num_rests / projectile_hit_count) * 100
+
+        # Note vs enemy score
+        if self.game__score > 0:
+            self.game__percent__note_over_enemy_score = (self.notes__score / self.game__score) * 100
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
         stat_dict = {}
