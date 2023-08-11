@@ -351,6 +351,10 @@ class HealthUpgradeGroup(Group):
                 self.enemy_base_for_small = curr_enemies_killed
                 stat_tracker.upgrades__total_dropped += 1
 
+    def reset(self) -> None:
+        self.enemy_base_for_small = 0
+        self.enemy_base_for_max = 0
+
 
 # Sprite Groups
 # Enemies

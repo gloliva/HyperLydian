@@ -422,6 +422,7 @@ class DifficultyManager:
     RESET_FUNCTIONS = [
         groups.strafer_grunt_enemies.reset,
         groups.spinner_grunt_enemies.reset,
+        groups.health_upgrades.reset,
     ]
 
     def roll_probability(self) -> int:
