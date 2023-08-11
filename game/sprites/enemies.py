@@ -6,7 +6,7 @@ from typing import Dict, Optional, List, Tuple
 import pygame as pg
 
 # project imports
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, ImageType
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, ImageType
 from sprites.base import CharacterSprite
 from stats import stat_tracker
 
@@ -66,11 +66,15 @@ class Enemy(CharacterSprite):
 class StraferGrunt(Enemy):
     DEFAULT_HEALTH = 20
     SPAWN_SPEED = 8
-    STRAFE_SPEED = 3
     PROJECTILE_SPAWN_DELTA = 40
     INITIAL_ROTATION = 270
     IMAGE_SCALE = 1.5
     SCORE = 10
+
+    # Strafe
+    STRAFE_SPEED = 3
+    MIN_STRAFE = FPS
+    MAX_STRAFE = FPS * 10
 
     def __init__(
             self,
@@ -108,6 +112,8 @@ class StraferGrunt(Enemy):
         self.overlapping_enemies = set()
         self.overlapping_upgrades = set()
         self.overlapping_player = set()
+        self.frames_alive = 0
+        self.strafe_switch_counter = randint(self.MIN_STRAFE, self.MAX_STRAFE)
 
         if self.spawn_direction == -1:
             self.rotate(90)
@@ -128,6 +134,11 @@ class StraferGrunt(Enemy):
 
     def strafe(self, game_screen_rect: pg.Rect):
         self.rect.move_ip(self.strafe_direction * self.STRAFE_SPEED, 0)
+
+        # randomly switch strafe direction
+        if self.frames_alive > self.strafe_switch_counter:
+            self.switch_strafe_direction()
+            self.strafe_switch_counter = self.frames_alive + randint(self.MIN_STRAFE, self.MAX_STRAFE)
 
         # stay in bounds
         if self.rect.left < 0:
@@ -174,6 +185,7 @@ class StraferGrunt(Enemy):
         super().update(*args, **kwargs)
 
     def move(self, game_screen_rect: pg.Rect):
+        self.frames_alive += 1
         if self.moving_to_position:
             self.move_to_position()
         else:
