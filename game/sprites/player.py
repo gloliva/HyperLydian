@@ -68,6 +68,7 @@ class Player(CharacterSprite):
         self.max_health = health
         self.projectiles_in_range = set()
         self.overlapping_enemies = set()
+        self.nearby_notes = set()
         self.last_time_hit = pg.time.get_ticks()
         self.last_time_note_collected = pg.time.get_ticks()
 
@@ -146,6 +147,10 @@ class Player(CharacterSprite):
 
     def get_enemy_collision_vector(self):
         enemy_collision_vector = [0, 0, 0, 0]
+
+        if len(self.overlapping_enemies) <= 0:
+            return enemy_collision_vector
+
         threshold = int(self.mask_size[0] * 0.45)
 
         for enemy in self.overlapping_enemies.copy():
@@ -233,6 +238,17 @@ class Player(CharacterSprite):
         if projectile in self.projectiles_in_range:
             self.projectiles_in_range.remove(projectile)
             stat_tracker.player__dodges -= 1
+
+    def add_notes_in_range(self, notes: List) -> None:
+        for note in notes:
+            if note not in self.nearby_notes:
+                self.nearby_notes.add(note)
+                stat_tracker.player__missed_nearby_notes += 1
+
+    def update_missed_notes(self, note) -> None:
+        if note in self.nearby_notes:
+            self.nearby_notes.remove(note)
+            stat_tracker.player__missed_nearby_notes -= 1
 
     def update_enemies_collided(self, enemy: CharacterSprite) -> None:
         if enemy not in self.overlapping_enemies:

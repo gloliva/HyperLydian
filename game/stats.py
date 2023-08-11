@@ -298,6 +298,7 @@ class StatTracker:
         self.player__percent__health_lost_over_gained = Stat(50.)
         self.player__percent__dodges_over_enemy_collision = Stat(50.)
         self.player__percent__hit_rests_over_accidentals = Stat(50.)
+        self.player__percent__missed_notes_over_dodges = Stat(50.)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
         self.player__angle = Stat(0)
@@ -313,6 +314,7 @@ class StatTracker:
         self.player__hit_distance = TrackerStat()
         self.player__enemies_collided = Stat(0)
         self.player__dodges = Stat(0)
+        self.player__missed_nearby_notes = Stat(0)
         self.player__alive_projectiles = Stat(0)
 
         self.notes__collected = Stat(0)
@@ -417,6 +419,11 @@ class StatTracker:
         total = self.player__dodges + self.player__enemies_collided
         if total > 0:
             self.player__percent__dodges_over_enemy_collision = (self.player__dodges / total) * 100
+
+        # Missed notes vs dodges
+        total = self.player__missed_nearby_notes + self.player__dodges
+        if total > 0:
+            self.player__percent__missed_notes_over_dodges = (self.player__missed_nearby_notes / total) * 100
 
         # Rests vs accidentals
         projectile_hit_count = self.player__projectile_hit_count.count

@@ -269,6 +269,15 @@ def handle_collisions(player: Player):
         projectile_distance = projectile.get_distance_traveled()
         stat_tracker.enemies__hit_distance.add(projectile_distance)
 
+    # nearby note misses
+    collided = pg.sprite.spritecollide(
+        player,
+        groups.notes,
+        dokill=False,
+        collided=pg.sprite.collide_circle_ratio(1.2),
+    )
+    player.add_notes_in_range(collided)
+
     # notes + player collision
     collided = pg.sprite.spritecollide(
         player,
@@ -279,6 +288,7 @@ def handle_collisions(player: Player):
 
     for note in collided:
         player.collect_note()
+        player.update_missed_notes(note)
         curr_time = pg.time.get_ticks()
         stat_tracker.notes__time__between_collecting.add(curr_time - note.spawn_time)
         note.kill()
