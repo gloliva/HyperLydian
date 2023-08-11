@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2012.0, 1319.0 ],
+		"rect" : [ 1474.0, -211.0, 1212.0, 1319.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -823,7 +823,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 794.333333333332575, 569.0, 87.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.0, 3.0, 67.0, 22.0 ],
+					"presentation_rect" : [ 7.0, 6.0, 66.0, 22.0 ],
 					"text" : "reverb~",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}

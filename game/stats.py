@@ -282,6 +282,7 @@ class StatTracker:
         self.player__frames__firing = Stat(0)
         self.player__percent__firing_weapon = Stat(0.)
         self.player__percent__moving_over_rotating = Stat(50.)
+        self.player__percent__moving_and_rotating = Stat(50.)
         self.player__frames__per_screen_quadrant = ListStat(initial_length=4)
         self.player__curr_velocity = ListStat(initial_length=2)
         self.player__curr_speed = Stat(0)
@@ -308,6 +309,7 @@ class StatTracker:
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
         self.weapon__shots_per_weapon = ListStat(initial_length=2)
+        self.weapon__percent__one_over_two = Stat(0)
 
         self.upgrades__total_dropped = Stat(0)
         self.upgrades__picked_up = Stat(0)
@@ -369,6 +371,11 @@ class StatTracker:
         if total > 0:
             self.player__percent__moving_over_rotating = (self.player__frames__moving / total) * 100
 
+        # Update movement and rotating vs just movement or just rotation
+        total = self.player__frames__moving + self.player__frames__rotating + self.player__frames__moving_and_rotating
+        if total > 0:
+            self.player__percent__moving_and_rotating = (self.player__frames__moving_and_rotating / total) * 100
+
         # Update firing vs not ratio
         if self.game__total_frames > 0:
             self.player__percent__firing_weapon = (self.player__frames__firing / self.game__total_frames) * 100
@@ -379,6 +386,12 @@ class StatTracker:
 
         if self.notes__total > 0:
             self.notes__percent__collected = (self.notes__collected / self.notes__total) * 100
+
+        # Update weapon usage
+        if self.weapon__total_shots_fired > 0:
+            self.weapon__percent__one_over_two = Stat(
+                (self.weapon__shots_per_weapon.list[0] / self.weapon__total_shots_fired.value) * 100
+            )
 
 
 
