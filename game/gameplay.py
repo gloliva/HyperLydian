@@ -261,6 +261,9 @@ def handle_collisions(player: Player):
     for projectile, enemies in collided.items():
         for enemy in enemies:
             stat_tracker.enemies__hit += 1
+            stat_tracker.weapon__hits_per_weapon.add_at_index(
+                stat_tracker.weapon__selected.value, 1
+            )
             enemy.take_damage(projectile.damage)
 
         if enemy.is_dead:

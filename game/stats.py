@@ -327,6 +327,7 @@ class StatTracker:
         self.weapon__selected = Stat(0)
         self.weapon__total_shots_fired = Stat(0)
         self.weapon__shots_per_weapon = ListStat(initial_length=2)
+        self.weapon__hits_per_weapon = ListStat(initial_length=2)
         self.weapon__percent__one_over_two = Stat(0)
 
         self.upgrades__total_dropped = Stat(0)

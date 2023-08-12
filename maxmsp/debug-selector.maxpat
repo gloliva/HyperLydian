@@ -280,13 +280,14 @@
 					"fontname" : "Arial",
 					"fontsize" : 16.0,
 					"id" : "obj-22",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 260.666666666666629, 229.0, 130.0, 24.0 ],
+					"patching_rect" : [ 260.666666666666629, 229.0, 130.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 5.0, 120.0, 24.0 ],
-					"text" : "Debug Enable",
+					"presentation_rect" : [ 5.0, 5.0, 205.0, 24.0 ],
+					"text" : "Debug Print Selector",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 
