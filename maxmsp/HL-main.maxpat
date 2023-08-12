@@ -667,7 +667,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 214.0, 2068.0, 115.0, 22.0 ],
+					"patching_rect" : [ 4.0, 2436.0, 115.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -691,7 +691,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 1070.5, 6.61762261390686, 167.0, 60.0 ],
 					"text" : "Lydian",
-					"textcolor" : [ 0.400002270936966, 0.400115519762039, 0.998569250106812, 1.0 ],
+					"textcolor" : [ 0.501962602138519, 0.0, 0.008127624168992, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -708,7 +708,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 922.964705538752241, 6.61762261390686, 167.0, 60.0 ],
 					"text" : "Hyper",
-					"textcolor" : [ 0.399992048740387, 0.800062239170074, 0.998948574066162, 1.0 ],
+					"textcolor" : [ 0.501962602138519, 0.0, 0.008127624168992, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -9005,7 +9005,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 4,\n/melody/pattern : [8, 8, 9, 9, 9, 8, 8, 10, 10, 10, 10, 9, 9],\n/melody/beat_len : 12,\n/melody/pattern_len : 13"
+									"text" : "/melody/idx : 3,\n/melody/pattern : [19, 19, 20, 20, 21, 20, 21, 19, 20],\n/melody/beat_len : 14,\n/melody/pattern_len : 9"
 								}
 
 							}
@@ -12356,7 +12356,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 49,\n/total : 1120,\n/score : 441,\n/time/between_collecting : [232, 1786.88, 1177, 4037, 49],\n/time/lifespan : [232, 3713.81, 5799, 6647, 1676],\n/percent/collected : 4.375",
+					"text" : "/collected : 0,\n/total : 24,\n/score : 0,\n/time/between_collecting : [inf, 0, 0, -inf, 0],\n/time/lifespan : [380, 2416., 380, 4822, 28],\n/percent/collected : 0.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -13948,7 +13948,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 4.0, 2547.308875298057501, 148.0, 22.0 ],
+					"patching_rect" : [ 4.0, 2575.058875298057501, 148.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -14414,7 +14414,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 4.0, 2473.411789298057556, 126.0, 22.0 ],
+					"patching_rect" : [ 4.0, 2501.161789298057556, 126.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -16106,7 +16106,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 12,\n/picked_up : 10,\n/missed : 2,\n/time/between_collecting : [548, 1190.2, 826, 3203, 10],\n/time/lifespan : [548, 1909.5, 826, 7009, 12],\n/percent/collected : 83.3333",
+					"text" : "/total_dropped : 0,\n/picked_up : 0,\n/missed : 0,\n/time/between_collecting : [inf, 0, 0, -inf, 0],\n/time/lifespan : [inf, 0, 0, -inf, 0],\n/percent/collected : 0",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -16666,7 +16666,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 6234,\n/still : 4793,\n/fps : 60,\n/bpm : 130.62,\n/prev/moving : 6234,\n/prev/still : 4642,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 0,\n/still_delta : 151,\n/selected_delta : 0,\n/mode : 1"
+									"text" : "/moving : 41,\n/still : 207,\n/fps : 60,\n/bpm : 134.6,\n/prev/moving : 0,\n/prev/still : 0,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/prev/min : 120,\n/prev/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 41,\n/still_delta : 207,\n/selected_delta : 0,\n/mode : 1"
 								}
 
 							}
@@ -19719,7 +19719,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 19,\n/melody/prev : 19,\n/melody/idx_delta : 0"
+									"text" : "/melody/curr : 19,\n/melody/prev : 0,\n/melody/idx_delta : -4"
 								}
 
 							}
@@ -20449,7 +20449,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 583.75, 910.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 4"
+									"text" : "/melody/curr : 1"
 								}
 
 							}
@@ -22960,7 +22960,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 3,\n/sharp/count : 2,\n/flat/count : 1,\n/natural/count : 2"
+									"text" : "/rest/count : 0,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
 								}
 
 							}
@@ -24058,13 +24058,12 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-409",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
-									"text" : "/filter/cutoff : 0.548291,\n/filter/gain : 1.37778,\n/filter/resonance : 1.93333"
+									"patching_rect" : [ 110.0, 849.75, 275.0, 33.0 ],
+									"text" : "/filter/resonance : 2.88"
 								}
 
 							}
@@ -24920,7 +24919,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 5,
 					"presentation_rect" : [ 1568.999999999999545, 1905.452894151210785, 405.000000000000227, 85.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 3591,\n/shots_per_weapon : [3512, 79],\n/hits_per_weapon : [1573, 39],\n/percent/one_over_two : 97.8001",
+					"text" : "/selected : 0,\n/total_shots_fired : 30,\n/shots_per_weapon : [30, 0],\n/hits_per_weapon : [7, 0],\n/percent/one_over_two : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -25108,7 +25107,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1246.166666666666515, 236.796729207038879, 257.0, 110.0 ],
-					"text" : "/bars : 137,\n/beats : 2,\n/units : 221.979,\n/ppq : 480.,\n/tempo/bpm : 130.62,\n/time_sig : [4, 4],\n/total_beats : 546"
+					"text" : "/bars : 8,\n/beats : 4,\n/units : 21.2366,\n/ppq : 480.,\n/tempo/bpm : 134.6,\n/time_sig : [4, 4],\n/total_beats : 32"
 				}
 
 			}
@@ -25511,7 +25510,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 10,
 					"presentation_rect" : [ 1128.999999999999545, 1828.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 77,\n/standard_count : 67,\n/special_count : 10,\n/num_on_screen : [0, 3.97472, 0, 10, 14322],\n/hit : 1612,\n/killed : 82,\n/hit_distance : [11., 349.241, 342.406, 1151.57, 1612],\n/alive_projectiles : 0,\n/score : 1165,\n/time/lifespan : [1222, 12377.3, 18492, 48058, 82]",
+					"text" : "/total : 2,\n/standard_count : 2,\n/special_count : 0,\n/num_on_screen : [0, 0.850993, 2, 2, 302],\n/hit : 7,\n/killed : 0,\n/hit_distance : [429., 469.541, 456.07, 516., 7],\n/alive_projectiles : 3,\n/score : 0,\n/time/lifespan : [inf, 0, 0, -inf, 0]",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -25592,7 +25591,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 4, 2, 577],\n/score : 1606,\n/total_frames : 14322,\n/time/current_playthrough : [0, 3, 57, 595],\n/num_events : 4,\n/percent/note_over_enemy_score : 27.4595",
+					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 15, 52],\n/score : 0,\n/total_frames : 302,\n/time/current_playthrough : [0, 0, 5, 234],\n/num_events : 0,\n/percent/note_over_enemy_score : 50.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -25612,7 +25611,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 37,
 					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [603, 680],\n/vertical_half : \"bottom\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 2469,\n/frames/moving : 6234,\n/frames/still : 4794,\n/frames/rotating : 825,\n/frames/firing : 13032,\n/frames/per_screen_quadrant : [3840, 2939, 4335, 3208],\n/frames/per_angle_quadrant : [4847, 3706, 2716, 3053],\n/percent/firing_weapon : 90.9929,\n/percent/moving_over_rotating : 88.3128,\n/percent/moving_and_rotating : 25.9131,\n/percent/health_lost_over_gained : 32.1429,\n/percent/dodges_over_enemy_collision : 72.2222,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 39.5349,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 66,\n/last_rotation_direction : 2,\n/percent/accuracy : 44.89,\n/time/between_kills : [0, 2755.71, 1138, 13210, 82],\n/time/between_getting_hit : [5676, 26091., 66553, 66553, 9],\n/max_health : 10,\n/curr_health : 9,\n/health_lost : 9,\n/health_gained : 19,\n/projectile_hit_count : [\"rest\", 3, \"sharp\", 2, \"flat\", 1, \"natural\", 2],\n/hit_distance : [113.842, 475.394, 152., 640., 8],\n/enemies_collided : 20,\n/dodges : 52,\n/missed_nearby_notes : 34,\n/alive_projectiles : 0",
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [570, 585],\n/vertical_half : \"bottom\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 9,\n/frames/moving : 41,\n/frames/still : 208,\n/frames/rotating : 44,\n/frames/firing : 97,\n/frames/per_screen_quadrant : [0, 0, 227, 75],\n/frames/per_angle_quadrant : [62, 240, 0, 0],\n/percent/firing_weapon : 32.1192,\n/percent/moving_over_rotating : 48.2353,\n/percent/moving_and_rotating : 9.57447,\n/percent/health_lost_over_gained : 50.,\n/percent/dodges_over_enemy_collision : 50.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 100.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 72,\n/last_rotation_direction : -2,\n/percent/accuracy : 23.3333,\n/time/between_kills : [inf, 0, 0, -inf, 0],\n/time/between_getting_hit : [inf, 0, 0, -inf, 0],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 0,\n/health_gained : 0,\n/projectile_hit_count : [\"rest\", 0, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [inf, 0, 0, -inf, 0],\n/enemies_collided : 0,\n/dodges : 0,\n/missed_nearby_notes : 1,\n/alive_projectiles : 5",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -25699,7 +25698,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 4.0, 2504.411789298057556, 161.0, 22.0 ],
+					"patching_rect" : [ 4.0, 2532.161789298057556, 161.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1594.077826877439293, 1525.920437932014465, 161.0, 22.0 ]
 				}
@@ -26815,7 +26814,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-182", 0 ],
-					"midpoints" : [ 13.5, 2536.411789298057556, -4.5, 2536.411789298057556, -4.5, 2461.411789298057556, 13.5, 2461.411789298057556 ],
+					"midpoints" : [ 13.5, 2564.161789298057556, -4.5, 2564.161789298057556, -4.5, 2489.161789298057556, 13.5, 2489.161789298057556 ],
 					"source" : [ "obj-308", 0 ]
 				}
 
