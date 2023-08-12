@@ -1,6 +1,6 @@
 # stdlib imports
 from math import sqrt
-from typing import List
+from typing import List, Set
 
 # 3rd-party imports
 import pygame as pg
@@ -67,7 +67,7 @@ class Player(CharacterSprite):
         # Additional Player attributes
         self.max_health = health
         self.projectiles_in_range = set()
-        self.overlapping_enemies = set()
+        self.overlapping_enemies: Set[CharacterSprite] = set()
         self.nearby_notes = set()
         self.last_time_hit = pg.time.get_ticks()
         self.last_time_note_collected = pg.time.get_ticks()
@@ -82,16 +82,16 @@ class Player(CharacterSprite):
         enemy_collision_vector = self.get_enemy_collision_vector()
 
         # move player based on key input
-        if pressed_keys[K_UP] and enemy_collision_vector[2] != 1:
+        if pressed_keys[K_UP] and enemy_collision_vector[0] != 1:
             self.rect.move_ip(0, -self.movement_speed)
             movement_vector[1] -= self.movement_speed
-        if pressed_keys[K_DOWN] and enemy_collision_vector[3] != 1:
+        if pressed_keys[K_DOWN] and enemy_collision_vector[1] != 1:
             self.rect.move_ip(0, self.movement_speed)
             movement_vector[1] += self.movement_speed
-        if pressed_keys[K_LEFT] and enemy_collision_vector[0] != 1:
+        if pressed_keys[K_LEFT] and enemy_collision_vector[2] != 1:
             self.rect.move_ip(-self.movement_speed, 0)
             movement_vector[0] -= self.movement_speed
-        if pressed_keys[K_RIGHT] and enemy_collision_vector[1] != 1:
+        if pressed_keys[K_RIGHT] and enemy_collision_vector[3] != 1:
             self.rect.move_ip(self.movement_speed, 0)
             movement_vector[0] += self.movement_speed
 
@@ -148,32 +148,53 @@ class Player(CharacterSprite):
     def get_enemy_collision_vector(self):
         enemy_collision_vector = [0, 0, 0, 0]
 
-        if len(self.overlapping_enemies) <= 0:
-            return enemy_collision_vector
-
         threshold = int(self.mask_size[0] * 0.45)
+        # tolerance = 50
 
         for enemy in self.overlapping_enemies.copy():
             collide_point = pg.sprite.collide_mask(self, enemy)
-            if collide_point is None:
-                # No longer collidingn
+            if pg.sprite.collide_mask(self, enemy) is None:
+                # No longer colliding
                 self.overlapping_enemies.remove(enemy)
                 continue
 
+            # # moving up
+            # if abs(enemy.rect.bottom - self.rect.top) < tolerance:
+            #     enemy_collision_vector[0] = 1
+
+            # # moving down
+            # if abs(enemy.rect.top - self.rect.bottom) < tolerance:
+            #     enemy_collision_vector[1] = 1
+
+            # # moving left
+            # if abs(enemy.rect.right - self.rect.left) < tolerance:
+            #     enemy_collision_vector[2] = 1
+
+            # # moving right
+            # if abs(enemy.rect.left - self.rect.right) < tolerance:
+            #     enemy_collision_vector[3] = 1
+
+
             horizontal, vertical = collide_point[0], collide_point[1]
+            # check top
+            if vertical < threshold:
+                enemy_collision_vector[0] = 1
+
+            # check bottom
+            if vertical > (self.mask_size[1] - threshold):
+                enemy_collision_vector[1] = 1
 
             # check left
             if horizontal < threshold:
-                enemy_collision_vector[0] = 1
+                enemy_collision_vector[2] = 1
+
             # check right
             if horizontal > (self.mask_size[0] - threshold):
-                enemy_collision_vector[1] = 1
-            # check top
-            if vertical < threshold:
-                enemy_collision_vector[2] = 1
-            # check bottom
-            if vertical > (self.mask_size[1] - threshold):
                 enemy_collision_vector[3] = 1
+
+
+        if len(self.overlapping_enemies) <= 0:
+            return [0, 0, 0, 0]
 
         return enemy_collision_vector
 
