@@ -138,7 +138,7 @@ function restsToNotes(patternIn) {
         Added notes are weighted towards notes that already occur within the pattern, although
         a totally random note can appear with lower probability.
     */
-    var probability = extraArgs[0];
+    var probability = extraArgs[0] / 100.0;
     var maxChanges = extraArgs[1];
     var numChanges = 0;
     var noteFrequency = {};
@@ -195,7 +195,7 @@ function notesToRests(patternIn) {
     /*
         Convert notes to rests based on a probability that's passed in via extra args.
     */
-    var probability = extraArgs[0];
+    var probability = extraArgs[0] / 100.0;
     var maxChanges = extraArgs[1];
     var numChanges = 0;
 
@@ -387,9 +387,11 @@ function constrainedChaos(patternIn) {
         Based on the input probability, will adjust a current step by a constrained range defined by
         input `min` and `max` variables passed in via extra args.
     */
-    var probability = extraArgs[0];
+    var probability = extraArgs[0] / 100.0;
     var min = extraArgs[1];
     var max = extraArgs[2];
+    var maxChanges = extraArgs[3];
+    var numChanges = 0;
 
     patternOut = new Array();
     envelopeOut = new Array();
@@ -398,9 +400,10 @@ function constrainedChaos(patternIn) {
     var currVal;
     for (var i = 0; i < patternIn.length; i++) {
         // random value
-        if (Math.random() < probability) {
+        if (Math.random() < probability && numChanges < maxChanges) {
             currVal = patternIn[i] + randInt(min, max);
             currVal = Math.max(restValue, Math.min(maxPatternRange - 1, currVal));
+            numChanges += 1;
             patternOut[i] = currVal;
         // else copy over same value
         } else {
@@ -422,7 +425,9 @@ function completeChaos(patternIn) {
         Total randomness of the full range of values (spanning 2 octaves of the scale).
         Useful for updating a stagnant pattern.
     */
-    var probability = extraArgs;
+    var probability = extraArgs[0] / 100.0;
+    var maxChanges = extraArgs[1];
+    var numChanges = 0;
 
     patternOut = new Array();
     envelopeOut = new Array();
@@ -430,7 +435,8 @@ function completeChaos(patternIn) {
     // Randomly add notes
     for (var i = 0; i < patternIn.length; i++) {
         // random value
-        if (Math.random() < probability) {
+        if (Math.random() < probability  && numChanges < maxChanges) {
+            numChanges += 1;
             patternOut[i] = randInt(restValue, maxPatternRange - 1);
         // else copy over same value
         } else {
