@@ -40,6 +40,33 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-28",
+					"linecount" : 15,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 521.800000000000068, 501.0, 393.0, 275.0 ],
+					"presentation_linecount" : 15,
+					"text" : "The two variables, Frequency Factor and Depth, loosely follow the concept of 1V per Octave tracking for handling how much modulation is applied, which ensures that the modulation is always related to the carrier signal to keep things sounding somewhat pleasant.\n\nFrequency Factor sets the frequency of the modulator signal, which is based off the frequency of the carrier signal. e.g. Input signal is 880 Hz with a Freq Factor of 0.5, then the modulator signal will be 440 Hz.\n\nDepth sets how much the carrier signal is modulated. This is also based on the input carrier signal, similar to the Frequency Factor."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-27",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 82.800000000000068, 28.0, 393.0, 60.0 ],
+					"text" : "An abstraction for applying Frequency Modulation to an input signal. Can select between 5 different modulator waveforms, including an input signal."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-26",
 					"maxclass" : "newobj",
 					"numinlets" : 2,

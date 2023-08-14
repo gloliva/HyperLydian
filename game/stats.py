@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Union
 
 # project imports
 import debug
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, REST, NUM_VOICES, FPS
+from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, REST, NUM_VOICES, FPS, RECORD_MUSIC
 from osc_client import osc, OSCHandler
 
 
@@ -259,6 +259,7 @@ class StatTracker:
         self.control__num_voices = Stat(NUM_VOICES)
         self.control__screen_width = Stat(SCREEN_WIDTH)
         self.control__screen_height = Stat(SCREEN_HEIGHT)
+        self.control__record_music = Stat(RECORD_MUSIC)
 
         self.game__play_count = Stat(0)
         self.game__time__total_played = TimeStat(0)

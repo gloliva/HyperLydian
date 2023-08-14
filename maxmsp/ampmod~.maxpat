@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-35",
+					"linecount" : 8,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 84.700000000000045, 293.5, 344.0, 149.0 ],
+					"text" : "Amplitude Modulation Effect\n\nHas 2 modes:\n1) Ring Modulation\n2) Classic Amplitude Modulation\n\nCan select between 5 different modulator waveforms, including and input waveform."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-33",
 					"maxclass" : "newobj",
 					"numinlets" : 2,

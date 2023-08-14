@@ -76,4 +76,7 @@ MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
 
 
 # Music constants
+RECORD_MUSIC_ENV_VAR = os.environ.get('RECORD_MUSIC')
+
 NUM_VOICES = 3
+RECORD_MUSIC = 0 if RECORD_MUSIC_ENV_VAR is None else int(RECORD_MUSIC_ENV_VAR)

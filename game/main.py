@@ -83,6 +83,8 @@ def close_max_application():
     if not DISABLE_OPENING_MAX_APPLICATION:
         stat_tracker.control__max_quit.update(1)
 
+    stat_tracker.control__record_music.update(0)
+
 
 def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     """Stop all game loops and quit game"""
