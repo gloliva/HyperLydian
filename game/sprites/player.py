@@ -149,31 +149,13 @@ class Player(CharacterSprite):
         enemy_collision_vector = [0, 0, 0, 0]
 
         threshold = int(self.mask_size[0] * 0.45)
-        # tolerance = 50
 
         for enemy in self.overlapping_enemies.copy():
             collide_point = pg.sprite.collide_mask(self, enemy)
-            if pg.sprite.collide_mask(self, enemy) is None:
+            if enemy.is_dead or pg.sprite.collide_mask(self, enemy) is None:
                 # No longer colliding
                 self.overlapping_enemies.remove(enemy)
                 continue
-
-            # # moving up
-            # if abs(enemy.rect.bottom - self.rect.top) < tolerance:
-            #     enemy_collision_vector[0] = 1
-
-            # # moving down
-            # if abs(enemy.rect.top - self.rect.bottom) < tolerance:
-            #     enemy_collision_vector[1] = 1
-
-            # # moving left
-            # if abs(enemy.rect.right - self.rect.left) < tolerance:
-            #     enemy_collision_vector[2] = 1
-
-            # # moving right
-            # if abs(enemy.rect.left - self.rect.right) < tolerance:
-            #     enemy_collision_vector[3] = 1
-
 
             horizontal, vertical = collide_point[0], collide_point[1]
             # check top
