@@ -1,3 +1,16 @@
+"""
+This module defines all the sprites that are:
+    1) in the background (stars)
+    2) appear in menus (blackhole, destroyed notes, notes, destroyed ship)
+    3) are collectible (notes)
+    4) or are used in special events (notes, letters)
+
+These objects are tied together in that they are not character sprites nor projectiles; they are
+the additional sprites that set the background.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from math import sqrt
 from random import (
@@ -17,6 +30,10 @@ from stats import stat_tracker
 
 
 class Background(pg.sprite.Sprite):
+    """
+    Basic background base class that defines minimal functionality that is shared across all
+    background sprites, such as an update function and a rotate function.
+    """
     DRAW_LAYER = 0
     ROTATION_AMOUNT = 1
 
@@ -27,11 +44,16 @@ class Background(pg.sprite.Sprite):
         self._layer = self.DRAW_LAYER
 
     def update(self, screen_rect: pg.Rect):
+        """Basic update function that moves the background sprite across the screen"""
         self.rect.move_ip(0, 2)
         if self.rect.top > screen_rect.height:
             self.kill()
 
     def rotate(self, rotation_angle: int):
+        """
+        Rotate the sprite's image. The current image in the animation needs to be rotated,
+        a new sprite mask needs to be created, and then the rect needs to be re-centered.
+        """
         curr_alpha = self.surf.get_alpha()
         self.current_rotation = rotation_angle % 360
 
@@ -51,6 +73,7 @@ class Background(pg.sprite.Sprite):
 
 
 class Note(Background):
+    """Note object that appears in the MAIN MENU and is a collectible during the gameplay loop"""
     SCORE = 1
     NUM_NOTES_PER_EVENT = 2
     NUM_NOTES_PER_MENU_EVENT = 10
@@ -231,6 +254,7 @@ class Note(Background):
 
 
 class BrokenNote(Background):
+    """Broken Notes that bounce around the screen during the DEATH MENU screen"""
     NUM_ON_LOAD = 80
     NUM_VARIANTS = 12
     DIRECTION = ['left', 'top', 'right', 'bottom']
@@ -303,6 +327,7 @@ class BrokenNote(Background):
 
 
 class Star(Background):
+    """Background stars that move and twinkle in the sky"""
     NUM_ON_LOAD = 800
     NUM_STARS_PER_EVENT = 2
     DRAW_LAYER = 0
@@ -360,6 +385,7 @@ class Star(Background):
 
 
 class Letter(Background):
+    """Letter sprites that spawn during a LetterField Special Event"""
     # Image
     NUM_VARIANTS = 7
     DRAW_LAYER = 3
@@ -547,6 +573,7 @@ class Letter(Background):
 
 
 class BlackHole(Background):
+    """Blackhole image that shows up in the MAIN MENU screen"""
     ROTATION_AMOUNT = 4
     MOVEMENT_VALUES = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
     MOVEMENT_INCREMENT = 0.05
@@ -580,6 +607,7 @@ class BlackHole(Background):
 
 
 class DestroyedShip(Background):
+    """Destroyed Player ship image that shows up in the DEATH MENU screen"""
     ROTATION_AMOUNT = 0.1
     DRAW_LAYER = 3
 

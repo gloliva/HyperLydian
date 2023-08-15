@@ -1,3 +1,15 @@
+"""
+This module contains sprite groups which defines functionality to be used by entire
+groups of sprites.
+
+Some sprite groups just use the pygame.sprite.Group class because they only need to call the
+group's upgrade function. For Enemies and Upgrades, custom groups are defined in order to handle
+how these sprites are spawned.
+
+Author: Gregg Oliva
+"""
+
+# stdlib imports
 import math
 from random import randint
 from typing import List, Optional, Tuple
@@ -19,6 +31,11 @@ from stats import stat_tracker
 
 # Custom Enemy Groups
 class StraferGruntGroup(Group):
+    """
+    A custom group that manages Strafer Grunt enemies. This keeps track of how the grunts are
+    oriented on the screen in rows (such as how many rows, how many grunts per row, and whether the
+    sprites spawn on the top or bottom of the screen)
+    """
     # Min / Max number of grunts
     MAX_ROWS = 4
     MAX_GRUNTS_PER_ROW = 6
@@ -62,10 +79,14 @@ class StraferGruntGroup(Group):
 
     @property
     def is_full(self):
+        """Checks to see if the maximum number of grunts are currently on screen"""
         total_grunts = sum(self.top_grunts_per_row) + sum(self.bottom_grunts_per_row)
         return total_grunts >= self.max_grunts_per_row * self.max_rows
 
     def create_new_grunt(self) -> StraferGrunt:
+        """
+        Creates a new grunt and adds it to the group.
+        """
         rate_of_fire = randint(500, 2000) if not settings_manager.easy_mode else randint(1000, 2500)
         # Create grunt weapon
         grunt_weapon = Weapon(
@@ -103,8 +124,7 @@ class StraferGruntGroup(Group):
         return grunt
 
     def add(self, *grunts: StraferGrunt) -> None:
-        """Overrides AbstractGroup `add` method to handle row assignment
-        """
+        """Overrides AbstractGroup `add` method to handle row assignment"""
         for grunt in grunts:
             super().add(grunt)
             if stat_tracker.player__vertical_half.text == 'bottom':
@@ -113,9 +133,7 @@ class StraferGruntGroup(Group):
                 self.bottom_grunts_per_row[self.bottom_row_to_fill] += 1
 
     def remove_internal(self, grunt: StraferGrunt) -> None:
-        """Overrides AbstractGroup `remove_internal` method to handle
-        removing grunt from a row.
-        """
+        """Overrides AbstractGroup `remove_internal` method to handle removing grunt from a row."""
         if grunt.spawn_direction == 1:
             if grunt.grunt_row < len(self.top_grunts_per_row):
                 self.top_grunts_per_row[grunt.grunt_row] -= 1
@@ -127,6 +145,7 @@ class StraferGruntGroup(Group):
         self.update_curr_row()
 
     def update_curr_row(self):
+        """Determines which row should be filled based on the current grunt orientation"""
         for row, num_grunts in enumerate(self.top_grunts_per_row):
             if num_grunts < self.max_grunts_per_row:
                 self.top_row_to_fill = row
@@ -138,6 +157,7 @@ class StraferGruntGroup(Group):
                 break
 
     def change_max_rows(self, row_delta: int):
+        """Change the maximum number of rows that grunts can spawn in"""
         self.max_rows += row_delta
         self.max_rows = max(1, min(self.MAX_ROWS, self.max_rows))
 
@@ -152,24 +172,33 @@ class StraferGruntGroup(Group):
                 self.bottom_grunts_per_row.pop()
 
     def change_grunts_per_row(self, grunt_delta: int):
+        """Change the number of grunts that can spawn per row"""
         self.max_grunts_per_row += grunt_delta
         self.max_grunts_per_row = max(self.MIN_GRUNTS_PER_ROW, min(self.MAX_GRUNTS_PER_ROW, self.max_grunts_per_row))
 
     def change_grunt_health(self, health_delta: int):
+        """Change how much health the grunts will have when they spawn"""
         self.additional_health = max(self.MIN_HEALTH, health_delta * self.HEALTH_INCREMENT)
 
     def change_spawn_timer(self, spawn_delta: int):
+        """Change the frequency of how grunts spawn"""
         increment = self.TIMER_INCREMENT * spawn_delta
         self.spawn_timer += increment
         self.spawn_timer = max(self.MIN_TIMER, min(self.MAX_TIMER, self.spawn_timer))
         update_timer(Event.ADD_STRAFER_GRUNT, self.spawn_timer)
 
     def reset(self):
+        """Reset all the grunt parameters back to their initial values"""
         self.max_rows = self.INITIAL_ROWS if not settings_manager.easy_mode else self.EASY_MODE_ROWS
         self.max_grunts_per_row = self.INITIAL_GRUNTS_PER_ROW
 
 
 class SpinnerGruntGroup(Group):
+    """
+    A custom group that manages Spinner Grunt enemies. This keeps track of where grunts spawn on the
+    screen and how many grunts can spawn at a time. This also keeps track of Special Event information
+    for the SpinnerGruntSwarm event.
+    """
     # Standard Gameplay
     INITIAL_MAX_GRUNTS = 2
     EASY_MODE_GRUNTS = 1
@@ -192,6 +221,7 @@ class SpinnerGruntGroup(Group):
 
     @classmethod
     def get_oval_starting_positions(cls, num_grunts: int, screen_rect: pg.Rect) -> List[Tuple[float]]:
+        """Gets the starting position for all grunts when a SpinnerGruntSwarm event starts"""
         angle_increment = (2 * math.pi) / num_grunts
 
         return [
@@ -207,6 +237,7 @@ class SpinnerGruntGroup(Group):
             start_positions: List[Tuple[float]],
             screen_rect: pg.Rect,
         ) -> List[float]:
+        """Gets the starting rotation for all grunts when a SpinnerGruntSwarm event starts"""
         rotation_angles = []
         for x, y in start_positions:
             angle_to_center = math.atan2(screen_rect.centery - y, x - screen_rect.centerx)
@@ -231,6 +262,7 @@ class SpinnerGruntGroup(Group):
 
     @property
     def is_full(self):
+        """Checks to see if the group has spawned the maximum number of grunts"""
         return self.grunts_on_screen >= self.max_grunts
 
     def create_new_grunt(
@@ -240,6 +272,7 @@ class SpinnerGruntGroup(Group):
             special_event: bool = False,
             in_menu: bool = False,
         ) -> SpinnerGrunt:
+        """Creates a new grunt and adds it to the group."""
         # Create grunt weapon
         variant_number = randint(0, projectiles.EnemyAccidental.NUM_VARIANTS - 1)
         rate_of_fire = 300 if not settings_manager.easy_mode else 600
@@ -284,15 +317,18 @@ class SpinnerGruntGroup(Group):
         return grunt
 
     def add(self, *grunts: SpinnerGrunt) -> None:
+        """Adds a grunt to the group and keeps track of how many grunts are on screen"""
         for grunt in grunts:
             super().add(grunt)
             self.grunts_on_screen += 1
 
     def remove_internal(self, grunt: SpinnerGrunt) -> None:
+        """Overrides the remove_internal function to handle stat tracking"""
         super().remove_internal(grunt)
         self.grunts_on_screen -= 1
 
     def change_grunts_per_ellipse_event(self, num_delta: int):
+        """Changes the number of grunts that spawn during the SpinnerGruntSwarm special event"""
         self.num_grunts_per_ellipse += num_delta
         self.num_grunts_per_ellipse = max(
             self.MIN_ELLIPSE_GRUNTS,
@@ -300,23 +336,28 @@ class SpinnerGruntGroup(Group):
         )
 
     def change_max_grunts(self, max_delta: int):
+        """Change the max number of grunts that can spawn on the screen at a time"""
         self.max_grunts += max_delta
         if self.max_grunts < 1:
             self.max_grunts = 1
 
     def set_max_grunts(self, max_grunts: int):
+        """Sets the max number of grunts that can spawn on the screen at a time"""
         self.max_grunts = max_grunts
 
     def change_grunt_health(self, health_delta: int):
+        """Change the health that grunts spawn with"""
         self.additional_health = max(self.MIN_HEALTH, health_delta * self.HEALTH_INCREMENT)
 
     def change_spawn_timer(self, spawn_delta: int):
+        """Change the frequency of how grunts spawn"""
         increment = self.TIMER_INCREMENT * spawn_delta
         self.spawn_timer += increment
         self.spawn_timer = max(self.MIN_TIMER, min(self.MAX_TIMER, self.spawn_timer))
         update_timer(Event.ADD_SPINNER_GRUNT, self.spawn_timer)
 
     def reset(self):
+        """Reset all the grunt parameters back to their initial values"""
         self.max_grunts = self.INITIAL_MAX_GRUNTS
         self.max_grunts_per_ellipse = self.MAX_ELLIPSE_GRUNTS
         self.num_grunts_per_ellipse = self.INITIAL_ELLIPSE_GRUNTS
@@ -324,6 +365,7 @@ class SpinnerGruntGroup(Group):
 
 # Custom Upgrade Groups
 class HealthUpgradeGroup(Group):
+    """Custom groups that holds health upgrade objects"""
     WEAK_THRESHOLD = 5
     MAX_THRESHOLD = 20
 
@@ -335,6 +377,10 @@ class HealthUpgradeGroup(Group):
         self.enemy_base_for_max = 0
 
     def create_new_health_upgrade_on_probability(self, center_position: Tuple[int, int]):
+        """
+        Determines whether a small or max health upgrade should drop based on whether the correct
+        number of enemies have been killed and whether a probability roll is less than the drop probabiliy
+        """
         curr_enemies_killed = stat_tracker.enemies__killed
         max_health_dropped = False
         if curr_enemies_killed > (self.enemy_base_for_max + self.MAX_THRESHOLD):
@@ -354,11 +400,12 @@ class HealthUpgradeGroup(Group):
                 stat_tracker.upgrades__total_dropped += 1
 
     def reset(self) -> None:
+        """Reset all the upgrade parameters back to their initial values"""
         self.enemy_base_for_small = 0
         self.enemy_base_for_max = 0
 
 
-# Sprite Groups
+# Defines Custom Sprite Groups
 # Enemies
 all_enemies = Group()
 strafer_grunt_enemies = StraferGruntGroup()
@@ -380,5 +427,5 @@ letters = Group()
 # Indicators
 side_bars = Group()
 
-# All
+# All sprites, used to draw every sprite to the screen
 all_sprites = LayeredGroup()

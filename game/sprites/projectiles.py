@@ -1,3 +1,10 @@
+"""
+This module defines projectiles that are fired from weapons.
+Projectiles have a speed and damage associated with them.
+
+Author: Gregg Oliva
+"""
+
 # stdlib
 import math
 from typing import Tuple
@@ -11,6 +18,7 @@ from exceptions import AssetLoadError
 from sprites.base import construct_asset_full_path
 
 class Projectile(pg.sprite.Sprite):
+    """Projectile base class. Projectiles are what actually do damage and are associated with a Weapon instance"""
     # Default attrs
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
@@ -98,7 +106,9 @@ class Projectile(pg.sprite.Sprite):
         return math.sqrt((x_delta)**2 + (y_delta)**2)
 
 
+# The following classes define specific projectiles that are used by Player and Enemy weapons
 class PlayerMusicNote(Projectile):
+    """Fast, low-damage projectile used by the Player's first weapon"""
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
     DEFAULT_ANGLE = 180
@@ -108,6 +118,7 @@ class PlayerMusicNote(Projectile):
 
 
 class PlayerAccidental(Projectile):
+    """Slow, high-damage projectile used by the Player's second weapon"""
     DEFAULT_DAMAGE = 5
     DEFAULT_SPEED = 8
     IMAGE_FILE = "projectiles/player/accidentals/{variant}.png"
@@ -116,7 +127,8 @@ class PlayerAccidental(Projectile):
 
 
 class EnemyQuarterRest(Projectile):
-    DEFAULT_DAMAGE = 5
+    """Enemy projectile used by Strafer Grunt enemies"""
+    DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 10
     DEFAULT_ANGLE = 180
     IMAGE_FILE = "projectiles/enemy/rests/rest.png"
@@ -124,6 +136,7 @@ class EnemyQuarterRest(Projectile):
 
 
 class EnemyAccidental(Projectile):
+    """Enemy projectile used by Spinner Grunt enemies"""
     DEFAULT_DAMAGE = 1
     DEFAULT_SPEED = 1
     IMAGE_FILE = "projectiles/enemy/accidentals/{variant}.png"

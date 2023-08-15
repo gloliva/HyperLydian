@@ -1,3 +1,11 @@
+"""
+This module defines objects that the player can collide with and gain some enhancement.
+
+The main upgrade is a Health Upgrade which heals the player on collecting.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Any, Tuple
 from random import random

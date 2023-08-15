@@ -1,3 +1,12 @@
+"""
+This module defines all the base Sprite class that is overriden by the Player and Enemy classes.
+
+This module defines all the basic sprite functionality, such as movement, rotation, attacking,
+switching weapons, taking damage, and showing animations.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 import math
 import os
@@ -12,7 +21,10 @@ from defs import PNG_PATH, ImageType
 
 
 class CharacterSprite(pg.sprite.Sprite):
-    """Base Sprite class to be subclassed by player and enemy objects"""
+    """
+    Base Sprite class to be subclassed by player and enemy objects. Defines the basic functionality
+    of a sprite, like how it moves, attacks, and rotates.
+    """
     ANIMATION_TIMER_INCREMENT = 0.25
     PROJECTILE_SPAWN_DELTA = 0
     DRAW_LAYER = 5
@@ -78,9 +90,14 @@ class CharacterSprite(pg.sprite.Sprite):
 
     @property
     def is_dead(self):
+        """Check to see if the sprite is dead based on its health"""
         return self.health <= 0
 
     def update(self, *args, **kwargs):
+        """
+        Update function is called every frame. This checks to see if an animation is showing
+        and then calls the sprite's movement function.
+        """
         if self.animation_on:
             self.show_animation()
 
@@ -92,6 +109,7 @@ class CharacterSprite(pg.sprite.Sprite):
         )
 
     def attack(self):
+        """Calls the equipped weapon's attack function"""
         x_delta = self.PROJECTILE_SPAWN_DELTA * math.cos(math.radians(self.current_rotation))
         y_delta = -1 * self.PROJECTILE_SPAWN_DELTA * math.sin(math.radians(self.current_rotation))
 
@@ -102,14 +120,20 @@ class CharacterSprite(pg.sprite.Sprite):
         )
 
     def switch_weapon(self, weapon_id: int = 0):
+        """If the sprite has multiple weapons, switch to a specific weapon ID"""
         self.current_weapon_id = weapon_id
         self.equipped_weapon = self.weapons[self.current_weapon_id]
 
     def cycle_weapons(self):
+        """If the sprite has multiple weapons, switch to the next weapon in the list"""
         self.current_weapon_id = (self.current_weapon_id + 1) % len(self.weapons)
         self.equipped_weapon = self.weapons[self.current_weapon_id]
 
     def rotate(self, rotation_angle: int):
+        """
+        Rotate the sprite's image. The current image in the animation needs to be rotated,
+        a new sprite mask needs to be created, and then the rect needs to be re-centered.
+        """
         self.current_rotation = rotation_angle % 360
         image = self.images[self.image_type][int(self.curr_image_id)]
         self.surf = pg.transform.rotate(image, rotation_angle)
@@ -124,6 +148,7 @@ class CharacterSprite(pg.sprite.Sprite):
         self.mask_size = self.mask.get_size()
 
     def take_damage(self, damage: int) -> None:
+        """Lose health and show the hit animation. If the sprite dies, call the on_death function"""
         self.health -= damage
         if self.health < 0:
             self.health = 0
@@ -136,6 +161,7 @@ class CharacterSprite(pg.sprite.Sprite):
             self.on_death()
 
     def show_animation(self):
+        """Show an animation based on an event, such as getting hit by a projectile or collecting an upgrade"""
         self.curr_image_id += self.ANIMATION_TIMER_INCREMENT
         image_id = int(self.curr_image_id)
 
@@ -152,6 +178,7 @@ class CharacterSprite(pg.sprite.Sprite):
         )
 
     def on_death(self):
+        """Call any on-death functions before killing the sprite and removing it from all groups"""
         for callback in self.on_death_callbacks:
             callback()
         self.kill()

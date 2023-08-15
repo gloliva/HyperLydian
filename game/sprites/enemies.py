@@ -1,3 +1,9 @@
+"""
+This module defines all the Enemy classes and their movements and abilities.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from random import choice as randelem, randint
 from typing import Dict, Optional, List, Tuple
@@ -12,6 +18,10 @@ from stats import stat_tracker
 
 
 class Enemy(CharacterSprite):
+    """
+    Base enemy class, this is mainly to track specific enemy stats, as the CharacterSprite class
+    handles most of the heavy lifting for Sprite functionality.
+    """
     def __init__(
             self,
             image_types_to_files: Dict[str, List[str]],
@@ -52,6 +62,7 @@ class Enemy(CharacterSprite):
             stat_tracker.enemies__standard_count += 1
 
     def on_death(self):
+        """Overrides the CharacterSprite on_death function to track enemy-specific stats"""
         # Handle tracking enemy death stats
         if not self.in_menu:
             current_time = pg.time.get_ticks()
@@ -64,6 +75,11 @@ class Enemy(CharacterSprite):
 
 
 class StraferGrunt(Enemy):
+    """
+    A Strafer Grunt enemy spawns at a specific horizontal row and strafes back and forth horizontally on the screen.
+
+    A Strafer Grunt bounces off of other grunts, upgrades, and the Player. It will occasionally switch directions at random.
+    """
     DEFAULT_HEALTH = 20
     SPAWN_SPEED = 8
     PROJECTILE_SPAWN_DELTA = 40
@@ -119,9 +135,11 @@ class StraferGrunt(Enemy):
             self.rotate(90)
 
     def set_stopping_point_y(self, y_pos: float):
+        """Sets the vertical position the grunt should stop at when moving to position"""
         self.stopping_point_y = y_pos
 
     def move_to_position(self):
+        """When the grunt spawns, move to the row its assigned to"""
         if self.stopping_point_y is None:
             raise Exception('Must Call set_stopping_point_y')
 
@@ -133,6 +151,7 @@ class StraferGrunt(Enemy):
             self.moving_to_position = False
 
     def strafe(self, game_screen_rect: pg.Rect):
+        """Once the grunt moves to position, it strafes back and forth horizontally across the screen."""
         self.rect.move_ip(self.strafe_direction * self.STRAFE_SPEED, 0)
 
         # randomly switch strafe direction
@@ -149,6 +168,7 @@ class StraferGrunt(Enemy):
             self.switch_strafe_direction()
 
     def switch_strafe_direction_on_enemy_collision(self, enemy: Enemy):
+        """Switch strafe direction if the enemy collides with another enemy"""
         if self.moving_to_position:
             if isinstance(enemy, StraferGrunt):
                 self.strafe_direction = -1 * enemy.strafe_direction
@@ -157,19 +177,27 @@ class StraferGrunt(Enemy):
             self.overlapping_enemies.add(enemy)
 
     def switch_strafe_direction_on_upgrade_collision(self, upgrade: Enemy):
+        """Switch strafe direction if the enemy collides with an upgrade"""
         if upgrade not in self.overlapping_upgrades:
             self.switch_strafe_direction()
             self.overlapping_upgrades.add(upgrade)
 
     def switch_strafe_direction_on_player_collision(self, player):
+        """Switch strafe direction if the enemy collides with the Player"""
         if player not in self.overlapping_player:
             self.switch_strafe_direction()
             self.overlapping_player.add(player)
 
     def switch_strafe_direction(self):
+        """Change strafing directions, which gets multiplied by the enemy's speed"""
         self.strafe_direction *= -1
 
     def update(self, *args, **kwargs):
+        """
+        Adds additional checks to the CharacterSprite's update function. Checks to see if the
+        enemy is still colliding with any objects it previously collided with, and then remove
+        them from its collision sets.
+        """
         for enemy in self.overlapping_enemies.copy():
             if not pg.sprite.collide_rect(self, enemy):
                 self.overlapping_enemies.remove(enemy)
@@ -185,6 +213,7 @@ class StraferGrunt(Enemy):
         super().update(*args, **kwargs)
 
     def move(self, game_screen_rect: pg.Rect):
+        """First move the grunt to its row, then strafe back and forth"""
         self.frames_alive += 1
         if self.moving_to_position:
             self.move_to_position()
@@ -192,6 +221,7 @@ class StraferGrunt(Enemy):
             self.strafe(game_screen_rect)
 
     def attack(self):
+        """Don't attack while moving to position, and then just call the base class attack function"""
         if self.moving_to_position:
             return
 
@@ -199,6 +229,9 @@ class StraferGrunt(Enemy):
 
 
 class SpinnerGrunt(Enemy):
+    """
+    A Spinner Grunt enemy spawns at a random point in the screen and rotates at that point, firing off projectiles.
+    """
     DEFAULT_HEALTH = 30
     INITIAL_ROTATION = 0
     SPAWN_SPEED = 6
@@ -242,6 +275,7 @@ class SpinnerGrunt(Enemy):
         self.moving_to_position = True
 
     def set_spawn_information(self, spawn: Optional[List] = None):
+        """Calculate where the grunt should spawn from"""
         if spawn is not None:
             x, y = spawn[0], spawn[1]
 
@@ -280,6 +314,7 @@ class SpinnerGrunt(Enemy):
         return spawn_location
 
     def move_to_position(self):
+        """Move the grunt to its spawn position on the screen"""
         if self.stopping_point_x is None:
             raise AttributeError('Must set stopping_point_x')
 
@@ -295,17 +330,15 @@ class SpinnerGrunt(Enemy):
                 self.moving_to_position = False
 
     def move(self, *args, **kwargs):
+        """Handle moving to position, then just rotate the grunt"""
         if self.moving_to_position:
             self.move_to_position()
         else:
             self.rotate(self.current_rotation - self.ROTATION_AMOUNT)
 
     def attack(self):
+        """Don't attack while moving to position, and then just call the base class attack function"""
         if self.moving_to_position:
             return
 
         super().attack()
-
-
-class TrackerGrunt(Enemy):
-    DEFAULT_HEALTH = 2

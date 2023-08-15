@@ -1,3 +1,9 @@
+"""
+This module defines everything related to the Player, such as its movement and abilities.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from math import sqrt
 from typing import List, Set
@@ -78,6 +84,10 @@ class Player(CharacterSprite):
         self.menu_direction = self.MENU_SPEED
 
     def move(self, pressed_keys, game_screen_rect: pg.Rect):
+        """
+        Determine how the player should move and rotate based on the user's keyboard input.
+        Also tracks movement-based stats.
+        """
         movement_vector = [0, 0]
 
         # check collided enemies
@@ -148,6 +158,10 @@ class Player(CharacterSprite):
             stat_tracker.player__frames__per_angle_quadrant.add_at_index(3, 1)
 
     def get_enemy_collision_vector(self):
+        """
+        Checks to see whether the Player is colliding with an enemy, and prevent it from moving
+        if that's the case.
+        """
         enemy_collision_vector = [0, 0, 0, 0]
 
         threshold = int(self.mask_size[0] * 0.45)
@@ -183,6 +197,7 @@ class Player(CharacterSprite):
         return enemy_collision_vector
 
     def move_in_menu(self, game_screen_rect: pg.Rect):
+        """This defines how the Player moves in the CREDITS MENU."""
         self.rect.move_ip(self.menu_direction, 0)
 
         # don't move out of bounds
@@ -194,6 +209,10 @@ class Player(CharacterSprite):
             self.menu_direction *= -1
 
     def take_damage(self, damage: int) -> None:
+        """
+        When the Player gets hit by an enemy projectile, lose health based on the projectile's damage
+        and show the damage animation.
+        """
         if debug.PLAYER_INVINCIBLE:
             return
 
@@ -207,6 +226,7 @@ class Player(CharacterSprite):
             pg.event.post(Event.PLAYER_DEATH)
 
     def heal(self, health: int) -> None:
+        """When the Player collides with a healh upgrade, gain health and show the heal animation"""
         self.health += health
         if self.health > self.max_health:
             self.health = self.max_health
@@ -219,12 +239,14 @@ class Player(CharacterSprite):
         self.show_animation()
 
     def collect_note(self) -> None:
+        """When the Player collides with a Note show the collect animation"""
         self.animation_on = True
         self.image_type = ImageType.COLLECT
         self.curr_image_id = 0
         self.show_animation()
 
     def attack(self, in_menu: bool = False):
+        """Attack with the equipped weapon"""
         attack_center = (self.rect.centerx, self.rect.centery)
         self.equipped_weapon.attack(
             projectile_center=attack_center,
@@ -234,33 +256,39 @@ class Player(CharacterSprite):
             stat_tracker.player__frames__firing += 1
 
     def add_projectiles_in_range(self, projectiles: List[projectiles.Projectile]):
+        """Keep track of projectiles that the Player is close to in order to track dodges"""
         for projectile in projectiles:
             if projectile not in self.projectiles_in_range:
                 self.projectiles_in_range.add(projectile)
                 stat_tracker.player__dodges += 1
 
     def update_dodges(self, projectile: projectiles.Projectile):
+        """If the Player hits one of the projectiles that is nearby, remove it from being "dodged" """
         if projectile in self.projectiles_in_range:
             self.projectiles_in_range.remove(projectile)
             stat_tracker.player__dodges -= 1
 
     def add_notes_in_range(self, notes: List) -> None:
+        """Keep track of notes that the Player is close to in order to track missed notes"""
         for note in notes:
             if note not in self.nearby_notes:
                 self.nearby_notes.add(note)
                 stat_tracker.player__missed_nearby_notes += 1
 
     def update_missed_notes(self, note) -> None:
+        """If the Player hits one of the notes that is nearby, remove it from being "missed" """
         if note in self.nearby_notes:
             self.nearby_notes.remove(note)
             stat_tracker.player__missed_nearby_notes -= 1
 
     def update_enemies_collided(self, enemy: CharacterSprite) -> None:
+        """Keep track of enemies the player is colliding with to not re-trigger the colliding logic"""
         if enemy not in self.overlapping_enemies:
             self.overlapping_enemies.add(enemy)
             stat_tracker.player__enemies_collided += 1
 
     def on_death(self):
+        """Check to see if the Player should die or not, based on the settings"""
         if settings_manager.player_invincible:
             self.health = 1
             return

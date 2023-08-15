@@ -1,3 +1,11 @@
+"""
+This module defines visual warning indicators, which includes the sides of each screen flashing red.
+This is used in the LetterField SpecialEvent to warn the user that danger is going to come from all
+sides of the screen.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Any, Optional, List
 
@@ -34,9 +42,11 @@ class Indicator(pg.sprite.Sprite):
         self.on_death_callbacks = on_death_callbacks if on_death_callbacks is not None else []
 
     def update(self, *args: Any, **kwargs: Any) -> None:
+        """Called every function to show the warning flash"""
         self.show_animation()
 
     def rotate(self, rotation_angle: int):
+        """Basic rotation function to rotate a Sprite, but keep the rect and alpha the same"""
         curr_alpha = self.surf.get_alpha()
         self.current_rotation = rotation_angle % 360
 
@@ -52,6 +62,10 @@ class Indicator(pg.sprite.Sprite):
         self.rect.center = current_image_center
 
     def show_animation(self):
+        """
+        Show the flashing animation, which just sets different alpha values to make it look like
+        the image is fading in and out.
+        """
         self.curr_alpha_id = (self.curr_alpha_id + self.ALPHA_INCREMENT) % self.num_alpha_values
 
         if self.curr_alpha_id == 0:
@@ -66,6 +80,7 @@ class Indicator(pg.sprite.Sprite):
         self.surf.set_alpha(alpha_value)
 
     def on_death(self):
+        """Call any functions when the sprite is set to be killed"""
         for callback in self.on_death_callbacks:
             callback()
         self.kill()
