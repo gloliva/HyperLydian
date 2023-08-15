@@ -1,4 +1,7 @@
 class SettingsManager:
+    """
+    Manages game settings which are set via the SETTINGS menu.
+    """
     def __init__(
         self,
         easy_mode: bool = False,

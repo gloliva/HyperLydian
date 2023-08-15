@@ -13,6 +13,11 @@ pg.font.init()
 
 
 class Text:
+    """
+    Base Text object that can be added to a Menu object.
+
+    Handles font rendering, text location, and text outline.
+    """
     def __init__(self,
                  text: str,
                  font_name: str,
@@ -81,6 +86,7 @@ class SelectableText(Text):
 
 
 class TransitionText(SelectableText):
+    """Selectable Text that supports returning a transition state when selected"""
     def __init__(self,
                  text: str,
                  font_name: str,
@@ -120,6 +126,8 @@ class TransitionText(SelectableText):
 
 
 class OptionText(SelectableText):
+    """Selectable Text that supports swapping through options when selected."""
+
     BOOLEAN_SETTINGS = {
         'OFF': False,
         'ON': True,

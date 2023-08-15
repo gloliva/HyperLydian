@@ -205,6 +205,9 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
         await asyncio.sleep(1)
 
     LOADING_MENU.update_text(MAX_LOAD_STR, REASON_TEXT)
+    REASON_TEXT.update_position(
+        {'bottomleft': (50, text_height_position - REASON_TEXT.rect.height)}
+    )
     LOADING_MENU.update_text(PERCENT_LOADED_STR.format(99), PERCENT_TEXT)
 
     # Wait for Max to loadbang everything

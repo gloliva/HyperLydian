@@ -41,7 +41,11 @@ CLOCK = pg.time.Clock()
 
 
 def main():
-    """Main Program Loop"""
+    """
+    Main Program Loop
+
+    Handles transitioning between different states.
+    """
     main_loop = True
     next_state = GameState.LOADING_SCREEN
 
@@ -73,6 +77,7 @@ def main():
 
 
 def get_default_audio_output_device():
+    """Get the default audio output device selected by the OS"""
     default_device_num = sd.default.device[1]
     devices = sd.query_devices()
     output_device_name = devices[default_device_num]['name']
@@ -80,6 +85,7 @@ def get_default_audio_output_device():
 
 
 def close_max_application():
+    """Send Max a signal to close the application"""
     if not DISABLE_OPENING_MAX_APPLICATION:
         stat_tracker.control__max_quit.update(1)
 
@@ -95,7 +101,6 @@ def quit_game(game_clock: pg.time.Clock, main_screen: pg.Surface):
     close_max_application()
     # send closing stats to Max
     stat_tracker.send_stats()
-    print('Quitting the game')
 
 
 # Game State transitions
@@ -112,6 +117,7 @@ GAME_STATE_TO_LOOP_MAP = {
 
 
 def transition_state(next_state: GameState, game_clock: pg.time.Clock, main_screen: pg.Surface):
+    """Get a loop function from a GameState"""
     state_loop = GAME_STATE_TO_LOOP_MAP[next_state]
     return state_loop(game_clock, main_screen)
 

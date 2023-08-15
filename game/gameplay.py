@@ -38,6 +38,19 @@ from stats import stat_tracker
 
 
 def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
+    """
+    Main gameplay loop. This is where everything important happens.
+
+    Summary of events that occur every loop:
+        1) Event queue is checked to determine if Player has pressed any buttons,
+           if any enemies should be added, if an event should start, etc.
+        2) All sprite groups are updated based on their "update" function
+        3) Collisions are checked, and sprites are updated accordingly
+        4) Difficulty manager checks to see if difficulty should increase/decrease
+        5) Special Event manager checks to see if a Special Event should be queued, started, or stopped
+        6) All sprites are (re)drawn to the screen
+        7) Stats are updated
+    """
     # create game screen
     game_screen = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
     screen_rect = game_screen.get_rect()
@@ -231,6 +244,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
 
 def handle_collisions(player: Player):
+    """
+    Handles collisions between different types of sprite groups.
+    All collisions are labeled as to which sprites are involved.
+    """
     # grunt + enemies collison
     # change Grunt strafe direction
     handled_enemies = set()
@@ -426,6 +443,12 @@ def end_game():
 
 
 class DifficultyManager:
+    """
+    Increases / Decreases difficulty as the game progresses, based on the player's performance.
+
+    The difficulty manager keeps track of groups of functions that can change parameters about various
+    sprite groups in the game, such as adjusting enemy health, spawn frequency, and max amount on screen.
+    """
     # Change difficulty thresholds
     KILL_THRESHOLD = 20
     EVENT_THRESHOLD = 2
@@ -450,6 +473,7 @@ class DifficultyManager:
     ]
 
     def roll_probability(self) -> int:
+        """Calculate a random int that's based on the player's max health"""
         player_max_health = stat_tracker.player__max_health.value
         return randint(0, player_max_health - 1)
 
@@ -459,14 +483,19 @@ class DifficultyManager:
         self.reset_difficulty()
 
     def reset_difficulty(self):
+        """Resets all difficulty back to the standard"""
         for reset_func in self.RESET_FUNCTIONS:
             reset_func()
 
     def update_difficulty(self, event_manager: SpecialEventManager) -> None:
+        """Updates both standard and special event difficulty"""
         self.update_standard_difficulty()
         self.update_special_event_difficulty(event_manager)
 
     def update_standard_difficulty(self) -> None:
+        """
+        If threshold has passed, randomly select a standard difficulty function to change
+        """
         num_enemies_killed = stat_tracker.enemies__killed.value
 
         if num_enemies_killed >= (self.standard_change_count + 1) * self.KILL_THRESHOLD:
@@ -482,6 +511,9 @@ class DifficultyManager:
             self.standard_change_count += 1
 
     def update_special_event_difficulty(self, event_manager: SpecialEventManager) -> None:
+        """
+        If threshold has passed, randomly select a special event difficulty function to change
+        """
         if event_manager.event_count >= (self.special_change_count + 1) * self.EVENT_THRESHOLD:
             player_curr_health = stat_tracker.player__curr_health.value
             change_difficulty_function = randelem(self.SPECIAL_FUNCTIONS)

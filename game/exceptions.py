@@ -1,3 +1,7 @@
+"""
+Custom exceptions
+"""
+
 class AssetLoadError(Exception):
     pass
 

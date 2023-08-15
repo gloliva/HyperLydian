@@ -12,7 +12,11 @@ from stats import stat_tracker
 
 
 class Weapon:
-    """Weapon contains projectile type, ammo amount, and rate of fire"""
+    """
+    CharacterSprite Weapon class, which handles player and enemy attacks.
+
+    Weapons contain projectile type, ammo amount, and rate of fire
+    """
     INFINITE_AMMO = float('inf')
     DEFAULT_RATE_OF_FIRE = 200
 
