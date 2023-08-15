@@ -334,7 +334,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-65",
@@ -10940,13 +10939,13 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-6",
-									"linecount" : 6,
+									"linecount" : 5,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 97.0 ],
-									"text" : "/melody/idx : 2,\n/melody/pattern : [15, 15, 16, 16, 17, 17, 18, 18, 17, 17, 16, 16, 17, 17, 18, 15],\n/melody/beat_len : 16,\n/melody/pattern_len : 16"
+									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
+									"text" : "/melody/idx : 4,\n/melody/pattern : [8, 8, 9, 9, 9, 8, 8, 10, 10, 10, 10, 9, 9],\n/melody/beat_len : 12,\n/melody/pattern_len : 13"
 								}
 
 							}
@@ -14248,7 +14247,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 8,\n/total : 206,\n/score : 70,\n/time/between_collecting : [416, 1441.88, 1223, 3098, 8],\n/time/lifespan : [416, 3624.83, 3439, 5714, 304],\n/percent/collected : 3.8835",
+					"text" : "/collected : 34,\n/total : 754,\n/score : 313,\n/time/between_collecting : [231, 1950.74, 2145, 4160, 34],\n/time/lifespan : [231, 3768.02, 3990, 5805, 1131],\n/percent/collected : 4.50928",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18157,7 +18156,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [838, 2471., 838, 4104, 2],\n/time/lifespan : [838, 2471., 838, 4104, 2],\n/percent/collected : 100.",
+					"text" : "/total_dropped : 9,\n/picked_up : 9,\n/missed : 0,\n/time/between_collecting : [434, 1790., 1031, 6040, 9],\n/time/lifespan : [434, 1790., 1031, 6040, 9],\n/percent/collected : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18761,7 +18760,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 1088,\n/still : 982,\n/fps : 60,\n/bpm : 122.92,\n/prev/moving : 1022,\n/prev/still : 754,\n/prev/min : 120,\n/prev/max : 180,\n/range : [100, 160],\n/min : 100,\n/max : 160,\n/selected : 1,\n/prev/selected : 1,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 66,\n/still_delta : 228,\n/selected_delta : 0,\n/mode : 1"
+									"text" : "/moving : 4237,\n/still : 3536,\n/fps : 60,\n/bpm : 131.591,\n/prev/moving : 4096,\n/prev/still : 3525,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 141,\n/still_delta : 11,\n/selected_delta : 0,\n/mode : 0"
 								}
 
 							}
@@ -22114,7 +22113,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 10,\n/melody/prev : 8,\n/melody/idx_delta : 0"
+									"text" : "/melody/curr : 19,\n/melody/prev : 19,\n/melody/idx_delta : 0"
 								}
 
 							}
@@ -22956,7 +22955,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 4"
+									"text" : "/melody/curr : 3"
 								}
 
 							}
@@ -25546,7 +25545,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 1,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
+									"text" : "/rest/count : 7,\n/sharp/count : 0,\n/flat/count : 3,\n/natural/count : 2"
 								}
 
 							}
@@ -26704,7 +26703,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
-									"text" : "/filter/cutoff : 0.477778,\n/filter/gain : 1.24889,\n/filter/resonance : 1.61333"
+									"text" : "/filter/cutoff : 0.576496,\n/filter/gain : 1.30111,\n/filter/resonance : 1.61333"
 								}
 
 							}
@@ -27586,7 +27585,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 5,
 					"presentation_rect" : [ 257.999999999999318, 2125.702894151210785, 405.000000000000227, 85.0 ],
-					"text" : "/selected : 1,\n/total_shots_fired : 345,\n/shots_per_weapon : [264, 81],\n/hits_per_weapon : [129, 45],\n/percent/one_over_two : 76.5217",
+					"text" : "/selected : 0,\n/total_shots_fired : 2287,\n/shots_per_weapon : [2198, 89],\n/hits_per_weapon : [1126, 79],\n/percent/one_over_two : 96.1084",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27778,7 +27777,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 1569.500000000010004, 1828.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 37,\n/beats : 4,\n/units : 53.7348,\n/ppq : 480.,\n/tempo/bpm : 122.92,\n/time_sig : [4, 4],\n/total_beats : 148"
+					"text" : "/bars : 101,\n/beats : 3,\n/units : 35.3733,\n/ppq : 480.,\n/tempo/bpm : 132.591,\n/time_sig : [4, 4],\n/total_beats : 403"
 				}
 
 			}
@@ -28184,7 +28183,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 10,
 					"presentation_rect" : [ 1128.999999999999545, 1828.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 3.06116, 0, 7, 2714],\n/hit : 174,\n/killed : 16,\n/hit_distance : [53.6656, 406.624, 142.302, 894.296, 174],\n/alive_projectiles : 0,\n/score : 190,\n/time/lifespan : [2902, 8569.56, 13657, 14186, 16]",
+					"text" : "/total : 53,\n/standard_count : 50,\n/special_count : 3,\n/num_on_screen : [0, 4.06839, 0, 10, 10396],\n/hit : 1205,\n/killed : 58,\n/hit_distance : [11., 337.551, 330., 1162.98, 1205],\n/alive_projectiles : 1,\n/score : 760,\n/time/lifespan : [2497, 13228.1, 37915, 37915, 58]",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28265,7 +28264,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 2,\n/time/total_played : [0, 1, 8, 929],\n/score : 260,\n/total_frames : 2714,\n/time/current_playthrough : [0, 0, 44, 999],\n/num_events : 1,\n/percent/note_over_enemy_score : 26.9231",
+					"text" : "/play_count : 1,\n/time/total_played : [0, 3, 3, 191],\n/score : 1073,\n/total_frames : 10396,\n/time/current_playthrough : [0, 2, 51, 323],\n/num_events : 3,\n/percent/note_over_enemy_score : 29.1705",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28283,9 +28282,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 494.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 38,
-					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 507.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [670, 448],\n/vertical_half : \"top\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 476,\n/frames/moving : 1088,\n/frames/still : 983,\n/frames/rotating : 167,\n/frames/firing : 2391,\n/frames/per_screen_quadrant : [741, 519, 1045, 409],\n/frames/per_angle_quadrant : [1156, 572, 563, 423],\n/percent/firing_weapon : 88.0987,\n/percent/moving_over_rotating : 86.6932,\n/percent/moving_and_rotating : 27.4986,\n/percent/health_lost_over_gained : 33.3333,\n/percent/dodges_over_enemy_collision : 100.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 40.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 120,\n/last_rotation_direction : 2,\n/percent/accuracy : 50.4348,\n/time/between_kills : [245, 2607.06, 3494, 7244, 16],\n/time/between_getting_hit : [24767, 24767., 24767, 24767, 1],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 1,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 1, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [518., 518., 518., 518., 1],\n/enemies_collided : 0,\n/dodges : 6,\n/missed_nearby_notes : 4,\n/alive_projectiles : 0",
+					"presentation_linecount" : 37,
+					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [807, 542],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 1987,\n/frames/moving : 4245,\n/frames/still : 3536,\n/frames/rotating : 628,\n/frames/firing : 8969,\n/frames/per_screen_quadrant : [2174, 2310, 2400, 3512],\n/frames/per_angle_quadrant : [2414, 4955, 1490, 1537],\n/percent/firing_weapon : 86.2736,\n/percent/moving_over_rotating : 87.1127,\n/percent/moving_and_rotating : 28.965,\n/percent/health_lost_over_gained : 43.75,\n/percent/dodges_over_enemy_collision : 50.7692,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 38.8889,\n/curr_velocity : [5, 0],\n/curr_speed : 5.,\n/angle : 92,\n/last_rotation_direction : 2,\n/percent/accuracy : 52.6891,\n/time/between_kills : [0, 2895.78, 1325, 21040, 58],\n/time/between_getting_hit : [32, 12227.2, 130, 68360, 14],\n/max_health : 10,\n/curr_health : 0,\n/health_lost : 14,\n/health_gained : 18,\n/projectile_hit_count : [\"rest\", 7, \"sharp\", 0, \"flat\", 3, \"natural\", 2],\n/hit_distance : [172., 484.542, 188., 804., 12],\n/enemies_collided : 32,\n/dodges : 33,\n/missed_nearby_notes : 21,\n/alive_projectiles : 0",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
