@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 4034.0, -11.0, 1852.0, 959.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -47,7 +47,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 142.0, 1278.0, 266.0, 42.0 ],
-					"presentation_linecount" : 9,
 					"text" : "Drum machine filters white/pink noise to create percussive sounds"
 				}
 
@@ -60,7 +59,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 422.25, 1595.0, 73.0, 42.0 ],
+					"patching_rect" : [ 422.25, 1595.0, 75.0, 42.0 ],
 					"text" : "Filter the signal"
 				}
 
@@ -74,7 +73,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 857.25, 1412.5, 118.0, 60.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Amplitude Envelope for this Voice"
 				}
 
@@ -88,7 +86,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1030.5, 323.5, 204.0, 60.0 ],
-					"presentation_linecount" : 6,
 					"text" : "Pattern abstraction for the Drum machine sets the cutoff frequency of the filter"
 				}
 
@@ -102,7 +99,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 43.5, 762.0, 142.0, 78.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Counter object is used to move through each note in the pattern"
 				}
 
@@ -128,7 +124,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1555.5, 64.0, 393.0, 149.0 ],
-					"presentation_linecount" : 8,
 					"text" : "Hard / Soft reset the Voice.\n\nSoft Reset: set the internal counter to 0 on the next output.\n\nHard Reset: trigger a soft reset and then send a bang to the internal metro object, which immediately resets them."
 				}
 
@@ -240,7 +235,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2489.0, -75.0, 1128.0, 928.0 ],
+						"rect" : [ 4034.0, -11.0, 1852.0, 959.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,

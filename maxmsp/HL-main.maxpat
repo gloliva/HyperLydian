@@ -10607,7 +10607,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 105.0, 1125.5, 224.0, 42.0 ],
+									"patching_rect" : [ 105.0, 1129.5, 224.0, 42.0 ],
 									"presentation_linecount" : 4,
 									"text" : "Send new Melody group to the Game Melody manager"
 								}
@@ -10634,7 +10634,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 455.0, 53.117596745491028, 290.0, 47.0 ],
+									"patching_rect" : [ 370.0, 40.617596745491028, 290.0, 47.0 ],
 									"text" : "Update the Melody group and Key after 2 in-game Special Events"
 								}
 
@@ -10960,7 +10960,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 3,\n/melody/pattern : [19, 19, 20, 20, 21, 20, 21, 19, 20],\n/melody/beat_len : 14,\n/melody/pattern_len : 9"
+									"text" : "/melody/idx : 5,\n/melody/pattern : [22, 22, 23, 23, 24, 24, 23, 23, 24, 24, 22, 22, 23, 23],\n/melody/beat_len : 16,\n/melody/pattern_len : 14"
 								}
 
 							}
@@ -14262,7 +14262,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 16,\n/total : 332,\n/score : 158,\n/time/between_collecting : [283, 1327.38, 962, 2328, 16],\n/time/lifespan : [283, 3076.35, 941, 5749, 437],\n/percent/collected : 4.81928",
+					"text" : "/collected : 4,\n/total : 116,\n/score : 36,\n/time/between_collecting : [282, 1745.75, 1154, 5098, 4],\n/time/lifespan : [282, 3564.33, 480, 5716, 166],\n/percent/collected : 3.44828",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18162,16 +18162,16 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-140",
-					"linecount" : 7,
+					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 320.357142857142662, 110.0 ],
+					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 320.357142857142662, 97.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [65, 479., 893, 893, 2],\n/time/lifespan : [65, 479., 893, 893, 2],\n/percent/collected : 100.",
+					"text" : "/total_dropped : 1,\n/picked_up : 1,\n/missed : 0,\n/time/between_collecting : [0, 0., 0, 0, 1],\n/time/lifespan : [0, 0., 0, 0, 1],\n/percent/collected : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18775,7 +18775,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 1009,\n/still : 884,\n/fps : 60,\n/bpm : 140.06,\n/prev/moving : 983,\n/prev/still : 718,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 26,\n/still_delta : 166,\n/selected_delta : 0,\n/mode : 1"
+									"text" : "/moving : 414,\n/still : 554,\n/fps : 60,\n/bpm : 141.04,\n/prev/moving : 377,\n/prev/still : 487,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 37,\n/still_delta : 67,\n/selected_delta : 0,\n/mode : 1"
 								}
 
 							}
@@ -19582,7 +19582,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2081.0, 70.0, 1091.0, 480.0 ],
+						"rect" : [ 1734.0, 100.0, 1091.0, 643.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -19610,7 +19610,80 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-37",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 606.0, 234.13239324092865, 158.0, 22.0 ],
+									"text" : "gate"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-36",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 606.0, 200.0, 126.0, 22.0 ],
+									"text" : "if $i1 > 0 then 1 else 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-35",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "FullPacket" ],
+									"patching_rect" : [ 606.0, 166.13239324092865, 113.0, 22.0 ],
+									"text" : "o.route /curr_health"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-34",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 606.0, 127.5147864818573, 78.0, 22.0 ],
+									"text" : "r player-stats"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-32",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 606.0, 264.0, 45.0, 22.0 ],
+									"text" : "0 1000"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-68",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 745.0, 127.5147864818573, 115.0, 22.0 ],
+									"text" : "r on-melody-change"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontsize" : 16.0,
 									"id" : "obj-83",
@@ -19618,7 +19691,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 420.25, 205.75, 201.0, 60.0 ],
+									"patching_rect" : [ 404.25, 362.75, 201.0, 60.0 ],
 									"presentation_linecount" : 2,
 									"text" : "Handle volume control on application start, stop, and when melodies change."
 								}
@@ -19631,9 +19704,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 506.0, 111.0, 105.0, 22.0 ],
-									"presentation_linecount" : 2,
-									"text" : "0.1, 0 10 0.1 1500"
+									"patching_rect" : [ 484.0, 264.0, 55.0, 22.0 ],
+									"text" : "0.1 1500"
 								}
 
 							}
@@ -19644,7 +19716,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 506.0, 81.13239324092865, 109.0, 22.0 ],
+									"patching_rect" : [ 484.0, 234.13239324092865, 109.0, 22.0 ],
 									"text" : "r volume-long-fade"
 								}
 
@@ -19656,7 +19728,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 334.0, 110.75, 32.0, 22.0 ],
+									"patching_rect" : [ 322.0, 267.75, 32.0, 22.0 ],
 									"text" : "0 $1"
 								}
 
@@ -19668,7 +19740,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 334.0, 77.13239324092865, 147.0, 22.0 ],
+									"patching_rect" : [ 322.0, 234.13239324092865, 147.0, 22.0 ],
 									"text" : "if $i1 == 1 then 0 else 500"
 								}
 
@@ -19680,7 +19752,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 334.0, 43.0, 72.0, 22.0 ],
+									"patching_rect" : [ 322.0, 200.0, 72.0, 22.0 ],
 									"text" : "r volume-off"
 								}
 
@@ -19692,7 +19764,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "float" ],
-									"patching_rect" : [ 239.0, 175.0, 57.0, 22.0 ],
+									"patching_rect" : [ 227.0, 332.0, 57.0, 22.0 ],
 									"text" : "t f f"
 								}
 
@@ -19707,7 +19779,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 319.0, 266.0, 30.0, 30.0 ]
+									"patching_rect" : [ 307.0, 423.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -19721,7 +19793,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 177.0, 266.0, 30.0, 30.0 ]
+									"patching_rect" : [ 165.0, 423.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -19736,7 +19808,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 319.0, 167.0, 30.0, 30.0 ]
+									"patching_rect" : [ 307.0, 324.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -19751,7 +19823,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 177.0, 167.0, 30.0, 30.0 ]
+									"patching_rect" : [ 165.0, 324.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -19762,7 +19834,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 177.0, 224.75, 81.0, 22.0 ],
+									"patching_rect" : [ 165.0, 381.75, 81.0, 22.0 ],
 									"text" : "*~ 0."
 								}
 
@@ -19774,7 +19846,7 @@
 									"numinlets" : 3,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
-									"patching_rect" : [ 239.0, 143.75, 57.0, 22.0 ],
+									"patching_rect" : [ 227.0, 300.75, 57.0, 22.0 ],
 									"text" : "line 0. 10"
 								}
 
@@ -19786,7 +19858,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 239.0, 110.75, 49.0, 22.0 ],
+									"patching_rect" : [ 227.0, 267.75, 49.0, 22.0 ],
 									"text" : "0.1 500"
 								}
 
@@ -19798,7 +19870,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 239.0, 77.13239324092865, 72.0, 22.0 ],
+									"patching_rect" : [ 227.0, 234.13239324092865, 72.0, 22.0 ],
 									"text" : "r volume-on"
 								}
 
@@ -19810,7 +19882,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 319.0, 224.75, 81.0, 22.0 ],
+									"patching_rect" : [ 307.0, 381.75, 81.0, 22.0 ],
 									"text" : "*~ 0."
 								}
 
@@ -19847,7 +19919,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-373", 0 ],
-									"midpoints" : [ 343.5, 137.75, 248.5, 137.75 ],
+									"midpoints" : [ 331.5, 294.75, 236.5, 294.75 ],
 									"source" : [ "obj-22", 0 ]
 								}
 
@@ -19869,8 +19941,44 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-373", 0 ],
-									"midpoints" : [ 515.5, 137.875, 248.5, 137.875 ],
+									"midpoints" : [ 493.5, 294.875, 236.5, 294.875 ],
 									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-373", 0 ],
+									"midpoints" : [ 615.5, 294.875, 236.5, 294.875 ],
+									"source" : [ "obj-32", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-35", 0 ],
+									"source" : [ "obj-34", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-36", 0 ],
+									"source" : [ "obj-35", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-37", 0 ],
+									"source" : [ "obj-36", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-32", 0 ],
+									"source" : [ "obj-37", 0 ]
 								}
 
 							}
@@ -19904,6 +20012,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-37", 1 ],
+									"source" : [ "obj-68", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-1", 1 ],
 									"source" : [ "obj-7", 0 ]
 								}
@@ -19912,7 +20027,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-376", 1 ],
-									"midpoints" : [ 286.5, 208.375, 390.5, 208.375 ],
+									"midpoints" : [ 274.5, 365.375, 378.5, 365.375 ],
 									"source" : [ "obj-7", 1 ]
 								}
 
@@ -22014,7 +22129,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 10,\n/melody/prev : 10,\n/melody/idx_delta : 0"
+									"text" : "/melody/curr : 6,\n/melody/prev : 6,\n/melody/idx_delta : 0"
 								}
 
 							}
@@ -22856,7 +22971,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 4"
+									"text" : "/melody/curr : 1"
 								}
 
 							}
@@ -25446,7 +25561,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 2,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
+									"text" : "/rest/count : 1,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
 								}
 
 							}
@@ -26603,7 +26718,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 110.0, 849.75, 275.0, 33.0 ],
-									"text" : "/filter/resonance : 1.36"
+									"text" : "/filter/resonance : 1.41333"
 								}
 
 							}
@@ -27485,7 +27600,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 5,
 					"presentation_rect" : [ 257.999999999999318, 2125.702894151210785, 405.000000000000227, 85.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 752,\n/shots_per_weapon : [752, 0],\n/hits_per_weapon : [341, 0],\n/percent/one_over_two : 100.",
+					"text" : "/selected : 0,\n/total_shots_fired : 380,\n/shots_per_weapon : [380, 0],\n/hits_per_weapon : [175, 0],\n/percent/one_over_two : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27677,7 +27792,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 1569.500000000010004, 1828.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 28,\n/beats : 3,\n/units : 94.9171,\n/ppq : 480.,\n/tempo/bpm : 139.86,\n/time_sig : [4, 4],\n/total_beats : 111"
+					"text" : "/bars : 152,\n/beats : 3,\n/units : 138.777,\n/ppq : 480.,\n/tempo/bpm : 141.04,\n/time_sig : [4, 4],\n/total_beats : 607"
 				}
 
 			}
@@ -28083,7 +28198,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 10,
 					"presentation_rect" : [ 1128.999999999999545, 1828.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 2.96233, 0, 6, 2708],\n/hit : 341,\n/killed : 17,\n/hit_distance : [66., 341.821, 245.967, 862.981, 341],\n/alive_projectiles : 0,\n/score : 200,\n/time/lifespan : [1828, 7873.53, 17862, 19566, 17]",
+					"text" : "/total : 13,\n/standard_count : 13,\n/special_count : 0,\n/num_on_screen : [0, 3.16794, 5, 6, 1435],\n/hit : 175,\n/killed : 9,\n/hit_distance : [22.0907, 310.525, 693.181, 760.805, 175],\n/alive_projectiles : 14,\n/score : 105,\n/time/lifespan : [3107, 6202.33, 12069, 12829, 9]",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28164,7 +28279,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 49, 363],\n/score : 358,\n/total_frames : 2708,\n/time/current_playthrough : [0, 0, 44, 897],\n/num_events : 1,\n/percent/note_over_enemy_score : 44.1341",
+					"text" : "/play_count : 2,\n/time/total_played : [0, 4, 37, 411],\n/score : 141,\n/total_frames : 1435,\n/time/current_playthrough : [0, 0, 23, 890],\n/num_events : 0,\n/percent/note_over_enemy_score : 25.5319",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28182,9 +28297,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 494.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 37,
-					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [825, 294],\n/vertical_half : \"top\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 708,\n/frames/moving : 1009,\n/frames/still : 885,\n/frames/rotating : 106,\n/frames/firing : 2510,\n/frames/per_screen_quadrant : [638, 762, 570, 738],\n/frames/per_angle_quadrant : [1216, 951, 298, 243],\n/percent/firing_weapon : 92.6883,\n/percent/moving_over_rotating : 90.4933,\n/percent/moving_and_rotating : 38.8371,\n/percent/health_lost_over_gained : 50.,\n/percent/dodges_over_enemy_collision : 100.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 63.1579,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 90,\n/last_rotation_direction : 2,\n/percent/accuracy : 45.3457,\n/time/between_kills : [1, 2465.06, 2301, 4874, 17],\n/time/between_getting_hit : [447, 4603.5, 447, 8760, 2],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 2,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 2, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [105., 125., 105., 145., 2],\n/enemies_collided : 0,\n/dodges : 7,\n/missed_nearby_notes : 12,\n/alive_projectiles : 0",
+					"presentation_linecount" : 38,
+					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 507.0 ],
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [385, 167],\n/vertical_half : \"top\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 333,\n/frames/moving : 414,\n/frames/still : 563,\n/frames/rotating : 125,\n/frames/firing : 1250,\n/frames/per_screen_quadrant : [248, 425, 11, 751],\n/frames/per_angle_quadrant : [563, 531, 198, 143],\n/percent/firing_weapon : 87.108,\n/percent/moving_over_rotating : 76.8089,\n/percent/moving_and_rotating : 38.1881,\n/percent/health_lost_over_gained : 50.,\n/percent/dodges_over_enemy_collision : 50.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 75.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 266,\n/last_rotation_direction : 2,\n/percent/accuracy : 46.0526,\n/time/between_kills : [0, 2453.33, 1234, 5651, 9],\n/time/between_getting_hit : [11525, 11525., 11525, 11525, 1],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 1,\n/health_gained : 1,\n/projectile_hit_count : [\"rest\", 1, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [624., 624., 624., 624., 1],\n/enemies_collided : 1,\n/dodges : 1,\n/missed_nearby_notes : 3,\n/alive_projectiles : 0",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 

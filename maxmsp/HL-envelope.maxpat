@@ -40,6 +40,47 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-7",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 405.0, 195.0, 282.0, 78.0 ],
+					"presentation_linecount" : 4,
+					"text" : "0 : full trigger\n1 : trigger attack\n2 : no trigger, i.e. sustain\n3: trigger release"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-6",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 405.0, 115.0, 282.0, 78.0 ],
+					"presentation_linecount" : 2,
+					"text" : "Handle the sustain type; i.e. whether the envelope should move trigger in full, trigger the first half, trigger the second half, or not trigger at all."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-16",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 60.833333333333371, 22.0, 559.0, 60.0 ],
+					"text" : "An abstraction for shaping and triggering an envelope to control a Voice's amplitude. Takes in tempo variables in order to shape determine how long the envelope should last based on its shape."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-1",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -47,18 +88,6 @@
 					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 379.0, 277.970562219619751, 334.0, 22.0 ],
 					"text" : "o.union"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 0,
-					"id" : "obj-6",
-					"maxclass" : "o.display",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 778.833333333333599, 229.529437780380249, 150.0, 33.0 ]
 				}
 
 			}
@@ -847,15 +876,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-103", 0 ],
 					"midpoints" : [ 749.5, 791.5, 395.333333333333371, 791.5 ],
-					"order" : 1,
-					"source" : [ "obj-8", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-6", 0 ],
-					"order" : 0,
 					"source" : [ "obj-8", 2 ]
 				}
 
@@ -878,7 +898,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-73", 0 ],
-					"midpoints" : [ 348.333333333333371, 942.0, 95.0, 942.0, 95.0, 172.0, 143.0, 172.0 ],
+					"midpoints" : [ 348.333333333333371, 942.0, 122.0, 942.0, 122.0, 172.0, 143.0, 172.0 ],
 					"source" : [ "obj-97", 0 ]
 				}
 

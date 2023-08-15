@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontsize" : 16.0,
+					"id" : "obj-5",
+					"linecount" : 5,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 348.0, 282.0, 393.0, 96.0 ],
+					"text" : "An abstraction for selecting classic \"Analog\" sounds. Each subpatch implements a different sound that is comprised of standard oscillators: sine, sawtooth, square, and triangle waves, each with different amplitudes."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
