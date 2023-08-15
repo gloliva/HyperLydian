@@ -334,29 +334,8 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
-								"box" : 								{
-									"id" : "obj-70",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 30.0, 30.0, 100.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-69",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 30.0, 30.0, 100.0, 22.0 ]
-								}
-
-							}
-, 							{
 								"box" : 								{
 									"id" : "obj-65",
 									"maxclass" : "message",
@@ -523,6 +502,13 @@
 								"patchline" : 								{
 									"destination" : [ "obj-38", 0 ],
 									"source" : [ "obj-37", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-41", 0 ],
+									"source" : [ "obj-38", 1 ]
 								}
 
 							}
@@ -10954,13 +10940,13 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-6",
-									"linecount" : 5,
+									"linecount" : 6,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 5,\n/melody/pattern : [22, 22, 23, 23, 24, 24, 23, 23, 24, 24, 22, 22, 23, 23],\n/melody/beat_len : 16,\n/melody/pattern_len : 14"
+									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 97.0 ],
+									"text" : "/melody/idx : 2,\n/melody/pattern : [15, 15, 16, 16, 17, 17, 18, 18, 17, 17, 16, 16, 17, 17, 18, 15],\n/melody/beat_len : 16,\n/melody/pattern_len : 16"
 								}
 
 							}
@@ -14262,7 +14248,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 4,\n/total : 116,\n/score : 36,\n/time/between_collecting : [282, 1745.75, 1154, 5098, 4],\n/time/lifespan : [282, 3564.33, 480, 5716, 166],\n/percent/collected : 3.44828",
+					"text" : "/collected : 8,\n/total : 206,\n/score : 70,\n/time/between_collecting : [416, 1441.88, 1223, 3098, 8],\n/time/lifespan : [416, 3624.83, 3439, 5714, 304],\n/percent/collected : 3.8835",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18162,16 +18148,16 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-140",
-					"linecount" : 6,
+					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 320.357142857142662, 97.0 ],
+					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 320.357142857142662, 110.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 1,\n/picked_up : 1,\n/missed : 0,\n/time/between_collecting : [0, 0., 0, 0, 1],\n/time/lifespan : [0, 0., 0, 0, 1],\n/percent/collected : 100.",
+					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [838, 2471., 838, 4104, 2],\n/time/lifespan : [838, 2471., 838, 4104, 2],\n/percent/collected : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18775,7 +18761,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 414,\n/still : 554,\n/fps : 60,\n/bpm : 141.04,\n/prev/moving : 377,\n/prev/still : 487,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 37,\n/still_delta : 67,\n/selected_delta : 0,\n/mode : 1"
+									"text" : "/moving : 1088,\n/still : 982,\n/fps : 60,\n/bpm : 122.92,\n/prev/moving : 1022,\n/prev/still : 754,\n/prev/min : 120,\n/prev/max : 180,\n/range : [100, 160],\n/min : 100,\n/max : 160,\n/selected : 1,\n/prev/selected : 1,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 66,\n/still_delta : 228,\n/selected_delta : 0,\n/mode : 1"
 								}
 
 							}
@@ -19610,7 +19596,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-37",
@@ -22129,7 +22114,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 6,\n/melody/prev : 6,\n/melody/idx_delta : 0"
+									"text" : "/melody/curr : 10,\n/melody/prev : 8,\n/melody/idx_delta : 0"
 								}
 
 							}
@@ -22971,7 +22956,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 1"
+									"text" : "/melody/curr : 4"
 								}
 
 							}
@@ -26713,12 +26698,13 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-409",
+									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 849.75, 275.0, 33.0 ],
-									"text" : "/filter/resonance : 1.41333"
+									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
+									"text" : "/filter/cutoff : 0.477778,\n/filter/gain : 1.24889,\n/filter/resonance : 1.61333"
 								}
 
 							}
@@ -27600,7 +27586,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 5,
 					"presentation_rect" : [ 257.999999999999318, 2125.702894151210785, 405.000000000000227, 85.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 380,\n/shots_per_weapon : [380, 0],\n/hits_per_weapon : [175, 0],\n/percent/one_over_two : 100.",
+					"text" : "/selected : 1,\n/total_shots_fired : 345,\n/shots_per_weapon : [264, 81],\n/hits_per_weapon : [129, 45],\n/percent/one_over_two : 76.5217",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27792,7 +27778,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 1569.500000000010004, 1828.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 152,\n/beats : 3,\n/units : 138.777,\n/ppq : 480.,\n/tempo/bpm : 141.04,\n/time_sig : [4, 4],\n/total_beats : 607"
+					"text" : "/bars : 37,\n/beats : 4,\n/units : 53.7348,\n/ppq : 480.,\n/tempo/bpm : 122.92,\n/time_sig : [4, 4],\n/total_beats : 148"
 				}
 
 			}
@@ -28198,7 +28184,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 10,
 					"presentation_rect" : [ 1128.999999999999545, 1828.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 13,\n/standard_count : 13,\n/special_count : 0,\n/num_on_screen : [0, 3.16794, 5, 6, 1435],\n/hit : 175,\n/killed : 9,\n/hit_distance : [22.0907, 310.525, 693.181, 760.805, 175],\n/alive_projectiles : 14,\n/score : 105,\n/time/lifespan : [3107, 6202.33, 12069, 12829, 9]",
+					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 3.06116, 0, 7, 2714],\n/hit : 174,\n/killed : 16,\n/hit_distance : [53.6656, 406.624, 142.302, 894.296, 174],\n/alive_projectiles : 0,\n/score : 190,\n/time/lifespan : [2902, 8569.56, 13657, 14186, 16]",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28279,7 +28265,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 2,\n/time/total_played : [0, 4, 37, 411],\n/score : 141,\n/total_frames : 1435,\n/time/current_playthrough : [0, 0, 23, 890],\n/num_events : 0,\n/percent/note_over_enemy_score : 25.5319",
+					"text" : "/play_count : 2,\n/time/total_played : [0, 1, 8, 929],\n/score : 260,\n/total_frames : 2714,\n/time/current_playthrough : [0, 0, 44, 999],\n/num_events : 1,\n/percent/note_over_enemy_score : 26.9231",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28299,7 +28285,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 38,
 					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 507.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [385, 167],\n/vertical_half : \"top\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 333,\n/frames/moving : 414,\n/frames/still : 563,\n/frames/rotating : 125,\n/frames/firing : 1250,\n/frames/per_screen_quadrant : [248, 425, 11, 751],\n/frames/per_angle_quadrant : [563, 531, 198, 143],\n/percent/firing_weapon : 87.108,\n/percent/moving_over_rotating : 76.8089,\n/percent/moving_and_rotating : 38.1881,\n/percent/health_lost_over_gained : 50.,\n/percent/dodges_over_enemy_collision : 50.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 75.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 266,\n/last_rotation_direction : 2,\n/percent/accuracy : 46.0526,\n/time/between_kills : [0, 2453.33, 1234, 5651, 9],\n/time/between_getting_hit : [11525, 11525., 11525, 11525, 1],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 1,\n/health_gained : 1,\n/projectile_hit_count : [\"rest\", 1, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [624., 624., 624., 624., 1],\n/enemies_collided : 1,\n/dodges : 1,\n/missed_nearby_notes : 3,\n/alive_projectiles : 0",
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [670, 448],\n/vertical_half : \"top\",\n/horizontal_half : \"left\",\n/frames/moving_and_rotating : 476,\n/frames/moving : 1088,\n/frames/still : 983,\n/frames/rotating : 167,\n/frames/firing : 2391,\n/frames/per_screen_quadrant : [741, 519, 1045, 409],\n/frames/per_angle_quadrant : [1156, 572, 563, 423],\n/percent/firing_weapon : 88.0987,\n/percent/moving_over_rotating : 86.6932,\n/percent/moving_and_rotating : 27.4986,\n/percent/health_lost_over_gained : 33.3333,\n/percent/dodges_over_enemy_collision : 100.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 40.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 120,\n/last_rotation_direction : 2,\n/percent/accuracy : 50.4348,\n/time/between_kills : [245, 2607.06, 3494, 7244, 16],\n/time/between_getting_hit : [24767, 24767., 24767, 24767, 1],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 1,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 1, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [518., 518., 518., 518., 1],\n/enemies_collided : 0,\n/dodges : 6,\n/missed_nearby_notes : 4,\n/alive_projectiles : 0",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
