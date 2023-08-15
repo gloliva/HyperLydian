@@ -1,9 +1,25 @@
+"""
+This module defines how variables are tracked in order to send to Max via OSC.
+
+There are various Stat objects that record specific types of variables or record variables
+in specific ways, as well as the StatManager object which defines all stats to record and send.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Any, Dict, List, Union
 
 # project imports
 import debug
-from defs import SCREEN_WIDTH, SCREEN_HEIGHT, PROJECTILE_TYPES, REST, NUM_VOICES, FPS, RECORD_MUSIC
+from defs import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    PROJECTILE_TYPES,
+    REST, NUM_VOICES,
+    FPS,
+    RECORD_MUSIC
+)
 from osc_client import osc, OSCHandler
 
 

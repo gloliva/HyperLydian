@@ -1,3 +1,12 @@
+"""
+This module defines all of the Sprites to display in Menus, such as the Main Menu Title.
+
+Most of these classes are pretty lightweight and are just loading the image file and
+setting its surface and rect.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Optional, Tuple
 
@@ -9,6 +18,10 @@ from sprites.base import construct_asset_full_path
 
 
 class StudioLogo(pg.sprite.Sprite):
+    """
+    This is the "studio logo" image that is displayed on application start.
+    This buys extra time while Max opens and loads.
+    """
     TOTAL_SCREEN_TIME = 6
     FADE_IN_SECONDS = 2
     FADE_OUT_SECONDS = 2
@@ -24,6 +37,7 @@ class StudioLogo(pg.sprite.Sprite):
 
 
 class MainTitle(pg.sprite.Sprite):
+    """The HyperLydian Title card to display during the MAIN MENU"""
     def __init__(self, screen_rect: pg.Rect) -> None:
         super().__init__()
         image_file = construct_asset_full_path('logo/title.png')
@@ -35,6 +49,7 @@ class MainTitle(pg.sprite.Sprite):
 
 
 class DeathScreenTitle(pg.sprite.Sprite):
+    """The YOU DIED title to display during the DEATH MENU"""
     def __init__(self, screen_rect: pg.Rect) -> None:
         super().__init__()
         image_file = construct_asset_full_path('logo/you_died.png')
@@ -46,6 +61,7 @@ class DeathScreenTitle(pg.sprite.Sprite):
 
 
 class MenuSelect(pg.sprite.Sprite):
+    """The selection icon that displays which text object the user is currently highlighting"""
     WIDTH_ADJUSTMENT = 150
     HEIGHT_ADJUSTMENT = 150
 

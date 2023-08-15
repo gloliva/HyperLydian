@@ -1,3 +1,9 @@
+"""
+This module defines how settings are set and accessed via the gameplay module.
+
+Author: Gregg Oliva
+"""
+
 class SettingsManager:
     """
     Manages game settings which are set via the SETTINGS menu.

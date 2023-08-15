@@ -1,3 +1,12 @@
+"""
+This module defines everything related to Events and is split up in two parts:
+    1) Pygame events that get posted to and processed from the Event queue
+    2) Custom Special Events that happen after a certain number of enemies are killed, and are different
+       from the normal gameplay flow.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from random import randint, choices as weightedelem
 from typing import List

@@ -1,3 +1,12 @@
+"""
+This module defines objects for rendering Text to the screen.
+
+Pygame's text support is pretty barebones / limited, so this wraps the pg.font.Font
+in order to provide an easy interface to define and update menu Text.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Callable, Dict, List, Optional, Tuple
 

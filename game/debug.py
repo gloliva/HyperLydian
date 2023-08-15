@@ -1,3 +1,13 @@
+"""
+This module defines some constants that can be set to Disable certain parts of the code
+which was useful for debugging purposes to isolate specific parts of the game.
+
+DISABLE_OPENING_MAX_APPLICATION is necessary to enable if you want to run the Max and Python application
+separately, such as using the Max/MSP collective file instead of the standalone application.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 import os
 

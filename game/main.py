@@ -1,6 +1,21 @@
-# stdlib imports
-# import asyncio
-# from subprocess import Popen
+"""
+The Entrypoint to the application. The main loop calls functions that run additional loops, such
+as menu loops and the main gameplay loop. Each function returns the next state to call. If a function returns
+None, that indicates to the main loop to Quit the application.
+
+This file is both the entrypoint and exit point of the application.
+
+Summary of program logic:
+    * Main loop
+    * Menu loop(s)
+    * Gameplay loop
+    * Death menu loop
+    * Gameplay / Death Menu loops repeat until Quit
+    * Quit causes Main loop to exit
+    * Application close (both Max and Python)
+
+Author: Gregg Oliva
+"""
 
 # 3rd-party imports
 import pygame as pg
@@ -42,9 +57,14 @@ CLOCK = pg.time.Clock()
 
 def main():
     """
-    Main Program Loop
+    Main Program Loop.
+
+    Gets default audio output device then updates the initialization stats before
+    entering the main application loop.
 
     Handles transitioning between different states.
+
+    The first transition state is the Loading Screen while the Max Application is loading.
     """
     main_loop = True
     next_state = GameState.LOADING_SCREEN

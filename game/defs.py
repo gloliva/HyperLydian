@@ -1,6 +1,9 @@
 """
-Global Constants and Definitions that don't have any dependencies
-and can be used across all objects.
+This module defines Global Constants and Definitions.
+
+These constants do not have any dependencies and can be used across all files.
+
+Author: Gregg Oliva
 """
 
 # stdlib imports

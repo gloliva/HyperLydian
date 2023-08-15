@@ -1,3 +1,13 @@
+"""
+This module defines the Weapon class that is used by the Player and Enemy objects.
+
+A Weapon is pretty much just a "Projectile Manager", as it determines how often
+and where to spawn the projectiles that it fires. The Projectile is what does the damage
+and has a speed associated with it, the Weapon just creates the projectiles.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 import math
 from random import randint
@@ -55,6 +65,7 @@ class Weapon:
             projectile_center: Tuple[int, int],
             movement_angle: int = None,
         ):
+        """Fires a projectile according to the rate of fire"""
         # Handle rate of fire for weapon
         current_time = pg.time.get_ticks()
         if not self.weapon_empty() and current_time - self.last_time_shot >= self.rate_of_fire:
@@ -89,6 +100,7 @@ class Weapon:
             projectile_center_position: Tuple[int, int],
             movement_angle: int = None,
         ) -> None:
+        """Spawns the projectile and adds it to the appropriate group"""
         variant_number = self.projectile_variant_number if self.projectile_variant_number is not None \
             else randint(0, self.projectile_type.NUM_VARIANTS - 1)
 
@@ -105,10 +117,13 @@ class Weapon:
         self.curr_projectiles -= 1
 
     def reload_projectile(self) -> None:
+        """Reloads the projectile ammo"""
         self.curr_projectiles += 1
 
     def change_rate_of_fire(self, rate_of_fire_delta: int) -> None:
+        """Change the rate of fire of the weapon"""
         self.rate_of_fire += rate_of_fire_delta
 
     def weapon_empty(self) -> bool:
+        """Checks to see if the weapon has run out of ammo"""
         return self.curr_projectiles == 0

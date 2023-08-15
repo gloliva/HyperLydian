@@ -1,3 +1,10 @@
+"""
+This module defines the OSC UPD client to converts the StatManager's stats dictionary into an
+OSC bundle to be sent over UDP to the Max Application.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import Any, Dict, List
 

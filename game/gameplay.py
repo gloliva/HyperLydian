@@ -1,3 +1,10 @@
+"""
+This module defines the actual Gameplay logic and the gameplay loop, and functionality related
+to how the game is experienced, such as changing the difficulty.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from random import randint, choice as randelem
 

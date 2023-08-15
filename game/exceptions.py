@@ -1,5 +1,9 @@
 """
-Custom exceptions
+This lightweight module defines custom exceptions. We don't need to override anything
+from the Exceptions module, but we want to be able to raise or check for specific exceptions related
+to the game.
+
+Author: Gregg Oliva
 """
 
 class AssetLoadError(Exception):
