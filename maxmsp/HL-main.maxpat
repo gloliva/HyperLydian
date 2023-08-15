@@ -248,7 +248,6 @@
 					}
 ,
 					"patching_rect" : [ 250.0, 2040.0, 118.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -269,7 +268,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 3877.328743738426056, 578.155754923820496, 640.806354100514909, 47.0 ],
-					"presentation_linecount" : 2,
 					"text" : "If audio recording is enabled, recording is enabled to a semi-randomly generated file. See record-music subpatcher for more details"
 				}
 
@@ -782,8 +780,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 3867.231920788683055, 30.185125946998596, 661.0, 469.0 ],
-					"presentation_linecount" : 20,
+					"patching_rect" : [ 3867.231920788683055, 30.185125946998596, 663.0, 469.0 ],
 					"text" : "The HyperLydian Max Patch is split up into different categories:\n\n1) Control Groups: handle the logistics of the patch, such as retrieving and saving data, managing the order of operations, communication to and from the Python application, and tempo control.\n\n2) Audio Groups: these objects deal with signals and actually produce and manipulate the sound. These groups comprise each individual voice (with their own oscillator bank, filter, and amplitude envelope) and their respective effects chain (chorus, flanger, delay, and reverb).\n\n3) Modulation Groups: modulation sources affect how the music evolves and changes, which include altering the melody (by adding / removing rests and / or notes, reversinng or inverting the values), changing the scale or key, slowing down or speeding up the tempo, swapping the effects (e.g. FM vs. Chorus), adjusting effects parameters, etc.\n\nA Max Standalone Application is opened and managed by the Python application and is meant to be viewed in Presentation mode, which offers a UI for viewing the interaction between the player's actions and the changes in the music.\n\nEach abstraction, subpatch, and Javascript file has additional comments that describe their function in more detail."
 				}
 
@@ -809,7 +806,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1324.647499821186102, 68.552660942077637, 203.812500178813934, 67.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Select output device and turn on global transport"
 				}
 
@@ -823,7 +819,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1135.125, 261.420463800430298, 249.812500178813934, 47.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Turn off a modulation type for a particular voice"
 				}
 
@@ -837,7 +832,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1135.125, 489.620231032371521, 335.859375134109996, 47.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Enable to print out OSC addresses associated with each modulation type."
 				}
 
@@ -850,8 +844,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2409.287396525341592, 524.155754923820496, 817.0, 187.0 ],
-					"presentation_linecount" : 16,
+					"patching_rect" : [ 2409.287396525341592, 524.155754923820496, 821.0, 187.0 ],
 					"text" : "Pattrstorage is used to handle switching melodies and saving changes to patterns from modulation sources. \n\nMelodies are swapped on-beat which triggers the following:  1) the current pattern is saved prior to switching to save any changes that have been made, 2) the next pattern is queued up, 3) if an entirely different melody group is being loaded, perform a hard reset (resets the Voice's metro object), otherwise perform a soft reset (only resets the Voice's counter object), 4) load the queued pattern.\n\nA hard reset is done on application start and when switching melody groups."
 				}
 
@@ -864,8 +857,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1808.79687531292393, 524.155754923820496, 428.0, 167.0 ],
-					"presentation_linecount" : 8,
+					"patching_rect" : [ 1808.79687531292393, 524.155754923820496, 431.0, 167.0 ],
 					"text" : "Global mixer receives each Voice's signal post-effects processing. \n\nVolume is automatically adjusted on application start and quit, and during melody changes.\n\nOverdrive is added to the signal as player health decreases."
 				}
 
@@ -879,7 +871,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 670.277082528664323, 572.489594995975494, 428.0, 67.0 ],
-					"presentation_linecount" : 3,
 					"text" : "Timing variables that are sent to each voice to control the tempo and rhythm. Global transport controls each voice's internal metronome."
 				}
 
@@ -893,7 +884,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 152.277082528664323, 1735.0, 428.0, 67.0 ],
-					"presentation_linecount" : 3,
 					"text" : "The OSC handler polls OSC addresses sent by the Python game application, splits them up based on category, and sends them to modulation sources."
 				}
 
@@ -907,7 +897,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 4020.953125402330443, 2035.0, 514.0, 167.0 ],
-					"presentation_linecount" : 12,
 					"text" : "Each voice has its own effects chain that receives messages from the modulation subpatches. \n\nAn input signal comes in from each voice, gets processed through each effect object, then gets sent to the mixer.\n\nEffects are enabled and adjusted based on game stats, which are described in more detail in the modulation subpatchers."
 				}
 
@@ -1018,7 +1007,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 2350.61534125029948, 754.0, 387.0, 27.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Pattern, Filter, Ampltidue Envelope",
 					"textjustification" : 1
 				}
@@ -1242,7 +1230,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 225.5, 2563.0, 140.0, 38.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Start and Stop Handling",
 					"textjustification" : 1
 				}
@@ -1341,7 +1328,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 6.125, 1837.0, 255.0, 24.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Melody and Effects Modifiers "
 				}
 
@@ -1369,7 +1355,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 737.080208467447164, 7.0, 239.0, 27.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Tempo / Transport Control",
 					"textjustification" : 1
 				}
@@ -1384,7 +1369,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 2885.901041800775602, 7.0, 307.0, 27.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Pattr Storage and Melody Control",
 					"textjustification" : 1
 				}
@@ -1462,7 +1446,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2775.0, 2848.69487738609314, 116.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1726.250000000014097, 1806.702894151210785, 96.0, 20.0 ],
+					"presentation_rect" : [ 1724.827826877438838, 1873.702894151210785, 96.0, 20.0 ],
 					"text" : "Tempo Stats",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ],
 					"textjustification" : 1
@@ -1571,7 +1555,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 22.0, 20.0, 554.0, 132.0 ],
-									"presentation_linecount" : 13,
 									"text" : "Reverb parameter modulation for Voice 2 and 3. Reverb parameters are modulated based on enemy and player stats, such as the number of projectiles on screen, the time between killing enemies, and the average distance a player's projectile travels before hitting an enemy.\n\nThese values are sent through line objects to smoothly transition between the different values"
 								}
 
@@ -1584,7 +1567,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 734.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1682,7 +1664,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 645.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1707,7 +1688,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 556.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1732,7 +1712,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 467.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1757,7 +1736,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 378.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1782,7 +1760,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 289.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1807,7 +1784,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 200.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1832,7 +1808,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 111.0, 402.0, 45.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "$1 200"
 								}
 
@@ -1931,7 +1906,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
 									"patching_rect" : [ 734.0, 217.0, 816.0, 83.0 ],
-									"presentation_linecount" : 6,
 									"text" : "/reverb/size = scale(/percent/moving_and_rotating, 0., 100., 5, 300),\n/reverb/damping = scale(/alive_projectiles, 0, 25, 0.05, 0.85),\n/reverb/dry = scale(/hit_distance[[ 1 ]], /hit_distance[[ 0 ]], /hit_distance[[ 3 ]], 0.05, 0.8),\n/reverb/decay = scale(/time/between_kills[[ 1 ]], /time/between_kills[[ 0 ]], /time/between_kills[[ 3 ]], 0.1, 0.7),\n/reverb/mix = scale(/position[[ 1 ]], 0, /screen_height, /mix/max, /mix/min)"
 								}
 
@@ -2340,7 +2314,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1896.0, -92.0, 1070.0, 1076.0 ],
+						"rect" : [ 4205.0, -4.0, 1070.0, 959.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2376,8 +2350,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 325.0, 693.0, 354.0, 132.0 ],
-									"presentation_linecount" : 7,
+									"patching_rect" : [ 306.0, 721.0, 354.0, 132.0 ],
 									"text" : "This scale change is applied to each voice.\n\nOnly the scale \"type\" (such as major, lydian, natural minor, etc.) changes on a melody change. The scale class (7-tone or 5-tone) remains the same and is based on the current weapon selection"
 								}
 
@@ -2386,13 +2359,12 @@
 								"box" : 								{
 									"fontsize" : 16.0,
 									"id" : "obj-2",
-									"linecount" : 16,
+									"linecount" : 15,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 499.0, 229.0, 353.0, 292.0 ],
-									"presentation_linecount" : 21,
-									"text" : "Swap scales when the Melody group changes. The selected scale is based on a weighted choice from Player stats:\n\n1) How often the player fires their weapon\n2) How often the player moves vs. rotates\n3) The amount of health the player has lost compared to gained\n4) The amount of enemy projectiles the player has dodged vs collided with an enemy\n5) The amount of notes a player has narrowly missed vs the amount of projectiles a player has dodged\n6) The amount of Rest projectiles the player has hit vs the amount of Accidentals projectiles the player has hit"
+									"patching_rect" : [ 374.0, 286.0, 440.0, 275.0 ],
+									"text" : "Swap scales when the Melody group changes. The selected scale is based on a weighted choice from Player stats:\n\n1) How often the player fires their weapon\n2) How often the player moves vs. rotates\n3) The amount of health the player has lost compared to gained\n4) The amount of enemy projectiles the player has dodged vs collided with an enemy\n5) The amount of notes a player has narrowly missed vs the amount of projectiles a player has dodged\n6) The amount of Rest projectiles the player has hit vs the amount of Accidentals projectiles the player has hit\n7) How often the player moves AND rotates\n8) How accurate the player is at hitting the enemy"
 								}
 
 							}
@@ -2402,7 +2374,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 57.0, 832.0, 89.0, 22.0 ],
+									"patching_rect" : [ 38.0, 860.0, 89.0, 22.0 ],
 									"text" : "s change-scale"
 								}
 
@@ -2414,7 +2386,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "FullPacket" ],
-									"patching_rect" : [ 57.0, 699.0, 144.0, 22.0 ],
+									"patching_rect" : [ 38.0, 727.0, 144.0, 22.0 ],
 									"text" : "o.route /1 /2"
 								}
 
@@ -2428,8 +2400,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 310.0, 580.0, 229.0, 98.0 ],
-									"presentation_linecount" : 8,
+									"patching_rect" : [ 291.0, 608.0, 229.0, 98.0 ],
 									"text" : "/1/scale/class = \"heptatonic\",\n/1/scale/type = /scale/type,\n/1/scale/voices = [1],\n/2/scale/class = \"pentatonic\",\n/2/scale/type = /scale/type,\n/2/scale/voices = [2, 3]\n"
 								}
 
@@ -2441,7 +2412,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 57.0, 796.0, 95.0, 22.0 ],
+									"patching_rect" : [ 38.0, 824.0, 95.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2453,7 +2424,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 133.333333333333314, 765.0, 95.333333333333343, 22.0 ],
+									"patching_rect" : [ 114.333333333333314, 793.0, 95.333333333333343, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2465,7 +2436,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "FullPacket" ],
-									"patching_rect" : [ 57.0, 735.0, 248.0, 22.0 ],
+									"patching_rect" : [ 38.0, 763.0, 248.0, 22.0 ],
 									"text" : "o.select /scale/class /scale/type /scale/voices"
 								}
 
@@ -2479,7 +2450,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 57.0, 584.0, 229.0, 70.0 ],
+									"patching_rect" : [ 38.0, 612.0, 229.0, 70.0 ],
 									"text" : "/1/scale/class = \"heptatonic\",\n/1/scale/type = /scale/type,\n/1/scale/voices = [1, 2, 3]\n"
 								}
 
@@ -2491,7 +2462,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "FullPacket", "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 57.0, 549.0, 525.0, 22.0 ],
+									"patching_rect" : [ 38.0, 577.0, 525.0, 22.0 ],
 									"text" : "o.cond /mode == 0\\, /mode == 1"
 								}
 
@@ -2503,7 +2474,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 196.0, 373.0, 95.0, 22.0 ],
+									"patching_rect" : [ 177.0, 401.0, 95.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2515,7 +2486,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 463.0, 162.0, 101.0, 22.0 ],
+									"patching_rect" : [ 444.0, 190.0, 101.0, 22.0 ],
 									"text" : "o.select /selected"
 								}
 
@@ -2527,7 +2498,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 463.0, 196.0, 150.0, 22.0 ],
+									"patching_rect" : [ 444.0, 224.0, 150.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2539,7 +2510,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 463.0, 128.0, 87.0, 22.0 ],
+									"patching_rect" : [ 444.0, 156.0, 87.0, 22.0 ],
 									"text" : "r weapon-stats"
 								}
 
@@ -2553,7 +2524,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 57.0, 438.0, 306.0, 95.0 ],
+									"patching_rect" : [ 38.0, 466.0, 306.0, 95.0 ],
 									"text" : "/scale/type = /scale_types[[ /scale/idx ]],\n\nif (/selected == 0,\n  /mode = 0,\n  /mode = 1\n)"
 								}
 
@@ -2565,7 +2536,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 57.0, 405.0, 158.0, 22.0 ],
+									"patching_rect" : [ 38.0, 433.0, 158.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2577,7 +2548,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 57.0, 373.0, 97.0, 22.0 ],
+									"patching_rect" : [ 38.0, 401.0, 97.0, 22.0 ],
 									"text" : "o.pack /scale/idx"
 								}
 
@@ -2589,7 +2560,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "FullPacket" ],
-									"patching_rect" : [ 196.0, 341.0, 171.0, 22.0 ],
+									"patching_rect" : [ 177.0, 369.0, 171.0, 22.0 ],
 									"text" : "o.select /scale_types /selected"
 								}
 
@@ -2601,7 +2572,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "FullPacket" ],
-									"patching_rect" : [ 57.0, 299.0, 135.0, 22.0 ],
+									"patching_rect" : [ 38.0, 327.0, 135.0, 22.0 ],
 									"text" : "o.route /values /weights"
 								}
 
@@ -2613,7 +2584,7 @@
 									"numinlets" : 3,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 57.0, 341.0, 134.0, 22.0 ],
+									"patching_rect" : [ 38.0, 369.0, 134.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"filename" : "weightedchoice.js",
 										"parameter_enable" : 0
@@ -2630,7 +2601,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 57.0, 264.0, 148.0, 22.0 ],
+									"patching_rect" : [ 38.0, 292.0, 148.0, 22.0 ],
 									"text" : "o.var"
 								}
 
@@ -2642,7 +2613,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 57.0, 229.0, 115.0, 22.0 ],
+									"patching_rect" : [ 38.0, 257.0, 115.0, 22.0 ],
 									"text" : "r on-melody-change"
 								}
 
@@ -2654,7 +2625,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 594.0, 162.0, 120.0, 22.0 ],
+									"patching_rect" : [ 575.0, 190.0, 120.0, 22.0 ],
 									"text" : "o.select /scale_types"
 								}
 
@@ -2666,7 +2637,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 186.0, 229.0, 296.0, 22.0 ],
+									"patching_rect" : [ 167.0, 257.0, 296.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -2675,13 +2646,13 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-10",
-									"linecount" : 9,
+									"linecount" : 11,
 									"maxclass" : "o.expr.codebox",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 186.0, 82.0, 257.0, 136.0 ],
-									"text" : "/values = [0, 1, 2, 3, 4, 5],\n/weights = [\n  /firing_weapon,\n  /moving_over_rotating,\n  /health_lost_over_gained,\n  /dodges_over_enemy_collision,\n  /missed_notes_over_dodges,\n  /hit_rests_over_accidentals\n]"
+									"patching_rect" : [ 167.0, 87.5, 257.0, 159.0 ],
+									"text" : "/values = [0, 1, 2, 3, 4, 5, 6, 7],\n/weights = [\n  /firing_weapon,\n  /moving_over_rotating,\n  /health_lost_over_gained,\n  /dodges_over_enemy_collision,\n  /missed_notes_over_dodges,\n  /hit_rests_over_accidentals,\n  /moving_and_rotating,\n  /accuracy\n]"
 								}
 
 							}
@@ -2692,7 +2663,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 186.0, 54.0, 93.0, 22.0 ],
+									"patching_rect" : [ 167.0, 59.5, 93.0, 22.0 ],
 									"text" : "o.route /percent"
 								}
 
@@ -2704,7 +2675,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 186.0, 26.0, 78.0, 22.0 ],
+									"patching_rect" : [ 167.0, 31.5, 78.0, 22.0 ],
 									"text" : "r player-stats"
 								}
 
@@ -2716,7 +2687,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 594.0, 128.0, 71.0, 22.0 ],
+									"patching_rect" : [ 575.0, 156.0, 71.0, 22.0 ],
 									"text" : "r scale-map"
 								}
 
@@ -2837,7 +2808,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-16", 0 ],
-									"midpoints" : [ 182.5, 331.5, 205.5, 331.5 ],
+									"midpoints" : [ 163.5, 359.5, 186.5, 359.5 ],
 									"source" : [ "obj-37", 2 ]
 								}
 
@@ -2915,7 +2886,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-48", 0 ],
-									"midpoints" : [ 319.5, 687.0, 66.5, 687.0 ],
+									"midpoints" : [ 300.5, 715.0, 47.5, 715.0 ],
 									"source" : [ "obj-47", 0 ]
 								}
 
@@ -2923,7 +2894,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-44", 0 ],
-									"midpoints" : [ 129.0, 727.0, 69.0, 727.0, 69.0, 729.0, 66.5, 729.0 ],
+									"midpoints" : [ 110.0, 755.0, 50.0, 755.0, 50.0, 757.0, 47.5, 757.0 ],
 									"source" : [ "obj-48", 1 ]
 								}
 
@@ -2984,7 +2955,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2411.699999999999818, 2871.8125, 320.299999999999955, 60.0 ],
+					"patching_rect" : [ 2411.699999999999818, 2871.8125, 321.0, 60.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1233.93437513411277, 6.61762261390686, 325.0, 60.0 ],
 					"text" : "Control Panel",
@@ -3001,7 +2972,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2789.125, 2813.69487738609314, 86.750000000000114, 33.0 ],
+					"patching_rect" : [ 2789.125, 2813.69487738609314, 88.0, 33.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1607.577826877439293, 1504.038069307808655, 134.0, 20.0 ],
 					"text" : "Audio Output Device",
@@ -3113,7 +3084,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 125.0, 378.0, 594.0, 203.0 ],
+									"patching_rect" : [ 127.0, 430.0, 594.0, 203.0 ],
 									"text" : "Define scale values.\n\nThe scale class is whether its a 7-tone (heptatonic) or 5-tone (pentatonic) scale and the scale type is the scale name (major, lydian, etc.).\n\nEach scale class contains a map of scale type to a list of integers. These integers correspond to the number of halfsteps from the base note for that scale degree.\n\nFor example, for \"/major : [0, 2, 4, 5, 7, 9, 11]\", the first scale degree is 0 halfsteps away from the base, the 3rd scale degree is 4 halfsteps away from the base, the 6th is 9 halfsteps away, etc."
 								}
 
@@ -3136,7 +3107,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 33.0, 378.0, 73.0, 22.0 ],
+									"patching_rect" : [ 33.0, 430.0, 73.0, 22.0 ],
 									"text" : "s scale-map"
 								}
 
@@ -3145,15 +3116,15 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-259",
-									"linecount" : 23,
+									"linecount" : 27,
 									"maxclass" : "o.compose",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 33.0, 55.382351517677307, 429.705879211425781, 305.0 ],
-									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 84, 47, 115, 99, 97, 108, 101, 115, 0, 44, 46, 0, 0, 0, 0, 3, 68, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -128, 47, 104, 101, 112, 116, 97, 116, 111, 110, 105, 99, 0, 44, 46, 0, 0, 0, 0, 1, 108, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 47, 109, 97, 106, 111, 114, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 10, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 11, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 48, 47, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 60, 47, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 10, 0, 0, 1, 56, 47, 112, 101, 110, 116, 97, 116, 111, 110, 105, 99, 0, 44, 46, 0, 0, 0, 0, 1, 36, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 47, 109, 97, 106, 111, 114, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 36, 47, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 48, 47, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 0, 112, 47, 111, 116, 104, 101, 114, 0, 0, 44, 46, 0, 0, 0, 0, 0, 96, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 76, 47, 99, 104, 114, 111, 109, 97, 116, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 10, 0, 0, 0, 11, 0, 0, 0, 108, 47, 115, 99, 97, 108, 101, 95, 116, 121, 112, 101, 115, 0, 0, 0, 0, 44, 115, 115, 115, 115, 115, 115, 0, 109, 97, 106, 111, 114, 0, 0, 0, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 0, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 0, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 0, 108, 121, 100, 105, 97, 110, 0, 0, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 0 ],
-									"saved_bundle_length" : 984,
-									"text" : "/scales : {\n  /heptatonic : {\n    /major : [0, 2, 4, 5, 7, 9, 11],\n    /minor/natural : [0, 2, 3, 5, 7, 8, 10],\n    /minor/harmonic : [0, 2, 3, 5, 7, 8, 11],\n    /minor/melodic : [0, 2, 3, 5, 7, 9, 11],\n    /lydian : [0, 2, 4, 6, 7, 9, 11],\n    /aeolian_dominant : [0, 2, 4, 5, 7, 8, 10]\n  },\n  /pentatonic : {\n    /major : [0, 2, 4, 7, 9],\n    /minor/natural : [0, 3, 5, 7, 10],\n    /minor/harmonic : [0, 3, 5, 7, 11],\n    /minor/melodic : [0, 3, 5, 7, 11],\n    /lydian : [0, 2, 5, 7, 11],\n    /aeolian_dominant : [0, 2, 4, 7, 10]\n  },\n  /other : {\n    /chromatic : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n  }\n},\n/scale_types : [\"major\", \"minor/natural\", \"minor/harmonic\", \"minor/melodic\", \"lydian\", \"aeolian_dominant\"]"
+									"patching_rect" : [ 33.0, 55.382351517677307, 493.705879211425781, 356.0 ],
+									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20, 47, 115, 99, 97, 108, 101, 115, 0, 44, 46, 0, 0, 0, 0, 4, 4, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -20, 47, 104, 101, 112, 116, 97, 116, 111, 110, 105, 99, 0, 44, 46, 0, 0, 0, 0, 1, -40, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 47, 109, 97, 106, 111, 114, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 10, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 11, 0, 0, 0, 56, 47, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 48, 47, 100, 111, 114, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 10, 0, 0, 0, 48, 47, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 11, 0, 0, 0, 52, 47, 109, 105, 120, 111, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 10, 0, 0, 0, 60, 47, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 10, 0, 0, 1, -116, 47, 112, 101, 110, 116, 97, 116, 111, 110, 105, 99, 0, 44, 46, 0, 0, 0, 0, 1, 120, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 47, 109, 97, 106, 111, 114, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 44, 47, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 36, 47, 100, 111, 114, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 0, 36, 47, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 40, 47, 109, 105, 120, 111, 108, 121, 100, 105, 97, 110, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 48, 47, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 44, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 0, 112, 47, 111, 116, 104, 101, 114, 0, 0, 44, 46, 0, 0, 0, 0, 0, 96, 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 76, 47, 99, 104, 114, 111, 109, 97, 116, 105, 99, 0, 0, 44, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 10, 0, 0, 0, 11, 0, 0, 0, -124, 47, 115, 99, 97, 108, 101, 95, 116, 121, 112, 101, 115, 0, 0, 0, 0, 44, 115, 115, 115, 115, 115, 115, 115, 115, 0, 0, 0, 109, 97, 106, 111, 114, 0, 0, 0, 109, 105, 110, 111, 114, 47, 110, 97, 116, 117, 114, 97, 108, 0, 0, 0, 109, 105, 110, 111, 114, 47, 104, 97, 114, 109, 111, 110, 105, 99, 0, 0, 109, 105, 110, 111, 114, 47, 109, 101, 108, 111, 100, 105, 99, 0, 0, 0, 100, 111, 114, 105, 97, 110, 0, 0, 108, 121, 100, 105, 97, 110, 0, 0, 109, 105, 120, 111, 108, 121, 100, 105, 97, 110, 0, 0, 97, 101, 111, 108, 105, 97, 110, 95, 100, 111, 109, 105, 110, 97, 110, 116, 0, 0, 0, 0 ],
+									"saved_bundle_length" : 1200,
+									"text" : "/scales : {\n  /heptatonic : {\n    /major : [0, 2, 4, 5, 7, 9, 11],\n    /minor/natural : [0, 2, 3, 5, 7, 8, 10],\n    /minor/harmonic : [0, 2, 3, 5, 7, 8, 11],\n    /minor/melodic : [0, 2, 3, 5, 7, 9, 11],\n    /dorian : [0, 2, 3, 5, 7, 9, 10],\n    /lydian : [0, 2, 4, 6, 7, 9, 11],\n    /mixolydian : [0, 2, 4, 5, 7, 9, 10],\n    /aeolian_dominant : [0, 2, 4, 5, 7, 8, 10]\n  },\n  /pentatonic : {\n    /major : [0, 2, 4, 7, 9],\n    /minor/natural : [0, 3, 5, 7, 10],\n    /minor/harmonic : [0, 3, 5, 7, 11],\n    /minor/melodic : [0, 3, 5, 7, 11],\n    /dorian : [0, 3, 5, 7, 10],\n    /lydian : [0, 2, 5, 7, 11],\n    /mixolydian : [0, 2, 4, 7, 9],\n    /aeolian_dominant : [0, 2, 4, 7, 10]\n  },\n  /other : {\n    /chromatic : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n  }\n},\n/scale_types : [\"major\", \"minor/natural\", \"minor/harmonic\", \"minor/melodic\", \"dorian\", \"lydian\", \"mixolydian\", \"aeolian_dominant\"]"
 								}
 
 							}
@@ -3334,7 +3305,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 311.0, 437.0, 304.0, 114.0 ],
-									"presentation_linecount" : 6,
 									"text" : "Swapping to Weapon 1 will select Voices 2 and 3 to either have a Flanger or Chorus effect applied to them.\n\nFlanger/Chorus modulation is hanlded in these subpatches."
 								}
 
@@ -3406,7 +3376,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 73.0, 30.0, 184.0, 42.0 ],
-													"presentation_linecount" : 2,
 													"text" : "Flanger modulation based on player stats"
 												}
 
@@ -5108,7 +5077,6 @@
 					}
 ,
 					"patching_rect" : [ 357.0, 2446.0, 173.0, 22.0 ],
-					"presentation_linecount" : 3,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -5165,6 +5133,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontsize" : 16.0,
@@ -5174,7 +5143,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 733.25, 1056.5, 151.25, 96.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Handle turning off other active effects, and route each effect to the appropriate voice"
 								}
 
@@ -5188,7 +5156,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 636.0, 805.999974000000066, 151.25, 78.0 ],
-									"presentation_linecount" : 2,
 									"text" : "FM and Delay modulation are handled in these subpatches"
 								}
 
@@ -5201,8 +5168,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 546.0, 48.249948263168335, 304.0, 167.0 ],
-									"presentation_linecount" : 9,
+									"patching_rect" : [ 546.0, 48.249948263168335, 306.0, 167.0 ],
 									"text" : "Swapping to Weapon 0 will select one voice to have an FM effect and the other voice to be a classic delay.\n\nThe modulator waveform for FM is selected based on a weighted choice; the weights are the number of frames the player spends at a particular angle (0-90, 90-180, 180-270, 270-360)."
 								}
 
@@ -5274,7 +5240,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 490.0, 261.000025868415833, 304.0, 203.0 ],
-													"presentation_linecount" : 11,
 													"text" : "FM modulation:\n\n1) The modulator signal's Frequency is based on how many player projectiles are on-screen.\n2) The modulator's depth is based on the player's current health.\n\nThe FM effect gets more intense as the player's health gets lower and the player increases how many projectiles they fire."
 												}
 
@@ -6032,7 +5997,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 451.0, 267.000025868415833, 308.0, 167.0 ],
-													"presentation_linecount" : 9,
 													"text" : "Delay modulation:\n\n1) The delay time is based on the avg time between collecting notes.\n2) The delay feedback is based on the percentage the player spends moving and rotating\n3) Delay mix is based on the percentage of notes the player has collected"
 												}
 
@@ -6638,7 +6602,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
 									"patching_rect" : [ 77.75, 973.5, 653.5, 262.0 ],
-									"presentation_linecount" : 31,
 									"text" : "# Turn off chorus\n/chorus/1/chorus/mix = 0,\n/chorus/2/chorus/mix = 0,\n/chorus/3/chorus/mix = 0,\n\n# Assign FM values\nassign(\"/fm/\" + /fm_voice + \"/fm/wave\", /wave),\nassign(\"/fm/\" + /fm_voice + \"/fm/factor\", /factor),\nassign(\"/fm/\" + /fm_voice + \"/fm/depth\", /depth),\n\n# Assign Delay values\nassign(\"/delay/\" + /delay_voice + \"/delay/mix\", /mix),\nassign(\"/delay/\" + /delay_voice + \"/delay/ms\", /ms),\nassign(\"/delay/\" + /delay_voice + \"/delay/feedback\", /feedback),\nassign(\"/delay/\" + /delay_voice + \"/delay/automation/enable\", 0),\n\n# Turn off delay and FM for other voices\nassign(\"/fm/\" + /delay_voice + \"/fm/wave\", 0),\nassign(\"/delay/\" + /fm_voice + \"/delay/mix\", 0)"
 								}
 
@@ -8001,7 +7964,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 771.0, 155.0, 222.0, 369.0 ],
-									"presentation_linecount" : 28,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 49, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -29, 51, 51, 51, 51, 51, 51, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 60, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 10, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -45, 51, 51, 51, 51, 51, 51, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 70, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 75, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 45, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 15, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 11, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -71, -103, -103, -103, -103, -103, -102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102 ],
 									"saved_bundle_length" : 896,
 									"text" : "/1/reverb/mix : 0,\n/2/reverb/mix : 30,\n/2/reverb/bandwidth : 0.5,\n/2/reverb/damping : 0.7,\n/2/reverb/spread : 30,\n/2/reverb/dry : 0.6,\n/2/reverb/room : 60,\n/2/reverb/time : 10,\n/2/reverb/early : 0.25,\n/2/reverb/decay : 0.25,\n/3/reverb/mix : 30,\n/3/reverb/bandwidth : 0.5,\n/3/reverb/damping : 0.3,\n/3/reverb/spread : 70,\n/3/reverb/dry : 0.2,\n/3/reverb/room : 75,\n/3/reverb/time : 30,\n/3/reverb/early : 0.25,\n/3/reverb/decay : 0.2,\n/4/reverb/mix : 45,\n/4/reverb/bandwidth : 0.2,\n/4/reverb/damping : 0.7,\n/4/reverb/spread : 15,\n/4/reverb/dry : 0.5,\n/4/reverb/room : 30,\n/4/reverb/time : 11,\n/4/reverb/early : 0.1,\n/4/reverb/decay : 0.2"
@@ -8029,7 +7991,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 524.333333333333258, 155.0, 222.0, 139.0 ],
-									"presentation_linecount" : 12,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 49, 47, 99, 104, 111, 114, 117, 115, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 50, 47, 99, 104, 111, 114, 117, 115, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 28, 0, 0, 0, 28, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 114, 97, 116, 101, 0, 0, 44, 100, 0, 0, 64, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 100, 101, 112, 116, 104, 0, 44, 100, 0, 0, 63, -52, 40, -11, -62, -113, 92, 41, 0, 0, 0, 28, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 103, 97, 105, 110, 0, 0, 44, 100, 0, 0, 63, -12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 108, 101, 102, 116, 47, 109, 115, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 28, 0, 0, 0, 36, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 108, 101, 102, 116, 47, 102, 101, 101, 100, 98, 97, 99, 107, 0, 44, 100, 0, 0, 63, -23, -103, -103, -103, -103, -103, -102, 0, 0, 0, 28, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 114, 105, 103, 104, 116, 47, 109, 115, 0, 0, 44, 105, 0, 0, 0, 0, 0, 28, 0, 0, 0, 40, 47, 51, 47, 99, 104, 111, 114, 117, 115, 47, 114, 105, 103, 104, 116, 47, 102, 101, 101, 100, 98, 97, 99, 107, 0, 0, 0, 0, 44, 100, 0, 0, 63, -45, 51, 51, 51, 51, 51, 51 ],
 									"saved_bundle_length" : 344,
 									"text" : "/1/chorus/mix : 0,\n/2/chorus/mix : 0,\n/3/chorus/mix : 28,\n/3/chorus/rate : 2.5,\n/3/chorus/depth : 0.22,\n/3/chorus/gain : 1.25,\n/3/chorus/left/ms : 28,\n/3/chorus/left/feedback : 0.8,\n/3/chorus/right/ms : 28,\n/3/chorus/right/feedback : 0.3"
@@ -8069,7 +8030,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 277.666666666666629, 155.0, 226.0, 139.0 ],
-									"presentation_linecount" : 12,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 49, 47, 100, 101, 108, 97, 121, 47, 109, 105, 120, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 50, 47, 100, 101, 108, 97, 121, 47, 109, 105, 120, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 22, 0, 0, 0, 20, 47, 50, 47, 100, 101, 108, 97, 121, 47, 109, 115, 0, 44, 105, 0, 0, 0, 0, 0, 100, 0, 0, 0, 32, 47, 50, 47, 100, 101, 108, 97, 121, 47, 102, 101, 101, 100, 98, 97, 99, 107, 0, 0, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 47, 50, 47, 100, 101, 108, 97, 121, 47, 97, 117, 116, 111, 109, 97, 116, 105, 111, 110, 47, 101, 110, 97, 98, 108, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 51, 47, 100, 101, 108, 97, 121, 47, 109, 105, 120, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 52, 47, 100, 101, 108, 97, 121, 47, 109, 105, 120, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 33, 0, 0, 0, 20, 47, 52, 47, 100, 101, 108, 97, 121, 47, 109, 115, 0, 44, 105, 0, 0, 0, 0, 0, 60, 0, 0, 0, 32, 47, 52, 47, 100, 101, 108, 97, 121, 47, 102, 101, 101, 100, 98, 97, 99, 107, 0, 0, 0, 44, 100, 0, 0, 63, -45, 51, 51, 51, 51, 51, 51, 0, 0, 0, 36, 47, 52, 47, 100, 101, 108, 97, 121, 47, 97, 117, 116, 111, 109, 97, 116, 105, 111, 110, 47, 101, 110, 97, 98, 108, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0 ],
 									"saved_bundle_length" : 328,
 									"text" : "/1/delay/mix : 0,\n/2/delay/mix : 22,\n/2/delay/ms : 100,\n/2/delay/feedback : 0.25,\n/2/delay/automation/enable : 0,\n/3/delay/mix : 0,\n/4/delay/mix : 33,\n/4/delay/ms : 60,\n/4/delay/feedback : 0.3,\n/4/delay/automation/enable : 0"
@@ -9002,6 +8962,49 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 0,
+									"id" : "obj-8",
+									"linecount" : 5,
+									"maxclass" : "o.expr.codebox",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "FullPacket", "FullPacket" ],
+									"patching_rect" : [ 99.0, 500.0, 206.0, 82.0 ],
+									"text" : "/modes = [2, 3],\n/weights = [\n  /frames/per_weapon[[ 0 ]],\n  /frames/per_weapon[[ 1 ]]\n]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "FullPacket" ],
+									"patching_rect" : [ 99.0, 597.5, 136.0, 22.0 ],
+									"text" : "o.route /modes /weights"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 99.0, 632.5, 136.0, 22.0 ],
+									"saved_object_attributes" : 									{
+										"filename" : "weightedchoice.js",
+										"parameter_enable" : 0
+									}
+,
+									"text" : "js weightedchoice.js"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontsize" : 16.0,
 									"id" : "obj-129",
 									"linecount" : 2,
@@ -9009,7 +9012,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 382.0, 1301.0, 323.0, 42.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Distance modifier functions are defined in the patternmodifier.js file as modes 2 and 3"
 								}
 
@@ -9023,7 +9025,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 276.0, 1001.0, 160.0, 42.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Debug print distance modifier type"
 								}
 
@@ -9037,7 +9038,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 688.25, 591.0, 195.0, 78.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Choose voice to modify based on number of current projectiles from player and enemies"
 								}
 
@@ -9051,7 +9051,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 478.25, 24.0, 366.0, 114.0 ],
-									"presentation_linecount" : 6,
 									"text" : "Converts steps to leaps or leaps to steps based on the number of projectiles fired from each weapon.\n\nWeapon 0 converts leaps to steps, Weapon 1 converts steps to leaps."
 								}
 
@@ -9072,14 +9071,12 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-115",
-									"linecount" : 2,
 									"maxclass" : "o.expr.codebox",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 364.0, 350.0, 176.0, 44.0 ],
-									"presentation_linecount" : 2,
-									"text" : "/prev/1/count = /1/count,\n/update_mode = 3"
+									"patching_rect" : [ 364.0, 350.0, 176.0, 31.0 ],
+									"text" : "/prev/1/count = /1/count"
 								}
 
 							}
@@ -9087,13 +9084,12 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-114",
-									"linecount" : 2,
 									"maxclass" : "o.expr.codebox",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 38.0, 350.0, 177.0, 44.0 ],
-									"text" : "/prev/0/count = /0/count,\n/update_mode = 2"
+									"patching_rect" : [ 38.0, 350.0, 177.0, 31.0 ],
+									"text" : "/prev/0/count = /0/count"
 								}
 
 							}
@@ -9131,7 +9127,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
 									"patching_rect" : [ 364.0, 234.147132158279419, 328.0, 70.0 ],
-									"presentation_linecount" : 4,
 									"text" : "/1/count = /hits_per_weapon[[ 1 ]],\n\n/delta = /1/count - /prev/1/count,\n/thresh = 100 - /percent/one_over_two"
 								}
 
@@ -9343,7 +9338,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 496.5, 1080.0, 199.0, 23.0 ],
-									"presentation_linecount" : 3,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 116, 121, 112, 101, 0, 0, 0, 44, 115, 0, 0, 100, 105, 115, 116, 97, 110, 99, 101, 45, 109, 111, 100, 105, 102, 105, 101, 114, 0, 0, 0 ],
 									"saved_bundle_length" : 52,
 									"text" : "/type : \"distance-modifier\""
@@ -9407,7 +9401,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
 									"patching_rect" : [ 99.000000000000455, 1408.0, 476.0, 57.0 ],
-									"presentation_linecount" : 3,
 									"text" : "assign(\"/selected\" + \"/\" + /voice_num + \"/pattern/values\", /values),\nassign(\"/selected\" + \"/\" + /voice_num + \"/pattern/sustain\", /sustain),\ndelete(/values, /sustain)"
 								}
 
@@ -9628,10 +9621,10 @@
 									"id" : "obj-25",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 99.0, 676.0, 130.0, 22.0 ],
-									"text" : "o.select /update_mode"
+									"numoutlets" : 1,
+									"outlettype" : [ "FullPacket" ],
+									"patching_rect" : [ 99.0, 668.0, 124.0, 22.0 ],
+									"text" : "o.pack /update_mode"
 								}
 
 							}
@@ -9705,6 +9698,13 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-25", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-108", 0 ],
 									"source" : [ "obj-103", 0 ]
 								}
@@ -9769,7 +9769,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-25", 0 ],
+									"destination" : [ "obj-8", 0 ],
 									"source" : [ "obj-117", 1 ]
 								}
 
@@ -9786,6 +9786,20 @@
 								"patchline" : 								{
 									"destination" : [ "obj-41", 0 ],
 									"source" : [ "obj-184", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 1 ],
+									"source" : [ "obj-2", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-2", 0 ]
 								}
 
 							}
@@ -10073,6 +10087,13 @@
 								"patchline" : 								{
 									"destination" : [ "obj-72", 0 ],
 									"source" : [ "obj-73", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -10565,7 +10586,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 363.0, 1587.0, 96.0, 60.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Debug print Key-change variables"
 								}
 
@@ -10579,7 +10599,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 837.0, 1107.5, 224.0, 78.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Select a new Key based on how many accidental projectiles the player has collided with. "
 								}
 
@@ -10593,7 +10612,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 105.0, 1129.5, 224.0, 42.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Send new Melody group to the Game Melody manager"
 								}
 
@@ -10945,7 +10963,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 4,\n/melody/pattern : [8, 8, 9, 9, 9, 8, 8, 10, 10, 10, 10, 9, 9],\n/melody/beat_len : 12,\n/melody/pattern_len : 13"
+									"text" : "/melody/idx : 5,\n/melody/pattern : [22, 22, 23, 23, 24, 24, 23, 23, 24, 24, 22, 22, 23, 23],\n/melody/beat_len : 16,\n/melody/pattern_len : 14"
 								}
 
 							}
@@ -11691,7 +11709,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 3003.399999999999636, 2955.69487738609314, 115.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 410.999999999999318, 2103.702894151210785, 99.0, 20.0 ],
+					"presentation_rect" : [ 1281.999999999999545, 2078.702894151210785, 99.0, 20.0 ],
 					"text" : "Weapon Stats",
 					"textcolor" : [ 0.901956915855408, 0.901983857154846, 0.901968538761139, 1.0 ],
 					"textjustification" : 1
@@ -11723,7 +11741,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 3126.949999999999818, 2901.69487738609314, 115.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1287.499999999999545, 1806.702894151210785, 88.0, 20.0 ],
+					"presentation_rect" : [ 1287.499999999999545, 1862.702894151210785, 88.0, 20.0 ],
 					"text" : "Enemy Stats",
 					"textcolor" : [ 0.901956915855408, 0.901983857154846, 0.901968538761139, 1.0 ],
 					"textjustification" : 1
@@ -11755,7 +11773,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 3003.399999999999636, 2927.69487738609314, 115.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1281.999999999999545, 2052.702894151210785, 99.0, 20.0 ],
+					"presentation_rect" : [ 410.999999999999318, 2014.702894151210785, 99.0, 20.0 ],
 					"text" : "Control Stats",
 					"textcolor" : [ 0.901956915855408, 0.901983857154846, 0.901968538761139, 1.0 ],
 					"textjustification" : 1
@@ -11848,7 +11866,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 365.750000000000455, 1671.0, 321.0, 42.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Details around each pattern modifier type can be found in the patternmodifier.js file"
 								}
 
@@ -11862,7 +11879,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 220.5, 1437.0, 129.0, 42.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Debug Print modifier type"
 								}
 
@@ -11889,7 +11905,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1365.0, 592.5, 317.0, 96.0 ],
-									"presentation_linecount" : 8,
 									"text" : "Select the Update Mode and any additional arguments for the particular mode.\n\nAll of these values are determined based on a weighted choice."
 								}
 
@@ -11915,7 +11930,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 289.0, 163.5, 432.0, 167.0 ],
-									"presentation_linecount" : 12,
 									"text" : "Pattern modifiers is where the most apparent changes to a pattern. Pattern modifiers bulk update notes to rests, rests to notes, change leaps to steps, steps to leaps, and add in some randomness to a pattern (in both a controlled and a chaotic way).\n\nPatterns are modified after a certain number of enemies are killed. The modifier type and the extent of the modification are based on Player stats."
 								}
 
@@ -12085,7 +12099,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 425.0, 1510.0, 193.0, 23.0 ],
-									"presentation_linecount" : 2,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 116, 121, 112, 101, 0, 0, 0, 44, 115, 0, 0, 112, 97, 116, 116, 101, 114, 110, 45, 109, 111, 100, 105, 102, 105, 101, 114, 0, 0, 0, 0 ],
 									"saved_bundle_length" : 52,
 									"text" : "/type : \"pattern-modifier\""
@@ -13777,7 +13790,6 @@
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
-						"fontsize" : 12.0,
 						"globalpatchername" : "",
 						"tags" : ""
 					}
@@ -14247,7 +14259,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 34,\n/total : 754,\n/score : 313,\n/time/between_collecting : [231, 1950.74, 2145, 4160, 34],\n/time/lifespan : [231, 3768.02, 3990, 5805, 1131],\n/percent/collected : 4.50928",
+					"text" : "/collected : 6,\n/total : 202,\n/score : 55,\n/time/between_collecting : [532, 1804.17, 1926, 3370, 6],\n/time/lifespan : [532, 3679.5, 3889, 5724, 315],\n/percent/collected : 2.9703",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -14306,7 +14318,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 377.25, 1609.5, 307.0, 42.0 ],
-									"presentation_linecount" : 2,
 									"text" : "For details on each patterninverter function, see the patterninverter.js file"
 								}
 
@@ -14343,7 +14354,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 138.0, 627.5, 319.0, 42.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Select Voice based on frames player spends in particular screen sections"
 								}
 
@@ -14357,7 +14367,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 703.25, 730.5, 366.0, 60.0 ],
-									"presentation_linecount" : 3,
 									"text" : "The patterninverter function to call is a weighted choice that is based off the number of frames that the player has performed a particular action"
 								}
 
@@ -14371,7 +14380,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 499.25, 14.0, 363.0, 149.0 ],
-									"presentation_linecount" : 8,
 									"text" : "Pattern inversion and reversing is a timed-event that is based off the average lifespan of an enemy. Once the game time crosses this threshold, a patterninversion function is called. \n\nPattern inversion functions are the least-frequently called as they can drastically alter the pattern."
 								}
 
@@ -14547,7 +14555,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 374.0, 210.0, 150.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 112, 114, 101, 118, 47, 102, 114, 97, 109, 101, 115, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 116, 111, 116, 97, 108, 95, 102, 114, 97, 109, 101, 115, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0 ],
 									"saved_bundle_length" : 72,
 									"text" : "/prev/frames : 0,\n/total_frames : 0"
@@ -14613,7 +14620,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
 									"patching_rect" : [ 29.0, 304.5, 567.0, 147.0 ],
-									"presentation_linecount" : 11,
 									"text" : "# set initial values\n/prev/frames ??= 0,\n\n/min = /fps * 15,\n/max = /fps * 90,\n\n# set threshold\n/threshold = int32(scale(/lifespan/avg, /lifespan/min, /lifespan/max, /min, /max)),\n\n/delta = /total_frames - /prev/frames"
 								}
 
@@ -17010,7 +17016,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 330.0, 132.359007973396274, 266.0, 132.0 ],
-									"presentation_linecount" : 7,
 									"text" : "Gets the scale values and sends them to specific voices.\n\nThe \"scale-selector\" subpatch peforms input-validation, and then selects the scale values from the given scale class and type."
 								}
 
@@ -17279,8 +17284,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 302.0, 199.0, 232.0, 78.0 ],
-													"presentation_linecount" : 4,
+													"patching_rect" : [ 302.0, 199.0, 234.0, 78.0 ],
 													"text" : "Fancy way to retrieve values from a nested bundle. All this is doing is getting the values from the scale-map."
 												}
 
@@ -17413,7 +17417,6 @@
 																	"numoutlets" : 1,
 																	"outlettype" : [ "" ],
 																	"patching_rect" : [ 169.0, 332.0, 256.0, 22.0 ],
-																	"presentation_linecount" : 2,
 																	"text" : "/scale/voices must be defined in scale-selector"
 																}
 
@@ -18156,7 +18159,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 6,
 					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 9,\n/picked_up : 9,\n/missed : 0,\n/time/between_collecting : [434, 1790., 1031, 6040, 9],\n/time/lifespan : [434, 1790., 1031, 6040, 9],\n/percent/collected : 100.",
+					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [788, 897., 788, 1006, 2],\n/time/lifespan : [788, 897., 788, 1006, 2],\n/percent/collected : 100.",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18238,7 +18241,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 706.0, 1504.691124439239502, 449.0, 42.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Route based on whether the tempo should scale to new weapon range, decrease, increase, or stay the same"
 								}
 
@@ -18252,7 +18254,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 706.0, 1231.691124439239502, 295.0, 78.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Check if the player has swapped weapons, or if the player has had a period of continuous movement or continuous non-movement"
 								}
 
@@ -18266,7 +18267,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1455.0, 397.691124439239502, 237.0, 42.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Handle swapping weapons and saving previous tempo range"
 								}
 
@@ -18760,7 +18760,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 4237,\n/still : 3536,\n/fps : 60,\n/bpm : 131.591,\n/prev/moving : 4096,\n/prev/still : 3525,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 141,\n/still_delta : 11,\n/selected_delta : 0,\n/mode : 0"
+									"text" : "/moving : 1213,\n/still : 913,\n/fps : 60,\n/bpm : 128.4,\n/prev/moving : 1213,\n/prev/still : 703,\n/prev/min : 120,\n/prev/max : 180,\n/range : [100, 160],\n/min : 100,\n/max : 160,\n/selected : 1,\n/prev/selected : 1,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 0,\n/still_delta : 210,\n/selected_delta : 0,\n/mode : 1"
 								}
 
 							}
@@ -19676,7 +19676,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 404.25, 362.75, 201.0, 60.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Handle volume control on application start, stop, and when melodies change."
 								}
 
@@ -20086,7 +20085,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 798.25, 1229.999981219619713, 231.0, 60.0 ],
-									"presentation_linecount" : 2,
 									"text" : "As the signal is overdriven, decrease the overal gain to keep the volume consistent."
 								}
 
@@ -21010,7 +21008,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 369.0, 193.499974131584167, 266.0, 149.0 ],
-									"presentation_linecount" : 8,
 									"text" : "Change the scale class on weapon swaps.\n\nWeapon 0 selects 7-tone scales, Weapon 1 selects 5-tone scales.\n\nThis affects voices 2 and 3, voice 1 will always be the 7-tone scale."
 								}
 
@@ -21837,7 +21834,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 280.0, 825.0, 278.0, 24.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Reset metro if melody group changes"
 								}
 
@@ -21851,7 +21847,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 401.0, 95.742648482322693, 253.0, 42.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Recieves new melody pattern list when melody group changes"
 								}
 
@@ -22113,7 +22108,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 19,\n/melody/prev : 19,\n/melody/idx_delta : 0"
+									"text" : "/melody/curr : 19,\n/melody/prev : 21,\n/melody/idx_delta : 0"
 								}
 
 							}
@@ -22516,7 +22511,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1451.0, 548.0, 210.0, 114.0 ],
-									"presentation_linecount" : 6,
 									"text" : "Logic for playing main menu music. Loops through the /melody/pattern pattr values. These pattr values are sent to the pattrstorage control group."
 								}
 
@@ -22529,7 +22523,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 647.5, 96.5, 474.0, 29.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Handles switching between Main Menu melodies."
 								}
 
@@ -22955,7 +22948,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 3"
+									"text" : "/melody/curr : 4"
 								}
 
 							}
@@ -24856,7 +24849,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 320.0, 722.0, 313.0, 78.0 ],
-									"presentation_linecount" : 4,
 									"text" : "The pattern's sustain values need to be updated as well. More details on how this is done can be seen in the valuemodifier.js file."
 								}
 
@@ -25545,7 +25537,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 7,\n/sharp/count : 0,\n/flat/count : 3,\n/natural/count : 2"
+									"text" : "/rest/count : 6,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 2"
 								}
 
 							}
@@ -25728,7 +25720,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 571.25, 868.852918613906695, 308.0, 167.0 ],
-									"presentation_linecount" : 9,
 									"text" : "The voice is chosen based on the Player's current angle.\n\nThe value position is based on the Player's current horizontal position.\n\nThe step direction is based on whether the most recent hit distance is greater or less than the average hit distance."
 								}
 
@@ -25742,7 +25733,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 468.25, 686.470541227813555, 308.0, 78.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Values are updated if:\n1) the number of dodges has changed\n2) A random that is generated is greater than the average Player hit distance"
 								}
 
@@ -26697,13 +26687,12 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-409",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
-									"text" : "/filter/cutoff : 0.576496,\n/filter/gain : 1.30111,\n/filter/resonance : 1.61333"
+									"text" : "/filter/resonance : 3.09333"
 								}
 
 							}
@@ -27553,7 +27542,7 @@
 					"patching_rect" : [ 203.714285714285722, 541.567441582679749, 318.39999999999992, 161.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 11,
-					"presentation_rect" : [ 1128.999999999999545, 2074.702894151210785, 405.000000000000227, 161.0 ],
+					"presentation_rect" : [ 257.999999999999318, 2036.702894151210785, 405.000000000000227, 161.0 ],
 					"text" : "/max_init : 0,\n/game_init : 0,\n/menu_init : 0,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900,\n/record_music : 0,\n/reset_music : 0",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
@@ -27576,16 +27565,16 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-325",
-					"linecount" : 5,
+					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 85.0 ],
+					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 97.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 5,
-					"presentation_rect" : [ 257.999999999999318, 2125.702894151210785, 405.000000000000227, 85.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 2287,\n/shots_per_weapon : [2198, 89],\n/hits_per_weapon : [1126, 79],\n/percent/one_over_two : 96.1084",
+					"presentation_linecount" : 6,
+					"presentation_rect" : [ 1128.999999999999545, 2100.702894151210785, 405.000000000000227, 97.0 ],
+					"text" : "/selected : 1,\n/total_shots_fired : 599,\n/shots_per_weapon : [564, 35],\n/hits_per_weapon : [264, 23],\n/frames/per_weapon : [2012, 684],\n/percent/one_over_two : 94.1569",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27711,6 +27700,10 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 3486.381327252585379, 534.743970632553101, 56.0, 22.0 ],
+					"restore" : 					{
+						"live.gain~" : [ -6.428571428571429 ]
+					}
+,
 					"text" : "autopattr",
 					"varname" : "u802001736"
 				}
@@ -27776,8 +27769,8 @@
 					"patching_rect" : [ 647.303423569591132, 307.302748560905457, 257.0, 110.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 7,
-					"presentation_rect" : [ 1569.500000000010004, 1828.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 101,\n/beats : 3,\n/units : 35.3733,\n/ppq : 480.,\n/tempo/bpm : 132.591,\n/time_sig : [4, 4],\n/total_beats : 403"
+					"presentation_rect" : [ 1568.077826877434745, 1895.702894151210785, 409.0, 110.0 ],
+					"text" : "/bars : 30,\n/beats : 3,\n/units : 274.433,\n/ppq : 480.,\n/tempo/bpm : 128.4,\n/time_sig : [4, 4],\n/total_beats : 119"
 				}
 
 			}
@@ -28149,7 +28142,8 @@
 ,
 					"slidercolor" : [ 0.701957821846008, 0.701978802680969, 0.701966881752014, 1.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ],
-					"tricolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
+					"tricolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ],
+					"varname" : "live.gain~"
 				}
 
 			}
@@ -28182,8 +28176,8 @@
 					"patching_rect" : [ 106.857142857142861, 859.747268080711365, 415.257142857142753, 149.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 10,
-					"presentation_rect" : [ 1128.999999999999545, 1828.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 53,\n/standard_count : 50,\n/special_count : 3,\n/num_on_screen : [0, 4.06839, 0, 10, 10396],\n/hit : 1205,\n/killed : 58,\n/hit_distance : [11., 337.551, 330., 1162.98, 1205],\n/alive_projectiles : 1,\n/score : 760,\n/time/lifespan : [2497, 13228.1, 37915, 37915, 58]",
+					"presentation_rect" : [ 1128.999999999999545, 1884.702894151210785, 405.000000000000227, 149.0 ],
+					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 3.54748, 0, 7, 2696],\n/hit : 287,\n/killed : 16,\n/hit_distance : [11., 314.474, 340., 862.981, 287],\n/alive_projectiles : 0,\n/score : 190,\n/time/lifespan : [3164, 9845.94, 16831, 17339, 16]",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28264,7 +28258,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 7,
 					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 3, 3, 191],\n/score : 1073,\n/total_frames : 10396,\n/time/current_playthrough : [0, 2, 51, 323],\n/num_events : 3,\n/percent/note_over_enemy_score : 29.1705",
+					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 52, 829],\n/score : 245,\n/total_frames : 2696,\n/time/current_playthrough : [0, 0, 44, 605],\n/num_events : 1,\n/percent/note_over_enemy_score : 22.449",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28284,7 +28278,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 37,
 					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [807, 542],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 1987,\n/frames/moving : 4245,\n/frames/still : 3536,\n/frames/rotating : 628,\n/frames/firing : 8969,\n/frames/per_screen_quadrant : [2174, 2310, 2400, 3512],\n/frames/per_angle_quadrant : [2414, 4955, 1490, 1537],\n/percent/firing_weapon : 86.2736,\n/percent/moving_over_rotating : 87.1127,\n/percent/moving_and_rotating : 28.965,\n/percent/health_lost_over_gained : 43.75,\n/percent/dodges_over_enemy_collision : 50.7692,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 38.8889,\n/curr_velocity : [5, 0],\n/curr_speed : 5.,\n/angle : 92,\n/last_rotation_direction : 2,\n/percent/accuracy : 52.6891,\n/time/between_kills : [0, 2895.78, 1325, 21040, 58],\n/time/between_getting_hit : [32, 12227.2, 130, 68360, 14],\n/max_health : 10,\n/curr_health : 0,\n/health_lost : 14,\n/health_gained : 18,\n/projectile_hit_count : [\"rest\", 7, \"sharp\", 0, \"flat\", 3, \"natural\", 2],\n/hit_distance : [172., 484.542, 188., 804., 12],\n/enemies_collided : 32,\n/dodges : 33,\n/missed_nearby_notes : 21,\n/alive_projectiles : 0",
+					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [955, 627],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 390,\n/frames/moving : 1213,\n/frames/still : 914,\n/frames/rotating : 179,\n/frames/firing : 2520,\n/frames/per_screen_quadrant : [321, 588, 307, 1480],\n/frames/per_angle_quadrant : [1166, 1076, 212, 242],\n/percent/firing_weapon : 93.4718,\n/percent/moving_over_rotating : 87.1408,\n/percent/moving_and_rotating : 21.8855,\n/percent/health_lost_over_gained : 80.,\n/percent/dodges_over_enemy_collision : 83.3333,\n/percent/hit_rests_over_accidentals : 75.,\n/percent/missed_notes_over_dodges : 40.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 124,\n/last_rotation_direction : 2,\n/percent/accuracy : 47.9132,\n/time/between_kills : [441, 2554.31, 3737, 5180, 16],\n/time/between_getting_hit : [275, 3837.62, 542, 15448, 8],\n/max_health : 10,\n/curr_health : 4,\n/health_lost : 8,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 6, \"sharp\", 0, \"flat\", 0, \"natural\", 2],\n/hit_distance : [91., 413., 224., 741., 8],\n/enemies_collided : 3,\n/dodges : 15,\n/missed_nearby_notes : 10,\n/alive_projectiles : 2",
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
