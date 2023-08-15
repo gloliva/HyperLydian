@@ -387,6 +387,7 @@ class StatTracker:
         self.weapon__total_shots_fired = Stat(0)
         self.weapon__shots_per_weapon = ListStat(initial_length=2)
         self.weapon__hits_per_weapon = ListStat(initial_length=2)
+        self.weapon__frames__per_weapon = ListStat(initial_length=2)
         self.weapon__percent__one_over_two = Stat(0)
 
         self.upgrades__total_dropped = Stat(0)
@@ -491,7 +492,7 @@ class StatTracker:
         projectile_hit_count = self.player__projectile_hit_count.count
         if projectile_hit_count > 0:
             num_rests = self.player__projectile_hit_count.get(REST)
-            self.player__percent__hit_rests_over_accidentals = (num_rests / projectile_hit_count) * 100
+            self.player__percent__hit_rests_over_accidentals.update((num_rests / projectile_hit_count) * 100)
 
         # Note vs enemy score
         if self.game__score > 0:

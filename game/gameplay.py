@@ -231,6 +231,10 @@ def run_gameplay(game_clock: pg.time.Clock, main_screen: pg.Surface):
         stat_tracker.player__alive_projectiles.update(len(groups.player_projectiles))
         stat_tracker.enemies__num_on_screen.add(len(groups.all_enemies))
         stat_tracker.enemies__alive_projectiles.update(len(groups.enemy_projectiles))
+        stat_tracker.weapon__frames__per_weapon.add_at_index(
+            index=player.current_weapon_id,
+            val=1,
+        )
         stat_tracker.update_stats()
         stat_tracker.set_game_time(pg.time.get_ticks())
         stat_tracker.send_stats()

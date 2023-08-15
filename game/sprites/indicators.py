@@ -10,6 +10,7 @@ from sprites.base import construct_asset_full_path
 
 
 class Indicator(pg.sprite.Sprite):
+    """Indicator base class for visually indicating something to the player"""
     # Image
     DRAW_LAYER = 2
 
@@ -71,6 +72,7 @@ class Indicator(pg.sprite.Sprite):
 
 
 class SideBar(Indicator):
+    """Warning bars that show up on each part of the screen"""
     # Image
     TYPES = ['warning']
     OFFSET = 24

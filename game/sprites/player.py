@@ -26,6 +26,8 @@ from settings_manager import settings_manager
 
 
 class Player(CharacterSprite):
+    """The player sprite. That's you!"""
+
     # Sprite
     DEFAULT_HEALTH = 10
     EASY_MODE_HEALTH = 15
@@ -267,7 +269,7 @@ class Player(CharacterSprite):
 
 
 def create_player(game_screen_rect: pg.Rect, in_menu: bool = False) -> Player:
-    """Creates a new Player object"""
+    """Creates a new Player object on every game start"""
     track_stat = True if not in_menu else False
     damage_increase = 2 if settings_manager.easy_mode else 0
 
