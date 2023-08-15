@@ -63,7 +63,11 @@ MAIN_MENU.add_text(
 
 
 def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
-    """Render main menu"""
+    """
+    MAIN MENU is the primary menu to start the game.
+
+    This is the Menu loop that handles transitions to the GAMEPLAY, CREDITS, and HOW TO PLAY states.
+    """
     # draw initial background
     for _ in range(background.Note.NUM_ON_LOAD):
         note = background.Note(MENU_SCREEN.get_rect(), on_load=True, in_menu=True)
@@ -166,6 +170,10 @@ def run_main_menu(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
 
 def start_game_fade_out(game_clock: pg.time.Clock, main_screen: pg.Surface, blackhole: background.BlackHole):
+    """
+    If transitioning back into the Game, begin a fade-out by drawing a white surface to the screen
+    and increasing its alpha value over time.
+    """
     fade_surf = pg.Surface(main_screen.get_size())
     fade_surf.fill('white')
     curr_fade_out_frame = 0
@@ -201,6 +209,10 @@ def start_game_fade_out(game_clock: pg.time.Clock, main_screen: pg.Surface, blac
 
 
 def handle_collisions(blackhole: background.BlackHole):
+    """
+    Handle collisions between notes nad blackhole to make it look like notes
+    are getting swallowed up by the blackhole.
+    """
     # blackhole and stars
     pg.sprite.spritecollide(
         blackhole,

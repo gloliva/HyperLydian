@@ -65,6 +65,15 @@ DEATH_MENU.add_text(
 
 
 def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
+    """
+    DEATH MENU displays the Player's stats for the previous run and gives the option
+    to Continue (no changes to music), Restart (reload music.json file), go to Main Menu,
+    or Quit.
+
+    This is the Menu loop and handles transitions to and from the DEATH MENU to the
+    GAMEPLAY loop or MAIN MENU.
+    """
+
     next_state = None
     screen_rect = main_screen.get_rect()
 
@@ -145,6 +154,11 @@ def run_death_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameSt
 
 
 def start_game_fade_out(game_clock: pg.time.Clock, main_screen: pg.Surface, destroyed_ship: background.DestroyedShip):
+    """
+    If transitioning back into the Game, begin a fade-out by drawing a white surface to the screen
+    and increasing its alpha value over time.
+    """
+
     screen_rect = main_screen.get_rect()
     fade_surf = pg.Surface(main_screen.get_size())
     fade_surf.fill('white')

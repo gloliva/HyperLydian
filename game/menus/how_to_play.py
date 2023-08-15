@@ -77,6 +77,12 @@ HOW_TO_PLAY_MENU.add_text(
 
 
 def run_how_to_play_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
+    """
+    HOW TO PLAY MENU displays the objectives and controls for the game.
+
+    This is the Menu loop that only transitions back to the MAIN MENU.
+    """
+
     next_state = None
     screen_rect = main_screen.get_rect()
 

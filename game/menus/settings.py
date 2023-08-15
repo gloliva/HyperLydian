@@ -69,6 +69,13 @@ SETTINGS_MENU.add_text(
 
 
 def run_settings_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
+    """
+    SETTINGS MENU provides the option to toggle different settings. The available settings are
+    EASY MODE and PLAYER INVINCIBLE.
+
+    This is the Menu loop and handles transitions to and from the MAIN MENU.
+    """
+
     next_state = None
     screen_rect = main_screen.get_rect()
 

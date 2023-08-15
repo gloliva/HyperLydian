@@ -8,12 +8,13 @@ from osc_client import osc, OSCHandler
 
 
 class Stat:
-    """A stat to be sent via OSC"""
+    """A simple Number Stat to be sent via OSC"""
     def __init__(self, value: Any, send: bool = True) -> None:
         self.value = value
         self.send = send
 
     def update(self, value: Any) -> None:
+        """Set the value of this stat to a different object"""
         self.value = value
 
     def __add__(self, other) -> "Stat":
@@ -85,12 +86,13 @@ class Stat:
 
 
 class TextStat:
-    """A stat that tracks text"""
+    """A stat that tracks strings"""
     def __init__(self, initial_text: str = '', send: bool = True) -> None:
         self.text = initial_text
         self.send = send
 
     def update(self, text: str) -> None:
+        """Update the string"""
         self.text = text
 
     def __str__(self) -> str:
@@ -112,10 +114,17 @@ class TimeStat:
 
     @property
     def time(self):
+        """Represents Time as a tuple of Hours, Minutes, Seconds, and Ms"""
         return (self.hours, self.minutes, self.seconds, self.ms)
 
     @property
     def time_display(self) -> str:
+        """
+        Display the time in a format that makes sense with how much time has ellapsed.
+        e.g. as (4 minutes 32 seconds), (24 seconds), (1 hour 3 minutes 10 seconds),
+
+        This function is useful for displaying Time Stats in the DEATH MENU
+        """
         time_str = [f'{self.seconds} Seconds']
         if self.minutes > 0:
             time_str.insert(0, f'{self.minutes} Minutes')
@@ -139,6 +148,17 @@ class TimeStat:
 
 
 class TrackerStat:
+    """
+    Tracks information about a numerical Stat that changes/updates frequently.
+
+    Tracks the following:
+        1) Min. value recorded
+        2) Avg. of all values recorded
+        3) The most recent value recorded
+        4) Max. value recorded
+        5) Total number of values recorded
+
+    """
     def __init__(self, send_mode: int = 0, send: bool = True) -> None:
         self.sum = 0
         self.last = 0
@@ -154,6 +174,9 @@ class TrackerStat:
 
     @property
     def avg(self) -> float:
+        """
+        Calculate the average of all tracked values
+        """
         if self.count > 0:
             return self.sum / self.count
         else:
@@ -161,16 +184,32 @@ class TrackerStat:
 
     @property
     def list(self) -> List:
+        """
+        All tracked values as a List
+        """
         return [self.min, self.avg, self.last, self.max, self.count]
 
     @property
     def value(self) -> Union[int, float, List]:
+        """
+        Returns one or more of the tracked values depending on the send_mode
+
+        send_mode = 0: Return all tracked values as a list
+        send_mode = 1: Return the min
+        send_mode = 2: Return the avg
+        send_mode = 3: Return the most recent
+        send_mode = 4: Return the max
+        send_mode = 5: Return the count
+        """
         if self.send_mode == 0:
             return self.list
 
         return self.list[self.send_mode - 1]
 
     def add(self, val: float):
+        """
+        Add a new value to be tracked
+        """
         self.last = val
         self.sum += val
         self.count += 1
@@ -187,6 +226,7 @@ class TrackerStat:
 
 
 class CounterStat:
+    """A stat that maps strings to counts"""
     def __init__(self, init_values: List[str] = None, send: bool = True) -> None:
         self._items = {} if init_values is None else {key: 0 for key in init_values}
         self.count = 0
@@ -194,15 +234,20 @@ class CounterStat:
 
     @property
     def items(self) -> List[Union[str, int]]:
+        """
+        Returns a List of tuple pairs: (item_str, item_count)
+        """
         items_list = []
         for key, val in self._items.items():
             items_list.extend([key, val])
         return items_list
 
     def get(self, item: str) -> int:
+        """Get an item by name"""
         return self._items[item]
 
     def increase(self, item: str) -> None:
+        """Increase the value of an item, or add the item to the map"""
         if item not in self._items:
             self._items[item] = 1
         else:
@@ -212,18 +257,22 @@ class CounterStat:
 
 
 class ListStat:
+    """A stat that tracks Lists"""
     def __init__(self, initial_length: int = 0, initial_fill: int = 0, send: bool = True) -> None:
         self.list = [initial_fill for _ in range(initial_length)]
         self.send = send
 
     def add_at_index(self, index: int, val: int):
+        """Increase the value at the index by one"""
         self.list[index] += val
 
     def update(self, *vals: int):
+        """Update the entire list to equal this new list"""
         for idx, val in enumerate(vals):
             self.list[idx] = val
 
     def get(self, index: int) -> Stat:
+        """Return an element from the list at the given index"""
         return Stat(self.list[index])
 
     def __str__(self) -> str:
@@ -234,6 +283,14 @@ class ListStat:
 
 
 class StatTracker:
+    """
+    Tracks all game information as Stats.
+
+    Displays some of these stats at the end DEATH MENU.
+
+    Sends relevant stats over OSC at the provided port.
+    """
+
     OUTPUT_STATS_FORMAT = [
         'SCORE:              {buffer}{value}',
         'ENEMIES KILLED:     {buffer}{value}',
@@ -245,7 +302,6 @@ class StatTracker:
         'TOTAL TIME PLAYED:  {buffer}{value}',
     ]
 
-    """Tracks game information"""
     def __init__(self, osc: OSCHandler) -> None:
         self.osc = osc
 
@@ -265,6 +321,8 @@ class StatTracker:
         self.game__time__total_played = TimeStat(0)
 
     def init_new_playthrough(self, start_time_ms: int = 0, player_max_health: int = 0):
+        """Reset Stats on a new Playthrough"""
+
         # Time trackers
         self.start_time = start_time_ms
         self.time_last_enemy_killed = start_time_ms
@@ -352,12 +410,14 @@ class StatTracker:
         self.game__play_count += 1
 
     def send_stats(self):
+        """Send all stats over OSC"""
         osc_stats = self.convert_osc_stats_to_dict()
         self.osc.union_bundle(osc_stats)
         if not debug.DISABLE_OSC_SEND:
             self.osc.send_full_bundle()
 
     def update_stats(self):
+        """Update stats based on other stats"""
         # Update score
         self.game__score = self.enemies__score + self.notes__score
 
@@ -438,6 +498,7 @@ class StatTracker:
             self.game__percent__note_over_enemy_score = (self.notes__score / self.game__score) * 100
 
     def convert_osc_stats_to_dict(self) -> Dict[str, Any]:
+        """Convert stats into a dictionary to be used by the OSC manager"""
         stat_dict = {}
 
         for stat_name, stat in self.__dict__.items():
@@ -460,6 +521,7 @@ class StatTracker:
         return stat_dict
 
     def set_game_time(self, total_time_elapsed_ms: int):
+        """Set the time that a new game playthrough begins"""
         # calculate playthrough time
         playthrough_time_elapsed = total_time_elapsed_ms - self.start_time
         self.game__time__current_playthrough = TimeStat(playthrough_time_elapsed)
@@ -468,6 +530,7 @@ class StatTracker:
         self.game__time__total_played = TimeStat(total_time_elapsed_ms)
 
     def print_stats(self):
+        """Print Stats to the console"""
         print(f'---- Game {self.game__play_count} ----')
         print(f'Score: {self.game__score}')
         print(f'Enemies Killed: {self.enemies__killed}')
@@ -489,6 +552,7 @@ class StatTracker:
         print()
 
     def get_endgame_stats(self) -> str:
+        """Formats the endgame stats text to be displayed during the DEATH MENU"""
         stats_to_report = [
             self.game__score,
             self.enemies__killed,

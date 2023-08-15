@@ -29,7 +29,7 @@ MAX_FULLY_LOADED = False
 MAX_OPENED_ADDRESS = '/max_opened'
 MAX_LOADED_ADDRESS = '/max_loaded'
 
-MAXIMUM_LOADTIME = 30
+MAXIMUM_LOADTIME = 40
 
 # Loading Screen Text
 LOADING_STR = 'LOADING'
@@ -56,21 +56,40 @@ LOADING_MENU.add_text(
 
 
 def loading_screen(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
+    """
+    Run the loading screen asynchronously as the Max Application opens.
+
+    After Max opens, transition to the MAIN MENU.
+    """
     asyncio.run(open_max_application(game_clock, main_screen))
     return GameState.MAIN_MENU
 
 
 def max_loaded_handler(address, *args):
+    """
+    Async handler function that gets called when polling for the /max_loaded OSC address
+    """
     global MAX_FULLY_LOADED
     MAX_FULLY_LOADED = True
 
 
 def max_opened_handler(address, *args):
+    """
+    Async handler function that gets called when polling for the /max_opened OSC address
+    """
     global MAX_OPEN
     MAX_OPEN = True
 
 
 async def open_max_application(game_clock: pg.time.Clock, main_screen: pg.Surface):
+    """
+    Opens the Max Application, shows the Studio Logo, and then shows a loading screen
+    while waiting for Max to send the OSC address /max_loaded to show Max has fully opened
+    and all initialization is complete.
+
+    Once Max signals that all loading has completed, close the OSC server and transition to the
+    MAIN MENU.
+    """
     global MAX_APP
 
     if DISABLE_OPENING_MAX_APPLICATION:
@@ -98,6 +117,9 @@ async def open_max_application(game_clock: pg.time.Clock, main_screen: pg.Surfac
 
 
 def show_studio_logo_screen(game_clock: pg.time.Clock, main_screen: pg.Surface):
+    """
+    Show the studio logo on startup. This buys us some time as Max begins to open and load.
+    """
     screen_rect = main_screen.get_rect()
     studio_logo = StudioLogo(screen_rect, screen_rect.height)
     alpha_value = 255
@@ -126,6 +148,11 @@ def show_studio_logo_screen(game_clock: pg.time.Clock, main_screen: pg.Surface):
 
 
 async def wait_for_max_to_load(main_screen: pg.Surface):
+    """
+    Loading screen that waits for Max to send OSC addresses to indicate that it has finished loading.
+
+    Reports when Max has opened and fully loaded, and gives a rough estimate of the remaining time needed.
+    """
     LOADING_MENU.add_screen(menu_screen=main_screen)
 
     # Set screen position for loading screen text
@@ -147,6 +174,7 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
 
     # Wait for Max to Open
     elapsed_load_time = 0
+    taking_awhile_set = False
     while not MAX_OPEN:
         main_screen.fill("black")
 
@@ -157,8 +185,12 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
         # update loading percent
         if elapsed_load_time < MAXIMUM_LOADTIME:
             percent = int((elapsed_load_time / MAXIMUM_LOADTIME) * 100)
-        else:
+        elif not taking_awhile_set:
+            taking_awhile_set = True
             LOADING_MENU.update_text(BEYOND_LOADTIME_STR, REASON_TEXT)
+            REASON_TEXT.update_position(
+                {'bottomleft': (50, text_height_position - REASON_TEXT.rect.height)}
+            )
             percent = 99
         LOADING_MENU.update_text(PERCENT_LOADED_STR.format(percent), PERCENT_TEXT)
 

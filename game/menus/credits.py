@@ -58,6 +58,11 @@ CREDITS_MENU.add_text(
 
 
 def run_credits_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> GameState:
+    """
+    CREDITS Menu lists out the credits for HyperLydian.
+    This is the Menu loop and handles transitions to and from the CREDITS menu.
+    """
+
     next_state = None
     screen_rect = main_screen.get_rect()
 
@@ -165,6 +170,9 @@ def run_credits_menu(game_clock: pg.time.Clock, main_screen: pg.Surface) -> Game
 
 
 def handle_collisions():
+    """
+    Handle collisions between player projectiles and enemies in CREDITS menu.
+    """
     # projectiles + enemies collision
     # destroy projectile + damage enemy
     collided = pg.sprite.groupcollide(
