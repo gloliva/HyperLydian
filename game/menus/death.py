@@ -1,3 +1,11 @@
+"""
+This module defines everything needed for the DEATH menu, which is displayed after the Player dies in game.
+
+This screen also displays the stats from the previous game run.
+
+Author: Gregg Oliva
+"""
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (

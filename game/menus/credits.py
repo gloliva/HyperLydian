@@ -1,3 +1,9 @@
+"""
+This module defines everything needed for the CREDITS menu.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from random import randint
 

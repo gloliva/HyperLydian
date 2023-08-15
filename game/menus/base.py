@@ -1,3 +1,10 @@
+"""
+This module defines all the base class for Menus, which is used to render text to the screen
+and select text options.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 from typing import List, Optional
 

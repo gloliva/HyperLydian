@@ -1,3 +1,12 @@
+"""
+This module defines everything needed for the SETTINGS menu, which is where the user
+can enable / disable specific game modes:
+    1) Easy Mode: this makes the game easier by reducing the number of enemies and giving the player more health
+    2) Player Invincible: makes the Player not take any damage
+
+Author: Gregg Oliva
+"""
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (

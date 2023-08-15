@@ -1,3 +1,11 @@
+"""
+This module defines everything needed for the HOW TO PLAY menu.
+
+This displays the game's objectives and controls.
+
+Author: Gregg Oliva
+"""
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (

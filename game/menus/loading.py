@@ -1,3 +1,12 @@
+"""
+This module defines everything needed for the LOADING menu.
+
+This is where the Max Application is opened and polled to see if it is finished loading.
+Once the Max Application reports it is done loading, this menu transfers to the MAIN MENU.
+
+Author: Gregg Oliva
+"""
+
 # stdlib imports
 import asyncio
 from subprocess import Popen

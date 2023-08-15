@@ -1,3 +1,12 @@
+"""
+This module defines everything needed for the MAIN MENU.
+
+This is where the user can start the game, toggle any settings, read the credits and how to play menus,
+and quit the game.
+
+Author: Gregg Oliva
+"""
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import (
@@ -8,6 +17,7 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
     SRCALPHA,
+    RESIZABLE,
 )
 
 # project imports
@@ -28,7 +38,7 @@ from stats import stat_tracker
 from text import TransitionText
 
 
-MENU_SCREEN = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA)
+MENU_SCREEN = pg.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), flags=SRCALPHA | RESIZABLE)
 
 
 # Create Main Menu
