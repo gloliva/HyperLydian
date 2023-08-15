@@ -1,3 +1,8 @@
+"""
+Global Constants and Definitions that don't have any dependencies
+and can be used across all objects.
+"""
+
 # stdlib imports
 from enum import Enum
 import os

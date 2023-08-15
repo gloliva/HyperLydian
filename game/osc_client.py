@@ -1,5 +1,4 @@
 # stdlib imports
-import asyncio
 from typing import Any, Dict, List
 
 # 3rd-party imports
