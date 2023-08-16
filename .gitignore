@@ -13,3 +13,6 @@
 
 # ignore any scratch / temp dirs
 *scratch
+
+# standalone applications
+*apps
