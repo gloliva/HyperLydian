@@ -49,13 +49,14 @@ from stats import stat_tracker
 pg.init()
 
 
-# set app icon if running game via Python, otherwise app icon is set via Pyinstaller
+# set app icon; path changes depending on whether this is via Python or a Standalone build
 try:
     base_path = sys._MEIPASS
 except Exception:
     base_path = os.path.abspath(".")
-    game_icon_file = os.path.join(base_path, PNG_PATH, 'icons/icon_32x32@2x.png')
-    pg.display.set_icon(pg.image.load(game_icon_file))
+
+game_icon_file = os.path.join(base_path, PNG_PATH, 'icons/icon_32x32@2x.png')
+pg.display.set_icon(pg.image.load(game_icon_file))
 
 
 # set up display

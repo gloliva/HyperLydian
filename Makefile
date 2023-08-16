@@ -3,7 +3,7 @@ clean:
 
 app:
 	pyinstaller ./game/main.py	\
-		--onedir -n hyperlydian	\
+		--onedir -n HyperLydian	\
 		--distpath apps	\
 		--icon "assets/png/icons/icon_32x32@2x.png"	\
 		--windowed	\
