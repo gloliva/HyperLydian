@@ -17,6 +17,10 @@ Summary of program logic:
 Author: Gregg Oliva
 """
 
+#stdlib imports
+import os
+import sys
+
 # 3rd-party imports
 import pygame as pg
 from pygame.locals import QUIT, RESIZABLE
@@ -27,8 +31,10 @@ from defs import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     GameState,
+    PNG_PATH,
 )
 from debug import DISABLE_OPENING_MAX_APPLICATION
+from exceptions import QuitOnLoadError
 from menus.loading import loading_screen
 from gameplay import run_gameplay
 from menus.main_menu import run_main_menu
@@ -38,11 +44,19 @@ from menus.how_to_play import run_how_to_play_menu
 from menus.settings import run_settings_menu
 from stats import stat_tracker
 
+
 # initial pygame setup
 pg.init()
 
-# set app icon
-pg.display.set_icon(pg.image.load('assets/png/icons/game_icon.png'))
+
+# set app icon if running game via Python, otherwise app icon is set via Pyinstaller
+try:
+    base_path = sys._MEIPASS
+except Exception:
+    base_path = os.path.abspath(".")
+    game_icon_file = os.path.join(base_path, PNG_PATH, 'icons/icon_32x32@2x.png')
+    pg.display.set_icon(pg.image.load(game_icon_file))
+
 
 # set up display
 MAIN_SCREEN = pg.display.set_mode(
@@ -90,6 +104,8 @@ def main():
 
             # lock FPS
             CLOCK.tick(60)
+    except QuitOnLoadError:
+        quit_game(CLOCK, MAIN_SCREEN)
     except Exception:
         # Catch all exception, close Max Application if anything errors out
         quit_game(CLOCK, MAIN_SCREEN)

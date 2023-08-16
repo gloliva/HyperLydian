@@ -6,6 +6,9 @@ to the game.
 Author: Gregg Oliva
 """
 
+class QuitOnLoadError(Exception):
+    pass
+
 class AssetLoadError(Exception):
     pass
 

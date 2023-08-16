@@ -80,7 +80,7 @@ PNG_PATH = 'assets/png'
 
 
 # Max application constants
-MAX_APPLICATION_PATH = 'dist/max-hyperlydian.app'
+MAX_APPLICATION_PATH = 'hl-max.app'
 
 
 # Music constants

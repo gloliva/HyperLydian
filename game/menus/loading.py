@@ -9,10 +9,13 @@ Author: Gregg Oliva
 
 # stdlib imports
 import asyncio
+import os
 from subprocess import Popen
+import sys
 
 # 3rd-party imports
 import pygame as pg
+from pygame.locals import QUIT
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 from pythonosc.dispatcher import Dispatcher
 
@@ -25,6 +28,7 @@ from defs import (
     FPS,
 )
 from debug import DISABLE_OPENING_MAX_APPLICATION
+from exceptions import QuitOnLoadError
 from menus.base import Menu
 from sprites.menus import StudioLogo
 from text import Text
@@ -112,7 +116,15 @@ async def open_max_application(game_clock: pg.time.Clock, main_screen: pg.Surfac
     transport, _ = await server.create_serve_endpoint()
 
     # Open Max application
-    args = ['open', MAX_APPLICATION_PATH]
+    try:
+        base_path = sys._MEIPASS
+        print(base_path)
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    max_application_path = os.path.join(base_path, MAX_APPLICATION_PATH)
+    print(max_application_path)
+    args = ['open', max_application_path]
     MAX_APP = Popen(args)
 
     # show studio logo
@@ -185,6 +197,12 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
     elapsed_load_time = 0
     taking_awhile_set = False
     while not MAX_OPEN:
+        # Check if quitting
+        for event in pg.event.get():
+            # Quit the game
+            if event.type == QUIT:
+                raise QuitOnLoadError('Quitting while game is loading')
+
         main_screen.fill("black")
 
         # update loading dots
@@ -221,6 +239,12 @@ async def wait_for_max_to_load(main_screen: pg.Surface):
 
     # Wait for Max to loadbang everything
     while not MAX_FULLY_LOADED:
+        # Check if quitting
+        for event in pg.event.get():
+            # Quit the game
+            if event.type == QUIT:
+                raise QuitOnLoadError('Quitting while game is loading')
+
         main_screen.fill("black")
         loading_dot_str = LOADING_DOT_STR * ((elapsed_load_time % 3) + 1)
         LOADING_MENU.update_text(loading_dot_str, LOADING_DOT_TEXT)

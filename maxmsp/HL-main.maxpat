@@ -844,7 +844,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2409.287396525341592, 524.155754923820496, 821.0, 187.0 ],
+					"patching_rect" : [ 2409.287396525341592, 524.155754923820496, 824.0, 187.0 ],
 					"text" : "Pattrstorage is used to handle switching melodies and saving changes to patterns from modulation sources. \n\nMelodies are swapped on-beat which triggers the following:  1) the current pattern is saved prior to switching to save any changes that have been made, 2) the next pattern is queued up, 3) if an entirely different melody group is being loaded, perform a hard reset (resets the Voice's metro object), otherwise perform a soft reset (only resets the Voice's counter object), 4) load the queued pattern.\n\nA hard reset is done on application start and when switching melody groups."
 				}
 
@@ -3268,7 +3268,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 4034.0, -11.0, 892.0, 959.0 ],
+						"rect" : [ 2146.0, -29.0, 892.0, 959.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5133,8 +5133,19 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "FullPacket", "FullPacket" ],
+									"patching_rect" : [ 101.0, 273.0, 180.0, 22.0 ],
+									"text" : "o.if bound(/per_angle_quadrant)"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontsize" : 16.0,
 									"id" : "obj-163",
@@ -6624,7 +6635,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "" ],
-									"patching_rect" : [ 162.0, 753.0, 219.5, 22.0 ],
+									"patching_rect" : [ 162.0, 791.0, 219.5, 22.0 ],
 									"text" : "t 1 l"
 								}
 
@@ -6636,7 +6647,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 162.0, 669.0, 85.0, 22.0 ],
+									"patching_rect" : [ 162.0, 707.0, 85.0, 22.0 ],
 									"text" : "o.pack /voices"
 								}
 
@@ -6648,7 +6659,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 162.0, 637.0, 68.0, 22.0 ],
+									"patching_rect" : [ 162.0, 675.0, 68.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"filename" : "shuffle.js",
 										"parameter_enable" : 0
@@ -6665,7 +6676,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 162.0, 603.0, 114.5, 22.0 ],
+									"patching_rect" : [ 162.0, 641.0, 114.5, 22.0 ],
 									"text" : "o.route /voices"
 								}
 
@@ -6678,7 +6689,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 162.0, 559.0, 150.0, 31.0 ],
+									"patching_rect" : [ 162.0, 597.0, 150.0, 31.0 ],
 									"text" : "/voices = [2, 3]"
 								}
 
@@ -6692,7 +6703,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 162.0, 699.5, 219.5, 44.0 ],
+									"patching_rect" : [ 162.0, 737.5, 219.5, 44.0 ],
 									"text" : "/fm_voice = /voices[[ 0 ]],\n/delay_voice = /voices[[ 1 ]]"
 								}
 
@@ -6745,7 +6756,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 162.0, 527.0, 242.5, 22.0 ],
+									"patching_rect" : [ 162.0, 565.0, 242.5, 22.0 ],
 									"text" : "t l l"
 								}
 
@@ -6759,7 +6770,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 162.0, 473.0, 220.0, 44.0 ],
+									"patching_rect" : [ 162.0, 511.0, 220.0, 44.0 ],
 									"text" : "/waves = [1, 2, 3, 4],\n/weights = /per_angle_quadrant"
 								}
 
@@ -6831,7 +6842,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 162.0, 443.0, 129.0, 22.0 ],
+									"patching_rect" : [ 162.0, 481.0, 129.0, 22.0 ],
 									"text" : "o.if /selected/delta != 0"
 								}
 
@@ -6843,7 +6854,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "FullPacket" ],
-									"patching_rect" : [ 101.0, 397.0, 80.0, 22.0 ],
+									"patching_rect" : [ 101.0, 430.0, 80.0, 22.0 ],
 									"text" : "o.select /prev"
 								}
 
@@ -6880,7 +6891,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 391.0, 261.0, 146.0, 23.0 ],
+									"patching_rect" : [ 391.0, 273.0, 151.0, 23.0 ],
 									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 112, 114, 101, 118, 47, 115, 101, 108, 101, 99, 116, 101, 100, 0, 0, 44, 105, 0, 0, -1, -1, -1, -1 ],
 									"saved_bundle_length" : 44,
 									"text" : "/prev/selected : -1"
@@ -6894,7 +6905,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
-									"patching_rect" : [ 101.0, 291.0, 309.0, 22.0 ],
+									"patching_rect" : [ 101.0, 307.0, 309.0, 22.0 ],
 									"text" : "o.union"
 								}
 
@@ -6920,7 +6931,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "FullPacket" ],
-									"patching_rect" : [ 101.0, 321.499922394752502, 309.0, 69.500077605247498 ],
+									"patching_rect" : [ 101.0, 337.499922394752502, 309.0, 70.0 ],
 									"text" : "/prev/selected ??= -1,\n\n/selected/delta = /selected - /prev/selected,\n/prev/selected = /selected"
 								}
 
@@ -6950,6 +6961,13 @@
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-45", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-104", 0 ],
 									"source" : [ "obj-102", 0 ]
@@ -7016,7 +7034,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-51", 0 ],
-									"midpoints" : [ 245.5, 286.0, 87.25, 286.0 ],
+									"midpoints" : [ 245.5, 252.0, 87.25, 252.0 ],
 									"source" : [ "obj-143", 0 ]
 								}
 
@@ -7072,15 +7090,15 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-143", 0 ],
-									"source" : [ "obj-42", 1 ]
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-42", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-45", 0 ],
-									"source" : [ "obj-42", 0 ]
+									"destination" : [ "obj-143", 0 ],
+									"source" : [ "obj-42", 1 ]
 								}
 
 							}
@@ -7115,7 +7133,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-45", 1 ],
-									"midpoints" : [ 110.5, 429.0, 417.0, 429.0, 417.0, 288.0, 400.5, 288.0 ],
+									"midpoints" : [ 110.5, 461.0, 417.0, 461.0, 417.0, 300.0, 400.5, 300.0 ],
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -7236,7 +7254,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-153", 0 ],
-									"midpoints" : [ 372.0, 815.999987000000033, 525.25, 815.999987000000033 ],
+									"midpoints" : [ 372.0, 850.999987000000033, 525.25, 850.999987000000033 ],
 									"source" : [ "obj-96", 1 ]
 								}
 
@@ -7244,7 +7262,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-51", 0 ],
-									"midpoints" : [ 171.5, 799.5, 87.25, 799.5 ],
+									"midpoints" : [ 171.5, 845.5, 87.25, 845.5 ],
 									"source" : [ "obj-96", 0 ]
 								}
 
@@ -7964,9 +7982,9 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 771.0, 155.0, 222.0, 369.0 ],
-									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 49, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -29, 51, 51, 51, 51, 51, 51, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 60, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 10, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -45, 51, 51, 51, 51, 51, 51, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 70, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 75, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 45, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 15, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 11, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -71, -103, -103, -103, -103, -103, -102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102 ],
+									"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 49, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -29, 51, 51, 51, 51, 51, 51, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 60, 0, 0, 0, 24, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 10, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 50, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 15, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -45, 51, 51, 51, 51, 51, 51, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 70, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 75, 0, 0, 0, 24, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 47, 51, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 109, 105, 120, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 45, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 98, 97, 110, 100, 119, 105, 100, 116, 104, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102, 0, 0, 0, 32, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 97, 109, 112, 105, 110, 103, 0, 0, 0, 44, 100, 0, 0, 63, -26, 102, 102, 102, 102, 102, 102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 115, 112, 114, 101, 97, 100, 0, 0, 0, 0, 44, 105, 0, 0, 0, 0, 0, 15, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 114, 121, 0, 0, 0, 44, 100, 0, 0, 63, -32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 114, 111, 111, 109, 0, 0, 44, 105, 0, 0, 0, 0, 0, 30, 0, 0, 0, 24, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 116, 105, 109, 101, 0, 0, 44, 105, 0, 0, 0, 0, 0, 11, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 101, 97, 114, 108, 121, 0, 44, 100, 0, 0, 63, -71, -103, -103, -103, -103, -103, -102, 0, 0, 0, 28, 47, 52, 47, 114, 101, 118, 101, 114, 98, 47, 100, 101, 99, 97, 121, 0, 44, 100, 0, 0, 63, -55, -103, -103, -103, -103, -103, -102 ],
 									"saved_bundle_length" : 896,
-									"text" : "/1/reverb/mix : 0,\n/2/reverb/mix : 30,\n/2/reverb/bandwidth : 0.5,\n/2/reverb/damping : 0.7,\n/2/reverb/spread : 30,\n/2/reverb/dry : 0.6,\n/2/reverb/room : 60,\n/2/reverb/time : 10,\n/2/reverb/early : 0.25,\n/2/reverb/decay : 0.25,\n/3/reverb/mix : 30,\n/3/reverb/bandwidth : 0.5,\n/3/reverb/damping : 0.3,\n/3/reverb/spread : 70,\n/3/reverb/dry : 0.2,\n/3/reverb/room : 75,\n/3/reverb/time : 30,\n/3/reverb/early : 0.25,\n/3/reverb/decay : 0.2,\n/4/reverb/mix : 45,\n/4/reverb/bandwidth : 0.2,\n/4/reverb/damping : 0.7,\n/4/reverb/spread : 15,\n/4/reverb/dry : 0.5,\n/4/reverb/room : 30,\n/4/reverb/time : 11,\n/4/reverb/early : 0.1,\n/4/reverb/decay : 0.2"
+									"text" : "/1/reverb/mix : 0,\n/2/reverb/mix : 30,\n/2/reverb/bandwidth : 0.5,\n/2/reverb/damping : 0.7,\n/2/reverb/spread : 30,\n/2/reverb/dry : 0.6,\n/2/reverb/room : 60,\n/2/reverb/time : 10,\n/2/reverb/early : 0.25,\n/2/reverb/decay : 0.25,\n/3/reverb/mix : 15,\n/3/reverb/bandwidth : 0.5,\n/3/reverb/damping : 0.3,\n/3/reverb/spread : 70,\n/3/reverb/dry : 0.2,\n/3/reverb/room : 75,\n/3/reverb/time : 30,\n/3/reverb/early : 0.25,\n/3/reverb/decay : 0.2,\n/4/reverb/mix : 45,\n/4/reverb/bandwidth : 0.2,\n/4/reverb/damping : 0.7,\n/4/reverb/spread : 15,\n/4/reverb/dry : 0.5,\n/4/reverb/room : 30,\n/4/reverb/time : 11,\n/4/reverb/early : 0.1,\n/4/reverb/decay : 0.2"
 								}
 
 							}
@@ -10957,13 +10975,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-6",
-									"linecount" : 5,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 5,\n/melody/pattern : [22, 22, 23, 23, 24, 24, 23, 23, 24, 24, 22, 22, 23, 23],\n/melody/beat_len : 16,\n/melody/pattern_len : 14"
+									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ]
 								}
 
 							}
@@ -14250,16 +14266,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-226",
-					"linecount" : 8,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 300.571428571428555, 219.487853646278381, 275.0, 123.0 ],
+					"patching_rect" : [ 300.571428571428555, 219.487853646278381, 282.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 6,\n/total : 202,\n/score : 55,\n/time/between_collecting : [532, 1804.17, 1926, 3370, 6],\n/time/lifespan : [532, 3679.5, 3889, 5724, 315],\n/percent/collected : 2.9703",
+					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18150,16 +18163,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-140",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 320.357142857142662, 110.0 ],
+					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 322.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [788, 897., 788, 1006, 2],\n/time/lifespan : [788, 897., 788, 1006, 2],\n/percent/collected : 100.",
+					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18754,13 +18764,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-196",
-									"linecount" : 20,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 1213,\n/still : 913,\n/fps : 60,\n/bpm : 128.4,\n/prev/moving : 1213,\n/prev/still : 703,\n/prev/min : 120,\n/prev/max : 180,\n/range : [100, 160],\n/min : 100,\n/max : 160,\n/selected : 1,\n/prev/selected : 1,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 0,\n/still_delta : 210,\n/selected_delta : 0,\n/mode : 1"
+									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ]
 								}
 
 							}
@@ -22102,13 +22110,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-86",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 19,\n/melody/prev : 21,\n/melody/idx_delta : 0"
+									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ]
 								}
 
 							}
@@ -22510,7 +22516,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1451.0, 548.0, 210.0, 114.0 ],
+									"patching_rect" : [ 1451.0, 548.0, 215.0, 114.0 ],
 									"text" : "Logic for playing main menu music. Loops through the /melody/pattern pattr values. These pattr values are sent to the pattrstorage control group."
 								}
 
@@ -22571,7 +22577,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 18.0, 256.5, 209.0, 203.0 ],
+									"patching_rect" : [ 18.0, 256.5, 210.0, 203.0 ],
 									"text" : "Start application with all Voice values set to 0, which is pattr value 99. This is to \"reset\" the Main Menu music on load.\n\nThis value is only recalled from pattrstorage once, and then it switches to the right side objects to handle playing menu music"
 								}
 
@@ -22947,8 +22953,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 4"
+									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ]
 								}
 
 							}
@@ -25531,13 +25536,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-576",
-									"linecount" : 4,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 6,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 2"
+									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ]
 								}
 
 							}
@@ -26691,8 +26694,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
-									"text" : "/filter/resonance : 3.09333"
+									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ]
 								}
 
 							}
@@ -27534,16 +27536,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-347",
-					"linecount" : 11,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 203.714285714285722, 541.567441582679749, 318.39999999999992, 161.0 ],
+					"patching_rect" : [ 203.714285714285722, 541.567441582679749, 318.39999999999992, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 11,
-					"presentation_rect" : [ 257.999999999999318, 2036.702894151210785, 405.000000000000227, 161.0 ],
-					"text" : "/max_init : 0,\n/game_init : 0,\n/menu_init : 0,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900,\n/record_music : 0,\n/reset_music : 0",
+					"presentation_rect" : [ 257.999999999999318, 2036.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27565,16 +27564,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-325",
-					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 97.0 ],
+					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 1128.999999999999545, 2100.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/selected : 1,\n/total_shots_fired : 599,\n/shots_per_weapon : [564, 35],\n/hits_per_weapon : [264, 23],\n/frames/per_weapon : [2012, 684],\n/percent/one_over_two : 94.1569",
+					"presentation_rect" : [ 1128.999999999999545, 2100.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27701,7 +27697,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 3486.381327252585379, 534.743970632553101, 56.0, 22.0 ],
 					"restore" : 					{
-						"live.gain~" : [ -6.428571428571429 ]
+						"live.gain~" : [ -5.0 ]
 					}
 ,
 					"text" : "autopattr",
@@ -27761,16 +27757,13 @@
 					"background_color" : [ 0.199999153614044, 0.200005099177361, 0.20000171661377, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-20",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 647.303423569591132, 307.302748560905457, 257.0, 110.0 ],
+					"patching_rect" : [ 647.303423569591132, 307.302748560905457, 257.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 1568.077826877434745, 1895.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 30,\n/beats : 3,\n/units : 274.433,\n/ppq : 480.,\n/tempo/bpm : 128.4,\n/time_sig : [4, 4],\n/total_beats : 119"
+					"presentation_rect" : [ 1568.077826877434745, 1895.702894151210785, 409.0, 33.0 ]
 				}
 
 			}
@@ -28168,16 +28161,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-43",
-					"linecount" : 10,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 106.857142857142861, 859.747268080711365, 415.257142857142753, 149.0 ],
+					"patching_rect" : [ 106.857142857142861, 859.747268080711365, 415.257142857142753, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 10,
-					"presentation_rect" : [ 1128.999999999999545, 1884.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 16,\n/standard_count : 16,\n/special_count : 0,\n/num_on_screen : [0, 3.54748, 0, 7, 2696],\n/hit : 287,\n/killed : 16,\n/hit_distance : [11., 314.474, 340., 862.981, 287],\n/alive_projectiles : 0,\n/score : 190,\n/time/lifespan : [3164, 9845.94, 16831, 17339, 16]",
+					"presentation_rect" : [ 1128.999999999999545, 1884.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28249,16 +28239,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-16",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 1594.358933091163635, 304.0, 110.0 ],
+					"patching_rect" : [ 10.0, 1594.358933091163635, 304.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 1,\n/time/total_played : [0, 0, 52, 829],\n/score : 245,\n/total_frames : 2696,\n/time/current_playthrough : [0, 0, 44, 605],\n/num_events : 1,\n/percent/note_over_enemy_score : 22.449",
+					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28269,16 +28256,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-15",
-					"linecount" : 37,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 494.0 ],
+					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 37,
-					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [955, 627],\n/vertical_half : \"bottom\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 390,\n/frames/moving : 1213,\n/frames/still : 914,\n/frames/rotating : 179,\n/frames/firing : 2520,\n/frames/per_screen_quadrant : [321, 588, 307, 1480],\n/frames/per_angle_quadrant : [1166, 1076, 212, 242],\n/percent/firing_weapon : 93.4718,\n/percent/moving_over_rotating : 87.1408,\n/percent/moving_and_rotating : 21.8855,\n/percent/health_lost_over_gained : 80.,\n/percent/dodges_over_enemy_collision : 83.3333,\n/percent/hit_rests_over_accidentals : 75.,\n/percent/missed_notes_over_dodges : 40.,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 124,\n/last_rotation_direction : 2,\n/percent/accuracy : 47.9132,\n/time/between_kills : [441, 2554.31, 3737, 5180, 16],\n/time/between_getting_hit : [275, 3837.62, 542, 15448, 8],\n/max_health : 10,\n/curr_health : 4,\n/health_lost : 8,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 6, \"sharp\", 0, \"flat\", 0, \"natural\", 2],\n/hit_distance : [91., 413., 224., 741., 8],\n/enemies_collided : 3,\n/dodges : 15,\n/missed_nearby_notes : 10,\n/alive_projectiles : 2",
+					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
