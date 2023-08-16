@@ -10,30 +10,41 @@ The fate of humanity's music rests in your hands. So, jump into the cosmic battl
 
 ## How to Install and Run
 
-### Option 1: MacOS Application
+### Option 1: HyperLydian Application
 
 #### *Download the Application*
 
 A MacBook is required to run the Python and Max/MSP standalone applications.
 
-You can download the main application from either:
+You can download the main application from the [HyperLydian Releases](https://github.com/gloliva/hyperlydian/releases) page.
 
-1. The releases page
-2. The [HyperLydian itch.io](https://gloliva.itch.io/hyperlydian) page (password to view the page is `earlyaccess`)
+Download the `HyperLydian-<OS>-<Architecture>.zip` file that is appropriate for your OS and open the zip file to extract the `HyperLydian` application.
 
 #### *Run the Game*
 
-### Option 2: Install from Source
+To run the game, find the `HyperLydian` application in Finder and double-click on it.
 
-If you don't have a Mac (or just want to be more up-to-date with changes), you'll need to install and run this game with Python
+If the application does not run due to MacOS restrictions, right-click on the application in Finder and select `open`, you may be prompted asking you if you want to open an application from an unregistered developer, click yes.
+
+If the above does not work, then you will need to open the Terminal and run the following commands:
+
+```bash
+sudo chmod -R 755 <path-to-app>/HyperLydian.app
+sudo xattr -dr com.apple.quarantine <path-to-app>/HyperLydian.app
+
+# Replace <path-to-app> with the correct path to HyperLydian.app
+# For example, if you extracted the HyperLydian application to your Downloads folder, you would run:
+sudo chmod -R 755 ~/Downloads/HyperLydian.app
+sudo xattr -dr com.apple.quarantine ~/Downloads/HyperLydian.app
+```
+
+### Option 2: Install from Source
 
 #### *Requirements*
 
 You will need at least Python 3.7, although preferably Python 3.9+. Has been tested with Python 3.8 and Python 3.11. If you need help installing a new version of Python, check out [pyenv](https://github.com/pyenv/pyenv).
 
 #### *Install*
-
-Will make this into a proper package at the end, but for now:
 
 ```bash
 git clone git@github.com:gloliva/hyperlydian.git
@@ -43,6 +54,8 @@ source .venv/bin/activate  # or activate.fish if using fish shell
 python3 -m pip install -r requirements.txt
 ```
 
+You will additionally need to download the Max Standalone application from the [HyperLydian Releases](https://github.com/gloliva/hyperlydian/releases) page. This application must be in the top-level hyperlydian project diretory to run correctly.
+
 #### *Run Game*
 
 From the project directory:
@@ -51,31 +64,29 @@ From the project directory:
 python3 game/main.py
 ```
 
-### OS Requirements
+If you want to run the game without opening the Max Standalone (either because you want to run the game without music, or because the Max Standalone has been opened independently), run:
 
-A MacBook is required to run the Python and Max/MSP standalone applications. A MacBook can run the game in any of the ways detailed in the Installations Instructions section.
-
-A Windows machine should be able to run this game if:
-
-1. You have [Max 8](https://cycling74.com/downloads) installed (you do not need a Max License to open and run a Max collective)
-2. Download the HyperLydian Max Collective from the releases page
-3. Build the Python game from source
-
-Please see the Installation Instructions for more details around the different ways to install and run the game.
+```bash
+DISABLE_MAX=1 python3 game/main.py
+```
 
 ### Computer Specs
 
-This software was built and tested on a computer with the following specs:
+This software was built and tested on the following machines:
 
 ```text
 MacBook Pro 2020
 CPU:    2.3 GHz Quad-Core Intel Core i7
 Memory: 32 GB
+
+MacBook Pro 2021
+CPU:    Apple M1 Pro
+Memory: 32 GB
 ```
 
-The Python application is relatively lightweight and should run fine on most computers. Max/MSP is faily CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music. Your experience may very if running an a computer that has less than 16 GB RAM.
+The Python application is relatively lightweight and should run fine on most computers. Max/MSP is fairly CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music or slow load times. Your experience may vary if running an a computer that has less than 16 GB RAM.
 
-If you experience any issues with Max/MSP, you may find more success by downloading Max and opening the HyperLydian Mac collective instead of running the standalone application.
+You will need ~500MB of disk space for the `HyperLydian` application.
 
 ## How to Play
 
