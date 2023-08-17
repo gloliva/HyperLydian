@@ -43,6 +43,10 @@ sudo xattr -dr com.apple.quarantine ~/Downloads/HyperLydian.app
 
 Additionally for MacOS, the Max Standalone will ask you permission to use your microphone. This is due to MacOS security restrictions and you must click yes for the software to work. However, the Max Standalone application does not use your microphone or record from any input device.
 
+##### Addtional Details All Operating Systems
+
+The HyperLydian application should open first, followed by the Max Standalone application. The game is played via the HyperLydian app, but the Max Standalone can be viewed to see how the music evolves as the game is played.
+
 ### Option 2: Install from Source
 
 #### *Requirements*
