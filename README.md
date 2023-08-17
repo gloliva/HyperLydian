@@ -14,16 +14,19 @@ The fate of humanity's music rests in your hands. So, jump into the cosmic battl
 
 #### *Download the Application*
 
-A MacBook is required to run the Python and Max/MSP standalone applications.
-
 You can download the main application from the [HyperLydian Releases](https://github.com/gloliva/hyperlydian/releases) page.
 
 Download the `HyperLydian-<OS>-<Architecture>.zip` file that is appropriate for your OS and open the zip file to extract the `HyperLydian` application.
 
 #### *Run the Game*
 
-To run the game, find the `HyperLydian` application in Finder and double-click on it.
+##### Microsoft Windows
 
+Click into the HyperLydian folder and then double-click the `HyperLydian` executable.
+
+##### Apple MacOS
+
+Find the `HyperLydian` application in Finder and double-click on it.
 If the application does not run due to MacOS restrictions, right-click on the application in Finder and select `open`, you may be prompted asking you if you want to open an application from an unregistered developer, click yes.
 
 If the above does not work, then you will need to open the Terminal and run the following commands:
@@ -37,6 +40,8 @@ sudo xattr -dr com.apple.quarantine <path-to-app>/HyperLydian.app
 sudo chmod -R 755 ~/Downloads/HyperLydian.app
 sudo xattr -dr com.apple.quarantine ~/Downloads/HyperLydian.app
 ```
+
+Additionally for MacOS, the Max Standalone will ask you permission to use your microphone. This is due to MacOS security restrictions and you must click yes for the software to work. However, the Max Standalone application does not use your microphone or record from any input device.
 
 ### Option 2: Install from Source
 
@@ -82,6 +87,10 @@ Memory: 32 GB
 MacBook Pro 2021
 CPU:    Apple M1 Pro
 Memory: 32 GB
+
+Microsoft Windows
+CPU:    4.2 GHz i7-7700K
+Memory: 16 GB
 ```
 
 The Python application is relatively lightweight and should run fine on most computers. Max/MSP is fairly CPU and memory intesive; if you are running additional memory-intensive applications you may experience stuttering for the music or slow load times. Your experience may vary if running an a computer that has less than 16 GB RAM.
