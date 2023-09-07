@@ -104,6 +104,16 @@ Explore different play styles to see how the music evolves: shoot enemies from u
 
 `E` - Rotate Player Clockwise
 
+## Game Details
+
+Game programming done in Python using the [pygame-ce](https://pyga.me/docs/) package.
+
+Music programming done in Max/MSP.
+
+Art assets drawn in PyxelEdit.
+
+MacOS Application and Windows Executable built using the [pyinstaller](https://pyinstaller.org/en/stable/usage.html) package.
+
 ## Credits
 
 All programming, art assets, and music written, designed, and created by Gregg Oliva.
