@@ -1,4 +1,4 @@
-![title_card](assets/png/github/title_card.png) <!-- markdownlint-disable-line -->
+![title_card](assets/png/github/itchio_header.png) <!-- markdownlint-disable-line -->
 
 Welcome to HyperLydian, a top-down 2D space shooter that goes beyond the ordinary gaming experience by blending multidirectional shooter gameplay with dynamic music creation. Prepare to embark on an extraordinary journey where your actions as a player shape the very fabric of the soundtrack.
 
@@ -10,21 +10,22 @@ The fate of humanity's music rests in your hands. So, jump into the cosmic battl
 
 ## How to Install and Run
 
-### Option 1: HyperLydian Application
+### *Download the Application*
 
-#### *Download the Application*
+You can download the main application from either:
 
-You can download the main application from the [HyperLydian Releases](https://github.com/gloliva/hyperlydian/releases) page.
+1. [Shrouded by Darkness Itch.io](https://gloliva.itch.io/hyperlydian) page
+2. [HyperLydian Github Releases](https://github.com/gloliva/hyperlydian/releases) page.
 
 Download the `HyperLydian-<OS>-<Architecture>.zip` file that is appropriate for your OS and open the zip file to extract the `HyperLydian` application.
 
-#### *Run the Game*
+### *Run the Game*
 
-##### Microsoft Windows
+#### Microsoft Windows
 
 Click into the HyperLydian folder and then double-click the `HyperLydian` executable.
 
-##### Apple MacOS
+#### Apple MacOS
 
 Find the `HyperLydian` application in Finder and double-click on it.
 If the application does not run due to MacOS restrictions, right-click on the application in Finder and select `open`, you may be prompted asking you if you want to open an application from an unregistered developer, click yes.
@@ -34,50 +35,20 @@ If the above does not work, then you will need to open the Terminal and run the 
 ```bash
 sudo chmod -R 755 <path-to-app>/HyperLydian.app
 sudo xattr -dr com.apple.quarantine <path-to-app>/HyperLydian.app
+```
 
-# Replace <path-to-app> with the correct path to HyperLydian.app
-# For example, if you extracted the HyperLydian application to your Downloads folder, you would run:
+You should replace `<path-to-app>` with the correct path to HyperLydian.app. For example, if you extracted the HyperLydian application to your Downloads folder, you would run:
+
+```bash
 sudo chmod -R 755 ~/Downloads/HyperLydian.app
 sudo xattr -dr com.apple.quarantine ~/Downloads/HyperLydian.app
 ```
 
-Additionally for MacOS, the Max Standalone will ask you permission to use your microphone. This is due to MacOS security restrictions and you must click yes for the software to work. However, the Max Standalone application does not use your microphone or record from any input device.
+Additionally for MacOS, the Max Standalone will ask you permission to use your microphone. This is due to MacOS security restrictions and you must click yes for the software to work. However, the Max Standalone application **does not** use your microphone or record from any input device.
 
 ##### Addtional Details All Operating Systems
 
 The HyperLydian application should open first, followed by the Max Standalone application. The game is played via the HyperLydian app, but the Max Standalone can be viewed to see how the music evolves as the game is played.
-
-### Option 2: Install from Source
-
-#### *Requirements*
-
-You will need at least Python 3.7, although preferably Python 3.9+. Has been tested with Python 3.8 and Python 3.11. If you need help installing a new version of Python, check out [pyenv](https://github.com/pyenv/pyenv).
-
-#### *Install*
-
-```bash
-git clone git@github.com:gloliva/hyperlydian.git
-cd hyperlydian
-python3 -m venv .venv  # install reqs in a new venv
-source .venv/bin/activate  # or activate.fish if using fish shell
-python3 -m pip install -r requirements.txt
-```
-
-You will additionally need to download the Max Standalone application from the [HyperLydian Releases](https://github.com/gloliva/hyperlydian/releases) page. This application must be in the top-level hyperlydian project diretory to run correctly.
-
-#### *Run Game*
-
-From the project directory:
-
-```bash
-python3 game/main.py
-```
-
-If you want to run the game without opening the Max Standalone (either because you want to run the game without music, or because the Max Standalone has been opened independently), run:
-
-```bash
-DISABLE_MAX=1 python3 game/main.py
-```
 
 ### Computer Specs
 
