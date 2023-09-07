@@ -14,7 +14,7 @@ The fate of humanity's music rests in your hands. So, jump into the cosmic battl
 
 You can download the main application from either:
 
-1. [Shrouded by Darkness Itch.io](https://gloliva.itch.io/hyperlydian) page
+1. [HyperLydian Itch.io](https://gloliva.itch.io/hyperlydian) page
 2. [HyperLydian Github Releases](https://github.com/gloliva/hyperlydian/releases) page.
 
 Download the `HyperLydian-<OS>-<Architecture>.zip` file that is appropriate for your OS and open the zip file to extract the `HyperLydian` application.
