@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+		"rect" : [ 34.0, 87.0, 1372.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -908,7 +908,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 4203.953125402330443, 2846.0, 331.0, 27.0 ],
+					"patching_rect" : [ 4212.541667262717965, 2757.616446256637573, 331.0, 27.0 ],
 					"text" : "Visual objects for presentation mode UI"
 				}
 
@@ -1504,7 +1504,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1516.0, -93.0, 1913.0, 1142.0 ],
+						"rect" : [ 34.0, 87.0, 1913.0, 1142.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2314,7 +2314,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 4205.0, -4.0, 1070.0, 959.0 ],
+						"rect" : [ 336.0, 87.0, 1070.0, 959.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5105,7 +5105,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1474.0, -211.0, 1212.0, 1319.0 ],
+						"rect" : [ 34.0, 87.0, 1372.0, 779.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5226,7 +5226,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 1608.0, -183.0, 2109.0, 1319.0 ],
+										"rect" : [ 34.0, 87.0, 2109.0, 1319.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -5262,7 +5262,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 490.0, 261.000025868415833, 304.0, 203.0 ],
+													"patching_rect" : [ 490.0, 261.000025868415833, 308.0, 203.0 ],
 													"text" : "FM modulation:\n\n1) The modulator signal's Frequency is based on how many player projectiles are on-screen.\n2) The modulator's depth is based on the player's current health.\n\nThe FM effect gets more intense as the player's health gets lower and the player increases how many projectiles they fire."
 												}
 
@@ -8457,7 +8457,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1989.0, -41.0, 1879.0, 1036.0 ],
+						"rect" : [ 34.0, 87.0, 1879.0, 1036.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -8565,7 +8565,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 633.0, 316.0, 326.0, 221.0 ],
+									"patching_rect" : [ 633.0, 316.0, 330.0, 221.0 ],
 									"text" : "Handles track panning for voices 2 and 3.\n\nTrack panning is based on Player's horizontal position. \n\nIf the Player is on the left side of the screen, voice 2 will be on the right channel and voice 3 will be on the left channel. \n\nIf the Player is on the right side of the screen, voice 2 will be on the left channel and voice 3 will be on the right channel."
 								}
 
@@ -8969,7 +8969,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1474.0, -211.0, 2041.0, 1319.0 ],
+						"rect" : [ 34.0, 87.0, 2041.0, 1319.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -10586,7 +10586,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1474.0, -211.0, 2492.0, 1319.0 ],
+						"rect" : [ 34.0, 87.0, 2492.0, 1319.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -10622,7 +10622,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 363.0, 1587.0, 96.0, 60.0 ],
+									"patching_rect" : [ 363.0, 1587.0, 98.0, 60.0 ],
 									"text" : "Debug print Key-change variables"
 								}
 
@@ -10661,7 +10661,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 248.5, 665.999974131584167, 128.0, 60.0 ],
+									"patching_rect" : [ 248.5, 665.999974131584167, 131.0, 60.0 ],
 									"text" : "Randomly select new melody group"
 								}
 
@@ -10994,13 +10994,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-6",
-									"linecount" : 6,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 85.0 ],
-									"text" : "/melody/idx : 2,\n/melody/pattern : [15, 15, 16, 16, 17, 17, 18, 18, 17, 17, 16, 16, 17, 17, 18, 15],\n/melody/beat_len : 16,\n/melody/pattern_len : 16"
+									"patching_rect" : [ 105.0, 949.999974131584167, 275.0, 33.0 ]
 								}
 
 							}
@@ -14287,16 +14285,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-226",
-					"linecount" : 8,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 300.571428571428555, 219.487853646278381, 282.0, 123.0 ],
+					"patching_rect" : [ 300.571428571428555, 219.487853646278381, 289.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 97.0 ],
-					"text" : "/collected : 25,\n/total : 494,\n/score : 211,\n/time/between_collecting : [830, 2023.12, 1982, 3973, 25],\n/time/lifespan : [7, 3672.03, 7, 5803, 730],\n/percent/collected : 5.06073",
+					"presentation_rect" : [ 257.999999999999318, 1880.702894151210785, 404.928571428571104, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -14318,7 +14313,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 4034.0, -11.0, 1852.0, 959.0 ],
+						"rect" : [ 34.0, 87.0, 1852.0, 959.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -14346,6 +14341,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontsize" : 16.0,
@@ -14356,17 +14352,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 377.25, 1609.5, 307.0, 42.0 ],
 									"text" : "For details on each patterninverter function, see the patterninverter.js file"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-89",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 99.0, 514.0, 100.0, 22.0 ]
 								}
 
 							}
@@ -14412,11 +14397,11 @@
 								"box" : 								{
 									"fontsize" : 16.0,
 									"id" : "obj-83",
-									"linecount" : 8,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 499.25, 14.0, 363.0, 149.0 ],
+									"patching_rect" : [ 499.25, 14.0, 366.0, 132.0 ],
 									"text" : "Pattern inversion and reversing is a timed-event that is based off the average lifespan of an enemy. Once the game time crosses this threshold, a patterninversion function is called. \n\nPattern inversion functions are the least-frequently called as they can drastically alter the pattern."
 								}
 
@@ -15801,7 +15786,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2270.0, 111.0, 640.0, 480.0 ],
+						"rect" : [ 766.0, 111.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -16004,7 +15989,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 2367.0, -11.0, 927.0, 774.0 ],
+						"rect" : [ 4556.0, 102.0, 932.0, 744.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -16040,7 +16025,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 251.0, 80.0, 266.0, 167.0 ],
+									"patching_rect" : [ 251.0, 80.0, 270.0, 167.0 ],
 									"text" : "Handle selecting the correct output audio device.\n\nIt can be tricky for Max to recognize the correct default device, so the default device name is sent from the Python application, and then adstatus is used to select this device name."
 								}
 
@@ -18187,16 +18172,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-140",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 322.0, 110.0 ],
+					"patching_rect" : [ 252.14285714285711, 382.91174840927124, 322.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/total_dropped : 2,\n/picked_up : 2,\n/missed : 0,\n/time/between_collecting : [984, 2112., 984, 3240, 2],\n/time/lifespan : [984, 2112., 984, 3240, 2],\n/percent/collected : 100.",
+					"presentation_rect" : [ 1128.999999999999545, 1703.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -18791,13 +18773,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-196",
-									"linecount" : 20,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ],
-									"text" : "/moving : 1518,\n/still : 1007,\n/fps : 60,\n/bpm : 120.551,\n/prev/moving : 1518,\n/prev/still : 940,\n/prev/min : 120,\n/prev/max : 180,\n/range : [120, 180],\n/min : 120,\n/max : 180,\n/selected : 0,\n/prev/selected : 0,\n/in_transition : 0,\n/tempo_change : 1,\n/sec_threshold : 2.,\n/moving_delta : 0,\n/still_delta : 67,\n/selected_delta : 0,\n/mode : 1"
+									"patching_rect" : [ 706.0, 921.25, 299.0, 277.0 ]
 								}
 
 							}
@@ -22139,13 +22119,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-86",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ],
-									"text" : "/melody/curr : 19,\n/melody/prev : 21,\n/melody/idx_delta : 0"
+									"patching_rect" : [ 26.666666666666671, 777.0, 179.0, 59.0 ]
 								}
 
 							}
@@ -22984,8 +22962,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ],
-									"text" : "/melody/curr : 2"
+									"patching_rect" : [ 729.75, 882.25, 134.0, 33.0 ]
 								}
 
 							}
@@ -25568,13 +25545,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-576",
-									"linecount" : 4,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ],
-									"text" : "/rest/count : 0,\n/sharp/count : 0,\n/flat/count : 0,\n/natural/count : 0"
+									"patching_rect" : [ 50.0, 418.588184833526611, 130.0, 72.0 ]
 								}
 
 							}
@@ -26350,7 +26325,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1474.0, -93.0, 1777.0, 1319.0 ],
+						"rect" : [ 34.0, 144.0, 1777.0, 1319.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -26386,7 +26361,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 948.0, 245.5, 508.0, 239.0 ],
+									"patching_rect" : [ 948.0, 245.5, 509.0, 239.0 ],
 									"text" : "Handle changing the Filter's parameters for each Voice. \n\nFilter cutoff Frequency is based on the player's screen position, with top left being the lowest Hz (a more closed filter) and bottom right being the highest Hz (a more open filter). The Filter for each voice has a range of Min and Max Frequencies that the cutoff can move between, so the /filter/cutoff value is between 0.-1., which moves the cutoff point between the Filter min/max cutoff range.,\n\nFilter gain is based off the player's vertical position on the screen.\n\nFilter resonance is based off of the player's rotation: rotating CCW will decrease the resonance, rotating CW will increase the resonance."
 								}
 
@@ -26724,13 +26699,11 @@
 								"box" : 								{
 									"fontface" : 0,
 									"id" : "obj-409",
-									"linecount" : 3,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 849.75, 275.0, 59.0 ],
-									"text" : "/filter/cutoff : 0.626068,\n/filter/gain : 1.20833,\n/filter/resonance : 2.54667"
+									"patching_rect" : [ 110.0, 849.75, 275.0, 33.0 ]
 								}
 
 							}
@@ -27572,16 +27545,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-347",
-					"linecount" : 11,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 203.714285714285722, 541.567441582679749, 318.39999999999992, 161.0 ],
+					"patching_rect" : [ 203.714285714285722, 541.567441582679749, 318.39999999999992, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 11,
-					"presentation_rect" : [ 257.999999999999318, 2036.702894151210785, 405.000000000000227, 161.0 ],
-					"text" : "/max_init : 0,\n/game_init : 0,\n/menu_init : 0,\n/max_quit : 0,\n/output_device : \"Scarlett 2i2 USB\",\n/fps : 60,\n/num_voices : 3,\n/screen_width : 1440,\n/screen_height : 900,\n/record_music : 0,\n/reset_music : 0",
+					"presentation_rect" : [ 257.999999999999318, 2036.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27603,16 +27573,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-325",
-					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 97.0 ],
+					"patching_rect" : [ 155.285714285714278, 732.064894914627075, 366.828571428571365, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 1128.999999999999545, 2100.702894151210785, 405.000000000000227, 97.0 ],
-					"text" : "/selected : 0,\n/total_shots_fired : 606,\n/shots_per_weapon : [548, 58],\n/hits_per_weapon : [196, 32],\n/frames/per_weapon : [2035, 1062],\n/percent/one_over_two : 90.429",
+					"presentation_rect" : [ 1128.999999999999545, 2100.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -27799,16 +27766,13 @@
 					"background_color" : [ 0.199999153614044, 0.200005099177361, 0.20000171661377, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-20",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 647.303423569591132, 307.302748560905457, 257.0, 110.0 ],
+					"patching_rect" : [ 647.303423569591132, 307.302748560905457, 257.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 1568.077826877434745, 1895.702894151210785, 409.0, 110.0 ],
-					"text" : "/bars : 29,\n/beats : 1,\n/units : 55.5521,\n/ppq : 480.,\n/tempo/bpm : 120.419,\n/time_sig : [4, 4],\n/total_beats : 113"
+					"presentation_rect" : [ 1568.077826877434745, 1895.702894151210785, 409.0, 33.0 ]
 				}
 
 			}
@@ -28206,16 +28170,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-43",
-					"linecount" : 10,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 106.857142857142861, 859.747268080711365, 415.257142857142753, 149.0 ],
+					"patching_rect" : [ 106.857142857142861, 859.747268080711365, 415.257142857142753, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 10,
-					"presentation_rect" : [ 1128.999999999999545, 1884.702894151210785, 405.000000000000227, 149.0 ],
-					"text" : "/total : 18,\n/standard_count : 18,\n/special_count : 0,\n/num_on_screen : [0, 3.36971, 2, 7, 3097],\n/hit : 228,\n/killed : 17,\n/hit_distance : [45.607, 374.46, 147.513, 1068., 228],\n/alive_projectiles : 4,\n/score : 215,\n/time/lifespan : [3233, 10407.8, 18446, 18722, 17]",
+					"presentation_rect" : [ 1128.999999999999545, 1884.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28287,16 +28248,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-16",
-					"linecount" : 7,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 10.0, 1594.358933091163635, 304.0, 110.0 ],
+					"patching_rect" : [ 10.0, 1594.358933091163635, 304.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 110.0 ],
-					"text" : "/play_count : 3,\n/time/total_played : [0, 2, 54, 342],\n/score : 426,\n/total_frames : 3097,\n/time/current_playthrough : [0, 0, 51, 348],\n/num_events : 1,\n/percent/note_over_enemy_score : 49.5305",
+					"presentation_rect" : [ 257.999999999999318, 1703.702894151210785, 405.000000000000227, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28307,16 +28265,13 @@
 					"flash_color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-15",
-					"linecount" : 37,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 494.0 ],
+					"patching_rect" : [ 58.428571428571431, 1047.738727927207947, 463.999999999999886, 33.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 37,
-					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 494.0 ],
-					"text" : "/starting_position : [720, 800],\n/starting_angle : 90,\n/position : [1090, 375],\n/vertical_half : \"top\",\n/horizontal_half : \"right\",\n/frames/moving_and_rotating : 418,\n/frames/moving : 1518,\n/frames/still : 1008,\n/frames/rotating : 153,\n/frames/firing : 2892,\n/frames/per_screen_quadrant : [1190, 669, 776, 462],\n/frames/per_angle_quadrant : [997, 1007, 322, 771],\n/percent/firing_weapon : 93.3807,\n/percent/moving_over_rotating : 90.8438,\n/percent/moving_and_rotating : 20.0096,\n/percent/health_lost_over_gained : 0.,\n/percent/dodges_over_enemy_collision : 75.,\n/percent/hit_rests_over_accidentals : 50.,\n/percent/missed_notes_over_dodges : 73.913,\n/curr_velocity : [0, 0],\n/curr_speed : 0.,\n/angle : 148,\n/last_rotation_direction : 2,\n/percent/accuracy : 37.6238,\n/time/between_kills : [0, 2500., 2191, 7812, 17],\n/time/between_getting_hit : [inf, 0, 0, -inf, 0],\n/max_health : 10,\n/curr_health : 10,\n/health_lost : 0,\n/health_gained : 2,\n/projectile_hit_count : [\"rest\", 0, \"sharp\", 0, \"flat\", 0, \"natural\", 0],\n/hit_distance : [inf, 0, 0, -inf, 0],\n/enemies_collided : 2,\n/dodges : 6,\n/missed_nearby_notes : 17,\n/alive_projectiles : 0",
+					"presentation_rect" : [ 691.264705538751969, 1703.702894151210785, 408.0, 33.0 ],
 					"textcolor" : [ 0.999995052814484, 1.0, 1.0, 1.0 ]
 				}
 
@@ -28397,7 +28352,7 @@
 					"bgfillcolor_proportion" : 0.5,
 					"bgfillcolor_type" : "gradient",
 					"id" : "obj-308",
-					"items" : [ "None", ",", "RZ39-0276", ",", "ASUS VG278HV", ",", "Scarlett 2i2 USB", ",", "MacBook Pro Speakers" ],
+					"items" : [ "None", ",", "MacBook Pro Speakers" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -28477,7 +28432,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2884.484375134109996, 4871.11762261390686, 180.0, 165.0 ],
+					"patching_rect" : [ 4168.231920788683055, 2821.69487738609314, 105.490191459655762, 165.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1254.205889850854874, 878.367647999999917, 596.470588922505158, 735.00302184176644 ],
 					"proportion" : 0.5,
