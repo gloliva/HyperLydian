@@ -12,6 +12,8 @@ HyperLydian immerses you in a unique amalgamation of interactive gameplay and cr
 
 The fate of humanity's music rests in your hands. So, jump into the cosmic battlefield and let the melody of the universe guide your way to victory! The power of music is not just in the notes, but in your hands as you wield the guns and the groove to save humanity.
 
+https://github.com/gloliva/hyperlydian/assets/16783600/a37f52b2-1f7e-4dc0-943a-6e9ec1a9f813
+
 ## Overview
 
 HyperLydian is a Digital Instrument disguised as a top-down 2D space-shooter. Every action the player takes will have an influence on changing the game's soundtrack: such as adding rests or notes, changing the tempo, scale, and key, modulating the parameters of various effects (e.g. reverb or delay), and much more.
