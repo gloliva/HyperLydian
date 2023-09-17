@@ -1,5 +1,9 @@
 ![title_card](assets/png/github/itchio_header.png) <!-- markdownlint-disable-line -->
 
+## [Watch the Gameplay Demo HERE](https://youtu.be/NnmMC1h0PUg?si=BaL4S2U6vALREYR9)
+
+## [Read the Full Technical Spec HERE](https://docs.google.com/document/d/1ugD658rL3Vi32GL9vDijxxINv15wIo75vuHTpG1NvUc/edit?usp=sharing)
+
 Welcome to HyperLydian, a top-down 2D space shooter that goes beyond the ordinary gaming experience by blending multidirectional shooter gameplay with dynamic music creation. Prepare to embark on an extraordinary journey where your actions as a player shape the very fabric of the soundtrack.
 
 In a not-so-distant future, Earth faces an invasion from an alien race that is devoid of the ability to appreciate music. Intent on dismantling humanity's greatest achievement, they threaten to erase the essence of rhythm and melody from our world. Standing as the last line of defense, our courageous protagonist, Lydian, emerges to confront the invaders head-on, armed with the power of infectious tunes, danceworthy beats... and GUNS!
