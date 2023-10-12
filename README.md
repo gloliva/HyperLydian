@@ -1,7 +1,5 @@
 ![title_card](assets/png/github/itchio_header.png) <!-- markdownlint-disable-line -->
 
-## [Watch the Gameplay Demo HERE](https://youtu.be/NnmMC1h0PUg?si=BaL4S2U6vALREYR9)
-
 ## [Read the Full Technical Spec HERE](https://docs.google.com/document/d/1ugD658rL3Vi32GL9vDijxxINv15wIo75vuHTpG1NvUc/edit?usp=sharing)
 
 Welcome to HyperLydian, a top-down 2D space shooter that goes beyond the ordinary gaming experience by blending multidirectional shooter gameplay with dynamic music creation. Prepare to embark on an extraordinary journey where your actions as a player shape the very fabric of the soundtrack.
@@ -12,7 +10,13 @@ HyperLydian immerses you in a unique amalgamation of interactive gameplay and cr
 
 The fate of humanity's music rests in your hands. So, jump into the cosmic battlefield and let the melody of the universe guide your way to victory! The power of music is not just in the notes, but in your hands as you wield the guns and the groove to save humanity.
 
-https://github.com/gloliva/hyperlydian/assets/16783600/a37f52b2-1f7e-4dc0-943a-6e9ec1a9f813
+## Click Below to Watch the Game Trailer
+
+[![trailer](media/thumbnails/Trailer.jpeg)](https://www.youtube.com/watch?v=8B7LRShHdi0)
+
+## Click Below to Watch a Gameplay Demo
+
+[![gameplay_demo](media/thumbnails/GameplayDemo.png)](https://youtu.be/NnmMC1h0PUg?si=BGNEOyeGDO27r6X2)
 
 ## Overview
 
@@ -66,7 +70,7 @@ sudo xattr -dr com.apple.quarantine ~/Downloads/HyperLydian.app
 
 Additionally for MacOS, the Max Standalone will ask you permission to use your microphone. This is due to MacOS security restrictions and you must click yes for the software to work. However, the Max Standalone application **does not** use your microphone or record from any input device.
 
-#### Addtional Details All Operating Systems
+#### Additional Details All Operating Systems
 
 The HyperLydian application should open first, followed by the Max Standalone application. The game is played via the HyperLydian app, but the Max Standalone can be viewed to see how the music evolves as the game is played.
 
